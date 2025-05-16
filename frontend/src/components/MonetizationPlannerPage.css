@@ -1,0 +1,44 @@
+.centered-logo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.85);
+  z-index: 10;
+  animation: fadeIn 0.3s;
+}
+
+.pulsate-logo {
+  animation: pulsate 1.2s infinite;
+  filter: drop-shadow(0 0 16px #00bcd4);
+}
+
+.pulsate-thinking {
+  margin-top: 16px;
+  font-weight: bold;
+  color: #00bcd4;
+  text-shadow: 0 0 8px #00bcd4, 0 0 16px #00bcd4;
+  animation: pulsateGlow 1.2s infinite;
+}
+
+@keyframes pulsate {
+  0% { transform: scale(1); filter: drop-shadow(0 0 8px #00bcd4); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 32px #00bcd4); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 8px #00bcd4); }
+}
+
+@keyframes pulsateGlow {
+  0% { text-shadow: 0 0 8px #00bcd4, 0 0 16px #00bcd4; }
+  50% { text-shadow: 0 0 24px #00bcd4, 0 0 48px #00bcd4; }
+  100% { text-shadow: 0 0 8px #00bcd4, 0 0 16px #00bcd4; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+} 

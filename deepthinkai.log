@@ -1,0 +1,173 @@
+2025-05-10 19:13:29,090 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 19:14:32,547 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 19:17:33,805 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 19:18:17,523 [INFO] DeepThinkAI: Starting chat request 24ca3a06-3b3e-4d8d-9545-ab2062a2752d with model: gemma:7b
+2025-05-10 19:18:19,931 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 19:21:23,200 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 19:23:09,491 [INFO] DeepThinkAI: Starting monetization plan request 86f570c3-b31c-43ea-9947-321140c62038 for niche: ai tools
+2025-05-10 19:23:10,350 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 19:28:05,999 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 19:30:40,126 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 19:31:09,834 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 19:31:25,172 [INFO] DeepThinkAI: Starting monetization plan request 1760d8de-b153-4ade-b4a7-b204ae1fef02 for niche: AI Tools
+2025-05-10 19:31:29,276 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 19:36:13,539 [INFO] DeepThinkAI: Starting monetization plan request 11010afe-4c34-4969-8aaa-77fc90e0d411 for niche: marathons
+2025-05-10 19:36:14,540 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 19:51:30,761 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 19:52:34,583 [INFO] DeepThinkAI: Starting guest post outreach request 1aef1ca5-5165-45f7-aaf3-c6d7f6f35fef for niche: sporting events
+2025-05-10 19:52:37,178 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 19:54:39,076 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 19:55:08,404 [INFO] DeepThinkAI: Starting guest post outreach request dc372294-aa4a-435f-aabc-08216c1eda1b for niche: utah marathon
+2025-05-10 19:55:14,707 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 19:58:15,735 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:11:01,945 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:11:43,451 [INFO] DeepThinkAI: Starting guest post outreach request 5608f3cc-f0e5-4d26-b167-819a3d0e57af for niche: utah marathons
+2025-05-10 20:11:49,753 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 20:14:28,763 [INFO] DeepThinkAI: Starting guest post outreach request 129c72c9-bb6e-4a67-aef8-62a503472254 for niche: I need you to identify 5-10 high authority websites in my niche (ENTER NICHE HERE) that have published articles within the last 3 months. These sites should accept guest posts. Analyze their sites for content gaps and ideas for good guest posts. 
+2025-05-10 20:14:32,811 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 20:14:39,535 [INFO] DeepThinkAI: Starting chat request 06d59761-6c7b-4909-9be3-dfffb4456cf6 with model: gemma:7b
+2025-05-10 20:15:37,084 [INFO] DeepThinkAI: Starting chat request 8173a40a-e1a7-4903-b1f4-22f259401e2e with model: gemma:7b
+2025-05-10 20:15:39,511 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 20:16:12,383 [INFO] DeepThinkAI: Starting chat request 4237e76d-17d8-4131-a006-98baf6c5edd5 with model: gemma:7b
+2025-05-10 20:16:13,559 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 20:16:48,673 [ERROR] DeepThinkAI: Validation error: [{'type': 'string_too_short', 'loc': ('body', 'messages', 3, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}]
+Traceback (most recent call last):
+  File "C:\llama\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\llama\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\llama\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 272, in app
+    raise RequestValidationError(_normalize_errors(errors), body=body)
+fastapi.exceptions.RequestValidationError: [{'type': 'string_too_short', 'loc': ('body', 'messages', 3, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}]
+2025-05-10 20:16:53,821 [ERROR] DeepThinkAI: Validation error: [{'type': 'string_too_short', 'loc': ('body', 'messages', 3, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}, {'type': 'string_too_short', 'loc': ('body', 'messages', 7, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}]
+Traceback (most recent call last):
+  File "C:\llama\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\llama\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\llama\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 272, in app
+    raise RequestValidationError(_normalize_errors(errors), body=body)
+fastapi.exceptions.RequestValidationError: [{'type': 'string_too_short', 'loc': ('body', 'messages', 3, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}, {'type': 'string_too_short', 'loc': ('body', 'messages', 7, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}]
+2025-05-10 20:16:56,189 [ERROR] DeepThinkAI: Validation error: [{'type': 'string_too_short', 'loc': ('body', 'messages', 3, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}, {'type': 'string_too_short', 'loc': ('body', 'messages', 7, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}, {'type': 'string_too_short', 'loc': ('body', 'messages', 13, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}, {'type': 'string_too_short', 'loc': ('body', 'messages', 17, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}]
+Traceback (most recent call last):
+  File "C:\llama\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\llama\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\llama\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 272, in app
+    raise RequestValidationError(_normalize_errors(errors), body=body)
+fastapi.exceptions.RequestValidationError: [{'type': 'string_too_short', 'loc': ('body', 'messages', 3, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}, {'type': 'string_too_short', 'loc': ('body', 'messages', 7, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}, {'type': 'string_too_short', 'loc': ('body', 'messages', 13, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}, {'type': 'string_too_short', 'loc': ('body', 'messages', 17, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}]
+2025-05-10 20:17:07,772 [INFO] DeepThinkAI: Starting chat request d2cabcf8-2b7d-4759-b8b0-f221a5117801 with model: auto
+2025-05-10 20:17:08,642 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 20:17:52,831 [ERROR] DeepThinkAI: Validation error: [{'type': 'string_too_short', 'loc': ('body', 'messages', 1, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}]
+Traceback (most recent call last):
+  File "C:\llama\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\llama\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\llama\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\llama\.venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 272, in app
+    raise RequestValidationError(_normalize_errors(errors), body=body)
+fastapi.exceptions.RequestValidationError: [{'type': 'string_too_short', 'loc': ('body', 'messages', 1, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}, 'url': 'https://errors.pydantic.dev/2.11/v/string_too_short'}]
+2025-05-10 20:18:05,075 [INFO] DeepThinkAI: Starting chat request 1f350238-d1e0-4c8c-aa83-e066ef8347ef with model: gemma:7b
+2025-05-10 20:18:05,915 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 20:19:32,771 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:19:51,119 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:19:54,835 [INFO] DeepThinkAI: Starting chat request 57de794a-598c-4aed-8525-b7e2f674755b with model: auto
+2025-05-10 20:19:58,171 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 20:23:01,885 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:30:32,042 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:30:50,883 [INFO] DeepThinkAI: Starting guest post outreach request 1641955e-c04f-405c-8b93-0d06a06aa0c0 for niche: utah marathons
+2025-05-10 20:30:51,596 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-10 20:33:20,997 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:33:51,293 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:34:05,190 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:34:14,089 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:34:49,186 [INFO] DeepThinkAI: Starting guest post outreach request 31ac77cd-30cc-49d0-8c64-e9ebeacc8f4c for niche: utah marathons
+2025-05-10 20:34:49,611 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:35:24,535 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:35:30,204 [INFO] DeepThinkAI: Starting guest post outreach request 21adcf0a-8e8e-457e-8107-d284d65bbac5 for niche: utah marathons
+2025-05-10 20:35:30,656 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:35:35,313 [INFO] DeepThinkAI: Starting guest post outreach request bcd75abf-8c32-421b-9580-2f8d4f785d53 for niche: utah marathons
+2025-05-10 20:35:35,743 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:37:37,153 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:38:14,700 [INFO] DeepThinkAI: Starting guest post outreach request 19b2c435-dddc-4729-8c20-0e5008ea0d7a for niche: utah marathon
+2025-05-10 20:38:15,139 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:38:28,479 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:38:29,636 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:38:29,701 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:40:52,738 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:41:44,442 [INFO] httpx: HTTP Request: GET http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:43:00,587 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:43:13,504 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:43:52,221 [INFO] DeepThinkAI: Starting guest post outreach request c6852aac-5d46-4697-852d-b5d92290ad96 for niche: utah sports
+2025-05-10 20:43:52,659 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:47:59,790 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:48:09,975 [INFO] DeepThinkAI: Starting guest post outreach request b5229e65-3c6f-40f2-9bb6-d9cd1f0fdb35 for niche: utah sports
+2025-05-10 20:48:10,393 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:48:27,590 [INFO] DeepThinkAI: Starting guest post outreach request 93f43e75-b226-48be-b76e-d6a903fe126a for niche: sporting events
+2025-05-10 20:48:27,996 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:48:48,124 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:49:07,136 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:49:19,441 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:49:31,412 [INFO] DeepThinkAI: Starting guest post outreach request 6846cbd5-b5b2-4ec8-a89d-b3b6cfebc057 for niche: sporting events
+2025-05-10 20:49:31,819 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:50:06,815 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:50:18,321 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:50:27,382 [INFO] DeepThinkAI: Starting guest post outreach request 8d53b8cf-c739-4df3-b8d8-968c74c6675a for niche: sporting events
+2025-05-10 20:50:27,806 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:50:37,865 [INFO] DeepThinkAI: Starting guest post outreach request e52b974f-6757-43ba-a93c-b076fcd54666 for niche: sporting events
+2025-05-10 20:50:38,269 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:50:50,400 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:50:50,417 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:50:57,412 [INFO] DeepThinkAI: Starting guest post outreach request 747d55c7-41b3-495a-a7ce-19b709d43079 for niche: sporting events
+2025-05-10 20:50:57,862 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:51:08,343 [INFO] DeepThinkAI: Starting guest post outreach request 5a705246-0d5d-438d-a0c8-e9cba8d3fe73 for niche: sporting events
+2025-05-10 20:51:08,755 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:51:36,151 [INFO] DeepThinkAI: Starting guest post outreach request e1152e4f-4a5c-48f8-969a-c9b0488dfd18 for niche: sporting events
+2025-05-10 20:51:36,567 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:51:55,844 [INFO] DeepThinkAI: Starting guest post outreach request 438a6be8-d84a-44e8-8692-6c9da58dbef9 for niche: marathons
+2025-05-10 20:51:56,267 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:53:08,383 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:53:47,286 [INFO] DeepThinkAI: Starting guest post outreach request d7c4cb06-0ad9-48be-b30d-ffb6367f3a40 for niche: marathons
+2025-05-10 20:53:47,717 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:53:52,848 [INFO] DeepThinkAI: Starting guest post outreach request ae308d87-a9f8-4c85-9782-3e39b3094db5 for niche: marathons
+2025-05-10 20:53:53,247 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-10 20:54:24,786 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-10 20:54:49,578 [INFO] DeepThinkAI: Starting chat request 322429c9-7d68-4f24-8aee-42d23f38009b with model: gemma:7b
+2025-05-10 20:54:50,024 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"

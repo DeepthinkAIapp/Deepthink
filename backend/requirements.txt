@@ -1,0 +1,45 @@
+# Web Framework and Server
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+starlette==0.27.0
+pyngrok==7.0.0
+
+# Security and Authentication
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-dotenv==1.0.0
+
+# Database
+aiosqlite==0.19.0
+
+# HTTP Client
+httpx==0.25.1
+
+# NLP and Text Processing
+nltk==3.8.1
+spacy==3.7.2
+textblob==0.17.1
+emoji==2.8.0
+contractions==0.1.73
+pyspellchecker==0.7.2
+wordninja==2.0.0
+
+# AI and Machine Learning
+transformers==4.35.2
+torch==2.1.1
+
+# Monitoring and Metrics
+prometheus-client==0.17.1
+prometheus-fastapi-instrumentator==6.1.0
+
+# Rate Limiting
+slowapi==0.1.8
+
+# Error Handling and Retries
+backoff==2.2.1
+
+# Development Tools
+black==23.11.0
+pytest==7.4.3
+pytest-asyncio==0.21.1 
