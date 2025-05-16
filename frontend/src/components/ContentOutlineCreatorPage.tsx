@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Box, Typography, TextField, Button, Paper, Alert, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
+import { Box, Typography, TextField, Button, Paper, Alert } from "@mui/material";
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import AnalysisCard from './AnalysisCard';
 import ChatInterface from './ChatInterface';
 import remarkGfm from 'remark-gfm';
 
@@ -189,12 +188,6 @@ const ContentOutlineCreatorPage: React.FC = () => {
   };
 
   // Helper to call handleStep3 with a specific keyword
-  const handleStep3WithKeyword = (keyword: string) => {
-    setSelectedKeyword(keyword);
-    handleStep3(keyword);
-  };
-
-  // Helper: Parse Markdown table to extract keywords (title/keyword column)
   function extractKeywordsFromMarkdownTable(md: string): string[] {
     const lines = md.split("\n").filter(l => l.trim().length > 0);
     const tableLines = lines.filter(l => l.includes("|") && !/^\s*\|?\s*-+/.test(l));
@@ -231,99 +224,6 @@ const ContentOutlineCreatorPage: React.FC = () => {
         return out;
       }
     );
-  }
-
-  // Helper: Parse Markdown table to sectioned outline
-  function tableMarkdownToOutline(md: string) {
-    const lines = md.split('\n').filter(l => l.trim().startsWith('|'));
-    if (lines.length < 3) return null; // Not a table
-    const dataLines = lines.slice(2);
-    const headerCells = lines[0].split('|').map(s => s.trim()).filter(Boolean);
-    const colCount = headerCells.length;
-    let sections: { name: string, ideas: string[] }[] = [];
-    for (let i = 0; i < dataLines.length; i++) {
-      const cells = dataLines[i].split('|').map(s => s.trim()).filter(Boolean);
-      if (cells.length === colCount) {
-        const section = cells[0];
-        const idea = cells[1];
-        let sec = sections.find(s => s.name === section);
-        if (!sec) {
-          sec = { name: section, ideas: [] };
-          sections.push(sec);
-        }
-        if (idea) sec.ideas.push(idea);
-      }
-    }
-    return sections.length > 0 ? sections : null;
-  }
-
-  // Helper: Parse outline as JSON or Markdown table to sectioned outline
-  function parseOutlineSections(outline: string): { name: string, ideas: string[] }[] | null {
-    // Try JSON
-    try {
-      const parsed = JSON.parse(outline);
-      const sections = Array.isArray(parsed)
-        ? parsed
-        : parsed.sections || parsed.subniches || [];
-      if (Array.isArray(sections) && sections.length > 0) {
-        return sections.map((item: any, idx: number) => {
-          let ideas: string[] = [];
-          if (Array.isArray(item.ideas)) ideas = item.ideas;
-          else if (Array.isArray(item.content_topic_ideas)) ideas = item.content_topic_ideas;
-          else if (Array.isArray(item.content_topics)) ideas = item.content_topics;
-          else if (typeof item.ideas === 'string') ideas = (item.ideas as string).split(/\n|;|,|\|/).map((s: string) => s.trim()).filter(Boolean);
-          else if (typeof item.content_topic_ideas === 'string') ideas = (item.content_topic_ideas as string).split(/\n|;|,|\|/).map((s: string) => s.trim()).filter(Boolean);
-          else if (typeof item.content_topics === 'string') ideas = (item.content_topics as string).split(/\n|;|,|\|/).map((s: string) => s.trim()).filter(Boolean);
-          return {
-            name: item.name || item.title || item.section || `Section ${idx + 1}`,
-            ideas
-          };
-        });
-      }
-    } catch {}
-    // Try Markdown table
-    const lines = outline.split('\n').filter(l => l.trim().startsWith('|'));
-    if (lines.length >= 3) {
-      const dataLines = lines.slice(2);
-      const headerCells = lines[0].split('|').map(s => s.trim()).filter(Boolean);
-      const colCount = headerCells.length;
-      let sections: { name: string, ideas: string[] }[] = [];
-      for (let i = 0; i < dataLines.length; i++) {
-        const cells = dataLines[i].split('|').map(s => s.trim()).filter(Boolean);
-        if (cells.length === colCount) {
-          const section = cells[0];
-          const idea = cells[1];
-          let sec = sections.find(s => s.name === section);
-          if (!sec) {
-            sec = { name: section, ideas: [] };
-            sections.push(sec);
-          }
-          if (idea) sec.ideas.push(idea);
-        }
-      }
-      if (sections.length > 0) return sections;
-    }
-    return null;
-  }
-
-  // Helper: Normalize line breaks in outline text
-  function normalizeOutlineText(md: string): string {
-    // Collapse lines that are not list items, headings, or empty lines
-    return md.replace(/([^\n])\n(?![\n#*-])/g, '$1 ');
-  }
-
-  // Helper: Aggressively fix line breaks in outline text
-  function fixOutlineLineBreaks(md: string): string {
-    // Only keep line breaks for headings, lists, or empty lines
-    return md.split(/\r?\n/).reduce((acc, line) => {
-      // If heading, list, or empty, keep line break
-      if (/^\s*(#|\*|-|\d+\.|$)/.test(line)) {
-        return acc + (acc ? '\n' : '') + line;
-      } else {
-        // Otherwise, merge with previous line
-        return acc + (acc && !acc.endsWith('\n') ? ' ' : '') + line;
-      }
-    }, '');
   }
 
   // Step 3: Generate full content outline for a selected keyword

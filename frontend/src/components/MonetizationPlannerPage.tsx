@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
-import { Box, Typography, TextField, Button, Paper, CircularProgress, Alert } from "@mui/material";
+import { Box, Typography, TextField, Button, Alert, CircularProgress } from "@mui/material";
 import "./MonetizationPlannerPage.css";
-import AnalysisCard from './AnalysisCard';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 

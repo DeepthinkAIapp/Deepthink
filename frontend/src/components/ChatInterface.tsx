@@ -5,9 +5,6 @@ import {
   TextField, 
   IconButton,
   Typography,
-  Select,
-  MenuItem,
-  FormControl,
   Avatar
 } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
@@ -36,18 +33,6 @@ interface ChatInterfaceProps {
   onModelChange: (model: string) => void;
   onLoadingChange?: (isLoading: boolean) => void;
 }
-
-const models = [
-  { label: 'Auto', value: 'auto' },
-  { label: 'Deepthink AI (Fast)', value: 'gemma:7b' },
-  { label: 'Mistral', value: 'mistral:latest' },
-  { label: 'DeepSeek (R1)', value: 'deepseek-r1:latest' },
-  { label: 'Phi-4', value: 'phi4:latest' },
-  { label: 'LLaVA (Vision)', value: 'llava:latest' },
-  { label: 'Llama 2 Uncensored', value: 'llama2-uncensored:latest' },
-  { label: 'CodeLlama', value: 'codellama:latest' },
-  { label: 'Llama 3.2 Vision', value: 'llama3.2-vision:latest' },
-];
 
 const MIN_MODEL_SWITCH_INTERVAL = 3000; // 3 seconds
 const MAX_INPUT_LENGTH = 8000;
@@ -78,20 +63,11 @@ function maskModelNames(text: string): string {
   return masked;
 }
 
-function isLastAssistantTurnComplete(messages: Message[]): boolean {
-  if (!messages.length) return false;
-  const last = messages[messages.length - 1];
-  if (last.role !== 'assistant') return false;
-  // Heuristic: if the last message ends with a special token or is long
-  return /[.!?…]$/.test(last.content.trim()) || last.content.length > 500;
-}
-
 function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onModelChange, onLoadingChange }: ChatInterfaceProps) {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [currentRequestId, setCurrentRequestId] = useState<string | null>(null);
   const [canResume, setCanResume] = useState(false);
-  const [inputWarning, setInputWarning] = useState<string | null>(null);
   const [attachedImage, setAttachedImage] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -104,12 +80,6 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
     // Focus input field when component mounts or messages change
     inputRef.current?.focus();
     if (onLoadingChange) onLoadingChange(isLoading);
-    // Warn if input is too long
-    if (input.length > 2000) {
-      setInputWarning('Your prompt is very long and may exceed the model\'s context window. Please shorten it or split it into multiple parts.');
-    } else {
-      setInputWarning(null);
-    }
   }, [messages, isLoading, input]);
 
   // Handle image file selection
@@ -314,16 +284,6 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
       onModelChange('llava:latest');
     }
   }, [messages, isLoading, input, attachedImage]);
-
-  const handleModelChange = (newModel: string) => {
-    const now = Date.now();
-    if (now - lastModelSwitch < MIN_MODEL_SWITCH_INTERVAL) {
-      alert('Please wait a moment before switching models again.');
-      return;
-    }
-    setLastModelSwitch(now);
-    onModelChange(newModel);
-  };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>

@@ -1,12 +1,9 @@
 import React, { useState, useRef } from "react";
-import { Box, Typography, TextField, Button, Paper, CircularProgress, Alert } from "@mui/material";
+import { Box, Typography, TextField, Button, Alert, CircularProgress } from "@mui/material";
 import "./MonetizationPlannerPage.css";
 import { useTheme } from '@mui/material/styles';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
-import AnalysisCard from './AnalysisCard';
 import ChatInterface from './ChatInterface';
 
 type Message = { role: 'user' | 'assistant', content: string };

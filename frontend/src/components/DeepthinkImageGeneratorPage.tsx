@@ -4,8 +4,6 @@ import { SketchPicker } from 'react-color';
 import { ReactSketchCanvas } from 'react-sketch-canvas';
 import "./MonetizationPlannerPage.css";
 import { getApiUrl, API_CONFIG } from '../config';
-import backgroundImg from '../assets/ai-cyber-girl-bg.jpg'; // Save the provided image as this file
-import InfoIcon from '@mui/icons-material/Info';
 import HelpIcon from '@mui/icons-material/Help';
 import DownloadIcon from '@mui/icons-material/Download';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -94,7 +92,6 @@ const DeepthinkImageGeneratorPage: React.FC = () => {
   const [clipSkip, setClipSkip] = useState<number | ''>('');
   const [eta, setEta] = useState<number | ''>('');
   const [promptStrength, setPromptStrength] = useState<number | ''>('');
-  const [maskImage, setMaskImage] = useState<string | null>(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [brushColor, setBrushColor] = useState('#000000');
   const [brushSize, setBrushSize] = useState(20);
@@ -397,38 +394,6 @@ Seed: ${options.seed || 'none'}
     setLoading(false);
   };
 
-  const handleDownload = () => {
-    if (imagePath) {
-      const link = document.createElement('a');
-      link.href = `${API_CONFIG.BASE_URL}/${imagePath.replace(/\\/g, '/')}`;
-      link.download = `generated_${new Date().getTime()}.png`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
-
-  const handleCopyPrompt = () => {
-    if (enhancedPrompt) {
-      navigator.clipboard.writeText(enhancedPrompt);
-      // You might want to add a toast notification here
-    }
-  };
-
-  const handleShare = async () => {
-    if (imagePath) {
-      try {
-        await navigator.share({
-          title: 'AI Generated Image',
-          text: `Check out this AI generated image using the prompt: ${prompt}`,
-          url: `${API_CONFIG.BASE_URL}/${imagePath.replace(/\\/g, '/')}`
-        });
-      } catch (err) {
-        console.error('Error sharing:', err);
-      }
-    }
-  };
-
   // Fetch generated images
   const fetchGeneratedImages = async () => {
     try {
@@ -459,53 +424,6 @@ Seed: ${options.seed || 'none'}
     setPrompt(image.prompt);
     setNegativePrompt(image.negative_prompt || '');
     setShowGallery(false);
-  };
-
-  // Handle image download
-  const handleDownloadImage = async (image: GeneratedImage) => {
-    try {
-      const response = await fetch(`${getApiUrl(API_CONFIG.IMAGE_GENERATOR)}${image.file_path}`);
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `generated_image_${image.id}.png`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    } catch (error) {
-      console.error('Error downloading image:', error);
-    }
-  };
-
-  // Handle image share
-  const handleShareImage = async (image: GeneratedImage) => {
-    try {
-      const response = await fetch(`${getApiUrl(API_CONFIG.IMAGE_GENERATOR)}${image.file_path}`);
-      const blob = await response.blob();
-      const file = new File([blob], `generated_image_${image.id}.png`, { type: 'image/png' });
-      
-      if (navigator.share) {
-        await navigator.share({
-          title: 'Generated Image',
-          text: `Prompt: ${image.prompt}`,
-          files: [file]
-        });
-      } else {
-        // Fallback for browsers that don't support Web Share API
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `generated_image_${image.id}.png`;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-      }
-    } catch (error) {
-      console.error('Error sharing image:', error);
-    }
   };
 
   // Add function to handle tag selection
@@ -642,14 +560,13 @@ Seed: ${options.seed || 'none'}
               strokeWidth={brushSize}
               strokeColor={brushColor}
               backgroundImage={inputImage}
-              exportWithBackgroundImage={true}
+              exportWithBackgroundImage={false}
               style={{ border: '1px solid #ccc' }}
               strokeStyle="solid"
               paths={defaultStroke.paths}
               allowOnlyPointerType="all"
               canvasColor="transparent"
               exportWithTransparentBackground={true}
-              preserveBackgroundImageAspectRatio="xMidYMid meet"
             />
             <Box sx={{ position: 'absolute', top: 10, right: 10, display: 'flex', gap: 1 }}>
               <Button
@@ -1130,16 +1047,6 @@ Seed: ${options.seed || 'none'}
                         <ContentCopyIcon />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Download">
-                      <IconButton size="small" onClick={() => handleDownloadImage(image)}>
-                        <DownloadIcon />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Share">
-                      <IconButton size="small" onClick={() => handleShareImage(image)}>
-                        <ShareIcon />
-                      </IconButton>
-                    </Tooltip>
                   </CardActions>
                 </Card>
               </Grid>
@@ -1187,12 +1094,6 @@ Seed: ${options.seed || 'none'}
             <DialogActions>
               <Button onClick={() => handleReusePrompt(selectedImage)}>
                 Reuse Prompt
-              </Button>
-              <Button onClick={() => handleDownloadImage(selectedImage)}>
-                Download
-              </Button>
-              <Button onClick={() => handleShareImage(selectedImage)}>
-                Share
               </Button>
               <Button onClick={() => setShowImageDetails(false)}>
                 Close
