@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Authority Checker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="icon.png" alt="Domain Authority Logo" class="logo">
+            <h1>Domain Authority</h1>
+        </div>
+        <div class="content">
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing domain metrics...</p>
+            </div>
+            <div id="metrics-result" class="hidden">
+                <div class="domain-info">
+                    <p id="domain-name" class="domain-url"></p>
+                </div>
+                <div class="metrics-container">
+                    <div class="metric-box">
+                        <div class="metric-label">Domain Authority</div>
+                        <div id="domain-authority" class="metric-value">-</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Page Authority</div>
+                        <div id="page-authority" class="metric-value">-</div>
+                    </div>
+                </div>
+            </div>
+            <div id="error-message" class="hidden">
+                <p class="error-text"></p>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="https://www.semanticpen.com/?utm_source=domain-authority-checker" target="_blank" class="powered-by">
+                Powered by Semantic Pen
+            </a>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

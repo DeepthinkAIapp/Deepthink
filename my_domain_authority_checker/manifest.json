@@ -1,0 +1,31 @@
+{
+   "action": {
+      "default_icon": {
+         "16": "favicon-16x16.png",
+         "48": "favicon-32x32.png",
+         "128": "android-chrome-512x512.png"
+      },
+      "default_popup": "popup.html"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "content_scripts": [ {
+      "js": [ "review.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_end"
+   } ],
+   "description": "Check domain authority and other metrics for any website",
+   "host_permissions": [ "\u003Call_urls>" ],
+   "icons": {
+      "16": "favicon-16x16.png",
+      "48": "favicon-32x32.png",
+      "128": "android-chrome-512x512.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr5GBr64JmFVPQFksy76cJ6pGCGF12cLoiNEyYGLNvpo8h5FRGjiZEL/KzrBLKMB/6rcCRgiYq7s93+uAJF01e09ChMiMLfCB12M+DAPDWqllNdd24mzlCeYAgN7BSMUkY5yhzrbxIx4zj/d8I4jusduytpob9bQbGO0p80Gk4UNurxizevZQkMEFFBDDt+BVyUwsKdrC7QQIVpxbmYFLeB926danhqBaMvNVXYuo8w09a4Ral6xmZVBEBqAQDsv6EeXNBW1QSmKPW3Qy3q3fRwGrEYitiRJJNqhqqiAJ8zSo1yBafVugSJbKhVnEx+wQ2UELfiLXkoHjwRzep4qbLQIDAQAB",
+   "manifest_version": 3,
+   "name": "Domain Authority Checker",
+   "permissions": [ "activeTab", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.0"
+} 

@@ -1,0 +1,243 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    width: 320px;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    padding: 16px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 8px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+}
+
+h1 {
+    font-size: 20px;
+    color: #2d3748;
+    margin: 0;
+    font-weight: 600;
+}
+
+.content {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.domain-info {
+    margin-bottom: 16px;
+}
+
+.domain-url {
+    font-size: 14px;
+    color: #4a5568;
+    word-break: break-all;
+    margin: 0;
+    padding: 8px;
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.metrics-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.metric-box {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.metric-box:hover {
+    transform: translateY(-2px);
+}
+
+.metric-label {
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none;
+}
+
+.spinner {
+    border: 3px solid #e2e8f0;
+    border-top: 3px solid #3b82f6;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin: 16px auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#loading p {
+    color: #64748b;
+    font-size: 14px;
+    text-align: center;
+    margin: 8px 0;
+}
+
+.error-text {
+    color: #ef4444;
+    font-size: 14px;
+    text-align: center;
+    margin: 8px 0;
+    padding: 8px;
+    background: #fee2e2;
+    border-radius: 4px;
+}
+
+.footer {
+    margin-top: 16px;
+    text-align: center;
+    padding: 8px;
+}
+
+.powered-by {
+    font-size: 12px;
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+    padding: 4px 8px;
+}
+
+.powered-by:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+/* New styles for better readability */
+#age-result p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+#domain-age {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+/* Review Modal Styles */
+.review-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.review-modal.visible {
+    opacity: 1;
+}
+
+.review-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 280px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.review-content h2 {
+    font-size: 18px;
+    color: #2d3748;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.review-content p {
+    font-size: 14px;
+    color: #4a5568;
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+.review-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.review-button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.review-button:hover {
+    transform: translateY(-1px);
+}
+
+.review-button.primary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.review-button.primary:hover {
+    background-color: #2563eb;
+}
+
+.review-button.secondary {
+    background-color: #e2e8f0;
+    color: #4a5568;
+}
+
+.review-button.secondary:hover {
+    background-color: #cbd5e1;
+}

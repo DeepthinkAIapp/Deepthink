@@ -1,0 +1,50 @@
+{
+  "microsoft.com": {
+    "domain": "microsoft.com",
+    "authority_score": 29,
+    "bing": 790,
+    "duckduckgo": 10,
+    "google": 0,
+    "brave": 29,
+    "total": 829,
+    "referring_domains": 829,
+    "backlinks": 829,
+    "details": "Score is based on estimated referring domains using multiple search engines. This is a rough estimate."
+  },
+  "python.org": {
+    "domain": "python.org",
+    "authority_score": 60,
+    "bing": 1130000,
+    "duckduckgo": 10,
+    "google": 0,
+    "brave": 0,
+    "total": 1130010,
+    "referring_domains": 1130010,
+    "backlinks": 1130010,
+    "details": "Score is based on estimated referring domains using multiple search engines. This is a rough estimate."
+  },
+  "fastapi.tiangolo.com": {
+    "domain": "fastapi.tiangolo.com",
+    "authority_score": 10,
+    "bing": 0,
+    "duckduckgo": 10,
+    "google": 0,
+    "brave": 0,
+    "total": 10,
+    "referring_domains": 10,
+    "backlinks": 10,
+    "details": "Score is based on estimated referring domains using multiple search engines. This is a rough estimate."
+  },
+  "example.com": {
+    "domain": "example.com",
+    "authority_score": 10,
+    "bing": 8,
+    "duckduckgo": 2,
+    "google": 0,
+    "brave": 0,
+    "total": 10,
+    "referring_domains": 10,
+    "backlinks": 10,
+    "details": "Score is based on estimated referring domains using multiple search engines. This is a rough estimate."
+  }
+}

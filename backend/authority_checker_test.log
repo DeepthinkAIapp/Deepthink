@@ -1,0 +1,136 @@
+2025-05-16 18:11:26,922 [INFO] AuthorityTest: Starting authority checker test suite
+2025-05-16 18:11:26,922 [INFO] AuthorityTest: Testing 12 domains
+2025-05-16 18:11:26,922 [INFO] AuthorityTest: Testing domain: microsoft.com
+2025-05-16 18:11:59,612 [INFO] AuthorityTest: Results for microsoft.com:
+2025-05-16 18:11:59,612 [INFO] AuthorityTest: Authority Score: 47
+2025-05-16 18:11:59,613 [INFO] AuthorityTest: Bing Results: 790
+2025-05-16 18:11:59,613 [INFO] AuthorityTest: DuckDuckGo Results: 10
+2025-05-16 18:11:59,613 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:11:59,613 [INFO] AuthorityTest: Brave Results: 29
+2025-05-16 18:11:59,614 [INFO] AuthorityTest: Total Backlinks: 829
+2025-05-16 18:11:59,614 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:11:59,614 [INFO] AuthorityTest: Search engine success rate for microsoft.com: 75.0%
+2025-05-16 18:11:59,614 [INFO] AuthorityTest: Adding extra delay for high-authority site...
+2025-05-16 18:12:09,615 [INFO] AuthorityTest: Testing domain: google.com
+2025-05-16 18:12:54,469 [INFO] AuthorityTest: Results for google.com:
+2025-05-16 18:12:54,469 [INFO] AuthorityTest: Authority Score: 100
+2025-05-16 18:12:54,469 [INFO] AuthorityTest: Bing Results: 7890000
+2025-05-16 18:12:54,470 [INFO] AuthorityTest: DuckDuckGo Results: 10
+2025-05-16 18:12:54,470 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:12:54,470 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:12:54,470 [INFO] AuthorityTest: Total Backlinks: 7890010
+2025-05-16 18:12:54,470 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:12:54,471 [INFO] AuthorityTest: Search engine success rate for google.com: 50.0%
+2025-05-16 18:12:54,471 [INFO] AuthorityTest: Adding extra delay for high-authority site...
+2025-05-16 18:13:04,473 [INFO] AuthorityTest: Testing domain: amazon.com
+2025-05-16 18:13:50,462 [INFO] AuthorityTest: Results for amazon.com:
+2025-05-16 18:13:50,462 [INFO] AuthorityTest: Authority Score: 100
+2025-05-16 18:13:50,462 [INFO] AuthorityTest: Bing Results: 1590000000
+2025-05-16 18:13:50,462 [INFO] AuthorityTest: DuckDuckGo Results: 10
+2025-05-16 18:13:50,462 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:13:50,463 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:13:50,463 [INFO] AuthorityTest: Total Backlinks: 1590000010
+2025-05-16 18:13:50,463 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:13:50,463 [INFO] AuthorityTest: Search engine success rate for amazon.com: 50.0%
+2025-05-16 18:13:50,464 [INFO] AuthorityTest: Adding extra delay for high-authority site...
+2025-05-16 18:14:00,464 [INFO] AuthorityTest: Testing domain: python.org
+2025-05-16 18:14:46,255 [INFO] AuthorityTest: Results for python.org:
+2025-05-16 18:14:46,256 [INFO] AuthorityTest: Authority Score: 90
+2025-05-16 18:14:46,256 [INFO] AuthorityTest: Bing Results: 1130000
+2025-05-16 18:14:46,256 [INFO] AuthorityTest: DuckDuckGo Results: 10
+2025-05-16 18:14:46,256 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:14:46,256 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:14:46,257 [INFO] AuthorityTest: Total Backlinks: 1130010
+2025-05-16 18:14:46,257 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:14:46,257 [INFO] AuthorityTest: Search engine success rate for python.org: 50.0%
+2025-05-16 18:14:46,257 [INFO] AuthorityTest: Testing domain: github.com
+2025-05-16 18:15:30,898 [INFO] AuthorityTest: Results for github.com:
+2025-05-16 18:15:30,898 [INFO] AuthorityTest: Authority Score: 100
+2025-05-16 18:15:30,898 [INFO] AuthorityTest: Bing Results: 1550000000
+2025-05-16 18:15:30,898 [INFO] AuthorityTest: DuckDuckGo Results: 0
+2025-05-16 18:15:30,898 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:15:30,899 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:15:30,899 [INFO] AuthorityTest: Total Backlinks: 1550000000
+2025-05-16 18:15:30,899 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:15:30,899 [INFO] AuthorityTest: Search engine success rate for github.com: 25.0%
+2025-05-16 18:15:30,900 [INFO] AuthorityTest: Testing domain: stackoverflow.com
+2025-05-16 18:16:15,610 [INFO] AuthorityTest: Results for stackoverflow.com:
+2025-05-16 18:16:15,611 [INFO] AuthorityTest: Authority Score: 100
+2025-05-16 18:16:15,611 [INFO] AuthorityTest: Bing Results: 44900000
+2025-05-16 18:16:15,611 [INFO] AuthorityTest: DuckDuckGo Results: 0
+2025-05-16 18:16:15,612 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:16:15,612 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:16:15,612 [INFO] AuthorityTest: Total Backlinks: 44900000
+2025-05-16 18:16:15,613 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:16:15,613 [INFO] AuthorityTest: Search engine success rate for stackoverflow.com: 25.0%
+2025-05-16 18:16:15,614 [INFO] AuthorityTest: Testing domain: fastapi.tiangolo.com
+2025-05-16 18:17:00,845 [INFO] AuthorityTest: Results for fastapi.tiangolo.com:
+2025-05-16 18:17:00,845 [INFO] AuthorityTest: Authority Score: 0
+2025-05-16 18:17:00,845 [INFO] AuthorityTest: Bing Results: 0
+2025-05-16 18:17:00,845 [INFO] AuthorityTest: DuckDuckGo Results: 0
+2025-05-16 18:17:00,845 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:17:00,846 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:17:00,846 [INFO] AuthorityTest: Total Backlinks: 0
+2025-05-16 18:17:00,846 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:17:00,846 [INFO] AuthorityTest: Search engine success rate for fastapi.tiangolo.com: 0.0%
+2025-05-16 18:17:00,847 [INFO] AuthorityTest: Testing domain: selenium.dev
+2025-05-16 18:17:33,610 [INFO] AuthorityTest: Results for selenium.dev:
+2025-05-16 18:17:33,610 [INFO] AuthorityTest: Authority Score: 18
+2025-05-16 18:17:33,611 [INFO] AuthorityTest: Bing Results: 0
+2025-05-16 18:17:33,611 [INFO] AuthorityTest: DuckDuckGo Results: 0
+2025-05-16 18:17:33,611 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:17:33,611 [INFO] AuthorityTest: Brave Results: 24
+2025-05-16 18:17:33,611 [INFO] AuthorityTest: Total Backlinks: 24
+2025-05-16 18:17:33,612 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:17:33,612 [INFO] AuthorityTest: Search engine success rate for selenium.dev: 25.0%
+2025-05-16 18:17:33,612 [INFO] AuthorityTest: Testing domain: beautifulsoup.readthedocs.io
+2025-05-16 18:18:18,187 [INFO] AuthorityTest: Results for beautifulsoup.readthedocs.io:
+2025-05-16 18:18:18,187 [INFO] AuthorityTest: Authority Score: 0
+2025-05-16 18:18:18,188 [INFO] AuthorityTest: Bing Results: 0
+2025-05-16 18:18:18,188 [INFO] AuthorityTest: DuckDuckGo Results: 0
+2025-05-16 18:18:18,188 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:18:18,188 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:18:18,188 [INFO] AuthorityTest: Total Backlinks: 0
+2025-05-16 18:18:18,189 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:18:18,189 [INFO] AuthorityTest: Search engine success rate for beautifulsoup.readthedocs.io: 0.0%
+2025-05-16 18:18:18,189 [INFO] AuthorityTest: Testing domain: example.com
+2025-05-16 18:19:03,038 [INFO] AuthorityTest: Results for example.com:
+2025-05-16 18:19:03,038 [INFO] AuthorityTest: Authority Score: 14
+2025-05-16 18:19:03,038 [INFO] AuthorityTest: Bing Results: 8
+2025-05-16 18:19:03,038 [INFO] AuthorityTest: DuckDuckGo Results: 0
+2025-05-16 18:19:03,038 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:19:03,039 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:19:03,039 [INFO] AuthorityTest: Total Backlinks: 8
+2025-05-16 18:19:03,039 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:19:03,039 [INFO] AuthorityTest: Search engine success rate for example.com: 25.0%
+2025-05-16 18:19:03,039 [INFO] AuthorityTest: Testing domain: test.com
+2025-05-16 18:19:48,066 [INFO] AuthorityTest: Results for test.com:
+2025-05-16 18:19:48,066 [INFO] AuthorityTest: Authority Score: 0
+2025-05-16 18:19:48,066 [INFO] AuthorityTest: Bing Results: 0
+2025-05-16 18:19:48,066 [INFO] AuthorityTest: DuckDuckGo Results: 0
+2025-05-16 18:19:48,067 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:19:48,067 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:19:48,067 [INFO] AuthorityTest: Total Backlinks: 0
+2025-05-16 18:19:48,067 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:19:48,067 [INFO] AuthorityTest: Search engine success rate for test.com: 0.0%
+2025-05-16 18:19:48,068 [INFO] AuthorityTest: Testing domain: localhost
+2025-05-16 18:20:32,655 [INFO] AuthorityTest: Results for localhost:
+2025-05-16 18:20:32,655 [INFO] AuthorityTest: Authority Score: 0
+2025-05-16 18:20:32,655 [INFO] AuthorityTest: Bing Results: 0
+2025-05-16 18:20:32,655 [INFO] AuthorityTest: DuckDuckGo Results: 0
+2025-05-16 18:20:32,655 [INFO] AuthorityTest: Google Results: 0
+2025-05-16 18:20:32,656 [INFO] AuthorityTest: Brave Results: 0
+2025-05-16 18:20:32,656 [INFO] AuthorityTest: Total Backlinks: 0
+2025-05-16 18:20:32,656 [INFO] AuthorityTest: Details: Score calculated using weighted multi-engine approach with logarithmic scaling and source diversity bonus.
+2025-05-16 18:20:32,656 [INFO] AuthorityTest: Search engine success rate for localhost: 0.0%
+2025-05-16 18:20:32,658 [INFO] AuthorityTest: Results saved to authority_test_results_20250516_181126.json
+2025-05-16 18:20:32,658 [INFO] AuthorityTest: 
+Test Suite Statistics:
+2025-05-16 18:20:32,658 [INFO] AuthorityTest: Total domains tested: 12
+2025-05-16 18:20:32,659 [INFO] AuthorityTest: Average authority score: 47.4
+2025-05-16 18:20:32,659 [INFO] AuthorityTest: Highest authority score: 100
+2025-05-16 18:20:32,659 [INFO] AuthorityTest: Lowest authority score: 0
+2025-05-16 18:20:32,659 [INFO] AuthorityTest: Bing success rate: 58.3%
+2025-05-16 18:20:32,659 [INFO] AuthorityTest: Duckduckgo success rate: 33.3%
+2025-05-16 18:20:32,659 [INFO] AuthorityTest: Google success rate: 0.0%
+2025-05-16 18:20:32,660 [INFO] AuthorityTest: Brave success rate: 16.7%

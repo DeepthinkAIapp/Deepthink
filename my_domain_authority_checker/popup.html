@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Authority Checker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="icon.png" alt="Domain Authority Logo" class="logo">
+            <h1>Domain Metrics</h1>
+        </div>
+        <div class="content">
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing domain metrics...</p>
+            </div>
+            <div id="metrics-result" class="hidden">
+                <div class="domain-info">
+                    <p id="domain-name" class="domain-url"></p>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-box primary">
+                        <div class="metric-label">Domain Authority</div>
+                        <div id="domain-authority" class="metric-value">-</div>
+                    </div>
+                    <div class="metric-box primary">
+                        <div class="metric-label">Page Authority</div>
+                        <div id="page-authority" class="metric-value">-</div>
+                    </div>
+                    <div class="metric-box secondary">
+                        <div class="metric-label">Spam Score</div>
+                        <div id="spam-score" class="metric-value">-</div>
+                    </div>
+                    <div class="metric-box secondary">
+                        <div class="metric-label">Backlinks</div>
+                        <div id="backlinks" class="metric-value">-</div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button id="refresh-btn" class="btn primary">Refresh</button>
+                    <button id="export-btn" class="btn secondary">Export Data</button>
+                </div>
+            </div>
+            <div id="error-message" class="hidden">
+                <p class="error-text"></p>
+            </div>
+        </div>
+        <div class="footer">
+            <p class="version">Version 1.0.0</p>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html> 

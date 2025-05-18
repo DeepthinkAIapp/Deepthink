@@ -1,0 +1,38 @@
+
+{
+    "0": "masterpiece, ___________ epic scene, vibrant colors, full hd, full body, dynamic lighting, ultra-high detail, dramatic lighting, movie poster style, asymmetric composition, photorealistic, unreal engine, concept art",
+    "30": "masterpiece, ___________ epic scene, vibrant colors, full hd, full body, dynamic lighting, ultra-high detail, dramatic lighting, movie poster style, asymmetric composition, photorealistic, unreal engine, concept art",
+    "60": "masterpiece, ___________ epic scene, vibrant colors, full hd, full body, dynamic lighting, ultra-high detail, dramatic lighting, movie poster style, asymmetric composition, photorealistic, unreal engine, concept art",
+    "90": "masterpiece, ___________ epic scene, vibrant colors, full hd, full body, dynamic lighting, ultra-high detail, dramatic lighting, movie poster style, asymmetric composition, photorealistic, unreal engine, concept art",
+    "150": "masterpiece, ___________ epic scene, vibrant colors, full hd, full body, dynamic lighting, ultra-high detail, dramatic lighting, movie poster style, asymmetric composition, photorealistic, unreal engine, concept art",
+    "240": "masterpiece, ___________ epic scene, vibrant colors, full hd, full body, dynamic lighting, ultra-high detail, dramatic lighting, movie poster style, asymmetric composition, photorealistic, unreal engine, concept art",
+    "350": "masterpiece, ___________ epic scene, vibrant colors, full hd, full body, dynamic lighting, ultra-high detail, dramatic lighting, movie poster style, asymmetric composition, photorealistic, unreal engine, concept art",
+    "480": "masterpiece, ___________ epic scene, vibrant colors, full hd, full body, dynamic lighting, ultra-high detail, dramatic lighting, movie poster style, asymmetric composition, photorealistic, unreal engine, concept art"
+}
+
+
+strength schedule:
+0: (0.65),  25: (0.55)
+translation x
+0:(0), 30:(15), 210:(15), 300:(0)
+translation y
+0:(0)
+translation z
+0:(0.2), 60:(10), 300:(15)
+rotation 3d x
+0:(0), 60:(0), 90:(0.5), 180:(0.5), 300:(0.5)
+rotation 3d y
+0:(0), 30:(-3.5), 90:(-2.5), 180:(-2.8), 300:(-2), 420:(0)
+rotation 3d z
+0:(0), 60:(0.2), 90:(0), 180:(-0.5), 300:(0), 420:(0.5), 500:(0.8)
+
+- FOV -
+0:(120)
+
+-Noise TAB - 
+noise schedule:
+0:(-0.06*(cos(3.141*t/15)**100)+0.06)
+
+- ANTI-BLUE TAB -
+amount schedule
+0: (0.05)
