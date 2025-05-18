@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Box, Typography, TextField, Button, Paper, Alert } from "@mui/material";
+import { Box, Typography, TextField, Button, Paper, Alert, useTheme } from "@mui/material";
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -7,34 +7,6 @@ import ChatInterface from './ChatInterface';
 import remarkGfm from 'remark-gfm';
 
 type Message = { role: 'user' | 'assistant', content: string };
-
-const SYSTEM_PROMPT = `Role: You are an experienced content strategist and SEO expert.
-Task: Your task is to create an SEO-optimized content outline for a given target keyword or topic. The outline should include the following elements:
-A title (H1) that incorporates the target keyword
-A meta description that summarizes the content and includes the target keyword
-An introduction that engages the reader and sets the context for the article
-Main headings (H2s) that cover key subtopics and use semantic keywords
-Bullet points under each H2 to provide a brief overview of the content to be covered
-A conclusion that summarizes the main points and provides a call to action or final thoughts
-A list of semantic keywords thematically related to the main keyword, providing around 50 keywords, with one keyword per line.
-Context: The content outline is designed to help writers create high-quality, SEO-friendly articles that comprehensively cover a given topic. The outline should be structured in a way that makes it easy for writers to understand the main points to be covered and ensure that the content is well-organized and engaging for readers.
-Process:
-Ask the client to provide their target keyword or topic.
-Generate a title (H1) that incorporates the target keyword or topic and is attention-grabbing for readers. If there is a year in the title, it is 2025.
-Create a meta description that summarizes the content and includes the target keyword, keeping it within the recommended character limit.
-Write an introduction that engages the reader, sets the context for the article, and includes relevant semantic keywords. Use burstiness in the sentences, combining both short and long sentences to create a more human-like flow. Use human writing like exclamation points and first person perspectives. The intro should include either an interesting stat, quotation, or something to hook the reader.
-Identify the main subtopics to be covered in the article and create H2 headings for each subtopic, incorporating semantic keywords. Write in an authoritative but friendly tone.
-Under each H2, provide bullet points that briefly outline the content to be covered, ensuring that the points are relevant and comprehensive.
-Write a conclusion that summarizes the main points of the article and provides a call to action or final thoughts, incorporating semantic keywords where appropriate. Use burstiness in the sentences to maintain a natural, human-like flow.
-Provide a list of semantic keywords thematically related to the main keyword, with around 50-100 keywords, and one keyword per line. The semantic keywords should be relevant to the specific keyword provided by the user, covering various aspects and subtopics related to the main keyword.
-Tips:
-Use tools like SurferSEO and Neuron Writer to identify semantic keywords related to the main topic.
-Ensure that the outline is well-structured and easy to follow, with a logical flow between subtopics.
-Keep the introduction and conclusion engaging and informative, as these sections play a crucial role in hooking readers and leaving a lasting impression.
-Use action verbs and descriptive language in the title and H2s to make the content more compelling and engaging.
-Optimize the meta description to ensure that it accurately summarizes the content and encourages readers to click through from search engine results pages.
-Adapt the writing style to the selected tone or provided copy to ensure consistency throughout the outline.
-By following this system prompt, you'll be able to create comprehensive, SEO-optimized content outlines that help your clients produce high-quality, engaging articles that rank well in search engines and resonate with their target audience, all while maintaining a consistent tone and style.`;
 
 const ONBOARDING_MESSAGE = `# Step 1: Subniche Content Idea Generator\nWhat's your main niche? (e.g., fitness, personal finance, gardening, tech, parenting, etc.)\n\nOnce you provide that, I'll:\n\n- Generate 5 relevant sub-niches within your main niche.\n- For each sub-niche, create 5 SEO-friendly content topic ideas.\n- Present everything in a clean, organized format.\n\n# Step 2: Targeted Keyword Idea Generator\nAfter you pick a sub-niche, I'll generate:\n\n- 15 informational article ideas (easy to rank for)\n- 5 transactional/affiliate post ideas\n- 2 pillar posts (1 affiliate, 1 informational)\nAll with SEO-friendly titles & target keywords in a table.\n\n# Step 3: SEO-Optimized Content Outline Creator\nYou'll choose one keyword, and I'll create a full outline with:\n- ✔ Title (H1) – Optimized & engaging\n- ✔ Meta description – Click-worthy & keyword-rich\n- ✔ Introduction – Hook + context\n- ✔ H2s with bullet points – Logical flow, semantic keywords\n- ✔ Conclusion – Recap + call to action\n- ✔ 50-100 semantic keywords – For NLP & depth\n\n# Step 4: AI Content Machine (Paragraph Generator)\nFor each H2, I'll write 400+ words in a human-like, conversational tone with:\n- ✅ Personal anecdotes (made-up but realistic)\n- ✅ Practical tips (from "experience")\n- ✅ Semantic keywords (naturally placed)\n- ✅ Burstiness (short + long sentences)\n- ✅ Occasional slang/errors (for authenticity)\n- ✅ Featured snippet-ready (clear, helpful answers)\n\nLet's Get Started!\n\nWhat's your main niche? (e.g., "gardening," "personal finance," "tech gadgets")\n\nOnce you tell me, I'll generate sub-niches + content ideas immediately!\n\n*(Example: If you say "fitness," I might suggest sub-niches like "home workouts," "weight loss nutrition," "running for beginners," etc., each with 5 blog topic ideas.)*\n\nYour turn! 🚀`;
 
@@ -50,6 +22,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
   const [selectedKeyword, setSelectedKeyword] = useState<string>("");
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const askedForFullArticleRef = useRef(false);
+  const theme = useTheme();
 
   // Debug: log if outline is not a string
   useEffect(() => {
@@ -226,54 +199,6 @@ const ContentOutlineCreatorPage: React.FC = () => {
     );
   }
 
-  // Step 3: Generate full content outline for a selected keyword
-  const handleStep3 = async (keywordOverride?: string) => {
-    setError(null);
-    setLoading(true);
-    abortController.current = new AbortController();
-    try {
-      const response = await fetch("/api/content-outline-creator", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prompt: SYSTEM_PROMPT,
-          niche: keywordOverride || selectedKeyword,
-        }),
-        signal: abortController.current.signal,
-      });
-      if (!response.ok) throw new Error("Failed to get outline");
-      if (!response.body) throw new Error("No response body");
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      let fullResponse = "";
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n");
-        buffer = lines.pop() || "";
-        for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            try {
-              const data = JSON.parse(line.slice(6));
-              if (data.content) {
-                fullResponse += data.content;
-                console.log('DEBUG: outline fullResponse', fullResponse);
-              }
-            } catch (e) {
-              // ignore
-            }
-          }
-        }
-      }
-    } catch (err: any) {
-      if (err.name !== "AbortError") setError(err.message || "An error occurred");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   // Helper: filter out system/context messages from chat display
   function getVisibleChatMessages(messages: Message[]): Message[] {
     // Only show user and assistant messages after the user starts chatting
@@ -286,7 +211,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
   return (
     <>
       <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
-      <Box sx={{ position: 'relative', zIndex: 1, minHeight: 0, background: 'rgba(255,255,255,0.85)' }}>
+      <Box sx={{ position: 'relative', zIndex: 1, minHeight: 0, background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)' }}>
         {loading && (
           <Box className="centered-logo-overlay" sx={{
             position: 'fixed',
@@ -319,7 +244,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
           <Typography variant="h4" gutterBottom>
             Deepthink AI Content Creation Machine
           </Typography>
-          <Paper elevation={3} sx={{ mt: 1, p: 1.5 }}>
+          <Paper elevation={3} sx={{ mt: 1, p: 1.5, bgcolor: theme.palette.mode === 'dark' ? '#232936' : undefined }}>
             <ReactMarkdown>{ONBOARDING_MESSAGE}</ReactMarkdown>
           </Paper>
           <TextField
@@ -330,6 +255,12 @@ const ContentOutlineCreatorPage: React.FC = () => {
             onChange={e => setMainNiche(e.target.value)}
             sx={{ my: 1.5 }}
             disabled={loading}
+            InputProps={{
+              style: {
+                background: theme.palette.mode === 'dark' ? '#f5f5f5' : undefined,
+                color: theme.palette.mode === 'dark' ? '#222' : undefined,
+              }
+            }}
           />
           <Box sx={{ display: "flex", gap: 2 }}>
             <Button
@@ -337,6 +268,14 @@ const ContentOutlineCreatorPage: React.FC = () => {
               color="primary"
               onClick={handleStep1}
               disabled={!mainNiche.trim() || loading}
+              sx={{
+                bgcolor: theme.palette.mode === 'dark' ? '#fff' : undefined,
+                color: theme.palette.mode === 'dark' ? '#222' : undefined,
+                '&:disabled': {
+                  bgcolor: theme.palette.mode === 'dark' ? '#eee' : undefined,
+                  color: theme.palette.mode === 'dark' ? '#aaa' : undefined,
+                }
+              }}
             >
               Generate Sub-niches & Ideas
             </Button>

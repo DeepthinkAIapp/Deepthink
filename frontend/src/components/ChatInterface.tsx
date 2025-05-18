@@ -12,11 +12,13 @@ import StopIcon from '@mui/icons-material/Stop'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import AttachFileIcon from '@mui/icons-material/AttachFile'
 import ReactMarkdown from 'react-markdown'
+import type { CodeProps } from 'react-markdown/types'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { getApiUrl, API_CONFIG } from '../config'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
+import ModelSelector from './ModelSelector'
 
 console.log('API Base URL:', API_CONFIG.BASE_URL);
 
@@ -34,7 +36,12 @@ interface ChatInterfaceProps {
   onLoadingChange?: (isLoading: boolean) => void;
 }
 
-const MIN_MODEL_SWITCH_INTERVAL = 3000; // 3 seconds
+interface ChatPayload {
+  model: string;
+  messages: Message[];
+  image?: string;
+}
+
 const MAX_INPUT_LENGTH = 8000;
 
 function stripThinkBlocks(text: string) {
@@ -71,7 +78,6 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
   const [attachedImage, setAttachedImage] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const [lastModelSwitch, setLastModelSwitch] = useState(Date.now());
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -122,7 +128,7 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
     }
 
     // Prepare payload
-    const payload: any = {
+    const payload: ChatPayload = {
       model: usedModel,
       messages: [
         ...newMessages
@@ -286,11 +292,40 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
   }, [messages, isLoading, input, attachedImage]);
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}>
+      {isLoading && (
+        <Box className="centered-logo-overlay" sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 2000,
+          background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.7)' : 'rgba(255,255,255,0.7)'
+        }}>
+          <img
+            src="/images/android-chrome-512x512.png"
+            alt="Deepthink AI Logo"
+            className="pulsate-logo"
+            style={{ width: 120, height: 120 }}
+          />
+          <Typography className="pulsate-thinking" variant="h6" sx={{ mt: 2 }}>
+            Thinking
+          </Typography>
+          <Typography variant="body2" sx={{ mt: 1, color: '#888', fontStyle: 'italic' }}>
+            Response can take 2-5 minutes
+          </Typography>
+        </Box>
+      )}
       <Box sx={{ 
         flex: 1, 
         overflowY: 'auto', 
         p: 2,
+        pt: { xs: '80px', sm: '80px' },
         display: 'flex',
         flexDirection: 'column',
         gap: 2,
@@ -322,7 +357,7 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
               sx={{
                 p: 2,
                 bgcolor: 'white',
-                color: msg.role === 'user' ? '#ff6b00' : 'text.primary',
+                color: theme.palette.mode === 'dark' ? '#111' : (msg.role === 'user' ? '#ff6b00' : 'text.primary'),
                 border: msg.role === 'user' ? '2px solid #ff6b00' : '1px solid #e3eafc',
                 boxShadow: msg.role === 'user' ? '0 2px 8px rgba(255,107,0,0.08)' : '0 2px 8px rgba(33,150,243,0.08)',
                 borderRadius: 3,
@@ -341,10 +376,10 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
                 }
               }}
             >
-              <Box sx={{ position: 'relative', zIndex: 1 }}>
+              <Box sx={{ position: 'relative', zIndex: 1, color: theme.palette.mode === 'dark' ? '#111' : undefined }}>
                 <ReactMarkdown
                   components={{
-                    code({node, inline, className, children, ...props}: any) {
+                    code: ({inline, className, children, ...props}: {inline?: boolean, className?: string, children: React.ReactNode}) => {
                       const match = /language-(\w+)/.exec(className || '');
                       return !inline && match ? (
                         <SyntaxHighlighter
@@ -381,139 +416,146 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
           borderColor: 'divider',
           bgcolor: 'background.paper',
           display: 'flex',
+          flexDirection: 'column',
           gap: 1,
-          alignItems: 'flex-end',
           borderBottomLeftRadius: 12,
           borderBottomRightRadius: 12,
           boxShadow: '0 -2px 8px rgba(33,150,243,0.08)'
         }}
       >
-        {/* Image preview */}
-        {attachedImage && (
-          <Box sx={{ mr: 1, mb: 0.5, position: 'relative', display: 'inline-block' }}>
-            <img src={attachedImage} alt="attachment" style={{ maxHeight: 48, borderRadius: 6 }} />
-            <IconButton
-              aria-label="Remove image"
-              title="Remove image"
-              size="small"
-              onClick={() => setAttachedImage(null)}
-              sx={{
-                position: 'absolute',
-                top: -8,
-                right: -8,
-                bgcolor: 'background.paper',
-                border: '1px solid',
-                borderColor: 'divider',
-                zIndex: 2
-              }}
-            >
-              ×
-            </IconButton>
+        <ModelSelector model={model} onModelChange={onModelChange} />
+        <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-end' }}>
+          {/* Image preview */}
+          {attachedImage && (
+            <Box sx={{ mr: 1, mb: 0.5, position: 'relative', display: 'inline-block' }}>
+              <img src={attachedImage} alt="attachment" style={{ maxHeight: 48, borderRadius: 6 }} />
+              <IconButton
+                aria-label="Remove image"
+                title="Remove image"
+                size="small"
+                onClick={() => setAttachedImage(null)}
+                sx={{
+                  position: 'absolute',
+                  top: -8,
+                  right: -8,
+                  bgcolor: 'background.paper',
+                  border: '1px solid',
+                  borderColor: 'divider',
+                  zIndex: 2
+                }}
+              >
+                ×
+              </IconButton>
+            </Box>
+          )}
+          <TextField
+            fullWidth
+            multiline
+            maxRows={10}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type your message..."
+            variant="outlined"
+            size="small"
+            inputRef={inputRef}
+            sx={{
+              color: theme.palette.mode === 'dark' ? '#fff' : undefined,
+              '& .MuiOutlinedInput-root': {
+                borderRadius: 2,
+                bgcolor: theme.palette.mode === 'dark' ? '#232936' : 'background.default',
+                color: theme.palette.mode === 'dark' ? '#fff' : undefined,
+                '& input, & textarea': {
+                  color: theme.palette.mode === 'dark' ? '#fff' : undefined,
+                  '::placeholder': {
+                    color: theme.palette.mode === 'dark' ? '#bbb' : undefined,
+                    opacity: 1
+                  }
+                }
+              }
+            }}
+            error={input.length > MAX_INPUT_LENGTH}
+          />
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 0.5 }}>
+            <Typography variant="caption" color={input.length > MAX_INPUT_LENGTH ? 'error' : 'text.secondary'}>
+              {input.length} / {MAX_INPUT_LENGTH} characters
+            </Typography>
           </Box>
-        )}
-        <TextField
-          fullWidth
-          multiline
-          maxRows={10}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Type your message..."
-          variant="outlined"
-          size="small"
-          inputRef={inputRef}
-          sx={{
-            color: (isMobile && theme.palette.mode === 'dark') ? '#fff' : undefined,
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 2,
-              bgcolor: 'background.default',
-              color: (isMobile && theme.palette.mode === 'dark') ? '#fff' : undefined,
-              '& input, & textarea': {
-                color: (isMobile && theme.palette.mode === 'dark') ? '#fff' : undefined,
-              }
-            }
-          }}
-          error={input.length > MAX_INPUT_LENGTH}
-        />
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 0.5 }}>
-          <Typography variant="caption" color={input.length > MAX_INPUT_LENGTH ? 'error' : 'text.secondary'}>
-            {input.length} / {MAX_INPUT_LENGTH} characters
-          </Typography>
+          {/* Image attachment button */}
+          <input
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="image-upload"
+            type="file"
+            onChange={handleImageChange}
+            title="Upload image"
+          />
+          <label htmlFor="image-upload">
+            <IconButton aria-label="Attach file" component="span" sx={{ mb: 0.5 }}>
+              <AttachFileIcon />
+            </IconButton>
+          </label>
+          {isLoading ? (
+            <IconButton 
+              color="error" 
+              onClick={handleStop}
+              sx={{ 
+                height: 40, 
+                width: 40,
+                bgcolor: 'error.light',
+                color: 'error.contrastText',
+                '&:hover': {
+                  bgcolor: 'error.main'
+                }
+              }}
+              aria-label="Stop generation"
+              title="Stop generation"
+            >
+              <StopIcon />
+            </IconButton>
+          ) : canResume ? (
+            <IconButton 
+              color="primary" 
+              onClick={handleResume}
+              sx={{ 
+                height: 40, 
+                width: 40,
+                bgcolor: 'primary.light',
+                color: 'primary.contrastText',
+                '&:hover': {
+                  bgcolor: 'primary.main'
+                }
+              }}
+              aria-label="Resume generation"
+              title="Resume generation"
+            >
+              <PlayArrowIcon />
+            </IconButton>
+          ) : (
+            <IconButton 
+              type="submit"
+              color="primary"
+              disabled={!input.trim()}
+              sx={{ 
+                height: 40, 
+                width: 40,
+                bgcolor: 'primary.main',
+                color: 'primary.contrastText',
+                '&:hover': {
+                  bgcolor: 'primary.dark'
+                },
+                '&.Mui-disabled': {
+                  bgcolor: 'action.disabledBackground',
+                  color: 'action.disabled'
+                }
+              }}
+              aria-label="Send message"
+              title="Send message"
+            >
+              <SendIcon />
+            </IconButton>
+          )}
         </Box>
-        {/* Image attachment button */}
-        <input
-          accept="image/*"
-          style={{ display: 'none' }}
-          id="image-upload"
-          type="file"
-          onChange={handleImageChange}
-          title="Upload image"
-        />
-        <label htmlFor="image-upload">
-          <IconButton aria-label="Attach file" component="span" sx={{ mb: 0.5 }}>
-            <AttachFileIcon />
-          </IconButton>
-        </label>
-        {isLoading ? (
-          <IconButton 
-            color="error" 
-            onClick={handleStop}
-            sx={{ 
-              height: 40, 
-              width: 40,
-              bgcolor: 'error.light',
-              color: 'error.contrastText',
-              '&:hover': {
-                bgcolor: 'error.main'
-              }
-            }}
-            aria-label="Stop generation"
-            title="Stop generation"
-          >
-            <StopIcon />
-          </IconButton>
-        ) : canResume ? (
-          <IconButton 
-            color="primary" 
-            onClick={handleResume}
-            sx={{ 
-              height: 40, 
-              width: 40,
-              bgcolor: 'primary.light',
-              color: 'primary.contrastText',
-              '&:hover': {
-                bgcolor: 'primary.main'
-              }
-            }}
-            aria-label="Resume generation"
-            title="Resume generation"
-          >
-            <PlayArrowIcon />
-          </IconButton>
-        ) : (
-          <IconButton 
-            type="submit"
-            color="primary"
-            disabled={!input.trim()}
-            sx={{ 
-              height: 40, 
-              width: 40,
-              bgcolor: 'primary.main',
-              color: 'primary.contrastText',
-              '&:hover': {
-                bgcolor: 'primary.dark'
-              },
-              '&.Mui-disabled': {
-                bgcolor: 'action.disabledBackground',
-                color: 'action.disabled'
-              }
-            }}
-            aria-label="Send message"
-            title="Send message"
-          >
-            <SendIcon />
-          </IconButton>
-        )}
       </Box>
     </Box>
   )

@@ -86,6 +86,34 @@ const AffiliateArticleIdeaGeneratorPage: React.FC = () => {
     <>
       <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: '100vh', background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)' }}>
+        {loading && (
+          <Box className="centered-logo-overlay" sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 2000,
+            background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.7)' : 'rgba(255,255,255,0.7)'
+          }}>
+            <img
+              src="/images/android-chrome-512x512.png"
+              alt="Deepthink AI Logo"
+              className="pulsate-logo"
+              style={{ width: 120, height: 120 }}
+            />
+            <Typography className="pulsate-thinking" variant="h6" sx={{ mt: 2 }}>
+              Thinking
+            </Typography>
+            <Typography variant="body2" sx={{ mt: 1, color: '#888', fontStyle: 'italic' }}>
+              Response can take 2-5 minutes
+            </Typography>
+          </Box>
+        )}
         <Box sx={{ maxWidth: 700, mx: "auto", mt: 6, p: 2, position: "relative", minHeight: 400 }}>
           <Typography variant="h4" gutterBottom>
             Targeted Affiliate Article Idea Generator
@@ -118,12 +146,10 @@ const AffiliateArticleIdeaGeneratorPage: React.FC = () => {
             )}
           </Box>
           {aiResponse && (
-            <AnalysisCard
-              robotImageUrl="/images/android-chrome-512x512.png"
-              robotImagePosition="bottom-right"
-              robotImageSize={64}
-              title="Affiliate Article Ideas & Keywords"
-            >
+            <Box sx={{ mt: 4, mb: 2, px: { xs: 0, sm: 2 } }}>
+              <Typography variant="h5" sx={{ mb: 2 }}>
+                Affiliate Article Ideas & Keywords
+              </Typography>
               <ReactMarkdown
                 components={{
                   code({node, inline, className, children, ...props}: any) {
@@ -160,7 +186,7 @@ const AffiliateArticleIdeaGeneratorPage: React.FC = () => {
 *Tip: Comprehensive, high-quality content that answers real buyer questions will always perform best!*
 `}</ReactMarkdown>
               </Box>
-            </AnalysisCard>
+            </Box>
           )}
           {error && (
             <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>

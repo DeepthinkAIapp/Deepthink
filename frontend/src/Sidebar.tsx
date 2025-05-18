@@ -87,11 +87,6 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="https://seo-analyzer-opal.vercel.app/" target="_blank" rel="noopener" onClick={isMobile ? onClose : undefined}>
-              <ListItemText primary="SEO Analyzer" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
             <ListItemButton component={Link} to="/search-intent-tool" onClick={isMobile ? onClose : undefined}>
               <ListItemText primary="Search Intent Tool" />
             </ListItemButton>
@@ -114,6 +109,16 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
           <ListItem disablePadding>
             <ListItemButton component={Link} to="/affiliate-article-ideas" onClick={isMobile ? onClose : undefined}>
               <ListItemText primary="Affiliate Article Ideas" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/video-generator" onClick={isMobile ? onClose : undefined}>
+              <ListItemText primary="Video Generator" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/website-authority-checker" onClick={isMobile ? onClose : undefined}>
+              <ListItemText primary="Website Authority Checker" />
             </ListItemButton>
           </ListItem>
         </List>

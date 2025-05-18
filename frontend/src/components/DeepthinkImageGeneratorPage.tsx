@@ -5,9 +5,7 @@ import { ReactSketchCanvas } from 'react-sketch-canvas';
 import "./MonetizationPlannerPage.css";
 import { getApiUrl, API_CONFIG } from '../config';
 import HelpIcon from '@mui/icons-material/Help';
-import DownloadIcon from '@mui/icons-material/Download';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import ShareIcon from '@mui/icons-material/Share';
 import HistoryIcon from '@mui/icons-material/History';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
@@ -560,13 +558,11 @@ Seed: ${options.seed || 'none'}
               strokeWidth={brushSize}
               strokeColor={brushColor}
               backgroundImage={inputImage}
-              exportWithBackgroundImage={false}
               style={{ border: '1px solid #ccc' }}
               strokeStyle="solid"
               paths={defaultStroke.paths}
               allowOnlyPointerType="all"
               canvasColor="transparent"
-              exportWithTransparentBackground={true}
             />
             <Box sx={{ position: 'absolute', top: 10, right: 10, display: 'flex', gap: 1 }}>
               <Button

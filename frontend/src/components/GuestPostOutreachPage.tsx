@@ -139,9 +139,19 @@ const GuestPostOutreachPage: React.FC = () => {
             )}
           </Box>
           {loading && (
-            <Box sx={{ display: "flex", alignItems: "center", mt: 2, visibility: "hidden" }}>
-              <CircularProgress size={24} sx={{ mr: 2 }} />
-              <Typography variant="body2">Finding opportunities...</Typography>
+            <Box className="centered-logo-overlay">
+              <img
+                src="/images/android-chrome-512x512.png"
+                alt="Deepthink AI Logo"
+                className="pulsate-logo"
+                style={{ width: 120, height: 120 }}
+              />
+              <Typography className="pulsate-thinking" variant="h6" sx={{ mt: 2 }}>
+                Thinking
+              </Typography>
+              <Typography variant="body2" sx={{ mt: 1, color: '#888', fontStyle: 'italic' }}>
+                Response can take 2-5 minutes
+              </Typography>
             </Box>
           )}
           {error && (
