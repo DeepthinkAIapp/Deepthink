@@ -4,7 +4,6 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTheme } from '@mui/material/styles';
-import AnalysisCard from './AnalysisCard';
 
 const ONBOARDING_MESSAGE = `**Step 1: Enter Your Sub-Niche**
 

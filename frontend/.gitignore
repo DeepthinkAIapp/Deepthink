@@ -1,1 +1,48 @@
-.vercel
+# Node and Python environments
+node_modules/
+venv/
+.venv/
+__pycache__/
+.pytest_cache/
+dist/
+build/
+*.pyc
+
+# System files
+.DS_Store
+
+# Large binaries and logs
+*.exe
+*.jar
+*.b64
+*.log
+*.html
+*.zip
+*.tar
+*.gz
+*.7z
+*.mp4
+*.mov
+*.avi
+*.webm
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Project-specific
+bfg.jar
+ngrok.exe
+rustup-init.exe
+image.b64
+deepthinkai.log
+authority_checker_test.log
+bing_bot_detection_microsoft.com.html
+mojeek_debug.html
+bing_debug.html
+duckduckgo_debug.html
+yandex_debug.html
+
+# IDE and OS
+.vscode/
+.idea/

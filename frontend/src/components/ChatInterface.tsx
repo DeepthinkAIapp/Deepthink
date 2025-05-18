@@ -12,11 +12,9 @@ import StopIcon from '@mui/icons-material/Stop'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import AttachFileIcon from '@mui/icons-material/AttachFile'
 import ReactMarkdown from 'react-markdown'
-import type { CodeProps } from 'react-markdown/types'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { getApiUrl, API_CONFIG } from '../config'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import ModelSelector from './ModelSelector'
 
@@ -79,7 +77,6 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -379,19 +376,20 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
               <Box sx={{ position: 'relative', zIndex: 1, color: theme.palette.mode === 'dark' ? '#111' : undefined }}>
                 <ReactMarkdown
                   components={{
-                    code: ({inline, className, children, ...props}: {inline?: boolean, className?: string, children: React.ReactNode}) => {
+                    code: (props: any) => {
+                      const {inline, className, children, ...rest} = props;
                       const match = /language-(\w+)/.exec(className || '');
                       return !inline && match ? (
                         <SyntaxHighlighter
                           style={oneDark}
                           language={match[1]}
                           PreTag="div"
-                          {...props}
+                          {...rest}
                         >
                           {String(children).replace(/\n$/, '')}
                         </SyntaxHighlighter>
                       ) : (
-                        <code className={className} {...props}>
+                        <code className={className} {...rest}>
                           {children}
                         </code>
                       );

@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 
 const BACKEND_URL = 'https://2e90-2601-681-8400-6350-205e-8b88-94c-89c1.ngrok-free.app';
-const API_URL = BACKEND_URL + '/api';
 
 const SAMPLERS = [
   'Euler a', 'Euler', 'LMS', 'Heun', 'DPM2', 'DPM2 a', 'DPM++ 2S a', 'DPM++ 2M', 'DPM++ SDE', 'DPM fast', 'DPM adaptive', 'LMS Karras', 'DPM2 Karras', 'DPM2 a Karras', 'DPM++ 2S a Karras', 'DPM++ 2M Karras', 'DPM++ SDE Karras', 'DDIM', 'PLMS'
@@ -365,50 +364,6 @@ const ensureStringSchedules = (settings: any) => {
   return newSettings;
 };
 
-// Helper: random suffixes for prompt diversity
-const PROMPT_SUFFIXES = [
-  ', cinematic lighting',
-  ', ultra detailed',
-  ', trending on artstation',
-  ', 8k resolution',
-  ', dramatic composition',
-  ', vibrant colors',
-  ', masterpiece',
-  ', photorealistic',
-  ', surreal atmosphere',
-  ', volumetric lighting',
-  '', // allow for no suffix
-];
-
-function getRandomSuffix() {
-  return PROMPT_SUFFIXES[Math.floor(Math.random() * PROMPT_SUFFIXES.length)];
-}
-
-function getRandomizedKeyframes(basePrompt: string) {
-  return {
-    "0": [basePrompt],
-    "30": [basePrompt + getRandomSuffix()],
-    "60": [basePrompt + getRandomSuffix()],
-    "90": [basePrompt + getRandomSuffix()]
-  };
-}
-
-function getEvenlySpacedKeyframes(maxFrames: number, numKeyframes = 4): number[] {
-  if (!maxFrames || maxFrames < 1) return [0];
-  const step = Math.floor(maxFrames / (numKeyframes - 1));
-  return Array.from({ length: numKeyframes }, (_, i) => i * step);
-}
-
-function buildPromptJsonFromPrompt(prompt: string | string[], maxFrames: number, numKeyframes = 4): Record<string, string> {
-  const keyframes = getEvenlySpacedKeyframes(maxFrames, numKeyframes);
-  const prompts = Array.isArray(prompt) ? prompt : [prompt];
-  const result: Record<string, string> = {};
-  keyframes.forEach((frame, idx) => {
-    result[String(frame)] = prompts[idx % prompts.length];
-  });
-  return result;
-}
-
 // Add template definitions
 const TEMPLATES = [
   {
@@ -451,14 +406,6 @@ const VideoGeneratorPage: React.FC = () => {
   const [selectedNegativeTags, setSelectedNegativeTags] = useState<string[]>([]);
   const [showAllNegativeTags, setShowAllNegativeTags] = useState(false);
   const [negativePrompt, setNegativePrompt] = useState(DEFAULT_NEGATIVE_PROMPT);
-  const [enhancedPrompt, setEnhancedPrompt] = useState<string | null>(null);
-  const [enhancing, setEnhancing] = useState(false);
-  const [enhanceError, setEnhanceError] = useState<string | null>(null);
-  const [promptMode, setPromptMode] = useState<'original' | 'enhanced' | 'edit'>('enhanced');
-  const [editedPrompt, setEditedPrompt] = useState<string>('');
-  const [promptDirty, setPromptDirty] = useState(false);
-  const lastEnhancedPrompt = useRef<string | null>(null);
-  const originalPromptRef = useRef<string>(deforumSettings.text_prompts["0"][0]);
   const [model, setModel] = useState(MODEL_OPTIONS[0].value);
   const [batchId, setBatchId] = useState<string | null>(null);
   const [promptJson, setPromptJson] = useState<Record<string, string>>(() => ({
@@ -503,197 +450,12 @@ const VideoGeneratorPage: React.FC = () => {
     }
   };
 
-  const enhancePrompt = async (
-    userPrompt: string,
-    options: {
-      negativePrompt: string,
-      steps: number,
-      cfgScale: number,
-      seed: number | '',
-      model: string
-    }
-  ): Promise<string> => {
-    const systemPrompt = `
-You are an expert at writing Midjourney-style prompts for AI image generation. 
-Given a short idea and user-selected options (style, aspect ratio, negative prompt, model, steps, cfg scale, seed), 
-expand it into a detailed, vivid prompt using Midjourney conventions. 
-Include subject, style, lighting, mood, and composition. 
-Add tags like --ar for aspect ratio, --style for style, --no for negative prompt, --seed for seed, --v 5 for version, --q 2 for quality, etc., as appropriate. 
-Do not include commentary, just output the prompt.
-If a field is not provided, omit its tag.
-`;
-    const userMessage = `
-Prompt: ${userPrompt}
-Negative Prompt: ${options.negativePrompt}
-Model: ${options.model}
-Steps: ${options.steps}
-CFG Scale: ${options.cfgScale}
-Seed: ${options.seed || 'none'}
-`;
-    const response = await fetch(`${API_URL}/chat`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "gemma:7b",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userMessage }
-        ]
-      }),
-    });
-    if (!response.body) throw new Error("No response body from chat API");
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = "";
-    let done = false;
-    let fullContent = "";
-    while (!done) {
-      const { value, done: streamDone } = await reader.read();
-      done = streamDone;
-      if (value) {
-        buffer += decoder.decode(value, { stream: true });
-        const sseMessages = buffer.split("\n\n");
-        buffer = sseMessages.pop() || "";
-        for (const sse of sseMessages) {
-          if (sse.startsWith("data: ")) {
-            try {
-              const jsonStr = sse.replace(/^data: /, "");
-              const data = JSON.parse(jsonStr);
-              if (data.message && data.message.content) {
-                fullContent += data.message.content;
-              }
-            } catch (e) {
-              // Ignore parse errors for incomplete chunks
-            }
-          }
-        }
-      }
-    }
-    return fullContent.trim() || userPrompt;
-  };
-
-  const handlePromptChange = (value: string) => {
-    setDeforumSettings(prev => ({
-      ...prev,
-      text_prompts: { ...prev.text_prompts, "0": [value] }
-    }));
-    originalPromptRef.current = value;
-    setPromptDirty(true);
-  };
-
-  const handlePromptFocus = () => {
-    // No-op for now
-  };
-
-  const handlePromptBlur = () => {
-    const prompt = deforumSettings.text_prompts["0"][0];
-    if (!prompt || !prompt.trim()) return;
-    if (!promptDirty) return;
-    if (lastEnhancedPrompt.current === prompt) return;
-    setEnhancing(true);
-    setEnhanceError(null);
-    console.log('Enhancing prompt on blur:', prompt);
-    enhancePrompt(prompt, {
-      negativePrompt,
-      steps: deforumSettings.steps,
-      cfgScale: deforumSettings.strength,
-      seed: deforumSettings.seed,
-      model
-    })
-      .then(result => {
-        setEnhancedPrompt(result);
-        lastEnhancedPrompt.current = prompt;
-        setPromptDirty(false);
-        console.log('Enhanced prompt set:', result);
-      })
-      .catch(err => setEnhanceError(err.message || 'Failed to enhance prompt'))
-      .finally(() => setEnhancing(false));
-  };
-
-  useEffect(() => {
-    if (promptMode === 'edit' && enhancedPrompt) {
-      setEditedPrompt(enhancedPrompt);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enhancedPrompt]);
-
-  // When promptMode or enhancedPrompt/editedPrompt changes, sync deforumSettings.text_prompts["0"][0] and randomize keyframes
-  useEffect(() => {
-    if (promptMode === 'enhanced' && enhancedPrompt) {
-      setDeforumSettings(prev => ({
-        ...prev,
-        text_prompts: getRandomizedKeyframes(enhancedPrompt)
-      }));
-    } else if (promptMode === 'edit' && editedPrompt) {
-      setDeforumSettings(prev => ({
-        ...prev,
-        text_prompts: getRandomizedKeyframes(editedPrompt)
-      }));
-    } else if (promptMode === 'original') {
-      setDeforumSettings(prev => ({
-        ...prev,
-        text_prompts: { ...prev.text_prompts, "0": [originalPromptRef.current] }
-      }));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [promptMode, enhancedPrompt, editedPrompt]);
-
-  // Sync deforumSettings.text_prompts with promptJson
-  useEffect(() => {
-    setDeforumSettings(prev => ({
-      ...prev,
-      text_prompts: {
-        ...prev.text_prompts,
-        ...Object.fromEntries(Object.entries(promptJson).map(([k, v]) => [k, [v]]))
-      }
-    }));
-  }, [promptJson]);
-
-  // When max_frames changes, recalculate keyframes and update promptJson
-  useEffect(() => {
-    const maxFrames = deforumSettings.max_frames || 120;
-    const keys = Object.keys(promptJson);
-    const values = Object.values(promptJson);
-    if (keys.length > 1) {
-      // Distribute existing prompts over new keyframes
-      setPromptJson(buildPromptJsonFromPrompt(values, maxFrames, keys.length));
-    } else {
-      // Use the single prompt for all keyframes
-      setPromptJson(buildPromptJsonFromPrompt(values[0], maxFrames));
-    }
-    // eslint-disable-next-line
-  }, [deforumSettings.max_frames]);
-
-  // When enhancedPrompt is set, update promptJson with enhanced prompt for all keyframes
-  useEffect(() => {
-    if (enhancedPrompt && promptMode === 'enhanced') {
-      const maxFrames = deforumSettings.max_frames || 120;
-      setPromptJson(buildPromptJsonFromPrompt(enhancedPrompt, maxFrames, Object.keys(promptJson).length));
-    }
-    // eslint-disable-next-line
-  }, [enhancedPrompt, promptMode]);
-
-  // Handler for JSON textarea
-  const handlePromptJsonChange = (val: string) => {
-    try {
-      const parsed = JSON.parse(val);
-      setPromptJson(parsed);
-    } catch (e) {
-      // Ignore parse error for now, could show error
-    }
-  };
-
   const handleGenerate = async () => {
     setLoading(true);
     setMessage(null);
     setVideoUrl(null);
     setBatchId(null);
     let promptToUse = deforumSettings.text_prompts["0"][0];
-    if (promptMode === 'enhanced' && enhancedPrompt) {
-      promptToUse = enhancedPrompt;
-    } else if (promptMode === 'edit' && editedPrompt) {
-      promptToUse = editedPrompt;
-    }
     const useInit = !!(initImage && deforumSettings.init_image);
     try {
       const safeSettings = ensureStringSchedules({
@@ -849,6 +611,29 @@ Seed: ${options.seed || 'none'}
       }));
       // For the textarea, keep as { [k: string]: string }
       setPromptJson(templatePrompts);
+    }
+  };
+
+  // Add handlePromptJsonChange function
+  const handlePromptJsonChange = (value: string) => {
+    try {
+      const parsed = JSON.parse(value);
+      setPromptJson(parsed);
+      // Update deforum settings with the new prompts
+      setDeforumSettings(prev => ({
+        ...prev,
+        text_prompts: Object.entries(parsed).reduce((acc, [key, value]) => ({
+          ...acc,
+          [key]: [String(value)]
+        }), {
+          "0": [""],
+          "30": [""],
+          "60": [""],
+          "90": [""]
+        })
+      }));
+    } catch (error) {
+      console.error('Invalid JSON:', error);
     }
   };
 

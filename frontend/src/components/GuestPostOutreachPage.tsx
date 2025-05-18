@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Box, Typography, TextField, Button, Paper, CircularProgress, Alert } from "@mui/material";
+import { Box, Typography, TextField, Button, Paper, Alert } from "@mui/material";
 import "./MonetizationPlannerPage.css";
 import { useTheme } from '@mui/material/styles';
 import ChatInterface from './ChatInterface';

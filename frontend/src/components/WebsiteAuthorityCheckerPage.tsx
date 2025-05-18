@@ -6,7 +6,6 @@ const LABELS = ['Domain Rating', 'Backlinks', 'Linking Websites'];
 export default function WebsiteAuthorityCheckerPage() {
   const [domain, setDomain] = useState('');
   const [loading, setLoading] = useState(false);
-  const [resultHtml, setResultHtml] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [metrics, setMetrics] = useState<string[]>([]);
   const theme = useTheme();
@@ -15,7 +14,6 @@ export default function WebsiteAuthorityCheckerPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setResultHtml(null);
     setMetrics([]);
     try {
       const res = await fetch('/api/authority-checker', {
@@ -25,8 +23,6 @@ export default function WebsiteAuthorityCheckerPage() {
       });
       const data = await res.json();
       if (data.html) {
-        setResultHtml(data.html);
-
         // Extract numbers from the HTML
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = data.html;

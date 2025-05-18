@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, status, BackgroundTasks, Request, Body, UploadFile
+from fastapi import FastAPI, HTTPException, Depends, status, BackgroundTasks, Request, Body, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.responses import StreamingResponse, JSONResponse
@@ -7,7 +7,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, validator, field_validator
 from typing import List, Optional, AsyncGenerator, Dict, Tuple, Any
 import httpx
 import json
@@ -51,6 +51,36 @@ import base64
 from fastapi.staticfiles import StaticFiles
 from PIL import Image, ImageStat
 import io
+from fastapi import APIRouter
+import shutil
+import sys
+sys.path.append(str(pathlib.Path(__file__).parent.parent / 'deepthink-link-builder' / 'modules'))
+import scraper
+import selenium_submitter
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.edge.options import Options as EdgeOptions
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import WebDriverException
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from selenium.webdriver.edge.service import Service
+import random
+from ahrefs_scraper import router as ahrefs_router
+
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+    handlers=[
+        logging.FileHandler('deepthinkai.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger('DeepThinkAI')
 
 class Message(BaseModel):
     role: str = Field(..., min_length=1, max_length=50)
@@ -59,8 +89,9 @@ class Message(BaseModel):
     entities: Optional[List[Dict]] = None
     intent: Optional[str] = None
 
-    @validator('role')
-    def validate_role(cls, v):
+    @field_validator('role')
+    @classmethod
+    def validate_role(cls, v: str) -> str:
         allowed_roles = ['user', 'assistant', 'system']
         if v not in allowed_roles:
             raise ValueError(f'Role must be one of {allowed_roles}')
@@ -86,22 +117,11 @@ class TokenData(BaseModel):
     username: Optional[str] = None
 
 class RequestContextFilter(logging.Filter):
-    def filter(self, record):
+    def filter(self, record: logging.LogRecord) -> bool:
         if hasattr(record, 'request_id'):
             return True
         record.request_id = 'startup'
         return True
-
-# Configure logging with structured format
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
-    handlers=[
-        logging.FileHandler('deepthinkai.log'),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger("DeepThinkAI")
 
 # Download required NLTK data
 nltk.download('punkt')
@@ -128,6 +148,9 @@ if not SECRET_KEY:
 # API Configuration
 OLLAMA_API_URL = os.getenv("OLLAMA_API_URL", "http://127.0.0.1:11434/api/chat")
 
+# Stable Diffusion WebUI URL
+SD_WEBUI_URL = "http://127.0.0.1:7860"
+
 # Database Configuration
 DB_DIR = pathlib.Path(__file__).parent.absolute()
 DATABASE_URL = str(DB_DIR / "chat.db")
@@ -139,27 +162,45 @@ RATE_LIMIT_REQUESTS = int(os.getenv("RATE_LIMIT_REQUESTS", "10"))
 RATE_LIMIT_PERIOD = int(os.getenv("RATE_LIMIT_PERIOD", "60"))
 
 # Request Configuration
-MAX_REQUEST_SIZE = int(os.getenv("MAX_REQUEST_SIZE", "1048576"))  # 1MB in bytes
+MAX_REQUEST_SIZE = int(os.getenv("MAX_REQUEST_SIZE", "104857600"))  # 100MB in bytes
 REQUEST_TIMEOUT = int(os.getenv("REQUEST_TIMEOUT", "200"))  # seconds
 
 # CORS Configuration
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",")
-# Add ngrok domains and production domain to allowed origins
-ALLOWED_ORIGINS.extend([
+ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5173",
     "https://*.ngrok-free.app",
     "https://*.ngrok.io",
     "https://*.ngrok.app",
-    "https://www.deepthinkai.app"  # Production domain
-])
+    "https://www.deepthinkai.app",
+    "https://deepthinkai.app",
+    "https://fda1-2601-681-8400-6350-8959-784e-ae86-4d3b.ngrok-free.app"
+]
+
+# Remove duplicates
+ALLOWED_ORIGINS = list(dict.fromkeys(ALLOWED_ORIGINS))
 
 # Rate limiter configuration
 limiter = Limiter(key_func=get_remote_address)
-app = FastAPI(title="DeepThinkAI API")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    await db_pool.initialize()
+    await init_db()
+    yield
+    # Shutdown
+    await db_pool.close_all()
+
+app = FastAPI(title="DeepThinkAI API", lifespan=lifespan)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Initialize Prometheus instrumentation
 Instrumentator().instrument(app).expose(app)
+
+# Include the Ahrefs router
+app.include_router(ahrefs_router)
 
 # Security middleware
 app.add_middleware(
@@ -173,7 +214,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["*"],
     max_age=3600
@@ -414,15 +455,6 @@ async def init_db():
             ON generated_images(timestamp)
         """)
 
-@app.on_event("startup")
-async def startup():
-    await db_pool.initialize()
-    await init_db()
-
-@app.on_event("shutdown")
-async def shutdown():
-    await db_pool.close_all()
-
 # Enhanced chat history storage with error handling
 async def store_chat_message(user_id: str, message: Message, model: str = None):
     async with get_db_connection() as conn:
@@ -554,47 +586,28 @@ async def monitor_model_response(model: str, func: callable, *args, **kwargs):
 @app.post("/api/chat")
 @limiter.limit(f"{RATE_LIMIT_REQUESTS}/{RATE_LIMIT_PERIOD}seconds")
 async def chat(request: Request, chat_request: EnhancedChatRequest, background_tasks: BackgroundTasks):
-    request_id = request.state.request_id
+    request_id = getattr(request.state, "request_id", str(uuid.uuid4()))
     ACTIVE_REQUESTS.inc()
     logger.info(f"Starting chat request {request_id} with model: {chat_request.model}")
-
     try:
-        # Process messages with sliding window for long prompts
-        processed_messages = process_long_prompt(chat_request.messages)
-        
-        # Filter out empty messages
-        processed_messages = [m for m in processed_messages if m.content and m.content.strip()]
-        
-        # Select model based on content
-        selected_model = select_best_model(processed_messages, chat_request.image)
-        
-        # Store chat history
-        for msg in processed_messages:
-            await monitor_db_operation(
-                'store_message',
-                store_chat_message,
-                "default_user",
-                msg,
-                selected_model
-            )
-        
-        # Get model response (streaming)
+        # If model is 'auto', use select_best_model to choose the appropriate model
+        selected_model = chat_request.model
+        if selected_model == 'auto':
+            selected_model = select_best_model(chat_request.messages, chat_request.image)
+            logger.info(f"Auto-selected model: {selected_model}")
+
         async def event_stream():
             try:
-                async with httpx.AsyncClient(timeout=30.0) as client:
+                async with httpx.AsyncClient(timeout=60.0) as client:
                     async with client.stream(
                         "POST",
                         OLLAMA_API_URL,
                         json={
                             "model": selected_model,
-                            "messages": [{"role": m.role, "content": m.content} for m in processed_messages],
+                            "messages": [{"role": m.role, "content": m.content} for m in chat_request.messages],
                             "stream": True
                         }
                     ) as response:
-                        user_last_message = processed_messages[-1].content if processed_messages else ''
-                        if is_creator_question(user_last_message):
-                            yield f"data: {{\"message\": {{\"content\": \"{CREATOR_RESPONSE}\"}}}}\n\n"
-                            return
                         async for line in response.aiter_lines():
                             if line.strip():
                                 try:
@@ -607,14 +620,15 @@ async def chat(request: Request, chat_request: EnhancedChatRequest, background_t
                                 except Exception:
                                     yield f"data: {line}\n\n"
             except Exception as e:
-                logger.error(f"Error in event_stream: {str(e)}")
+                logger.error(f"Error in event_stream for /api/chat: {str(e)}", exc_info=True)
                 yield f"data: {{\"error\": \"{str(e)}\"}}\n\n"
-
+            finally:
+                ACTIVE_REQUESTS.dec()
         return StreamingResponse(event_stream(), media_type="text/event-stream")
-
     except Exception as e:
         ACTIVE_REQUESTS.dec()
         ERROR_COUNT.labels(type=type(e).__name__, endpoint='/api/chat').inc()
+        logger.error(f"Exception in /api/chat: {str(e)}", exc_info=True)
         raise
 
 @app.post("/api/chat/stop/{request_id}")
@@ -826,7 +840,7 @@ async def health_check():
     # Check model service health
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
-            response = await client.get(OLLAMA_API_URL)
+            response = await client.get("http://127.0.0.1:11434/api/tags")
             health_status["model_service"] = "healthy" if response.status_code == 200 else "unhealthy"
     except Exception as e:
         health_status["model_service"] = "unhealthy"
@@ -840,6 +854,10 @@ sentiment_pipeline = None
 MODEL_SELECTION_CACHE = {}
 
 def select_best_model(messages: List[Message], image: Optional[str] = None) -> str:
+    # If image is present, use vision model
+    if image:
+        return "llava:latest"
+
     # Create cache key from message content
     cache_key = "|".join(m.content or "" for m in messages)
     if cache_key in MODEL_SELECTION_CACHE:
@@ -874,6 +892,11 @@ def select_best_model(messages: List[Message], image: Optional[str] = None) -> s
     ):
         MODEL_SELECTION_CACHE[cache_key] = "gemma:7b"
         return "gemma:7b"
+
+    # For long prompts, use mistral:latest
+    if messages and any(len(m.content or '') > 1500 for m in messages):
+        MODEL_SELECTION_CACHE[cache_key] = "mistral:latest"
+        return "mistral:latest"
 
     # Default to gemma:7b for other tasks
     MODEL_SELECTION_CACHE[cache_key] = "gemma:7b"
@@ -1409,58 +1432,64 @@ class ImagePromptRequest(BaseModel):
     input_image: Optional[str] = None
     mask_image: Optional[str] = None
 
-    @validator('seed_resize_width', 'seed_resize_height')
-    def validate_seed_resize(cls, v):
+    @field_validator('seed_resize_width', 'seed_resize_height')
+    @classmethod
+    def validate_seed_resize(cls, v: Optional[int]) -> int:
         if v is not None and v < 0:
             return 0
-        return v
+        return v if v is not None else 0
 
-    @validator('width', 'height')
-    def validate_dimensions(cls, v):
+    @field_validator('width', 'height')
+    @classmethod
+    def validate_dimensions(cls, v: Optional[int]) -> int:
         if v is not None:
             if v < 64:
                 return 64
             if v > 2048:
                 return 2048
-        return v
+        return v if v is not None else 512
 
-    @validator('steps')
-    def validate_steps(cls, v):
+    @field_validator('steps')
+    @classmethod
+    def validate_steps(cls, v: Optional[int]) -> int:
         if v is not None:
             if v < 1:
                 return 1
             if v > 150:
                 return 150
-        return v
+        return v if v is not None else 30
 
-    @validator('cfg_scale')
-    def validate_cfg_scale(cls, v):
+    @field_validator('cfg_scale')
+    @classmethod
+    def validate_cfg_scale(cls, v: Optional[float]) -> float:
         if v is not None:
             if v < 1.0:
                 return 1.0
             if v > 30.0:
                 return 30.0
-        return v
+        return v if v is not None else 7.0
 
-    @validator('denoising_strength')
-    def validate_denoising_strength(cls, v):
+    @field_validator('denoising_strength')
+    @classmethod
+    def validate_denoising_strength(cls, v: Optional[float]) -> float:
         if v is not None:
             if v < 0.0:
                 return 0.0
             if v > 1.0:
                 return 1.0
-        return v
+        return v if v is not None else 0.7
 
 # Add this function near the top of the file, after the imports
 async def check_sd_api_availability():
     """Check if Stable Diffusion API is available"""
     try:
-        response = requests.get("http://127.0.0.1:7861/sdapi/v1/sd-models", timeout=5)
-        if response.status_code != 200:
-            logger.error(f"Stable Diffusion API returned status code {response.status_code}")
-            return False
-        return True
-    except requests.exceptions.RequestException as e:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(f"{SD_WEBUI_URL}/sdapi/v1/sd-models", timeout=5)
+            if response.status_code != 200:
+                logger.error(f"Stable Diffusion API returned status code {response.status_code}")
+                return False
+            return True
+    except Exception as e:
         logger.error(f"Error checking Stable Diffusion API availability: {str(e)}")
         return False
 
@@ -2033,6 +2062,561 @@ async def youtube_content_planner(request: Request):
             return {"content": content}
 
     return JSONResponse({"error": "Invalid request"}, status_code=400)
+
+# Mount the generated videos directory as a static files route
+GENERATED_VIDEO_DIR = os.path.join(os.path.dirname(__file__), 'data', 'generated_videos')
+os.makedirs(GENERATED_VIDEO_DIR, exist_ok=True)
+app.mount("/data/generated_videos", StaticFiles(directory=GENERATED_VIDEO_DIR), name="generated_videos")
+
+@app.get("/api/generated-videos")
+async def get_generated_videos():
+    """List all generated video files."""
+    try:
+        files = []
+        for fname in os.listdir(GENERATED_VIDEO_DIR):
+            if fname.lower().endswith(('.mp4', '.mov', '.avi', '.webm')):
+                files.append({
+                    "filename": fname,
+                    "url": f"/data/generated_videos/{fname}"
+                })
+        return {"videos": files}
+    except Exception as e:
+        logger.error(f"Error listing generated videos: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error listing generated videos")
+
+@app.post("/api/upload-video")
+async def upload_video(video: UploadFile = File(...)):
+    try:
+        # Create a unique filename using timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{timestamp}_{video.filename}"
+        file_path = os.path.join("data/generated_videos", filename)
+        
+        # Save the uploaded file
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(video.file, buffer)
+        
+        return JSONResponse({
+            "message": "Video uploaded successfully",
+            "filename": filename,
+            "path": f"/data/generated_videos/{filename}"
+        })
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        video.file.close()
+
+DEFORUM_API_URL = "http://localhost:7860/deforum_api/batches"
+
+from fastapi import APIRouter
+router = APIRouter()
+
+def fix_deforum_schedules(settings):
+    # List of schedule fields that must be strings
+    schedule_fields = [
+        "cfg_scale_schedule", "steps_schedule", "init_scale_schedule", "latent_scale_schedule",
+        "image_strength_schedule", "blendFactorMax", "blendFactorSlope", "tweening_frames_schedule",
+        "color_correction_factor"
+    ]
+    for field in schedule_fields:
+        value = settings.get(field)
+        if isinstance(value, list):
+            # Convert [15] -> "0:(15)"
+            if len(value) > 0:
+                settings[field] = f"0:({value[0]})"
+        elif isinstance(value, dict):
+            # Convert {"0": 25} -> "0:(25)"
+            settings[field] = ",".join(f"{k}:({v})" for k, v in value.items())
+    return settings
+
+# Add this function after the imports
+def copy_deforum_video_to_served_dir(deforum_video_path: str) -> str:
+    """Copy a Deforum-generated video to the backend's served directory."""
+    try:
+        if not os.path.exists(deforum_video_path):
+            raise FileNotFoundError(f"Deforum video not found: {deforum_video_path}")
+        
+        # Get the filename from the path
+        filename = os.path.basename(deforum_video_path)
+        
+        # Create the destination path in the backend's served directory
+        dest_path = os.path.join(GENERATED_VIDEO_DIR, filename)
+        
+        # Copy the file
+        shutil.copy2(deforum_video_path, dest_path)
+        
+        # Return the URL path that the frontend can use
+        return f"/data/generated_videos/{filename}"
+    except Exception as e:
+        logger.error(f"Error copying Deforum video: {str(e)}")
+        raise
+
+@router.post("/api/deforum-generate")
+async def deforum_generate(user_settings: dict = Body(...)):
+    # Try to load defaults from C:\llama\settings\deforum.txt
+    settings_path = r"C:\llama\settings\deforum.txt"
+    file_defaults = None
+    if os.path.exists(settings_path):
+        try:
+            with open(settings_path, "r", encoding="utf-8") as f:
+                file_defaults = json.load(f)
+        except Exception as e:
+            file_defaults = None
+            # Optionally log error
+    # Fallback hardcoded defaults
+    hard_defaults = {
+        "animation_mode": "2D",
+        "max_frames": 188,
+        "W": 512,
+        "H": 512,
+        "seed": 42,
+        "sampler": "Euler a",
+        "steps": 20,
+        "scale": 7.0,
+        "animation_prompts": {
+            "0": "masterpiece, a man walking past a mural of a leopard on a wall, anamorphic, Indian themes, Indian art, Indian art wall, graffiti art, video art, Full HD, vibrant colours, dynamic lighting, ultra high detail, dramatic lighting, movie, poster, asymmetric composition, ultra detailed, Photorealistic, unreal engine, art by Johnson Ting neg ",
+            "30": "masterpiece, Traveller walking in street of footpath of a tiger or leopard on a wall ,Indian, tiger, elephant, animals, metropolis, Nagpur city skyline, Leopard wall in the background, art, cyberpunk tiger, futuristic, a astronauts walking on  past a mural of a leopard on a wall, birds, bright colourful, photo realistic, Natural Lighting, dynamic lighting, ultra-high detail, dramatic lighting, movie, poster, asymmetric composition, ultra detailed, Photorealistic, unreal engine, art by Johnson Ting neg ",
+            "60": "masterpiece, a man walking past a mural of a leopard on a wall, Traveller waking on the footpath , forest, lion, cat, metropolis, Indian themes, trees, beach and palm trees, As the sun gently bathed the vibrant city streets, a man strolled leisurely, his steps casting a rhythmic melody against the pavement. His eyes wandered, absorbing the kaleidoscope of colours that surrounded him, until they locked onto a mesmerizing mural adorning a weathered wall. A majestic leopard, its sleek coat painted with lifelike precision, commanded attention, exuding an aura of wild grace, airbus airplane, bright colourful, photo realistic, India, words, Boston, New York, Sydney, Los Angeles, Tokyo, Singapore, Paris, Ball, palm trees, Eifel tower, cocktail, Europe, statue of liberty photo, Tourists, Natural Lighting, dynamic lighting, ultra high detail, dramatic lighting, movie, asymmetric composition, ultra detailed, Photorealistic, unreal engine, art by Johnson Ting -neg ",
+            "90": "masterpiece, A man walking , wild life, Futuristic Kuala Lumpur cyberpunk forest, Kuala Lumpur, coloured, futuristic artwork, jungle, forest art style, morning, As the man drew closer, the mural seemed to come alive, as if the leopard's piercing eyes were beckoning him into a realm where untamed wonders awaited. In the background, a symphony of wilderness echoed softly, the distant calls of tropical birds blending with the rustling of leaves and the gentle roar of a distant waterfall,  futuristic forest, rockets, epic scene, displaying in the background futuristic city buildings and many cyborgs, perspective view, Full HD, vibrant colours, dynamic lighting, ultra-high detail, dramatic lighting, movie poster style, asymmetric composition, ultra detailed, photorealistic, unreal engine, art by Johnson Ting -neg",
+            "150": "masterpiece, Full body Robot Al with somewhat photorealistic humanoid features looking directly wall of leopard, moving parts within this leopard or tiger, trees, scary lion, natural, naturals, stardust, sci-fi Futuristic forest, mechanics, epic scene, displaying in the background futuristic city buildings and many cyborgs, perspective view, Full HD, vibrant colours, dynamic lighting, ultra high detail, dramatic lighting, movie poster style, asymmetric composition, ultra detailed, Photorealistic, unreal engine, Bart by Johnson Ting -neg",
+            "240": "masterpiece, a super hero walking past a mural of a leopard on a wall , avengers infinity war, epic battle scene, Captivated by the mural's essence, the man paused, his curiosity awakened. Thoughts of vast savannas and dense rainforests swirled in his mind, as his imagination conjured images of rhinos grazing in golden grasslands, elephants trumpeting beneath a crimson sunset, and jaguars prowling through moonlit jungles, He felt a deep connection to the animal kingdom, recognizing the profound interconnectedness of all living beings, full-length dynamic pose avenger iron man in super hero costume, marvel universe style, pear axe hammer intricate detailed, magic light, New York city in the background, Thunder and lightning, rich colours, dynamic lighting, ultra high detail, dramatic lighting, movie poster style, asymmetric composition, ultra detailed, Photorealistic, unreal engine, art by Johnson Ting--neg",
+            "350": "masterpiece, astronaut walking past a mural of a leopard on a wall right side of his face, Cinematic still shot, epic scene, displaying in the background the moon and other planets and stars, galaxy, gravity movie, movie poser, vibrant colours, dynamic lighting, ultra high detail, dramatic lighting, movie poster style, asymmetric composition, ultra detailed, Photorealistic, unreal engine, art by Johnson Ting--neg",
+            "480": "masterpiece, walking Star Wars in Wes Anderson style, natural, forest, animals , wild life, birds, sky, wild life trees, leaves, hyper realistic photography, trees, 8k, star wars, outer space, galaxy, animals, Full Body, Concept Art, Cinematic, Dark, 20, 4k, Powerful, Natural Lighting, dynamic lighting, ultra high detail, dramatic lighting, movie, asymmetric composition, ultra detailed, Photorealistic, unreal engine, art by Johnson Ting -neg"
+        },
+        "strength_schedule": "0:(0.65),25:(0.55)",
+        "translation_z": "0:(0.2),60:(10),300:(15)",
+        "rotation_3d_x": "0:(0),60:(0),90:(0.5),180:(0.5),300:(0.5)",
+        "rotation_3d_y": "0:(0),30:(-3.5),90:(0.5),180:(-2.8),300:(-2),420:(0)",
+        "rotation_3d_z": "0:(0),60:(0.2),90:(0),180:(-0.5),300:(0),420:(0.5),500:(0.8)",
+        "fov_schedule": "0:(120)",
+        "noise_schedule": "0:(-0.06*(cos(3.141*t/15)**100)+0.06)",
+        "anti_blur_as": "0:(0.05)",
+    }
+    # Use file defaults if available, else hard defaults
+    base_defaults = file_defaults if file_defaults else hard_defaults
+    # Merge user_settings on top
+    deforum_settings = {**base_defaults, **user_settings}
+    deforum_settings = fix_deforum_schedules(deforum_settings)
+    # Ensure the model is set correctly for Deforum
+    if 'model' in user_settings and user_settings['model']:
+        deforum_settings['sd_model_name'] = user_settings['model']
+    elif 'sd_model_name' in user_settings and user_settings['sd_model_name']:
+        deforum_settings['sd_model_name'] = user_settings['sd_model_name']
+    # Optionally, remove 'model' key to avoid confusion
+    if 'model' in deforum_settings:
+        del deforum_settings['model']
+    payload = {
+        "deforum_settings": deforum_settings,
+        "options_overrides": {}
+    }
+    async with httpx.AsyncClient() as client:
+        response = await client.post(DEFORUM_API_URL, json=payload)
+        if response.status_code == 202:
+            data = response.json()
+            batch_id = data.get("batch_id")
+            
+            # Poll for completion and get video path
+            while True:
+                status_response = await client.get(f"{DEFORUM_API_URL}?id={batch_id}")
+                if status_response.status_code == 200:
+                    status_data = status_response.json()
+                    if status_data.get("status") == "completed":
+                        # Get the video path from the response
+                        video_path = status_data.get("output_video_path")
+                        if video_path:
+                            try:
+                                # Copy the video to the backend's served directory
+                                video_url = copy_deforum_video_to_served_dir(video_path)
+                                return {
+                                    "batch_id": batch_id,
+                                    "status": "completed",
+                                    "video_url": video_url
+                                }
+                            except Exception as e:
+                                logger.error(f"Error copying video: {str(e)}")
+                                return {
+                                    "batch_id": batch_id,
+                                    "status": "completed",
+                                    "error": str(e)
+                                }
+                        break
+                await asyncio.sleep(5)  # Wait 5 seconds before next poll
+            
+            return data
+        else:
+            raise HTTPException(status_code=response.status_code, detail=response.text)
+
+@router.post("/api/deforum-stop")
+async def deforum_stop(data: dict = Body(...)):
+    batch_id = data.get("batch_id")
+    if not batch_id:
+        raise HTTPException(status_code=400, detail="batch_id is required")
+    # Forward the stop request to Deforum API
+    cancel_url = "http://localhost:7860/deforum_api/cancel"
+    async with httpx.AsyncClient() as client:
+        response = await client.post(cancel_url, json={"id": batch_id})
+        if response.status_code == 200:
+            return {"status": "stopped"}
+        else:
+            raise HTTPException(status_code=response.status_code, detail=response.text)
+
+# Register the router
+app.include_router(router)
+
+# Create directories for uploaded files
+UPLOAD_DIR = os.path.join(os.path.dirname(__file__), 'data', 'uploads')
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+# Mount the uploads directory as a static files route
+app.mount("/data/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+
+@app.post("/api/upload-image")
+async def upload_image(image: UploadFile = File(...)):
+    """Upload an image file."""
+    try:
+        # Validate file type
+        if not image.content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail="File must be an image")
+
+        # Create a unique filename using timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{timestamp}_{image.filename}"
+        file_path = os.path.join(UPLOAD_DIR, filename)
+        
+        # Save the uploaded file
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(image.file, buffer)
+        
+        return JSONResponse({
+            "message": "Image uploaded successfully",
+            "filename": filename,
+            "url": f"/data/uploads/{filename}",
+            "path": file_path  # Return the full file path
+        })
+    except Exception as e:
+        logger.error(f"Error uploading image: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        image.file.close()
+
+@app.post("/api/backlink/forms")
+async def detect_backlink_forms(payload: Dict[str, Any] = Body(...)):
+    directory_url = payload.get("directory_url")
+    if not directory_url:
+        return {"error": "Missing directory_url"}
+    forms = scraper.find_submission_forms(directory_url, max_pages=3)
+    return {"forms": forms}
+
+@app.post("/api/backlink/submit")
+async def submit_backlink_form(payload: Dict[str, Any] = Body(...)):
+    return await selenium_submitter.submit_form(payload)
+
+def calculate_authority_score(backlink_data: Dict[str, Any]) -> float:
+    """
+    Calculate authority score using methodology similar to Ahrefs' DR:
+    1. Consider unique domains (referring domains)
+    2. Weight the authority of linking domains
+    3. Consider link distribution
+    4. Apply logarithmic scaling
+    5. Plot on a 100-point scale
+    """
+    total_backlinks = backlink_data['total']
+    
+    # Updated weights to reflect new priorities
+    # Bing is primary source, DuckDuckGo secondary
+    weights = {
+        'bing': 1.0,        # Primary source
+        'duckduckgo': 0.8,  # Secondary source
+        'mojeek': 0.6,      # Additional sources
+        'yandex': 0.6,
+        'brave': 0.5,
+        'yahoo': 0.5,
+        'baidu': 0.4,
+        'google': 0.3       # Least reliable due to anti-bot measures
+    }
+    
+    weighted_total = 0
+    active_sources = 0
+    
+    # Calculate weighted total and count active sources
+    for engine, weight in weights.items():
+        if engine in backlink_data and backlink_data[engine] > 0:
+            weighted_total += backlink_data[engine] * weight
+            active_sources += 1
+    
+    # Apply logarithmic scaling (log base 10)
+    # This helps handle the huge range of backlink counts
+    import math
+    if weighted_total > 0:
+        log_score = math.log10(weighted_total)
+        # Scale to 0-100 range
+        # Typical max log10 value for top sites is ~7 (10M backlinks)
+        authority_score = min(100, int((log_score / 7) * 100))
+    else:
+        authority_score = 0
+        
+    # Enhanced diversity bonus based on source reliability
+    diversity_bonus = 0
+    if backlink_data.get('bing', 0) > 0:
+        diversity_bonus += 5  # Bonus for primary source
+    if backlink_data.get('duckduckgo', 0) > 0:
+        diversity_bonus += 3  # Bonus for secondary source
+    
+    # Additional bonus for other sources
+    other_sources = sum(1 for engine in ['mojeek', 'yandex', 'brave', 'yahoo', 'baidu', 'google']
+                       if backlink_data.get(engine, 0) > 0)
+    diversity_bonus += other_sources * 1  # 1 point per additional source
+    
+    # Apply diversity bonus but maintain max 100
+    final_score = min(100, authority_score + diversity_bonus)
+    
+    return final_score
+
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edge/91.0.864.59 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1"
+]
+
+def get_random_user_agent() -> str:
+    return random.choice(USER_AGENTS)
+
+def get_selenium_options() -> EdgeOptions:
+    options = webdriver.EdgeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_argument(f'--user-agent={get_random_user_agent()}')
+    # Additional options to help avoid detection
+    options.add_argument('--disable-infobars')
+    options.add_argument('--disable-browser-side-navigation')
+    options.add_argument('--disable-features=IsolateOrigins,site-per-process')
+    options.add_experimental_option('excludeSwitches', ['enable-automation'])
+    options.add_experimental_option('useAutomationExtension', False)
+    return options
+
+def get_headers() -> Dict[str, str]:
+    return {
+        "User-Agent": get_random_user_agent(),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate, br",
+        "DNT": "1",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Sec-Fetch-User": "?1",
+        "Cache-Control": "max-age=0"
+    }
+
+# Update the get_bing_count function to use the new headers
+def get_bing_count(domain):
+    try:
+        url = f"https://www.bing.com/search?q=site:{domain}"
+        headers = get_headers()
+        print(f"Making request to Bing: {url}")
+        resp = requests.get(url, headers=headers, timeout=10)
+        print(f"Bing response status: {resp.status_code}")
+        if resp.status_code != 200:
+            print(f"Bing error response: {resp.text}")
+            return 0
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        results_text = None
+        possible_selectors = [
+            'span.sb_count',
+            'div.sb_count',
+            'span.count',
+            'div.count',
+            'span[class*="count"]',
+            'div[class*="count"]'
+        ]
+        for selector in possible_selectors:
+            results_text = soup.select_one(selector)
+            if results_text:
+                break
+        if results_text:
+            print(f"Bing found results text: {results_text.text}")
+            match = re.search(r'([\d,]+)', results_text.text)
+            if match:
+                count = int(match.group(1).replace(',', ''))
+                print(f"Bing extracted count: {count}")
+                return count
+        else:
+            print("Bing: No results count found in the page")
+            print("Bing page content:", resp.text[:500])
+        return 0
+    except Exception as e:
+        print(f"Error getting Bing count: {str(e)}")
+        return 0
+
+# Update the get_duckduckgo_count function to use the new headers
+def get_duckduckgo_count(domain):
+    try:
+        url = f"https://duckduckgo.com/html/?q=site:{domain}"
+        headers = get_headers()
+        print(f"Making request to DuckDuckGo: {url}")
+        resp = requests.get(url, headers=headers, timeout=10)
+        print(f"DuckDuckGo response status: {resp.status_code}")
+        if resp.status_code != 200:
+            print(f"DuckDuckGo error response: {resp.text}")
+            return 0
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        results = soup.select('.result')
+        count = len(results)
+        print(f"DuckDuckGo extracted count: {count}")
+        return count
+    except Exception as e:
+        print(f"Error getting DuckDuckGo count: {str(e)}")
+        return 0
+
+# Update the Selenium functions to use the new options
+def get_google_count_selenium(domain):
+    try:
+        options = get_selenium_options()
+        logger.info("Starting Edge WebDriver for Google search...")
+        service = Service(EdgeChromiumDriverManager().install())
+        driver = webdriver.Edge(service=service, options=options)
+        try:
+            # First try with site: operator
+            url = f"https://www.google.com/search?q=site:{domain}"
+            logger.info(f"Making request to Google with Selenium: {url}")
+            driver.get(url)
+            
+            # Check if we hit a CAPTCHA
+            if "detected unusual traffic" in driver.page_source.lower():
+                logger.warning("Google CAPTCHA detected, trying alternative approach...")
+                # Try alternative approach using inurl: operator
+                url = f"https://www.google.com/search?q=inurl:{domain}"
+                driver.get(url)
+            
+            # Wait for any element that might contain results count
+            logger.info("Waiting for Google results...")
+            try:
+                # Try different selectors that might contain the results count
+                selectors = [
+                    (By.ID, "result-stats"),
+                    (By.CLASS_NAME, "sb_count"),
+                    (By.CSS_SELECTOR, "#resultStats"),
+                    (By.XPATH, "//div[contains(text(), 'results')]")
+                ]
+                
+                for by, selector in selectors:
+                    try:
+                        element = WebDriverWait(driver, 2).until(
+                            EC.presence_of_element_located((by, selector))
+                        )
+                        stats_text = element.text
+                        logger.info(f"Google found stats text: {stats_text}")
+                        
+                        # Extract number from text
+                        match = re.search(r'([\d,]+)', stats_text)
+                        if match:
+                            count = int(match.group(1).replace(',', ''))
+                            logger.info(f"Google extracted count: {count}")
+                            return count
+                    except:
+                        continue
+                
+                # If no stats found, try counting results
+                results = driver.find_elements(By.CSS_SELECTOR, "div.g")
+                count = len(results)
+                logger.info(f"Google found {count} results by counting elements")
+                return count
+            
+            except Exception as e:
+                logger.error(f"Error extracting Google results: {str(e)}")
+                return 0
+            
+        except Exception as e:
+            logger.error(f"Error during Google search: {str(e)}")
+            try:
+                logger.error(f"Google page source: {driver.page_source[:500]}")
+            except:
+                pass
+            return 0
+        finally:
+            try:
+                driver.quit()
+                logger.info("Google WebDriver closed successfully")
+            except Exception as e:
+                logger.error(f"Error closing Google WebDriver: {str(e)}")
+    except Exception as e:
+        logger.error(f"Error initializing Google WebDriver: {str(e)}")
+        return 0
+
+def get_brave_count_selenium(domain):
+    try:
+        options = get_selenium_options()
+        logger.info("Starting Edge WebDriver for Brave search...")
+        service = Service(EdgeChromiumDriverManager().install())
+        driver = webdriver.Edge(service=service, options=options)
+        try:
+            # Try different search approaches
+            urls = [
+                f"https://search.brave.com/search?q=site:{domain}",
+                f"https://search.brave.com/search?q=inurl:{domain}"
+            ]
+            
+            for url in urls:
+                try:
+                    logger.info(f"Making request to Brave with Selenium: {url}")
+                    driver.get(url)
+                    
+                    # Wait for results
+                    logger.info("Waiting for Brave search results...")
+                    
+                    # Try different selectors for results
+                    selectors = [
+                        "div[data-testid='result']",
+                        "div.result",
+                        "div.snippet",
+                        "div.search-result"
+                    ]
+                    
+                    for selector in selectors:
+                        try:
+                            WebDriverWait(driver, 2).until(
+                                EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                            )
+                            results = driver.find_elements(By.CSS_SELECTOR, selector)
+                            count = len(results)
+                            if count > 0:
+                                logger.info(f"Brave found {count} results")
+                                return count
+                        except:
+                            continue
+                    
+                except Exception as e:
+                    logger.error(f"Error with Brave URL {url}: {str(e)}")
+                    continue
+            
+            logger.warning("No results found in Brave search")
+            return 0
+            
+        except Exception as e:
+            logger.error(f"Error during Brave search: {str(e)}")
+            try:
+                logger.error(f"Brave page source: {driver.page_source[:500]}")
+            except:
+                pass
+            return 0
+        finally:
+            try:
+                driver.quit()
+                logger.info("Brave WebDriver closed successfully")
+            except Exception as e:
+                logger.error(f"Error closing Brave WebDriver: {str(e)}")
+    except Exception as e:
+        logger.error(f"Error initializing Brave WebDriver: {str(e)}")
+        return 0
 
 if __name__ == "__main__":
     import uvicorn

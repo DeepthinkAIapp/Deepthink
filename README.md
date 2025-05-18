@@ -39,9 +39,17 @@ A modern, full-stack AI chat and tools platform with a FastAPI backend and React
 2. **Backend:**
    ```bash
    cd backend
-   python setup.py
-   python main.py
+   # Recommended for most setups:
+   uvicorn main:app --reload --host 0.0.0.0 --port 8000
+   # (Alternatively, python main.py)
    ```
+   - Make sure you are in the `backend` directory when running this command.
+   - If you see errors about missing directories (e.g., `data/generated_images`), create them:
+   ```bash
+   mkdir data/generated_images
+   mkdir data/generated_videos
+   ```
+   - The backend supports video generation endpoints and can be integrated with Deforum/Stable Diffusion workflows.
 
 3. **Frontend:**
    ```bash
@@ -192,6 +200,12 @@ POST /api/chat
 - **CORS errors:** Update `ALLOWED_ORIGINS` and restart backend
 - **Database issues:** Delete/recreate `chat.db` if schema changes
 - **Port conflicts:** Change ports in config if needed
+- **Missing directory errors:** If you see errors like `Directory 'data/generated_images' does not exist`, create the required folders in the backend directory:
+  ```bash
+  mkdir data/generated_images
+  mkdir data/generated_videos
+  ```
+- **Video generation/Deforum integration:** See the VideoGeneratorPage and backend `/api/generate-video` endpoint for details on integrating Deforum or other video AI tools.
 
 ---
 
