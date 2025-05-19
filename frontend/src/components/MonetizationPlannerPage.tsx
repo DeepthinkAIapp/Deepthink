@@ -87,7 +87,7 @@ const MonetizationPlannerPage: React.FC = () => {
             </Box>
           )}
           <Typography variant="h4" gutterBottom>
-            DEEPSEEKAI Monetization Planner
+            DeepThink AI Monetization Planner
           </Typography>
           <Typography variant="body1" gutterBottom>
             Enter your niche or topic below to generate a comprehensive monetization blueprint for YouTube and blogs.
