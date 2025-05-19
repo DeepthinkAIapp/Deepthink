@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
+import { getApiUrl } from '../config';
 
 const BACKEND_URL = 'https://2e90-2601-681-8400-6350-205e-8b88-94c-89c1.ngrok-free.app';
 
@@ -418,7 +419,7 @@ const VideoGeneratorPage: React.FC = () => {
 
   const fetchVideos = async () => {
     try {
-      const res = await fetch(`${BACKEND_URL}/api/generated-videos`);
+      const res = await fetch(getApiUrl('/api/generated-videos'));
       const data = await res.json();
       setVideos(data.videos || []);
     } catch (err) {
@@ -431,7 +432,7 @@ const VideoGeneratorPage: React.FC = () => {
   }, []);
 
   const pollJobStatus = async (batchId: string) => {
-    const statusUrl = `${BACKEND_URL}/deforum_api/batches?id=${batchId}`;
+    const statusUrl = getApiUrl(`/deforum_api/batches?id=${batchId}`);
     let isComplete = false;
     setMessage('Video is being generated...');
     while (!isComplete) {
@@ -466,7 +467,7 @@ const VideoGeneratorPage: React.FC = () => {
         init_image: useInit ? deforumSettings.init_image : ''
       });
       console.log('Sending settings:', safeSettings);
-      const res = await fetch(`${BACKEND_URL}/api/deforum-generate`, {
+      const res = await fetch(getApiUrl('/api/deforum-generate'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(safeSettings)
@@ -493,7 +494,7 @@ const VideoGeneratorPage: React.FC = () => {
     setBatchId(null);
     setMessage('Stopping job...');
     try {
-      const res = await fetch(`${BACKEND_URL}/api/deforum-stop`, {
+      const res = await fetch(getApiUrl('/api/deforum-stop'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ batch_id: batchId })
@@ -527,7 +528,7 @@ const VideoGeneratorPage: React.FC = () => {
     formData.append('image', file);
 
     try {
-      const response = await fetch(`${BACKEND_URL}/api/upload-image`, {
+      const response = await fetch(getApiUrl('/api/upload-image'), {
         method: 'POST',
         body: formData,
       });
@@ -1078,11 +1079,11 @@ const VideoGeneratorPage: React.FC = () => {
           <li key={video.filename} style={{ marginBottom: 24 }}>
             <div><strong>{video.filename}</strong></div>
             <video width="320" controls style={{ display: 'block', marginTop: 8 }}>
-              <source src={`${BACKEND_URL}${video.url}`} type="video/mp4" />
+              <source src={getApiUrl(video.url)} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div>
-              <a href={`${BACKEND_URL}${video.url}`} target="_blank" rel="noopener noreferrer">Download</a>
+              <a href={getApiUrl(video.url)} target="_blank" rel="noopener noreferrer">Download</a>
             </div>
           </li>
         ))}
