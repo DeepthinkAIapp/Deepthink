@@ -117,7 +117,7 @@ const BlogPage = () => {
         }}>
           <Box sx={{ position: 'relative', width: '100%', height: { xs: 220, md: 320 }, overflow: 'hidden', borderRadius: 3 }}>
             <img
-              src="/images/Leonardo_Phoenix_10_A_futuristic_sleek_robotic_AI_figure_with_0.jpg"
+              src={`${import.meta.env.BASE_URL}images/Leonardo_Phoenix_10_A_futuristic_sleek_robotic_AI_figure_with_0.jpg`}
               alt="Deepthink AI Preview"
               style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }}
             />
@@ -203,9 +203,9 @@ const BlogPage = () => {
             Get inspired by top AI-generated images and prompts from the community. Explore creative ideas and see what's possible with Deepthink AI and PromptHero!
           </Typography>
           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center', mb: 2 }}>
-            <img src="/images/Leonardo_Phoenix_10_A_futuristic_AI_chat_assistant_depicted_as_3.jpg" alt="PromptHero Sample 1" style={{ width: 180, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }} />
-            <img src="/images/prompthero-prompt-fceab06c6e2.webp" alt="PromptHero Sample 2" style={{ width: 180, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }} />
-            <img src="/images/Flux_Dev_a_futuristic_landscape_depicting_a_legion_of_advanced_1.jpg" alt="PromptHero Sample 3" style={{ width: 180, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }} />
+            <img src={`${import.meta.env.BASE_URL}images/Leonardo_Phoenix_10_A_futuristic_AI_chat_assistant_depicted_as_3.jpg`} alt="PromptHero Sample 1" style={{ width: 180, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }} />
+            <img src={`${import.meta.env.BASE_URL}images/prompthero-prompt-fceab06c6e2.webp`} alt="PromptHero Sample 2" style={{ width: 180, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }} />
+            <img src={`${import.meta.env.BASE_URL}images/Flux_Dev_a_futuristic_landscape_depicting_a_legion_of_advanced_1.jpg`} alt="PromptHero Sample 3" style={{ width: 180, borderRadius: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }} />
           </Box>
           <Button
             variant="outlined"

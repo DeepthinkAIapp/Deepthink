@@ -31789,3 +31789,45 @@ Stacktrace:
 2025-05-17 21:29:05,073 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
 2025-05-17 21:37:38,358 [INFO] DeepThinkAI: Database pool initialized with 10 connections
 2025-05-17 21:38:15,211 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 18:03:19,044 [INFO] DeepThinkAI: Starting chat request d0376521-64fc-4946-a3d5-e3e87913aa49 with model: gemma:7b
+2025-05-18 18:03:26,552 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 18:08:50,033 [INFO] DeepThinkAI: Starting chat request e1572fa2-ac5f-4941-8886-22587566e914 with model: gemma:7b
+2025-05-18 18:08:54,180 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 18:09:43,753 [INFO] DeepThinkAI: Starting chat request 56e82a91-69cc-4758-a58e-80b9c1b959c2 with model: gemma:7b
+2025-05-18 18:09:44,826 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 18:10:06,548 [INFO] DeepThinkAI: Starting chat request 0e04914b-8666-4d7e-94c2-ea3fc408ff4a with model: gemma:7b
+2025-05-18 18:10:07,545 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 18:14:33,141 [INFO] DeepThinkAI: Starting chat request 8e0db3a1-b6bd-4430-bfcf-47cae0b1d905 with model: gemma:7b
+2025-05-18 18:14:34,122 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 18:19:28,313 [INFO] DeepThinkAI: Starting chat request aa7a74e5-3482-46f8-8172-c411d3ef34f3 with model: gemma:7b
+2025-05-18 18:19:29,215 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 18:19:35,586 [INFO] DeepThinkAI: Starting chat request 1e4e9558-54d5-48ec-8c60-5d80bd67968d with model: gemma:7b
+2025-05-18 18:19:36,627 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 18:22:36,990 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 18:22:39,588 [INFO] DeepThinkAI: Starting monetization plan request 4698e7a6-8dd5-4184-9e94-61dcd2b9a499 for niche: marathons
+2025-05-18 18:22:42,136 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 18:29:13,949 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 18:38:17,639 [INFO] DeepThinkAI: Starting chat request 2f0c34e0-b72c-4fe3-b997-51bc80f6eec4 with model: gemma:7b
+2025-05-18 18:38:21,684 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 18:39:32,677 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 18:48:56,927 [INFO] DeepThinkAI: Starting chat request cabe643b-4def-4b23-8863-77f38984d0aa with model: gemma:7b
+2025-05-18 18:49:01,027 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 19:03:32,223 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 19:08:56,177 [INFO] DeepThinkAI: Starting guest post outreach request 6d20e789-08d9-4e21-852e-ca937ae9a23f for niche: solana coins
+2025-05-18 19:09:00,773 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 19:09:23,231 [INFO] DeepThinkAI: Request 2137a616-7872-4494-ad37-9f58f208d64d: Received subniche/content ideas request
+2025-05-18 19:09:23,232 [INFO] DeepThinkAI: Request 2137a616-7872-4494-ad37-9f58f208d64d: Using model gemma:7b
+2025-05-18 19:09:36,787 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 19:18:16,664 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 19:21:00,642 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 19:27:48,537 [INFO] DeepThinkAI: Starting chat request 862111bc-83c9-40b3-81e6-3b89bcb1f1e1 with model: gemma:7b
+2025-05-18 19:27:52,625 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 19:28:55,007 [INFO] DeepThinkAI: Starting chat request d13111e7-e50f-4eea-b7fa-005de9f97203 with model: gemma:7b
+2025-05-18 19:28:55,739 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 19:52:11,013 [INFO] DeepThinkAI: Starting chat request a2c1fdd0-5f86-4403-b3be-42d3dce6e4b5 with model: gemma:7b
+2025-05-18 19:52:15,118 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 20:20:24,811 [INFO] DeepThinkAI: Starting chat request 4d20fcef-d336-4710-8b93-72eec37c4896 with model: gemma:7b
+2025-05-18 20:20:31,740 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 20:22:08,459 [INFO] DeepThinkAI: Request 522e6b4a-b5d3-4016-b026-7ebb8ed7f4e9: Received subniche/content ideas request
+2025-05-18 20:22:08,461 [INFO] DeepThinkAI: Request 522e6b4a-b5d3-4016-b026-7ebb8ed7f4e9: Using model gemma:7b
+2025-05-18 20:22:21,166 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"

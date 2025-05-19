@@ -69,7 +69,7 @@ const BlogPost = () => {
 
   // SEO meta and structured data
   const canonicalUrl = `https://deepthinkai.app/blog/${post.id}`;
-  const imageUrl = `https://deepthinkai.app${post.image}`;
+  const imageUrl = `https://deepthinkai.app${import.meta.env.BASE_URL}${post.image}`;
   const description = post.content.introduction.slice(0, 155);
   const jsonLd = {
     '@context': 'https://schema.org',
