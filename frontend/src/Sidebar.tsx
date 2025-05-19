@@ -55,8 +55,8 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
         minHeight: 64
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <img src="/images/logo.png" alt="Logo" style={{ height: 36, width: 36, borderRadius: 8, marginRight: 8 }} />
-          <span style={{ fontWeight: 700, fontSize: 20, letterSpacing: 1 }}>deepseek</span>
+          <img src="/images/android-chrome-512x512.png" alt="Logo" style={{ height: 36, width: 36, borderRadius: 8, marginRight: 8 }} />
+          <span style={{ fontWeight: 700, fontSize: 20, letterSpacing: 1 }}>DEEPTHINK</span>
         </Box>
         {isMobile && (
           <IconButton onClick={onClose}>
