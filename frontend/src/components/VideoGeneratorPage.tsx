@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { getApiUrl } from '../config';
 
-const BACKEND_URL = 'https://2e90-2601-681-8400-6350-205e-8b88-94c-89c1.ngrok-free.app';
-
 const SAMPLERS = [
   'Euler a', 'Euler', 'LMS', 'Heun', 'DPM2', 'DPM2 a', 'DPM++ 2S a', 'DPM++ 2M', 'DPM++ SDE', 'DPM fast', 'DPM adaptive', 'LMS Karras', 'DPM2 Karras', 'DPM2 a Karras', 'DPM++ 2S a Karras', 'DPM++ 2M Karras', 'DPM++ SDE Karras', 'DDIM', 'PLMS'
 ];
