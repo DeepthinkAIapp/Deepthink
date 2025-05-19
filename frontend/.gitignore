@@ -25,10 +25,7 @@ build/
 *.mov
 *.avi
 *.webm
-*.png
-*.jpg
-*.jpeg
-*.gif
+
 
 # Project-specific
 bfg.jar
