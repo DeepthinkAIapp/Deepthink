@@ -4,7 +4,7 @@
 // API Configuration
 export const API_CONFIG = {
   // Use Vite environment variable for API URL
-  BASE_URL: import.meta.env.VITE_API_URL || 'https://fda1-2601-681-8400-6350-8959-784e-ae86-4d3b.ngrok-free.app',
+  BASE_URL: import.meta.env.VITE_API_URL || 'https://3c0a-2601-681-8400-6350-e56a-a571-bd45-4b51.ngrok-free.app',
   // API endpoints
   CHAT: '/api/chat',
   GENERATE: '/api/generate',
