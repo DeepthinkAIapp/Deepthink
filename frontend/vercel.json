@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://3c0a-2601-681-8400-6350-e56a-a571-bd45-4b51.ngrok-free.app/api/:path*"
+      "destination": "https://00ca-2601-681-8400-6350-e97d-b915-5c58-fb42.ngrok-free.app/api/:path*"
     }
   ],
   "headers": [
