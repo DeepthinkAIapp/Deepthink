@@ -115,12 +115,12 @@ const YouTubeContentPlannerPage: React.FC = () => {
 
   return (
     <>
-      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/logo.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
+      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: '100vh', background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)', color: theme.palette.mode === 'dark' ? '#fff' : 'inherit' }}>
         {loading && (
           <Box className="centered-logo-overlay">
             <img
-              src="/images/logo.png"
+              src="/images/android-chrome-512x512.png"
               alt="Deepthink AI Logo"
               className="pulsate-logo"
               style={{ width: 120, height: 120 }}

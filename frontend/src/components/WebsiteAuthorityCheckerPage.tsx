@@ -69,7 +69,7 @@ export default function WebsiteAuthorityCheckerPage() {
       {loading && (
         <Box className="centered-logo-overlay">
           <img
-            src="/images/logo.png"
+            src="/images/android-chrome-512x512.png"
             alt="Deepthink AI Logo"
             className="pulsate-logo"
             style={{ width: 120, height: 120 }}

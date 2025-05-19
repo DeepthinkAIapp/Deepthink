@@ -24,7 +24,7 @@ build/
 *.mp4
 *.mov
 *.avi
-*.webm
+
 
 
 # Project-specific
@@ -34,11 +34,9 @@ rustup-init.exe
 image.b64
 deepthinkai.log
 authority_checker_test.log
-bing_bot_detection_microsoft.com.html
-mojeek_debug.html
-bing_debug.html
-duckduckgo_debug.html
-yandex_debug.html
+
+
+
 
 # IDE and OS
 .vscode/
