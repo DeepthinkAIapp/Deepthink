@@ -3,6 +3,7 @@ import { Box, Typography, TextField, Button, Alert, CircularProgress } from "@mu
 import "./MonetizationPlannerPage.css";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { getApiUrl } from '../config';
 
 const MonetizationPlannerPage: React.FC = () => {
   const [niche, setNiche] = useState("");
@@ -17,7 +18,7 @@ const MonetizationPlannerPage: React.FC = () => {
     setLoading(true);
     abortController.current = new AbortController();
     try {
-      const response = await fetch("/api/monetize", {
+      const response = await fetch(getApiUrl("/api/monetize"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ niche }),
@@ -67,13 +68,13 @@ const MonetizationPlannerPage: React.FC = () => {
 
   return (
     <>
-      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
+      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/logo.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: '100vh', background: 'rgba(255,255,255,0.85)' }}>
         <Box sx={{ maxWidth: 600, mx: "auto", mt: 6, p: 2, position: "relative", minHeight: 400 }}>
           {loading && (
             <Box className="centered-logo-overlay">
               <img
-                src="/images/android-chrome-512x512.png"
+                src="/images/logo.png"
                 alt="Deepthink AI Logo"
                 className="pulsate-logo"
                 style={{ width: 120, height: 120 }}

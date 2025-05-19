@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTheme } from '@mui/material/styles';
+import { getApiUrl } from '../config';
 
 const ONBOARDING_MESSAGE = `**Step 1: Enter Your Sub-Niche**
 
@@ -62,7 +63,7 @@ const AffiliateArticleIdeaGeneratorPage: React.FC = () => {
     setAiResponse(null);
     abortController.current = new AbortController();
     try {
-      const response = await fetch("/api/affiliate-article-ideas", {
+      const response = await fetch(getApiUrl("/api/affiliate-article-ideas"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -83,7 +84,7 @@ const AffiliateArticleIdeaGeneratorPage: React.FC = () => {
 
   return (
     <>
-      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
+      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/logo.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: '100vh', background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)' }}>
         {loading && (
           <Box className="centered-logo-overlay" sx={{
@@ -100,7 +101,7 @@ const AffiliateArticleIdeaGeneratorPage: React.FC = () => {
             background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.7)' : 'rgba(255,255,255,0.7)'
           }}>
             <img
-              src="/images/android-chrome-512x512.png"
+              src="/images/logo.png"
               alt="Deepthink AI Logo"
               className="pulsate-logo"
               style={{ width: 120, height: 120 }}

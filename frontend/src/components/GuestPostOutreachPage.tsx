@@ -5,6 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import ChatInterface from './ChatInterface';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { getApiUrl } from '../config';
 
 type Message = { role: 'user' | 'assistant', content: string };
 
@@ -40,7 +41,7 @@ const GuestPostOutreachPage: React.FC = () => {
         return;
       }
       const prompt = `I need you to identify 5-10 high authority websites in my niche (${niche}) that have published articles within the last 3 months. These sites should accept guest posts. Analyze their sites for content gaps and ideas for good guest posts.`;
-      const response = await fetch("/api/guestpost", {
+      const response = await fetch(getApiUrl("/api/guestpost"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ niche, prompt }),

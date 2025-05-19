@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button, Paper, Alert, MenuItem, Select, FormControl, InputLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
+import { getApiUrl } from '../config';
 
 const SYSTEM_PROMPT_1 = `You are an experienced content strategist and YouTube expert. Your task is to help a YouTuber generate 5 sub-niche areas and 5 content topic ideas within each sub-niche based on a main niche they provide. The sub-niches and topic ideas should be tailored to do well on YouTube.\n\nProcess:\n1. Ask the YouTuber to provide their main niche of interest.\n2. Generate 5 relevant sub-niches based on the main niche.\n3. For each sub-niche, create 5 YouTube topic ideas that provide value to the target audience and incorporate relevant keywords. Some can also be viral ideas, like "I did X, this happened" kind of thing.\n4. Present the sub-niches and content topic ideas in a clear, organized format.\n5. Offer guidance on how the YouTuber can mix and match or modify the ideas to suit their channel's unique style and voice.\nTips:\n- Use your SEO expertise to identify sub-niches and content topics that have good potential to get views for a beginner on YouTube.\n- Ensure that the content ideas are specific, informative, and targeted to the YouTuber's intended audience.\n- Encourage the YouTuber to create high-quality, engaging content that provides value to their readers.\n- Remind the YouTuber to optimize their content for YouTube, including creating viral thumbnails, and optimizing their videos for retention.`;
 
@@ -52,7 +53,7 @@ const YouTubeContentPlannerPage: React.FC = () => {
     setVideoIdeas([]);
     setGuidance("");
     try {
-      const response = await fetch("/api/youtube-content-planner", {
+      const response = await fetch(getApiUrl("/api/youtube-content-planner"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -85,7 +86,7 @@ const YouTubeContentPlannerPage: React.FC = () => {
     setVideoIdeas([]);
     setGuidance("");
     try {
-      const response = await fetch("/api/youtube-content-planner", {
+      const response = await fetch(getApiUrl("/api/youtube-content-planner"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -114,12 +115,12 @@ const YouTubeContentPlannerPage: React.FC = () => {
 
   return (
     <>
-      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
+      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/logo.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: '100vh', background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)', color: theme.palette.mode === 'dark' ? '#fff' : 'inherit' }}>
         {loading && (
           <Box className="centered-logo-overlay">
             <img
-              src="/images/android-chrome-512x512.png"
+              src="/images/logo.png"
               alt="Deepthink AI Logo"
               className="pulsate-logo"
               style={{ width: 120, height: 120 }}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
+import { getApiUrl } from '../config';
 
 const LABELS = ['Domain Rating', 'Backlinks', 'Linking Websites'];
 
@@ -16,7 +17,7 @@ export default function WebsiteAuthorityCheckerPage() {
     setError(null);
     setMetrics([]);
     try {
-      const res = await fetch('/api/authority-checker', {
+      const res = await fetch(getApiUrl('/api/authority-checker'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ domain }),
@@ -68,7 +69,7 @@ export default function WebsiteAuthorityCheckerPage() {
       {loading && (
         <Box className="centered-logo-overlay">
           <img
-            src="/images/android-chrome-512x512.png"
+            src="/images/logo.png"
             alt="Deepthink AI Logo"
             className="pulsate-logo"
             style={{ width: 120, height: 120 }}

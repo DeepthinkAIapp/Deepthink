@@ -5,6 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import ChatInterface from './ChatInterface';
+import { getApiUrl } from '../config';
 
 type Message = { role: 'user' | 'assistant', content: string };
 
@@ -25,7 +26,7 @@ const SearchIntentToolPage: React.FC = () => {
     let generatedAnalysis = "";
     try {
       const prompt = `Role: You are an advanced AI Search Intent Analyzer, specializing in SEO and content strategy.\nTask: Analyze the search intent behind the given keyword or topic: '${keyword}'.\n\nInstructions:\n- Identify the primary intent (informational, navigational, transactional, or commercial investigation)\n- Craft an enticing H1 search intent title that includes the target keyword plus relevant trigger words. Ensure the title is between 55 and 60 characters.\n- Analyze and present the following aspects in a table format: Content Type & Format, User's Main Goal, Key Expectations, What to Avoid, Important Elements to Include, Tone and Style, Call-to-Action, Additional Insights, Key Audience Segments (for transactional/commercial intent topics)\n- For any aspect with multiple details, each detail should be in its own cell with the corresponding column on the left blank after the first mention.\n- For transactional or commercial intent topics, include a comprehensive list of key audience segments.\n- Keep the analysis concise yet comprehensive, focusing on actionable insights.\n\nContext: In today's SEO landscape, understanding search intent is crucial for creating content that ranks well and satisfies user needs. Search engines prioritize content that best matches user intent, not just keyword density. Your analysis will help content creators avoid outdated SEO tactics and focus on producing highly relevant, user-centric content that addresses the core needs behind each search query.\n\nTo begin, analyze the search intent for: '${keyword}'. Present your analysis in a clean, easy-to-read table format as described.`;
-      const response = await fetch("/api/search-intent", {
+      const response = await fetch(getApiUrl("/api/search-intent"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
@@ -93,7 +94,7 @@ const SearchIntentToolPage: React.FC = () => {
 
   return (
     <>
-      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
+      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/logo.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: '100vh', background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)' }}>
         <Box sx={{ maxWidth: 700, mx: "auto", mt: 6, p: 2, position: "relative", minHeight: 400 }}>
           <Typography variant="h5" gutterBottom>
@@ -134,7 +135,7 @@ const SearchIntentToolPage: React.FC = () => {
           {loading && (
             <Box className="centered-logo-overlay">
               <img
-                src="/images/android-chrome-512x512.png"
+                src="/images/logo.png"
                 alt="Deepthink AI Logo"
                 className="pulsate-logo"
                 style={{ width: 120, height: 120 }}

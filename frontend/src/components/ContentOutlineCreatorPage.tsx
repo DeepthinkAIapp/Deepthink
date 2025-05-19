@@ -5,6 +5,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ChatInterface from './ChatInterface';
 import remarkGfm from 'remark-gfm';
+import { getApiUrl } from '../config';
 
 type Message = { role: 'user' | 'assistant', content: string };
 
@@ -71,7 +72,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
     setSubniches(null);
     abortController.current = new AbortController();
     try {
-      const response = await fetch("/api/content-outline-subniches", {
+      const response = await fetch(getApiUrl("/api/content-outline-subniches"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ main_niche: mainNiche }),
@@ -124,7 +125,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
     setSelectedSubniche(subniche);
     abortController.current = new AbortController();
     try {
-      const response = await fetch("/api/content-outline-keywords", {
+      const response = await fetch(getApiUrl("/api/content-outline-keywords"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sub_niche: subniche }),
@@ -210,7 +211,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
 
   return (
     <>
-      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
+      <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/logo.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: 0, background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)' }}>
         {loading && (
           <Box className="centered-logo-overlay" sx={{
@@ -227,7 +228,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
             background: 'rgba(255,255,255,0.7)'
           }}>
             <img
-              src="/images/android-chrome-512x512.png"
+              src="/images/logo.png"
               alt="Deepthink AI Logo"
               className="pulsate-logo"
               style={{ width: 120, height: 120 }}
