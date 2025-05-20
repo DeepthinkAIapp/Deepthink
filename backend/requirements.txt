@@ -18,7 +18,6 @@ textblob==0.17.1
 emoji==2.8.0
 contractions==0.1.73
 transformers==4.35.2
-spellchecker==0.7.2
 wordninja==2.0.0
 prometheus-client==0.17.1
 prometheus-fastapi-instrumentator==6.1.0
