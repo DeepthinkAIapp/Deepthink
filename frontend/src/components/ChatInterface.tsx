@@ -535,7 +535,7 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
           background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.7)' : 'rgba(255,255,255,0.7)'
         }}>
           <img
-            src={`${import.meta.env.BASE_URL}images/android-chrome-512x512.png`}
+            src="/brand/logo.png"
             alt="Deepthink AI Logo"
             className="pulsate-logo"
             style={{ width: 120, height: 120 }}
@@ -589,7 +589,7 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
                 msg.role === 'user'
                   ? (user?.photoURL || (user?.email ? gravatarUrl(user.email) : undefined))
                   : msg.role === 'assistant'
-                    ? `${import.meta.env.BASE_URL}images/android-chrome-512x512.png`
+                    ? '/brand/logo.png'
                     : undefined
               }
               alt={msg.role === 'user' ? (user?.displayName || user?.email || 'User') : 'AI'}

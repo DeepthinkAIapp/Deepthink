@@ -44,20 +44,19 @@ const ChatPageLayout: React.FC<ChatPageLayoutProps> = ({
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile); // open by default on desktop, closed on mobile
 
-  // Handler to open sidebar (hamburger)
-  const handleSidebarOpen = () => setIsSidebarOpen(true);
-  // Handler to close sidebar
+  // Handler to close sidebar (desktop only)
   const handleSidebarClose = () => setIsSidebarOpen(false);
 
-  // Close sidebar on mobile after selecting a chat
+  // Only allow sidebar open/close on desktop
   const handleSelectChat = (id: string) => {
     setCurrentChatId(id);
-    if (isMobile) setIsSidebarOpen(false);
+    if (!isMobile) setIsSidebarOpen(false);
   };
 
-  // Ensure sidebar closes on mobile after sign-in
+  // Always keep sidebar closed on mobile
   useEffect(() => {
     if (isMobile) setIsSidebarOpen(false);
+    else setIsSidebarOpen(true);
   }, [isMobile]);
 
   // Debug logs
@@ -73,28 +72,6 @@ const ChatPageLayout: React.FC<ChatPageLayoutProps> = ({
 
   return (
     <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
-      {/* Hamburger/Menu Button for Mobile */}
-      {isMobile && !isSidebarOpen && (
-        <IconButton
-          color="primary"
-          onClick={handleSidebarOpen}
-          aria-label="Open sidebar"
-          sx={{
-            position: 'fixed',
-            top: 12,
-            left: 12,
-            zIndex: 2000,
-            bgcolor: 'background.paper',
-            boxShadow: 3,
-            borderRadius: 2,
-            width: 44,
-            height: 44,
-            display: { xs: 'flex', sm: 'none' },
-          }}
-        >
-          <MenuIcon />
-        </IconButton>
-      )}
       <Sidebar
         chats={chats}
         currentChatId={currentChatId}
