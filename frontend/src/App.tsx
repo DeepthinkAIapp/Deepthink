@@ -28,11 +28,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import ChatPageLayout from './pages/ChatPageLayout';
 import CustomInstructionsDialog from './components/CustomInstructionsDialog';
 import { signOutUser } from './firebase';
-
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-}
+import type { Message } from './types';
 
 interface Chat {
   id: string;
@@ -72,8 +68,6 @@ function App() {
   const [chats, setChats] = useState<Chat[]>([]);
   const [currentChatId, setCurrentChatId] = useState<string>('');
   const [model, setModel] = useState<string>('gemma:7b');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mode, setMode] = useState<'light' | 'dark'>(
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -82,9 +76,7 @@ function App() {
   const themeMUI = useTheme();
   const isMobile = useMediaQuery(themeMUI.breakpoints.down('sm'));
   const [customInstructionsOpen, setCustomInstructionsOpen] = useState(false);
-  const { user, loading: authLoading } = useAuth();
-
-  const currentChat = chats.find(chat => chat.id === currentChatId);
+  const { user } = useAuth();
 
   useEffect(() => {
     const saved = localStorage.getItem('deepthinkai_chats');
@@ -154,18 +146,6 @@ function App() {
     ));
   };
 
-  // Close sidebar after sign-in on mobile
-  useEffect(() => {
-    if (user && isMobile) {
-      setIsSidebarOpen(false);
-    }
-  }, [user, isMobile]);
-
-  // Handler to open sidebar (for hamburger/menu button)
-  const handleSidebarOpen = () => setIsSidebarOpen(true);
-  // Handler to close sidebar
-  const handleSidebarClose = () => setIsSidebarOpen(false);
-
   return (
     <HelmetProvider>
       <Helmet>
@@ -188,39 +168,7 @@ function App() {
             <MenuColorWrapper>
               {(isChat) => (
                 <>
-                  {/* Hamburger/Menu Button for Mobile */}
-                  {isMobile && !isSidebarOpen && (
-                    <IconButton
-                      color="primary"
-                      onClick={handleSidebarOpen}
-                      aria-label="Open sidebar"
-                      sx={{
-                        position: 'fixed',
-                        top: 12,
-                        left: 12,
-                        zIndex: 2000,
-                        bgcolor: 'background.paper',
-                        boxShadow: 3,
-                        borderRadius: 2,
-                        width: 44,
-                        height: 44,
-                        display: { xs: 'flex', sm: 'none' },
-                      }}
-                    >
-                      <MenuIcon />
-                    </IconButton>
-                  )}
-                  {/* Sidebar */}
-                  <Sidebar
-                    chats={chats}
-                    currentChatId={currentChatId}
-                    onSelectChat={setCurrentChatId}
-                    onNewChat={handleNewChat}
-                    open={isSidebarOpen}
-                    onClose={handleSidebarClose}
-                    onDeleteChat={handleDeleteChat}
-                  />
-                  {/* Mobile Tools Menu (top right) */}
+                  {/* Only show mobile tools menu globally (top right) */}
                   <Box sx={{ position: 'fixed', top: 0, right: 0, zIndex: 1000, p: 2, display: 'flex', gap: 2 }}>
                     {isMobile && (
                       <>
@@ -260,13 +208,12 @@ function App() {
                 </>
               )}
             </MenuColorWrapper>
-            {/* Add top padding to main content to prevent overlap with menu */}
+            {/* Main content, no sidebar except on /chat */}
             <Box sx={{ pt: { xs: '80px', sm: '80px' }, pr: { xs: 0, sm: '0px' } }}>
               <Routes>
                 <Route path="/" element={<WelcomeScreen />} />
                 <Route path="/blog" element={<BlogPage />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
-                
                 {/* Protected Routes */}
                 <Route
                   path="/chat"

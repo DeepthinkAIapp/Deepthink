@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import Sidebar from '../Sidebar';
 import ChatInterface from '../components/ChatInterface';
-
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-}
+import type { Message } from '../types';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
 
 interface Chat {
   id: string;
@@ -40,10 +40,29 @@ const ChatPageLayout: React.FC<ChatPageLayoutProps> = ({
   onLoadingChange,
 }) => {
   const currentChat = chats.find(chat => chat.id === currentChatId);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile); // open by default on desktop, closed on mobile
+
+  // Handler to open sidebar (hamburger)
+  const handleSidebarOpen = () => setIsSidebarOpen(true);
+  // Handler to close sidebar
+  const handleSidebarClose = () => setIsSidebarOpen(false);
+
+  // Close sidebar on mobile after selecting a chat
+  const handleSelectChat = (id: string) => {
+    setCurrentChatId(id);
+    if (isMobile) setIsSidebarOpen(false);
+  };
+
+  // Ensure sidebar closes on mobile after sign-in
+  useEffect(() => {
+    if (isMobile) setIsSidebarOpen(false);
+  }, [isMobile]);
 
   // Debug logs
-  console.log('currentChatId:', currentChatId);
-  console.log('currentChat:', currentChat);
+  // console.log('currentChatId:', currentChatId);
+  // console.log('currentChat:', currentChat);
 
   // Handler to update messages and ensure UI updates
   const handleMessagesChange = (newMessages: Message[]) => {
@@ -54,13 +73,35 @@ const ChatPageLayout: React.FC<ChatPageLayoutProps> = ({
 
   return (
     <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+      {/* Hamburger/Menu Button for Mobile */}
+      {isMobile && !isSidebarOpen && (
+        <IconButton
+          color="primary"
+          onClick={handleSidebarOpen}
+          aria-label="Open sidebar"
+          sx={{
+            position: 'fixed',
+            top: 12,
+            left: 12,
+            zIndex: 2000,
+            bgcolor: 'background.paper',
+            boxShadow: 3,
+            borderRadius: 2,
+            width: 44,
+            height: 44,
+            display: { xs: 'flex', sm: 'none' },
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
       <Sidebar
         chats={chats}
         currentChatId={currentChatId}
-        onSelectChat={setCurrentChatId}
+        onSelectChat={handleSelectChat}
         onNewChat={handleNewChat}
-        open={true}
-        onClose={() => {}}
+        open={isSidebarOpen}
+        onClose={handleSidebarClose}
         onDeleteChat={handleDeleteChat}
       />
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
