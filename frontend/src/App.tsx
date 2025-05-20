@@ -29,6 +29,7 @@ import ChatPageLayout from './pages/ChatPageLayout';
 import CustomInstructionsDialog from './components/CustomInstructionsDialog';
 import { signOutUser } from './firebase';
 import type { Message } from './types';
+import TopNav from './components/TopNav';
 
 interface Chat {
   id: string;
@@ -165,6 +166,7 @@ function App() {
         <CssBaseline />
         <AuthProvider>
           <Router>
+            <TopNav />
             <MenuColorWrapper>
               {(isChat) => (
                 <>

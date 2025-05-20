@@ -356,10 +356,7 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
       const decoder = new TextDecoder();
 
       // Add assistant message placeholder
-      let lastMessages: Message[] = [...newMessages, { role: 'assistant', content: '' }];
-      onMessagesChange([...messages, ...lastMessages]);
       let assistantContent = '';
-
       let buffer = '';
       try {
         while (true) {
@@ -387,24 +384,10 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
                 }
                 if (data.message && data.message.content) {
                   assistantContent += data.message.content;
-                  lastMessages[lastMessages.length - 1] = {
-                    role: 'assistant',
-                    content: assistantContent,
-                  };
-                  setMessages([...messages, ...lastMessages]);
-                  onMessagesChange([...messages, ...lastMessages]);
                 }
-                // If done, ensure the last assistant message is updated one final time
+                // If done, break out of the loop
                 if (data.done) {
-                  lastMessages[lastMessages.length - 1] = {
-                    role: 'assistant',
-                    content: assistantContent,
-                  };
-                  console.log('Final assistantContent:', assistantContent);
-                  console.log('Final lastMessages:', lastMessages);
-                  setMessages([...messages, ...lastMessages]);
-                  console.log('Received done signal');
-                  return;
+                  break;
                 }
               } catch (err) {
                 // If JSON.parse fails, skip this chunk and wait for the next one
@@ -414,14 +397,10 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
             }
           }
         }
-        // After stream ends, ensure the last assistant message is updated
-        lastMessages[lastMessages.length - 1] = {
-          role: 'assistant',
-          content: assistantContent,
-        };
-        console.log('Stream end assistantContent:', assistantContent);
-        console.log('Stream end lastMessages:', lastMessages);
+        // After stream ends, add the full assistant message at once
+        const lastMessages: Message[] = [...newMessages, { role: 'assistant', content: assistantContent }];
         setMessages([...messages, ...lastMessages]);
+        onMessagesChange([...messages, ...lastMessages]);
       } catch (err) {
         console.error('Error processing stream:', err);
         if (err instanceof Error) {
