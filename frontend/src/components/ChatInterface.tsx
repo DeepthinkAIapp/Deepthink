@@ -23,7 +23,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import { v4 as uuidv4 } from 'uuid'
 import { useAuth } from '../contexts/AuthContext'
-import md5 from 'md5'
+import md5 from 'blueimp-md5'
 
 console.log('API Base URL:', API_CONFIG.BASE_URL);
 
