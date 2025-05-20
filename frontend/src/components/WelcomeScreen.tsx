@@ -115,7 +115,7 @@ const WelcomeScreen: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ minHeight: '100vh', background: `url(/images/android-chrome-512x512.png) center center no-repeat`, backgroundSize: '40%', py: 6, display: 'flex', alignItems: 'center', position: 'relative' }}>
+      <Box sx={{ minHeight: '100vh', background: `url(/images/logo.png) center center no-repeat`, backgroundSize: '40%', py: 6, display: 'flex', alignItems: 'center', position: 'relative' }}>
         {/* Light/Dark mode toggle button in top right */}
         <Box sx={{ position: 'absolute', top: 24, right: 32, zIndex: 10 }}>
           <IconButton onClick={handleToggleMode} color="inherit" sx={{ bgcolor: mode === 'dark' ? 'rgba(36,40,48,0.85)' : 'rgba(255,255,255,0.85)', boxShadow: 2 }}>
