@@ -5,9 +5,11 @@ import { signInWithGoogle } from '../firebase';
 import GoogleIcon from '@mui/icons-material/Google';
 import OnboardingTour from './OnboardingTour';
 import InterestQuiz from './InterestQuiz';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { Helmet } from 'react-helmet-async';
+import { useAuth } from '../contexts/AuthContext';
 
 const TOP_TOOLS = [
   {
@@ -73,22 +75,27 @@ const WelcomeScreen: React.FC = () => {
   const [whyOpen, setWhyOpen] = useState(false);
   const [showTour, setShowTour] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
-  const [userInterests, setUserInterests] = useState<string[]>([]);
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
+    // If user is logged in, skip welcome/tutorial and go to /chat
+    if (user) {
+      navigate('/chat');
+      return;
+    }
     // Check if this is the user's first visit
     const hasVisited = localStorage.getItem('hasVisited');
     if (!hasVisited) {
       setShowWelcomeModal(true);
       localStorage.setItem('hasVisited', 'true');
     }
-  }, []);
+  }, [user, navigate]);
 
   const handleStartNow = async () => {
     try {
       await signInWithGoogle();
-      setShowQuiz(true);
+      navigate('/chat');
     } catch (error) {
       console.error('Error signing in:', error);
     }
@@ -99,7 +106,6 @@ const WelcomeScreen: React.FC = () => {
   };
 
   const handleQuizComplete = (interests: string[]) => {
-    setUserInterests(interests);
     setShowQuiz(false);
     navigate('/chat');
   };
@@ -115,6 +121,21 @@ const WelcomeScreen: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Helmet>
+        <title>Welcome | DeepThink AI</title>
+        <meta name="description" content="Welcome to DeepThink AI. Unlock smarter research with our AI-powered tools for SEO, content, and digital growth." />
+        <link rel="canonical" href="https://www.deepthinkai.app" />
+        <meta property="og:title" content="Welcome | DeepThink AI" />
+        <meta property="og:description" content="Welcome to DeepThink AI. Unlock smarter research with our AI-powered tools for SEO, content, and digital growth." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.deepthinkai.app" />
+        <meta property="og:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Welcome | DeepThink AI" />
+        <meta name="twitter:description" content="Welcome to DeepThink AI. Unlock smarter research with our AI-powered tools for SEO, content, and digital growth." />
+        <meta name="twitter:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:url" content="https://www.deepthinkai.app" />
+      </Helmet>
       <Box sx={{ minHeight: '100vh', background: `url(/images/blog/logo.png) center center no-repeat`, backgroundSize: '40%', py: 6, display: 'flex', alignItems: 'center', position: 'relative' }}>
         {/* Light/Dark mode toggle button in top right */}
         <Box sx={{ position: 'absolute', top: 24, right: 32, zIndex: 10 }}>

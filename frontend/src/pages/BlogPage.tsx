@@ -76,23 +76,23 @@ const BlogPage = () => {
   }, [visibleCount, sortedPosts.length]);
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box sx={{ background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 40%, #fff 100%)`, minHeight: '100vh', pb: 8 }}>
+    <Box sx={{ background: 'linear-gradient(135deg, #ff6600 0%, #fff 100%)', minHeight: '100vh', pb: 8 }}>
       <Helmet>
-        <title>Deepthink AI Blog | Free AI Tools, Guides & Insights</title>
-        <meta name="description" content="Explore the Deepthink AI Blog for the latest on free AI tools, content creation, image generation, SEO, monetization, and more. Discover how to supercharge your workflow with Deepthink AI." />
-        <link rel="canonical" href="https://yourdomain.com/blog" />
-        <meta property="og:title" content="Deepthink AI Blog | Free AI Tools, Guides & Insights" />
-        <meta property="og:description" content="Explore the Deepthink AI Blog for the latest on free AI tools, content creation, image generation, SEO, monetization, and more." />
+        <title>DeepThink AI Blog | Free AI Tools, Guides & Insights</title>
+        <meta name="description" content="Explore the DeepThink AI Blog for the latest on free AI tools, content creation, image generation, SEO, monetization, and more. Discover how to supercharge your workflow with DeepThink AI." />
+        <link rel="canonical" href="https://www.deepthinkai.app/blog" />
+        <meta property="og:title" content="DeepThink AI Blog | Free AI Tools, Guides & Insights" />
+        <meta property="og:description" content="Explore the DeepThink AI Blog for the latest on free AI tools, content creation, image generation, SEO, monetization, and more. Discover how to supercharge your workflow with DeepThink AI." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/blog" />
-        <meta property="og:image" content="https://yourdomain.com/images/Leonardo_Phoenix_10_A_futuristic_sleek_robotic_AI_figure_with_0.jpg" />
+        <meta property="og:url" content="https://www.deepthinkai.app/blog" />
+        <meta property="og:image" content="https://www.deepthinkai.app/images/logo.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Deepthink AI Blog | Free AI Tools, Guides & Insights" />
-        <meta name="twitter:description" content="Explore the Deepthink AI Blog for the latest on free AI tools, content creation, image generation, SEO, monetization, and more." />
-        <meta name="twitter:image" content="https://yourdomain.com/images/Leonardo_Phoenix_10_A_futuristic_sleek_robotic_AI_figure_with_0.jpg" />
+        <meta name="twitter:title" content="DeepThink AI Blog | Free AI Tools, Guides & Insights" />
+        <meta name="twitter:description" content="Explore the DeepThink AI Blog for the latest on free AI tools, content creation, image generation, SEO, monetization, and more. Discover how to supercharge your workflow with DeepThink AI." />
+        <meta name="twitter:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:url" content="https://www.deepthinkai.app/blog" />
       </Helmet>
       {/* HERO SECTION WITH VIDEO/IMAGE */}
       <Box sx={{
@@ -104,17 +104,18 @@ const BlogPage = () => {
         position: 'relative',
       }}>
         <Box sx={{
-          bgcolor: 'background.paper',
-          borderRadius: 4,
-          boxShadow: `0 4px 24px ${theme.palette.primary.main}22`,
-          border: `2px solid ${theme.palette.primary.main}`,
+          bgcolor: 'rgba(255,255,255,0.95)',
+          borderRadius: 6,
+          boxShadow: '0 4px 24px rgba(255,102,0,0.13)',
+          border: '2px solid #ff6600',
           p: { xs: 1, md: 2 },
           mb: 4,
           maxWidth: 480,
           width: '100%',
           position: 'relative',
+          overflow: 'hidden',
         }}>
-          <Box sx={{ position: 'relative', width: '100%', height: { xs: 220, md: 320 }, overflow: 'hidden', borderRadius: 3 }}>
+          <Box sx={{ position: 'relative', width: '100%', height: { xs: 220, md: 320 }, overflow: 'hidden', borderRadius: 4 }}>
             <video
               ref={videoRef}
               src="/images/2.mp4"
@@ -122,7 +123,7 @@ const BlogPage = () => {
               loop
               muted
               playsInline
-              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 16, boxShadow: '0 2px 16px rgba(255,102,0,0.10)' }}
               poster="/images/android-chrome-512x512.png"
               onPlay={() => setIsVideoPlaying(true)}
               onPause={() => setIsVideoPlaying(false)}
@@ -137,7 +138,7 @@ const BlogPage = () => {
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
                   fontSize: 64,
-                  color: 'primary.main',
+                  color: '#ff6600',
                   opacity: 0.85,
                   cursor: 'pointer',
                   transition: 'opacity 0.2s',
@@ -153,7 +154,6 @@ const BlogPage = () => {
         {/* CTA BUTTON */}
         <Button
           variant="contained"
-          color="primary"
           size="large"
           sx={{
             fontWeight: 700,
@@ -162,7 +162,10 @@ const BlogPage = () => {
             py: 2,
             mb: 4,
             borderRadius: 2,
-            boxShadow: `0 2px 8px ${theme.palette.primary.main}33`
+            background: '#ff6600',
+            color: '#fff',
+            boxShadow: '0 2px 8px rgba(255,102,0,0.18)',
+            '&:hover': { background: '#ff8533' }
           }}
           onClick={() => window.location.href = '/'}
         >
@@ -201,38 +204,37 @@ const BlogPage = () => {
         </Grid>
         {/* PROMPT INSPIRATION SECTION */}
         <Box sx={{
-          bgcolor: `${theme.palette.primary.light}11`,
+          bgcolor: '#fff7f0',
           py: { xs: 4, md: 6 },
           mb: 4,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           borderRadius: 3,
-          border: `1.5px solid ${theme.palette.primary.light}`,
+          border: '1.5px solid #ffb366',
         }}>
-          <Typography variant="h4" sx={{ fontWeight: 700, mb: 2, color: 'primary.main' }}>
+          <Typography variant="h4" sx={{ fontWeight: 700, mb: 2, color: '#ff6600' }}>
             Prompt Inspiration
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 600, textAlign: 'center' }}>
             Get inspired by top AI-generated images and prompts from the community. Explore creative ideas and see what's possible with Deepthink AI and PromptHero!
           </Typography>
           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'center', mb: 2 }}>
-            <img src="/images/blog/prompthero-prompt-9503d8ce603.webp" alt="PromptHero Sample 1" style={{ width: 180, borderRadius: 12, boxShadow: `0 2px 8px ${theme.palette.primary.main}22`, border: `1.5px solid ${theme.palette.primary.light}` }} onError={e => { e.currentTarget.src = '/images/android-chrome-512x512.png'; }} />
-            <img src="/images/blog/prompthero-prompt-2479e948aee.webp" alt="PromptHero Sample 2" style={{ width: 180, borderRadius: 12, boxShadow: `0 2px 8px ${theme.palette.primary.main}22`, border: `1.5px solid ${theme.palette.primary.light}` }} onError={e => { e.currentTarget.src = '/images/android-chrome-512x512.png'; }} />
-            <img src="/images/blog/prompthero-prompt-75f921002e7.webp" alt="PromptHero Sample 3" style={{ width: 180, borderRadius: 12, boxShadow: `0 2px 8px ${theme.palette.primary.main}22`, border: `1.5px solid ${theme.palette.primary.light}` }} onError={e => { e.currentTarget.src = '/images/android-chrome-512x512.png'; }} />
+            <img src="/images/blog/prompthero-prompt-9503d8ce603.webp" alt="PromptHero Sample 1" style={{ width: 180, borderRadius: 12, boxShadow: '0 2px 8px #ff660022', border: '1.5px solid #ffb366' }} onError={e => { e.currentTarget.src = '/images/android-chrome-512x512.png'; }} />
+            <img src="/images/blog/prompthero-prompt-2479e948aee.webp" alt="PromptHero Sample 2" style={{ width: 180, borderRadius: 12, boxShadow: '0 2px 8px #ff660022', border: '1.5px solid #ffb366' }} onError={e => { e.currentTarget.src = '/images/android-chrome-512x512.png'; }} />
+            <img src="/images/blog/prompthero-prompt-75f921002e7.webp" alt="PromptHero Sample 3" style={{ width: 180, borderRadius: 12, boxShadow: '0 2px 8px #ff660022', border: '1.5px solid #ffb366' }} onError={e => { e.currentTarget.src = '/images/android-chrome-512x512.png'; }} />
           </Box>
           <Button
             variant="outlined"
-            color="primary"
             href="https://prompthero.com/top"
             target="_blank"
             rel="noopener"
-            sx={{ fontWeight: 600, mt: 1, borderColor: 'primary.main', color: 'primary.main' }}
+            sx={{ fontWeight: 600, mt: 1, borderColor: '#ff6600', color: '#ff6600', '&:hover': { borderColor: '#ff8533', color: '#ff8533', background: '#fff3e0' } }}
           >
             See More on PromptHero
           </Button>
           <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
-            Images & prompts courtesy of <a href="https://prompthero.com/top" target="_blank" rel="noopener" style={{ color: theme.palette.primary.main, textDecoration: 'underline' }}>PromptHero</a>
+            Images & prompts courtesy of <a href="https://prompthero.com/top" target="_blank" rel="noopener" style={{ color: '#ff6600', textDecoration: 'underline' }}>PromptHero</a>
           </Typography>
         </Box>
       </Box>
@@ -330,8 +332,8 @@ const BlogPage = () => {
 
           {/* Sidebar */}
           <Grid item xs={12} md={4}>
-            <SidebarBox>
-              <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, color: 'primary.main' }}>
+            <SidebarBox sx={{ border: '1.5px solid #ffb366', boxShadow: '0 2px 8px #ff660011', background: '#fff7f0' }}>
+              <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, color: '#ff6600' }}>
                 Recent Posts
               </Typography>
               {recentPosts.map((post) => (
@@ -352,8 +354,8 @@ const BlogPage = () => {
                 </Box>
               ))}
             </SidebarBox>
-            <SidebarBox>
-              <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, color: 'primary.main' }}>
+            <SidebarBox sx={{ border: '1.5px solid #ffb366', boxShadow: '0 2px 8px #ff660011', background: '#fff7f0' }}>
+              <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, color: '#ff6600' }}>
                 Most Viewed
               </Typography>
               {mostViewedPosts.map((post) => (
@@ -374,11 +376,11 @@ const BlogPage = () => {
           sx={{ 
             mt: 8, 
             p: 6, 
-            bgcolor: 'primary.main', 
+            bgcolor: '#ff6600', 
             borderRadius: 2,
             textAlign: 'center',
             color: 'white',
-            boxShadow: `0 4px 24px ${theme.palette.primary.main}22`
+            boxShadow: '0 4px 24px #ff660022'
           }}
         >
           <Typography variant="h4" gutterBottom sx={{ fontWeight: 700, color: 'white' }}>
@@ -396,7 +398,7 @@ const BlogPage = () => {
               fontSize: '1.1rem',
               fontWeight: 600,
               '&:hover': {
-                color: theme.palette.primary.light,
+                color: '#ffb366',
               }
             }}
           >

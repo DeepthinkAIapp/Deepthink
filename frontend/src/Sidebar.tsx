@@ -1,4 +1,3 @@
-import React from 'react';
 import { 
   Box, 
   List, 
@@ -63,81 +62,170 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
       flexDirection: 'column',
       bgcolor: 'background.paper',
       overflow: 'auto',
-      position: 'relative'
+      position: 'relative',
+      background: 'linear-gradient(to bottom, #ff6600 0%, #ffffff 100%)',
     }}>
       <Box sx={{ 
         p: 2, 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'space-between',
-        borderBottom: 1,
-        borderColor: 'divider',
-        minHeight: 64
+        borderBottom: '2px solid',
+        borderColor: '#ff6600',
+        minHeight: 80,
+        background: 'linear-gradient(135deg, rgba(255,102,0,0.15) 0%, rgba(255,255,255,0.9) 100%)',
+        backdropFilter: 'blur(8px)',
+        boxShadow: '0 4px 12px rgba(255,102,0,0.1)'
       }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <img src="/images/blog/logo.png" alt="Logo" style={{ height: 36, width: 36, borderRadius: 8, marginRight: 8 }} />
-          <span style={{ fontWeight: 700, fontSize: 20, letterSpacing: 1 }}>DEEPTHINK AI</span>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+          <Box
+            sx={{
+              position: 'relative',
+              width: 44,
+              height: 44,
+              borderRadius: 2,
+              overflow: 'hidden',
+              boxShadow: '0 2px 8px rgba(255,102,0,0.2)',
+              border: '2px solid #ff6600',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: '#fff'
+            }}
+          >
+            <img 
+              src="/images/blog/logo.png" 
+              alt="Logo" 
+              style={{ 
+                height: '100%', 
+                width: '100%', 
+                objectFit: 'cover'
+              }} 
+            />
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography 
+              sx={{ 
+                fontWeight: 800, 
+                fontSize: 20, 
+                letterSpacing: 1,
+                color: '#ff6600',
+                textShadow: '0 1px 2px rgba(255,102,0,0.1)',
+                lineHeight: 1.2
+              }}
+            >
+              DEEPTHINK AI
+            </Typography>
+            <Typography 
+              sx={{ 
+                fontSize: 12, 
+                color: 'text.secondary',
+                letterSpacing: 0.5,
+                fontWeight: 500
+              }}
+            >
+              AI-Powered Tools
+            </Typography>
+          </Box>
         </Box>
         {isMobile && (
-          <IconButton onClick={onClose}>
+          <IconButton 
+            onClick={onClose}
+            sx={{
+              color: '#ff6600',
+              '&:hover': {
+                bgcolor: 'rgba(255,102,0,0.1)'
+              }
+            }}
+          >
             <CloseIcon />
           </IconButton>
         )}
       </Box>
       <Box>
-        <button onClick={onNewChat} style={{ width: '100%', padding: '10px 0', background: '#1976d2', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 600, fontSize: 16, cursor: 'pointer' }}>
+        <button onClick={onNewChat} style={{ 
+          width: '100%', 
+          padding: '10px 0', 
+          background: '#ff6600', 
+          color: '#fff', 
+          border: 'none', 
+          borderRadius: 6, 
+          fontWeight: 600, 
+          fontSize: 16, 
+          cursor: 'pointer',
+          boxShadow: '0 2px 8px rgba(255, 102, 0, 0.3)'
+        }}>
           + New chat
         </button>
       </Box>
-      <List>
+      <List sx={{ 
+        '& .MuiListItemButton-root': {
+          '&:hover': {
+            background: 'rgba(255, 255, 255, 0.08)',
+            color: '#fff',
+          },
+          '&.Mui-selected': {
+            background: '#ff6600',
+            color: '#fff',
+            '&:hover': {
+              background: '#ff8533',
+              color: '#fff',
+            }
+          },
+          color: '#fff',
+        },
+        '& .MuiListItemText-root': {
+          color: '#fff',
+        },
+      }}>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/blog" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="Blog" />
+          <ListItemButton component={Link} to="/blog" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="Blog" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/monetization-planner" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="Monetization Planner" />
+          <ListItemButton component={Link} to="/monetization-planner" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="Monetization Planner" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/guestpost-outreach" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="Guest Post Outreach" />
+          <ListItemButton component={Link} to="/guestpost-outreach" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="Guest Post Outreach" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/search-intent-tool" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="Search Intent Tool" />
+          <ListItemButton component={Link} to="/search-intent-tool" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="Search Intent Tool" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/image-generator" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="Image Generator" />
+          <ListItemButton component={Link} to="/image-generator" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="Image Generator" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/content-outline-creator" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="Content Creator Machine" />
+          <ListItemButton component={Link} to="/content-outline-creator" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="Content Creator Machine" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/youtube-content-planner" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="YouTube Content Planner" />
+          <ListItemButton component={Link} to="/youtube-content-planner" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="YouTube Content Planner" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/affiliate-article-ideas" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="Affiliate Article Ideas" />
+          <ListItemButton component={Link} to="/affiliate-article-ideas" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="Affiliate Article Ideas" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/video-generator" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="Video Generator" />
+          <ListItemButton component={Link} to="/video-generator" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="Video Generator" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/website-authority-checker" onClick={isMobile ? onClose : undefined}>
-            <ListItemText primary="Website Authority Checker" />
+          <ListItemButton component={Link} to="/website-authority-checker" onClick={isMobile ? onClose : undefined} sx={{ color: '#fff', fontWeight: 600, textDecoration: 'none', '&:hover': { textDecoration: 'underline', color: '#fff' } }}>
+            <ListItemText primary="Website Authority Checker" sx={{ color: '#fff', fontWeight: 600 }} />
           </ListItemButton>
         </ListItem>
       </List>
@@ -164,9 +252,10 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
               }}
               sx={{
                 '&.Mui-selected': {
-                  bgcolor: 'primary.light',
+                  bgcolor: '#ff6600',
+                  color: '#fff',
                   '&:hover': {
-                    bgcolor: 'primary.light',
+                    bgcolor: '#ff6600',
                   },
                 },
               }}
@@ -176,7 +265,7 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { 
-                    color: chat.id === currentChatId ? 'primary.contrastText' : 'text.primary'
+                    color: chat.id === currentChatId ? '#fff' : 'text.primary'
                   }
                 }}
               />
@@ -184,20 +273,48 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
           </ListItem>
         ))}
       </List>
-      <Box sx={{ p: 2, borderTop: 1, borderColor: 'divider', display: 'flex', alignItems: 'center', gap: 1, bgcolor: 'background.paper', position: 'sticky', bottom: 0, zIndex: 2 }}>
+      <Box sx={{ 
+        p: 2, 
+        borderTop: 1, 
+        borderColor: '#ff6600', 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: 1, 
+        bgcolor: 'background.paper', 
+        position: 'sticky', 
+        bottom: 0, 
+        zIndex: 2,
+        background: 'rgba(255, 255, 255, 0.9)',
+        backdropFilter: 'blur(8px)'
+      }}>
         {user && (
           <>
-            <Avatar src={user.photoURL || undefined} alt={user.displayName || user.email || 'User'} sx={{ width: 36, height: 36, mr: 1 }} />
+            <Avatar src={user.photoURL || undefined} alt={user.displayName || user.email || 'User'} sx={{ 
+              width: 36, 
+              height: 36, 
+              mr: 1,
+              border: '2px solid #ff6600'
+            }} />
             <Box sx={{ flex: 1 }}>
-              <Typography variant="body2" sx={{ fontWeight: 600 }}>{user.displayName || 'User'}</Typography>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#ff6600' }}>{user.displayName || 'User'}</Typography>
               <Typography variant="caption" color="text.secondary">{user.email}</Typography>
             </Box>
           </>
         )}
-        <IconButton onClick={handleSettings} title="Settings">
+        <IconButton onClick={handleSettings} title="Settings" sx={{ 
+          color: '#ff6600',
+          '&:hover': {
+            bgcolor: 'rgba(255, 102, 0, 0.1)'
+          }
+        }}>
           <SettingsIcon />
         </IconButton>
-        <IconButton onClick={handleSignOut} title="Sign Out">
+        <IconButton onClick={handleSignOut} title="Sign Out" sx={{ 
+          color: '#ff6600',
+          '&:hover': {
+            bgcolor: 'rgba(255, 102, 0, 0.1)'
+          }
+        }}>
           <LogoutIcon />
         </IconButton>
       </Box>
@@ -208,18 +325,22 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
     <>
       {isMobile && !open && (
         <IconButton
-          onClick={onNewChat /* This should open the sidebar, but we need a prop for onOpen. For now, just placeholder. */}
+          onClick={onNewChat}
           sx={{
             position: 'fixed',
             top: 12,
             left: 12,
             zIndex: 2000,
-            bgcolor: 'background.paper',
+            bgcolor: '#ff6600',
+            color: '#fff',
             boxShadow: 3,
             borderRadius: 2,
             width: 44,
             height: 44,
             display: { xs: 'flex', sm: 'none' },
+            '&:hover': {
+              bgcolor: '#ff8533',
+            },
           }}
           aria-label="Open sidebar"
         >

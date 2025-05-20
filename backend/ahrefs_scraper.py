@@ -7,8 +7,12 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import re
 from bs4 import BeautifulSoup
+from pydantic import BaseModel
 
 router = APIRouter()
+
+class AuthorityCheckerRequest(BaseModel):
+    domain: str
 
 def parse_number(text):
     # Converts 2.6B, 3.0M, etc. to integer
@@ -27,9 +31,8 @@ def parse_number(text):
     return int(num)
 
 @router.post("/api/authority-checker")
-async def authority_checker(request: Request):
-    data = await request.json()
-    domain = data.get("domain")
+async def authority_checker(request: AuthorityCheckerRequest):
+    domain = request.domain
     if not domain:
         return {"error": "No domain provided"}
 

@@ -59,7 +59,8 @@ export default function TopNav() {
             background: '#fff',
             fontWeight: 700,
             boxShadow: 2,
-            '&:hover': { background: 'rgba(255,102,0,0.08)', borderColor: '#ff6600' },
+            textDecoration: 'none',
+            '&:hover': { background: 'rgba(255,102,0,0.08)', borderColor: '#ff6600', textDecoration: 'underline', color: '#ff8533' },
           }}
         >
           {link.label}

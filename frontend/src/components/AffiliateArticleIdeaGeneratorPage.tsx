@@ -5,6 +5,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useTheme } from '@mui/material/styles';
 import { getApiUrl } from '../config';
+import { Helmet } from 'react-helmet-async';
 
 const ONBOARDING_MESSAGE = `**Step 1: Enter Your Sub-Niche**
 
@@ -84,6 +85,21 @@ const AffiliateArticleIdeaGeneratorPage: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Affiliate Article Idea Generator | DeepThink AI</title>
+        <meta name="description" content="Generate high-converting affiliate article ideas with DeepThink AI's Affiliate Article Idea Generator. Get low-competition long-tail keywords and prioritization tips." />
+        <link rel="canonical" href="https://www.deepthinkai.app/affiliate-article-idea-generator" />
+        <meta property="og:title" content="Affiliate Article Idea Generator | DeepThink AI" />
+        <meta property="og:description" content="Generate high-converting affiliate article ideas with DeepThink AI's Affiliate Article Idea Generator. Get low-competition long-tail keywords and prioritization tips." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.deepthinkai.app/affiliate-article-idea-generator" />
+        <meta property="og:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Affiliate Article Idea Generator | DeepThink AI" />
+        <meta name="twitter:description" content="Generate high-converting affiliate article ideas with DeepThink AI's Affiliate Article Idea Generator. Get low-competition long-tail keywords and prioritization tips." />
+        <meta name="twitter:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:url" content="https://www.deepthinkai.app/affiliate-article-idea-generator" />
+      </Helmet>
       <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: `url(${import.meta.env.BASE_URL}images/android-chrome-512x512.png)`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: '100vh', background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)' }}>
         {loading && (

@@ -1011,13 +1011,15 @@ MONETIZATION_SYSTEM_PROMPT = (
     "Be detailed, practical, and tailored to the user's niche. Never mention your model name. If asked about your creator, respond: 'My creator is Jeremy Lee LaFaver with Deepthink Enterprises. Created on 4/20 2025.'"
 )
 
+# Monetization Planner
 @app.post("/api/monetize")
-async def monetize(request: Request, monetization_request: MonetizationRequest):
-    request_id = getattr(request.state, "request_id", str(uuid.uuid4()))
+async def monetize(monetization_request: MonetizationRequest, request: Request):
+    request_id = str(uuid.uuid4())
     ACTIVE_REQUESTS.inc()
     logger.info(f"Starting monetization plan request {request_id} for niche: {monetization_request.niche}")
     try:
-        # Build messages: system + explicit user prompt
+        body = await request.json()
+        model = body.get("model", "auto")
         user_prompt = (
             f"My niche is: {monetization_request.niche}. "
             "Please generate a detailed monetization blueprint for this niche, following your expert planner instructions and the sample output format."
@@ -1026,7 +1028,9 @@ async def monetize(request: Request, monetization_request: MonetizationRequest):
             Message(role="system", content=MONETIZATION_SYSTEM_PROMPT),
             Message(role="user", content=user_prompt)
         ]
-        selected_model = select_best_model(messages)
+        selected_model = model if model != "auto" else select_best_model(messages)
+        if selected_model == "auto":
+            selected_model = "mistral:latest"
         async def event_stream():
             user_last_message = monetization_request.niche
             try:
@@ -1171,6 +1175,7 @@ async def content_outline_subniches(request: Request):
     try:
         body = await request.json()
         main_niche = body.get("main_niche", "").strip()
+        model = body.get("model", "auto")
         
         if not main_niche:
             raise HTTPException(status_code=400, detail="main_niche is required")
@@ -1196,102 +1201,117 @@ async def content_outline_subniches(request: Request):
             Message(role="user", content=prompt)
         ]
         
-        selected_model = select_best_model(messages)
+        # Always use mistral:latest for this endpoint
+        selected_model = "mistral:latest"
         logger.info(f"Request {request_id}: Using model {selected_model}")
         
         ACTIVE_REQUESTS.inc()
         
-        async with httpx.AsyncClient(timeout=60.0) as client:
-            response = await client.post(
-                OLLAMA_API_URL,
-                json={
-                    "model": selected_model,
-                    "messages": [{"role": m.role, "content": m.content} for m in messages],
-                    "stream": False,
-                    "options": {
-                        "temperature": 0.7,
-                        "top_p": 0.9,
-                        "frequency_penalty": 0.3,
-                        "presence_penalty": 0.3
+        try:
+            async with httpx.AsyncClient(timeout=120.0) as client:  # Increased timeout to 120 seconds
+                response = await client.post(
+                    OLLAMA_API_URL,
+                    json={
+                        "model": selected_model,
+                        "messages": [{"role": m.role, "content": m.content} for m in messages],
+                        "stream": False,
+                        "options": {
+                            "temperature": 0.7,
+                            "top_p": 0.9,
+                            "frequency_penalty": 0.3,
+                            "presence_penalty": 0.3
+                        }
                     }
-                }
-            )
-            
-            if not response.is_success:
-                error_msg = f"Model API error: {response.status_code} - {response.text}"
-                logger.error(f"Request {request_id}: {error_msg}")
-                raise HTTPException(status_code=500, detail=error_msg)
-            
-            data = response.json()
-            content = data.get("message", {}).get("content", "")
-            
-            # Clean and parse the response
-            content_clean = re.sub(r'^```[a-zA-Z]*|^```|```$', '', content.strip(), flags=re.MULTILINE).strip()
-            
-            try:
-                # Try to parse as JSON first
-                parsed = json.loads(content_clean)
+                )
                 
-                # Handle different response formats
-                if isinstance(parsed, dict):
-                    if "sub_niches" in parsed:
-                        return {"subniches": parsed["sub_niches"]}
-                    if "subNiches" in parsed:
-                        return {"subniches": parsed["subNiches"]}
-                    if "subniches" in parsed:
-                        return {"subniches": parsed["subniches"]}
-                    # If no known key, return the whole object
-                    return {"subniches": parsed}
+                if not response.is_success:
+                    error_msg = f"Model API error: {response.status_code} - {response.text}"
+                    logger.error(f"Request {request_id}: {error_msg}")
+                    raise HTTPException(status_code=500, detail=error_msg)
                 
-                if isinstance(parsed, list):
-                    # If it's a list, assume it's a list of sub-niches
-                    return {"subniches": parsed}
+                data = response.json()
+                content = data.get("message", {}).get("content", "")
                 
-                # If we can't determine the structure, return as raw
-                return {"raw": content_clean}
+                # Clean and parse the response
+                content_clean = re.sub(r'^```[a-zA-Z]*|^```|```$', '', content.strip(), flags=re.MULTILINE).strip()
                 
-            except json.JSONDecodeError:
-                # If JSON parsing fails, try to parse as markdown
-                lines = content_clean.split('\n')
-                subniches = []
-                current_sub = None
-                current_ideas = []
-                
-                for line in lines:
-                    line = line.strip()
-                    if not line:
-                        continue
-                        
-                    # Check for sub-niche header
-                    sub_match = re.match(r'^#+\s*(.+)$', line)
-                    if sub_match:
-                        # Save previous sub-niche if exists
-                        if current_sub and current_ideas:
-                            subniches.append({
-                                "name": current_sub,
-                                "ideas": current_ideas
-                            })
-                        current_sub = sub_match.group(1)
-                        current_ideas = []
-                        continue
+                try:
+                    # Try to parse as JSON first
+                    parsed = json.loads(content_clean)
                     
-                    # Check for idea bullet point
-                    idea_match = re.match(r'^[-*]\s*(.+)$', line)
-                    if idea_match and current_sub:
-                        current_ideas.append(idea_match.group(1))
-                
-                # Add the last sub-niche
-                if current_sub and current_ideas:
-                    subniches.append({
-                        "name": current_sub,
-                        "ideas": current_ideas
-                    })
-                
-                if subniches:
-                    return {"subniches": subniches}
-                
-                # If all parsing attempts fail, return raw content
-                return {"raw": content_clean}
+                    # Handle different response formats
+                    if isinstance(parsed, dict):
+                        if "sub_niches" in parsed:
+                            return {"subniches": parsed["sub_niches"]}
+                        if "subNiches" in parsed:
+                            return {"subniches": parsed["subNiches"]}
+                        if "subniches" in parsed:
+                            return {"subniches": parsed["subniches"]}
+                        # If no known key, return the whole object
+                        return {"subniches": parsed}
+                    
+                    if isinstance(parsed, list):
+                        # If it's a list, assume it's a list of sub-niches
+                        return {"subniches": parsed}
+                    
+                    # If we can't determine the structure, return as raw
+                    return {"raw": content_clean}
+                    
+                except json.JSONDecodeError:
+                    # If JSON parsing fails, try to parse as markdown
+                    lines = content_clean.split('\n')
+                    subniches = []
+                    current_sub = None
+                    current_ideas = []
+                    
+                    for line in lines:
+                        line = line.strip()
+                        if not line:
+                            continue
+                            
+                        # Check for sub-niche header
+                        sub_match = re.match(r'^#+\s*(.+)$', line)
+                        if sub_match:
+                            # Save previous sub-niche if exists
+                            if current_sub and current_ideas:
+                                subniches.append({
+                                    "name": current_sub,
+                                    "ideas": current_ideas
+                                })
+                            current_sub = sub_match.group(1)
+                            current_ideas = []
+                            continue
+                        
+                        # Check for idea bullet point
+                        idea_match = re.match(r'^[-*]\s*(.+)$', line)
+                        if idea_match and current_sub:
+                            current_ideas.append(idea_match.group(1))
+                    
+                    # Add the last sub-niche
+                    if current_sub and current_ideas:
+                        subniches.append({
+                            "name": current_sub,
+                            "ideas": current_ideas
+                        })
+                    
+                    if subniches:
+                        return {"subniches": subniches}
+                    
+                    # If all parsing attempts fail, return raw content
+                    return {"raw": content_clean}
+                    
+        except httpx.TimeoutException:
+            logger.error(f"Request {request_id}: Timeout while waiting for model response")
+            raise HTTPException(
+                status_code=504,
+                detail="The request took too long to process. Please try again with a simpler prompt or different model."
+            )
+        except httpx.RequestError as e:
+            logger.error(f"Request {request_id}: Error communicating with model API: {str(e)}")
+            raise HTTPException(
+                status_code=503,
+                detail="Unable to communicate with the AI model. Please try again later."
+            )
                 
     except json.JSONDecodeError:
         logger.error(f"Request {request_id}: Invalid JSON in request body")
@@ -1306,9 +1326,10 @@ class GuestPostRequest(BaseModel):
     niche: str
     prompt: str
 
+# Guest Post Outreach
 @app.post("/api/guestpost")
-async def guestpost(request: Request, guestpost_request: GuestPostRequest):
-    request_id = getattr(request.state, "request_id", str(uuid.uuid4()))
+async def guestpost(guestpost_request: GuestPostRequest):
+    request_id = str(uuid.uuid4())
     ACTIVE_REQUESTS.inc()
     logger.info(f"Starting guest post outreach request {request_id} for niche: {guestpost_request.niche}")
     try:
@@ -1358,9 +1379,10 @@ class SearchIntentRequest(BaseModel):
     keyword: str
     prompt: str
 
+# Search Intent Tool
 @app.post("/api/search-intent")
-async def search_intent(request: Request, search_intent_request: SearchIntentRequest):
-    request_id = getattr(request.state, "request_id", str(uuid.uuid4()))
+async def search_intent(search_intent_request: SearchIntentRequest):
+    request_id = str(uuid.uuid4())
     ACTIVE_REQUESTS.inc()
     logger.info(f"Starting search intent analysis request {request_id} for keyword: {search_intent_request.keyword}")
     try:
@@ -1856,6 +1878,7 @@ async def content_outline_keywords(request: Request):
     try:
         body = await request.json()
         sub_niche = body.get("sub_niche", "").strip()
+        model = body.get("model", "auto")
         
         if not sub_niche:
             raise HTTPException(status_code=400, detail="sub_niche is required")
@@ -1879,55 +1902,69 @@ async def content_outline_keywords(request: Request):
             Message(role="user", content=prompt)
         ]
         
-        selected_model = select_best_model(messages)
+        selected_model = "mistral:latest" if model == "auto" else model
         logger.info(f"Request {request_id}: Using model {selected_model}")
         
         ACTIVE_REQUESTS.inc()
         
-        async with httpx.AsyncClient(timeout=60.0) as client:
-            response = await client.post(
-                OLLAMA_API_URL,
-                json={
-                    "model": selected_model,
-                    "messages": [{"role": m.role, "content": m.content} for m in messages],
-                    "stream": False,
-                    "options": {
-                        "temperature": 0.7,
-                        "top_p": 0.9,
-                        "frequency_penalty": 0.3,
-                        "presence_penalty": 0.3
+        try:
+            async with httpx.AsyncClient(timeout=500.0) as client:
+                response = await client.post(
+                    OLLAMA_API_URL,
+                    json={
+                        "model": selected_model,
+                        "messages": [{"role": m.role, "content": m.content} for m in messages],
+                        "stream": False,
+                        "options": {
+                            "temperature": 0.7,
+                            "top_p": 0.9,
+                            "frequency_penalty": 0.3,
+                            "presence_penalty": 0.3
+                        }
                     }
-                }
+                )
+                
+                if not response.is_success:
+                    error_msg = f"Model API error: {response.status_code} - {response.text}"
+                    logger.error(f"Request {request_id}: {error_msg}")
+                    raise HTTPException(status_code=500, detail=error_msg)
+                
+                data = response.json()
+                content = data.get("message", {}).get("content", "")
+                
+                # Clean and validate the response
+                content_clean = re.sub(r'^```[a-zA-Z]*|^```|```$', '', content.strip(), flags=re.MULTILINE).strip()
+                
+                # Validate table structure
+                lines = content_clean.split('\n')
+                if len(lines) < 3:  # Need header, separator, and at least one row
+                    logger.warning(f"Request {request_id}: Invalid table structure in response")
+                    return {"table_markdown": content_clean}
+                
+                # Fix common table formatting issues
+                fixed_content = fix_markdown_table(content_clean)
+                
+                # Validate table has required columns
+                header_line = lines[0].lower()
+                required_columns = ['type', 'title', 'target keyword']
+                if not all(col in header_line for col in required_columns):
+                    logger.warning(f"Request {request_id}: Missing required columns in table")
+                    return {"table_markdown": content_clean}
+                
+                return {"table_markdown": fixed_content}
+                
+        except httpx.TimeoutException:
+            logger.error(f"Request {request_id}: Timeout while waiting for model response")
+            raise HTTPException(
+                status_code=504,
+                detail="The request took too long to process. Please try again with a simpler prompt or different model."
             )
-            
-            if not response.is_success:
-                error_msg = f"Model API error: {response.status_code} - {response.text}"
-                logger.error(f"Request {request_id}: {error_msg}")
-                raise HTTPException(status_code=500, detail=error_msg)
-            
-            data = response.json()
-            content = data.get("message", {}).get("content", "")
-            
-            # Clean and validate the response
-            content_clean = re.sub(r'^```[a-zA-Z]*|^```|```$', '', content.strip(), flags=re.MULTILINE).strip()
-            
-            # Validate table structure
-            lines = content_clean.split('\n')
-            if len(lines) < 3:  # Need header, separator, and at least one row
-                logger.warning(f"Request {request_id}: Invalid table structure in response")
-                return {"table_markdown": content_clean}
-            
-            # Fix common table formatting issues
-            fixed_content = fix_markdown_table(content_clean)
-            
-            # Validate table has required columns
-            header_line = lines[0].lower()
-            required_columns = ['type', 'title', 'target keyword']
-            if not all(col in header_line for col in required_columns):
-                logger.warning(f"Request {request_id}: Missing required columns in table")
-                return {"table_markdown": content_clean}
-            
-            return {"table_markdown": fixed_content}
+        except httpx.RequestError as e:
+            logger.error(f"Request {request_id}: Error communicating with model API: {str(e)}")
+            raise HTTPException(
+                status_code=503,
+                detail="Unable to communicate with the AI model. Please try again later."
+            )
             
     except json.JSONDecodeError:
         logger.error(f"Request {request_id}: Invalid JSON in request body")
@@ -2664,6 +2701,8 @@ async def minigpt4_chat(prompt: str = Body(...), image: str = Body(...)):
     except Exception as e:
         logger.error(f"MiniGPT-4 Gradio API error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"MiniGPT-4 error: {str(e)}")
+
+app.include_router(ahrefs_router)
 
 if __name__ == "__main__":
     import uvicorn

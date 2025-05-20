@@ -1,4 +1,4 @@
-import React, { useState, useRef, Dispatch, SetStateAction } from "react";
+import React, { useState, useRef } from "react";
 import { Box, Typography, TextField, Button, Alert, CircularProgress } from "@mui/material";
 import "./MonetizationPlannerPage.css";
 import { useTheme } from '@mui/material/styles';
@@ -6,8 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import ChatInterface from './ChatInterface';
 import { getApiUrl } from '../config';
-
-type Message = { role: 'user' | 'assistant' | 'system', content: string };
+import { Helmet } from 'react-helmet-async';
 
 const SearchIntentToolPage: React.FC = () => {
   const [keyword, setKeyword] = useState("");
@@ -16,7 +15,6 @@ const SearchIntentToolPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const abortController = useRef<AbortController | null>(null);
   const theme = useTheme();
-  const [chatMessages, setChatMessages] = useState<Message[]>([]);
 
   const handleGenerate = async () => {
     setAnalysis("");
@@ -83,17 +81,23 @@ const SearchIntentToolPage: React.FC = () => {
     setLoading(false);
   };
 
-  // Helper: filter out system/context messages from chat display
-  function getVisibleChatMessages(messages: Message[]): Message[] {
-    // Only show user and assistant messages after the user starts chatting
-    if (messages.length > 1 && messages[0].role === 'assistant' && messages[0].content.startsWith('Context:')) {
-      return messages.slice(1);
-    }
-    return messages;
-  }
-
   return (
     <>
+      <Helmet>
+        <title>Search Intent Tool | DeepThink AI</title>
+        <meta name="description" content="Analyze search intent behind keywords and topics with DeepThink AI's advanced Search Intent Tool. Get actionable insights for content optimization." />
+        <link rel="canonical" href="https://www.deepthinkai.app/search-intent-tool" />
+        <meta property="og:title" content="Search Intent Tool | DeepThink AI" />
+        <meta property="og:description" content="Analyze search intent behind keywords and topics with DeepThink AI's advanced Search Intent Tool. Get actionable insights for content optimization." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.deepthinkai.app/search-intent-tool" />
+        <meta property="og:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Search Intent Tool | DeepThink AI" />
+        <meta name="twitter:description" content="Analyze search intent behind keywords and topics with DeepThink AI's advanced Search Intent Tool. Get actionable insights for content optimization." />
+        <meta name="twitter:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:url" content="https://www.deepthinkai.app/search-intent-tool" />
+      </Helmet>
       <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: '100vh', background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)' }}>
         <Box sx={{ maxWidth: 700, mx: "auto", mt: 6, p: 2, position: "relative", minHeight: 400 }}>
@@ -117,7 +121,7 @@ const SearchIntentToolPage: React.FC = () => {
               </thead>
               <tbody>
                 <tr><td style={{ border: '1px solid #ccc', padding: 6 }}>Primary Intent</td><td style={{ border: '1px solid #ccc', padding: 6 }}>Informational/Transactional/etc.</td></tr>
-                <tr><td style={{ border: '1px solid #ccc', padding: 6 }}>H1 Search Intent Title</td><td style={{ border: '1px solid #ccc', padding: 6 }}>&quot;Best Running Shoes for Flat Feet: Top Picks &amp; Expert Tips (2024)&quot;</td></tr>
+                <tr><td style={{ border: '1px solid #ccc', padding: 6 }}>H1 Search Intent Title</td><td style={{ border: '1px solid #ccc', padding: 6 }}>&quot;Best Running Shoes for Flat Feet: Top Picks &amp; Expert Tips (2025)&quot;</td></tr>
                 <tr><td style={{ border: '1px solid #ccc', padding: 6 }}>Content Type &amp; Format</td><td style={{ border: '1px solid #ccc', padding: 6 }}>Comparison guide with pros/cons, expert reviews, and buyer's checklist<br/>Video embedded (try-on tests, comfort analysis)</td></tr>
                 <tr><td style={{ border: '1px solid #ccc', padding: 6 }}>User's Main Goal</td><td style={{ border: '1px solid #ccc', padding: 6 }}>Find supportive running shoes for flat arches</td></tr>
                 <tr><td style={{ border: '1px solid #ccc', padding: 6 }}>Key Expectations</td><td style={{ border: '1px solid #ccc', padding: 6 }}>Shoe recommendations with arch support<br/>Price ranges and durability comparisons</td></tr>
@@ -198,7 +202,6 @@ const SearchIntentToolPage: React.FC = () => {
                 Have follow-up questions or want to go deeper? Chat below:
               </Typography>
               <ChatInterface
-                messages={getVisibleChatMessages(chatMessages)}
                 onMessagesChange={setChatMessages}
                 model="auto"
                 onModelChange={() => {}}

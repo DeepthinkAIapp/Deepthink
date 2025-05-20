@@ -6,6 +6,7 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ChatInterface from './ChatInterface';
 import remarkGfm from 'remark-gfm';
 import { getApiUrl } from '../config';
+import { Helmet } from 'react-helmet-async';
 
 type Message = { role: 'user' | 'assistant' | 'system', content: string };
 
@@ -75,7 +76,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
       const response = await fetch(getApiUrl("/api/content-outline-subniches"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ main_niche: mainNiche }),
+        body: JSON.stringify({ main_niche: mainNiche, model: "mistral:latest" }),
         signal: abortController.current.signal,
       });
       if (!response.ok) throw new Error("Failed to get sub-niches");
@@ -128,7 +129,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
       const response = await fetch(getApiUrl("/api/content-outline-keywords"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sub_niche: subniche }),
+        body: JSON.stringify({ sub_niche: subniche, model: "mistral:latest" }),
         signal: abortController.current.signal,
       });
       if (!response.ok) throw new Error("Failed to get keyword ideas");
@@ -211,6 +212,21 @@ const ContentOutlineCreatorPage: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Content Outline Creator | DeepThink AI</title>
+        <meta name="description" content="Create detailed content outlines with DeepThink AI's Content Outline Creator. Generate SEO-optimized article structures for your niche." />
+        <link rel="canonical" href="https://www.deepthinkai.app/content-outline-creator" />
+        <meta property="og:title" content="Content Outline Creator | DeepThink AI" />
+        <meta property="og:description" content="Create detailed content outlines with DeepThink AI's Content Outline Creator. Generate SEO-optimized article structures for your niche." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.deepthinkai.app/content-outline-creator" />
+        <meta property="og:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Content Outline Creator | DeepThink AI" />
+        <meta name="twitter:description" content="Create detailed content outlines with DeepThink AI's Content Outline Creator. Generate SEO-optimized article structures for your niche." />
+        <meta name="twitter:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:url" content="https://www.deepthinkai.app/content-outline-creator" />
+      </Helmet>
       <Box sx={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: -1, backgroundImage: 'url(/images/android-chrome-512x512.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
       <Box sx={{ position: 'relative', zIndex: 1, minHeight: 0, background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.92)' : 'rgba(255,255,255,0.85)' }}>
         {loading && (
@@ -386,7 +402,6 @@ const ContentOutlineCreatorPage: React.FC = () => {
           {keywordTable && (
             <Box sx={{ mt: 4 }}>
               <ChatInterface
-                messages={getVisibleChatMessages(chatMessages)}
                 onMessagesChange={setChatMessages}
                 model="auto"
                 onModelChange={() => {}}

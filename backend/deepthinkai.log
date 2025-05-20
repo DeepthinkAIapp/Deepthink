@@ -32440,3 +32440,679 @@ fastapi.exceptions.RequestValidationError: [{'type': 'string_too_short', 'loc': 
 2025-05-20 00:35:13,611 [INFO] DeepThinkAI: Starting chat request 22d46f00-ce15-4b93-80a3-18a8bed66ab3 with model: gemma:7b
 2025-05-20 00:49:41,887 [INFO] DeepThinkAI: Starting chat request 3c6ed9d3-f8bf-4f59-a4d3-e3c2150cc60b with model: gemma:7b
 2025-05-20 00:49:52,736 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:19:44,066 [INFO] DeepThinkAI: Starting chat request ac7baf53-2124-43f8-95a6-444eabb7aea6 with model: gemma:7b
+2025-05-20 01:19:54,431 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:20:45,789 [INFO] DeepThinkAI: Starting guest post outreach request 58a52f14-deb4-4e44-93ca-47b920f92123 for niche: Marathons
+2025-05-20 01:20:46,213 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:20:59,900 [INFO] DeepThinkAI: Starting monetization plan request f3669a28-1fa2-4834-8106-fb63484b293e for niche: marathons
+2025-05-20 01:21:00,325 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:29:14,775 [INFO] DeepThinkAI: Starting chat request ff3d775f-7b9e-497a-bffd-974566b1063d with model: gemma:7b
+2025-05-20 01:29:21,775 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:29:32,138 [INFO] DeepThinkAI: Starting guest post outreach request 31fbc869-3a91-494e-a14f-201f27b5452b for niche: Marathons
+2025-05-20 01:29:32,576 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:30:39,810 [INFO] DeepThinkAI: Request b9a3994f-f3ca-4819-b409-60538e9c108b: Received subniche/content ideas request
+2025-05-20 01:30:39,812 [INFO] DeepThinkAI: Request b9a3994f-f3ca-4819-b409-60538e9c108b: Using model auto
+2025-05-20 01:30:40,235 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:30:40,235 [ERROR] DeepThinkAI: Request b9a3994f-f3ca-4819-b409-60538e9c108b: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 01:30:40,237 [ERROR] DeepThinkAI: Request b9a3994f-f3ca-4819-b409-60538e9c108b: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1223, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 01:30:53,780 [INFO] DeepThinkAI: Starting monetization plan request 3c7a4db0-eaa4-4820-a7f9-603dec6d2f6f for niche: marathon
+2025-05-20 01:30:54,217 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:31:03,090 [INFO] DeepThinkAI: Starting monetization plan request 55146998-fb49-4e37-a27e-40b4ada484de for niche: marathon
+2025-05-20 01:31:03,527 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:32:12,107 [INFO] DeepThinkAI: Starting chat request b7bcd396-ba04-4065-85f1-84173aa01ef2 with model: gemma:7b
+2025-05-20 01:32:15,344 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:38:46,871 [INFO] DeepThinkAI: Request 2f8f0e8f-b39c-4fd0-bbdb-41fd6ea4e1c7: Received subniche/content ideas request
+2025-05-20 01:38:46,872 [INFO] DeepThinkAI: Request 2f8f0e8f-b39c-4fd0-bbdb-41fd6ea4e1c7: Using model auto
+2025-05-20 01:38:47,292 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:38:47,293 [ERROR] DeepThinkAI: Request 2f8f0e8f-b39c-4fd0-bbdb-41fd6ea4e1c7: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 01:38:47,294 [ERROR] DeepThinkAI: Request 2f8f0e8f-b39c-4fd0-bbdb-41fd6ea4e1c7: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1223, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 01:38:49,971 [INFO] DeepThinkAI: Request c68d05c8-98d7-4e61-8ddb-2495ef4a31fe: Received subniche/content ideas request
+2025-05-20 01:38:49,972 [INFO] DeepThinkAI: Request c68d05c8-98d7-4e61-8ddb-2495ef4a31fe: Using model auto
+2025-05-20 01:38:50,395 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:38:50,395 [ERROR] DeepThinkAI: Request c68d05c8-98d7-4e61-8ddb-2495ef4a31fe: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 01:38:50,396 [ERROR] DeepThinkAI: Request c68d05c8-98d7-4e61-8ddb-2495ef4a31fe: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1223, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 01:39:04,201 [INFO] DeepThinkAI: Starting monetization plan request d6134954-c530-43a7-92ec-9a0f1d02c78c for niche: marathon
+2025-05-20 01:39:04,633 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:39:15,687 [INFO] DeepThinkAI: Starting monetization plan request d532c7ad-202e-4003-97e3-6e5d71495852 for niche: marathon
+2025-05-20 01:39:16,125 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 01:39:51,306 [INFO] DeepThinkAI: Starting chat request 082c33fc-7890-4ee1-ac03-095ebc8aa37b with model: gemma:7b
+2025-05-20 01:39:58,326 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:40:08,948 [INFO] DeepThinkAI: Starting search intent analysis request d0cc064a-9344-4939-8d6f-953f47ae30f0 for keyword: marathon runners
+2025-05-20 01:41:28,604 [INFO] DeepThinkAI: Starting search intent analysis request 2f4a9e45-d37c-49a0-bf0c-785ef0e3f248 for keyword: Marathon shoes
+2025-05-20 01:42:14,953 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:44:15,264 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:52:14,794 [INFO] DeepThinkAI: Starting chat request e7724f82-322a-4985-820f-2ffaf00adce4 with model: gemma:7b
+2025-05-20 01:52:23,263 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:54:01,437 [INFO] DeepThinkAI: Starting chat request a0590b00-ca84-48e4-9025-ece5f3fe30b1 with model: gemma:7b
+2025-05-20 01:54:05,201 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:56:22,799 [INFO] DeepThinkAI: Starting chat request f1c54eda-4855-4b37-b47a-27dcaa53c2a4 with model: gemma:7b
+2025-05-20 01:56:24,905 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 01:57:11,842 [INFO] DeepThinkAI: Starting chat request ea44788b-8a7b-46d7-b088-8bc42c47fb03 with model: gemma:7b
+2025-05-20 01:57:14,118 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:16:01,466 [INFO] DeepThinkAI: Starting chat request 0c66571f-7056-43a8-ac65-18f70e86b3e8 with model: gemma:7b
+2025-05-20 02:16:08,587 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:38:10,904 [INFO] DeepThinkAI: Starting chat request 8cddc19a-cdc0-4437-a8dd-2c3b632bb5e7 with model: gemma:7b
+2025-05-20 02:38:17,518 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:43:14,854 [INFO] DeepThinkAI: Starting chat request 2f39fc53-1242-4c10-b3a4-95bec86df884 with model: gemma:7b
+2025-05-20 02:43:15,648 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:43:46,224 [INFO] DeepThinkAI: Starting chat request c1194320-a283-4b42-9720-ea5bd2dc615a with model: gemma:7b
+2025-05-20 02:43:46,871 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:45:11,514 [INFO] DeepThinkAI: Starting chat request 05a92021-e27d-4a9d-8d4e-b6599f4b419e with model: gemma:7b
+2025-05-20 02:45:15,163 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:45:36,054 [INFO] DeepThinkAI: Starting chat request 5fb8fc94-2071-48bd-99fe-5a801b415431 with model: gemma:7b
+2025-05-20 02:46:47,283 [INFO] DeepThinkAI: Starting chat request 7eaf588e-6b2a-4c80-9641-de5792e94bb9 with model: gemma:7b
+2025-05-20 02:46:49,380 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:53:59,874 [INFO] DeepThinkAI: Starting chat request 40d5fd99-019a-452c-81e5-45a5dda9e827 with model: gemma:7b
+2025-05-20 02:54:07,477 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:57:48,371 [INFO] DeepThinkAI: Starting chat request 02554a87-e328-453e-995b-5e99f067e3b5 with model: gemma:7b
+2025-05-20 02:57:49,095 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:57:53,463 [INFO] DeepThinkAI: Starting chat request abfe71eb-d981-4d8a-8b3f-0df1fea4ef84 with model: gemma:7b
+2025-05-20 02:57:59,488 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 02:58:21,493 [INFO] DeepThinkAI: Starting chat request b44ecf83-bec8-403e-b4b3-af158b32c988 with model: gemma:7b
+2025-05-20 02:58:22,140 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 03:01:09,898 [INFO] DeepThinkAI: Starting chat request 7fcd3879-3c4a-46fc-8b32-5d384cbc00a7 with model: gemma:7b
+2025-05-20 03:01:15,785 [INFO] DeepThinkAI: Starting chat request cb7123a6-97d9-4592-886e-419b44c4aa45 with model: gemma:7b
+2025-05-20 03:01:16,327 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 03:01:28,274 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 03:06:41,755 [INFO] DeepThinkAI: Starting chat request 82e6b6ce-a57a-4e5b-9fea-7cb6a5e05c3c with model: gemma:7b
+2025-05-20 03:06:48,675 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 03:16:10,198 [INFO] DeepThinkAI: Starting chat request 82676f01-a5ff-4ce7-9573-a807c6cbe0c3 with model: gemma:7b
+2025-05-20 03:16:16,284 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 03:16:28,098 [INFO] DeepThinkAI: Starting chat request d2fb8350-feb6-4d0f-9e01-0a0dad180d9a with model: gemma:7b
+2025-05-20 03:16:28,792 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 03:20:09,028 [INFO] DeepThinkAI: Starting guest post outreach request f98f335b-649a-4ffa-8156-322a54bd6e65 for niche: marathon
+2025-05-20 03:20:09,470 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 03:20:36,667 [INFO] DeepThinkAI: Starting guest post outreach request 3fb79c8c-b6a7-47ee-963b-2a650507b27e for niche: marathon
+2025-05-20 03:20:37,121 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 03:21:15,515 [INFO] DeepThinkAI: Starting guest post outreach request 501a3f1c-708d-4929-9c70-b56d352c9067 for niche: marathon
+2025-05-20 03:21:15,937 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 03:30:53,093 [INFO] DeepThinkAI: Starting guest post outreach request 257e6a40-d343-421f-ab12-9a5953862081 for niche: fitness
+2025-05-20 03:30:53,517 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 03:36:12,793 [INFO] DeepThinkAI: Starting guest post outreach request 818dcbdd-7fb3-455e-b8e4-e05758833798 for niche: fitness
+2025-05-20 03:36:13,244 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 03:37:17,961 [INFO] DeepThinkAI: Starting guest post outreach request 43c74ea0-8b39-4fc7-a2df-2f999d2a5f5b for niche: fitness
+2025-05-20 03:37:18,474 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 04:04:33,507 [INFO] DeepThinkAI: Starting chat request 335beb7c-363e-43df-81ae-80960ebb9a2e with model: gemma:7b
+2025-05-20 04:04:41,219 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 04:04:54,678 [INFO] DeepThinkAI: Starting chat request c9b797e3-9b7a-4ccc-9024-aea1e9cd2e9b with model: gemma:7b
+2025-05-20 04:28:48,625 [INFO] DeepThinkAI: Starting guest post outreach request 6af80999-f5ee-4efc-960c-84079a4ee12c for niche: marathon
+2025-05-20 04:28:49,113 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 04:29:13,586 [INFO] DeepThinkAI: Starting chat request aa1e02a7-c276-4e3f-83f8-87eacbe52885 with model: gemma:7b
+2025-05-20 04:29:20,271 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 05:02:14,116 [INFO] DeepThinkAI: Starting monetization plan request d19cfc65-d5dd-4b01-a5e6-14641aa6ee1f for niche: marathon
+2025-05-20 05:02:14,644 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:15:55,222 [INFO] DeepThinkAI: Starting chat request 764ad4b9-782a-4a57-b2f1-2629efefb7be with model: gemma:7b
+2025-05-20 05:16:05,525 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 05:17:20,237 [INFO] DeepThinkAI: Starting chat request 4954ece4-b40d-4b27-822e-8c912a450c77 with model: gemma:7b
+2025-05-20 05:17:24,018 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 05:17:37,896 [INFO] DeepThinkAI: Starting chat request e03a296c-bfef-458a-9403-b46b14f15f85 with model: gemma:7b
+2025-05-20 05:18:02,874 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 05:18:13,403 [INFO] DeepThinkAI: Starting chat request 21d06db2-26be-4cb1-a717-654623ecd00e with model: gemma:7b
+2025-05-20 05:19:00,573 [INFO] DeepThinkAI: Starting monetization plan request 3f3c08cf-dc8d-4dcd-955f-8aafd0ce4076 for niche: marathon
+2025-05-20 05:19:01,197 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:19:22,320 [INFO] DeepThinkAI: Starting monetization plan request cf4add3a-99d5-4104-aabc-ecf31f905f6f for niche: marathon
+2025-05-20 05:19:22,780 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:20:40,374 [INFO] DeepThinkAI: Starting monetization plan request 79c5f695-ad04-42ec-8893-9f5bce7ecf99 for niche: marathon
+2025-05-20 05:20:40,839 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:39:24,459 [ERROR] DeepThinkAI: Validation error: [{'type': 'missing', 'loc': ('body', 'niche'), 'msg': 'Field required', 'input': {'domain': 'microsoft.com'}}]
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 346, in app
+    raise validation_error
+fastapi.exceptions.RequestValidationError: [{'type': 'missing', 'loc': ('body', 'niche'), 'msg': 'Field required', 'input': {'domain': 'microsoft.com'}}]
+2025-05-20 05:42:04,598 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 05:42:31,687 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 05:43:07,800 [INFO] DeepThinkAI: Request 1917a9c7-6909-4dbc-8fcd-d85dfd15699b: Received subniche/content ideas request
+2025-05-20 05:43:07,801 [INFO] DeepThinkAI: Request 1917a9c7-6909-4dbc-8fcd-d85dfd15699b: Using model auto
+2025-05-20 05:43:08,292 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:43:08,294 [ERROR] DeepThinkAI: Request 1917a9c7-6909-4dbc-8fcd-d85dfd15699b: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:43:08,295 [ERROR] DeepThinkAI: Request 1917a9c7-6909-4dbc-8fcd-d85dfd15699b: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1223, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:45:34,976 [INFO] DeepThinkAI: Request 386ffb78-300c-421a-be62-df0ccfc02d4a: Received subniche/content ideas request
+2025-05-20 05:45:34,978 [INFO] DeepThinkAI: Request 386ffb78-300c-421a-be62-df0ccfc02d4a: Using model auto
+2025-05-20 05:45:35,426 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:45:35,427 [ERROR] DeepThinkAI: Request 386ffb78-300c-421a-be62-df0ccfc02d4a: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:45:35,428 [ERROR] DeepThinkAI: Request 386ffb78-300c-421a-be62-df0ccfc02d4a: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1224, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:46:01,145 [INFO] DeepThinkAI: Starting guest post outreach request 4d41124d-ab94-4b90-b6f2-be6dba0f080c for niche: tax guides
+2025-05-20 05:46:01,602 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:46:55,333 [ERROR] DeepThinkAI: Validation error: [{'type': 'missing', 'loc': ('body', 'niche'), 'msg': 'Field required', 'input': {'domain': 'microsoft.com'}}, {'type': 'missing', 'loc': ('body', 'prompt'), 'msg': 'Field required', 'input': {'domain': 'microsoft.com'}}]
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 346, in app
+    raise validation_error
+fastapi.exceptions.RequestValidationError: [{'type': 'missing', 'loc': ('body', 'niche'), 'msg': 'Field required', 'input': {'domain': 'microsoft.com'}}, {'type': 'missing', 'loc': ('body', 'prompt'), 'msg': 'Field required', 'input': {'domain': 'microsoft.com'}}]
+2025-05-20 05:49:25,778 [INFO] DeepThinkAI: Starting guest post outreach request 3b5d7da1-9b52-41de-bc94-5f916a607aeb for niche: tax guides
+2025-05-20 05:49:26,236 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:49:34,846 [INFO] DeepThinkAI: Request e72841f0-c8eb-4683-9fc2-f045e58b0a94: Received subniche/content ideas request
+2025-05-20 05:49:34,848 [INFO] DeepThinkAI: Request e72841f0-c8eb-4683-9fc2-f045e58b0a94: Using model auto
+2025-05-20 05:49:35,301 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:49:35,302 [ERROR] DeepThinkAI: Request e72841f0-c8eb-4683-9fc2-f045e58b0a94: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:49:35,303 [ERROR] DeepThinkAI: Request e72841f0-c8eb-4683-9fc2-f045e58b0a94: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1224, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:49:51,025 [INFO] DeepThinkAI: Request d64865cf-6733-413c-b1de-b009a72c25a3: Received subniche/content ideas request
+2025-05-20 05:49:51,026 [INFO] DeepThinkAI: Request d64865cf-6733-413c-b1de-b009a72c25a3: Using model auto
+2025-05-20 05:49:51,447 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:49:51,447 [ERROR] DeepThinkAI: Request d64865cf-6733-413c-b1de-b009a72c25a3: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:49:51,448 [ERROR] DeepThinkAI: Request d64865cf-6733-413c-b1de-b009a72c25a3: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1224, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:51:54,483 [INFO] DeepThinkAI: Request 42f2a6b3-3d43-4aee-84ad-b720a4ed2d07: Received subniche/content ideas request
+2025-05-20 05:51:54,485 [INFO] DeepThinkAI: Request 42f2a6b3-3d43-4aee-84ad-b720a4ed2d07: Using model auto
+2025-05-20 05:51:54,933 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:51:54,933 [ERROR] DeepThinkAI: Request 42f2a6b3-3d43-4aee-84ad-b720a4ed2d07: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:51:54,935 [ERROR] DeepThinkAI: Request 42f2a6b3-3d43-4aee-84ad-b720a4ed2d07: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1224, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:56:10,604 [INFO] DeepThinkAI: Request e26d1692-ba27-4b72-9f4f-501fc7bec61b: Received subniche/content ideas request
+2025-05-20 05:56:10,605 [INFO] DeepThinkAI: Request e26d1692-ba27-4b72-9f4f-501fc7bec61b: Using model auto
+2025-05-20 05:56:11,161 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:56:11,162 [ERROR] DeepThinkAI: Request e26d1692-ba27-4b72-9f4f-501fc7bec61b: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:56:11,162 [ERROR] DeepThinkAI: Request e26d1692-ba27-4b72-9f4f-501fc7bec61b: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1224, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:56:30,463 [INFO] DeepThinkAI: Request f27ef149-507e-48c8-960b-6a3d654ebc3d: Received subniche/content ideas request
+2025-05-20 05:56:30,464 [INFO] DeepThinkAI: Request f27ef149-507e-48c8-960b-6a3d654ebc3d: Using model auto
+2025-05-20 05:56:30,911 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 05:56:30,911 [ERROR] DeepThinkAI: Request f27ef149-507e-48c8-960b-6a3d654ebc3d: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:56:30,913 [ERROR] DeepThinkAI: Request f27ef149-507e-48c8-960b-6a3d654ebc3d: Error in subniche/content ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1224, in content_outline_subniches
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 05:58:31,614 [INFO] DeepThinkAI: Request 7c98d420-8fa2-448c-863c-68c900e718b1: Received subniche/content ideas request
+2025-05-20 05:58:31,615 [INFO] DeepThinkAI: Request 7c98d420-8fa2-448c-863c-68c900e718b1: Using model phi4:latest
+2025-05-20 05:59:32,028 [ERROR] DeepThinkAI: Request 7c98d420-8fa2-448c-863c-68c900e718b1: Error in subniche/content ideas: 
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1209, in content_outline_subniches
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-05-20 06:02:27,661 [INFO] DeepThinkAI: Request 71438d64-2549-49de-8e49-50ba45a3d3d1: Received subniche/content ideas request
+2025-05-20 06:02:27,663 [INFO] DeepThinkAI: Request 71438d64-2549-49de-8e49-50ba45a3d3d1: Using model phi4:latest
+2025-05-20 06:03:28,237 [ERROR] DeepThinkAI: Request 71438d64-2549-49de-8e49-50ba45a3d3d1: Error in subniche/content ideas: 
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1212, in content_outline_subniches
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-05-20 06:05:14,086 [INFO] DeepThinkAI: Request 6d93989f-da00-4799-9613-87b04b38c8c7: Received subniche/content ideas request
+2025-05-20 06:05:14,087 [INFO] DeepThinkAI: Request 6d93989f-da00-4799-9613-87b04b38c8c7: Using model phi4:latest
+2025-05-20 06:07:14,497 [ERROR] DeepThinkAI: Request 6d93989f-da00-4799-9613-87b04b38c8c7: Timeout while waiting for model response
+2025-05-20 06:07:14,498 [ERROR] DeepThinkAI: Request 6d93989f-da00-4799-9613-87b04b38c8c7: Error in subniche/content ideas: 504: The request took too long to process. Please try again with a simpler prompt or different model.
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1212, in content_outline_subniches
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1305, in content_outline_subniches
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 504: The request took too long to process. Please try again with a simpler prompt or different model.
+2025-05-20 06:08:32,003 [INFO] DeepThinkAI: Request 2950208d-7f43-428f-9af3-fb6eb7620c67: Received subniche/content ideas request
+2025-05-20 06:08:32,004 [INFO] DeepThinkAI: Request 2950208d-7f43-428f-9af3-fb6eb7620c67: Using model mistral:latest
+2025-05-20 06:10:21,409 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 06:10:26,867 [INFO] DeepThinkAI: Request 5f7fb109-f78c-4ab7-92f5-29005583e01e: Received keyword/article ideas request
+2025-05-20 06:10:26,869 [INFO] DeepThinkAI: Request 5f7fb109-f78c-4ab7-92f5-29005583e01e: Using model auto
+2025-05-20 06:10:27,406 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 06:10:27,407 [ERROR] DeepThinkAI: Request 5f7fb109-f78c-4ab7-92f5-29005583e01e: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 06:10:27,407 [ERROR] DeepThinkAI: Request 5f7fb109-f78c-4ab7-92f5-29005583e01e: Error in keyword/article ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1928, in content_outline_keywords
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 06:12:36,069 [INFO] DeepThinkAI: Starting chat request 01638da5-59ce-4865-9c91-8d73f51acc41 with model: gemma:7b
+2025-05-20 06:12:51,299 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 06:14:34,503 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 06:15:50,908 [INFO] DeepThinkAI: Request 44150dc9-a4c3-450a-b6e0-080fe3c71ee8: Received subniche/content ideas request
+2025-05-20 06:15:50,909 [INFO] DeepThinkAI: Request 44150dc9-a4c3-450a-b6e0-080fe3c71ee8: Using model mistral:latest
+2025-05-20 06:17:33,189 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 06:17:36,130 [INFO] DeepThinkAI: Request 9e98d4d8-1056-4352-98d6-4cdab42b9dda: Received keyword/article ideas request
+2025-05-20 06:17:36,131 [INFO] DeepThinkAI: Request 9e98d4d8-1056-4352-98d6-4cdab42b9dda: Using model auto
+2025-05-20 06:17:36,560 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 06:17:36,561 [ERROR] DeepThinkAI: Request 9e98d4d8-1056-4352-98d6-4cdab42b9dda: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 06:17:36,562 [ERROR] DeepThinkAI: Request 9e98d4d8-1056-4352-98d6-4cdab42b9dda: Error in keyword/article ideas: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1928, in content_outline_keywords
+    raise HTTPException(status_code=500, detail=error_msg)
+fastapi.exceptions.HTTPException: 500: Model API error: 404 - {"error":"model \"auto\" not found, try pulling it first"}
+2025-05-20 06:20:02,221 [INFO] DeepThinkAI: Request e27747a6-50b3-420c-8cd2-824255bfee6c: Received keyword/article ideas request
+2025-05-20 06:20:02,223 [INFO] DeepThinkAI: Request e27747a6-50b3-420c-8cd2-824255bfee6c: Using model mistral:latest
+2025-05-20 06:21:02,684 [ERROR] DeepThinkAI: Request e27747a6-50b3-420c-8cd2-824255bfee6c: Error in keyword/article ideas: 
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1911, in content_outline_keywords
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-05-20 06:22:38,777 [INFO] DeepThinkAI: Request 772844db-cb41-495a-8d39-2c1af9088b6c: Received keyword/article ideas request
+2025-05-20 06:22:38,779 [INFO] DeepThinkAI: Request 772844db-cb41-495a-8d39-2c1af9088b6c: Using model mistral:latest
+2025-05-20 06:24:39,243 [ERROR] DeepThinkAI: Request 772844db-cb41-495a-8d39-2c1af9088b6c: Timeout while waiting for model response
+2025-05-20 06:24:39,244 [ERROR] DeepThinkAI: Request 772844db-cb41-495a-8d39-2c1af9088b6c: Error in keyword/article ideas: 504: The request took too long to process. Please try again with a simpler prompt or different model.
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1912, in content_outline_keywords
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1958, in content_outline_keywords
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 504: The request took too long to process. Please try again with a simpler prompt or different model.
+2025-05-20 06:25:15,003 [INFO] DeepThinkAI: Request 03098a74-fbf1-41b7-acee-5a8616f0a0f0: Received keyword/article ideas request
+2025-05-20 06:25:15,005 [INFO] DeepThinkAI: Request 03098a74-fbf1-41b7-acee-5a8616f0a0f0: Using model mistral:latest
+2025-05-20 06:27:15,566 [ERROR] DeepThinkAI: Request 03098a74-fbf1-41b7-acee-5a8616f0a0f0: Timeout while waiting for model response
+2025-05-20 06:27:15,567 [ERROR] DeepThinkAI: Request 03098a74-fbf1-41b7-acee-5a8616f0a0f0: Error in keyword/article ideas: 504: The request took too long to process. Please try again with a simpler prompt or different model.
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1912, in content_outline_keywords
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1958, in content_outline_keywords
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 504: The request took too long to process. Please try again with a simpler prompt or different model.
+2025-05-20 06:30:13,877 [INFO] DeepThinkAI: Request e917936c-d7cf-4601-9dda-88aa3eebf4d0: Received keyword/article ideas request
+2025-05-20 06:30:13,879 [INFO] DeepThinkAI: Request e917936c-d7cf-4601-9dda-88aa3eebf4d0: Using model mistral:latest
+2025-05-20 06:33:15,347 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 06:34:23,152 [INFO] DeepThinkAI: Starting chat request 43e4ee02-f955-4f4e-be30-8f4f87deada0 with model: auto
+2025-05-20 06:34:23,153 [INFO] DeepThinkAI: Auto-selected model: auto
+2025-05-20 06:34:23,589 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 06:35:33,979 [INFO] DeepThinkAI: Starting search intent analysis request 088eb644-87af-4495-9c32-dacbc3c65232 for keyword: how to grow tomatoes
+2025-05-20 06:35:37,124 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"

@@ -4,28 +4,28 @@ import { Link } from 'react-router-dom';
 const Menu = () => (
     <List>
         <MenuItem>
-            <Link to="/monetization-planner">Monetization Planner</Link>
+            <Link to="/monetization-planner" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Monetization Planner</Link>
         </MenuItem>
         <MenuItem>
-            <Link to="/guestpost-outreach">Guest Post Outreach</Link>
+            <Link to="/guestpost-outreach" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Guest Post Outreach</Link>
         </MenuItem>
         <MenuItem>
-            <Link to="/search-intent-tool">Search Intent Tool</Link>
+            <Link to="/search-intent-tool" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Search Intent Tool</Link>
         </MenuItem>
         <MenuItem>
-            <Link to="/image-generator">Image Generator</Link>
+            <Link to="/image-generator" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Image Generator</Link>
         </MenuItem>
         <MenuItem>
-            <Link to="/content-outline-creator">Content Creator Machine</Link>
+            <Link to="/content-outline-creator" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Content Creator Machine</Link>
         </MenuItem>
         <MenuItem>
-            <Link to="/affiliate-article-ideas">Affiliate Article Ideas</Link>
+            <Link to="/affiliate-article-ideas" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Affiliate Article Ideas</Link>
         </MenuItem>
         <MenuItem>
-            <Link to="/youtube-content-planner">YouTube Content Planner</Link>
+            <Link to="/youtube-content-planner" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>YouTube Content Planner</Link>
         </MenuItem>
         <MenuItem>
-            <Link to="/blog">Blog</Link>
+            <Link to="/blog" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Blog</Link>
         </MenuItem>
     </List>
 );

@@ -18,7 +18,6 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { getApiUrl, API_CONFIG } from '../config'
 import { useTheme } from '@mui/material/styles'
 import ModelSelector from './ModelSelector'
-import DataIngestion from './DataIngestion'
 import SearchIcon from '@mui/icons-material/Search'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import { v4 as uuidv4 } from 'uuid'
@@ -51,7 +50,28 @@ interface IngestedData {
 const MAX_INPUT_LENGTH = 8000;
 const CUSTOM_INSTRUCTIONS_KEY = 'deepthinkai_custom_instructions';
 const CUSTOM_INSTRUCTIONS_TOGGLE_KEY = 'deepthinkai_custom_instructions_enabled';
-const RAG_BACKEND_URL = 'http://localhost:8001';
+
+// Ollama models and descriptions
+const OLLAMA_MODELS = [
+  { value: 'llama3.1:latest', label: 'Llama 3.1', description: 'Fast and instructional (great for most tasks)' },
+  { value: 'llama3.2-vision:latest', label: 'Llama 3.2 Vision', description: 'Advanced vision model with better image understanding' },
+  { value: 'phi4:latest', label: 'Phi-4', description: 'Best for complex reasoning and detailed analysis' },
+  { value: 'mistral:latest', label: 'Mistral', description: 'Handles long context and big inputs' },
+  { value: 'gemma:7b', label: 'Gemma 7B', description: 'General purpose, balanced performance' },
+  { value: 'gemma3:latest', label: 'Gemma 3', description: 'Latest Gemma model, good for general tasks' },
+  { value: 'gemma3:12b', label: 'Gemma 3 12B', description: 'Larger Gemma model for more complex tasks' },
+  { value: 'llava:latest', label: 'LLaVA', description: 'Vision model for basic image understanding' },
+  { value: 'bakllava:latest', label: 'BakLLaVA', description: 'Enhanced vision model with better accuracy' },
+  { value: 'codellama:latest', label: 'CodeLlama', description: 'Specialized for code generation and analysis' },
+  { value: 'llama2-uncensored:latest', label: 'Llama 2 Uncensored', description: 'Unfiltered responses for creative tasks' },
+  { value: 'deepseek-r1:latest', label: 'DeepSeek R1', description: 'Advanced reasoning and problem-solving' },
+];
+
+// Helper to get model description
+const getModelDescription = (model: string) => {
+  const found = OLLAMA_MODELS.find(m => m.value === model);
+  return found ? found.description : '';
+};
 
 function stripThinkBlocks(text: string) {
   // Remove all <think>...</think> blocks
@@ -92,6 +112,16 @@ function gravatarUrl(email: string, size = 64) {
   return `https://www.gravatar.com/avatar/${hash}?s=${size}&d=identicon`;
 }
 
+// Enhanced smart selection for 'auto' model
+const selectSmartModel = (input: string, hasCustomInstructions: boolean, hasImage: boolean): string => {
+  if (hasImage) return 'minigpt4:latest'; // Using MiniGPT-4 for best image analysis
+  if (input.length > 1500) return 'mistral:latest';
+  if (hasCustomInstructions) return 'llama3.1:latest';
+  if (/reason|logic|explain|why|how|analyze|step|thought|chain|math|solve/i.test(input)) return 'phi4:latest';
+  if (/code|program|function|class|algorithm|debug|implement|develop|software|api|database/i.test(input)) return 'codellama:latest';
+  return 'llama3.1:latest'; // Default fast and instructional
+};
+
 function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, onLoadingChange }: ChatInterfaceProps) {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -101,9 +131,6 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const theme = useTheme();
-  const [showDataIngestion, setShowDataIngestion] = useState(false);
-  const [ingestedData, setIngestedData] = useState<IngestedData | null>(null);
-  const [fileIngestStatus, setFileIngestStatus] = useState<string | null>(null);
   const [chatHistories, setChatHistories] = useState<{ [id: string]: Message[] }>({});
   const [currentConversationId, setCurrentConversationId] = useState<string>(() => uuidv4());
   const [messages, setMessages] = useState<Message[]>([]);
@@ -119,42 +146,6 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
   useEffect(() => {
     console.log('ChatInterface messages prop:', messages);
   }, [messages]);
-
-  // Handle image or file selection
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const ext = file.name.split('.').pop()?.toLowerCase();
-    if (ext === 'txt' || ext === 'md') {
-      // Ingest text/markdown file to RAG backend using FormData
-      setFileIngestStatus(null);
-      const formData = new FormData();
-      formData.append('file', file);
-      fetch(`${RAG_BACKEND_URL}/ingest`, {
-        method: 'POST',
-        body: formData,
-      })
-        .then(async (res) => {
-          if (!res.ok) throw new Error('Failed to ingest file');
-          setFileIngestStatus('File ingested into knowledge base!');
-        })
-        .catch(() => {
-          setFileIngestStatus('Failed to ingest file.');
-        });
-      return;
-    }
-    // Otherwise, treat as image
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      const imageData = ev.target?.result as string;
-      setAttachedImage(imageData);
-      // Auto-select MiniGPT-4 when an image is attached
-      if (model !== 'minigpt4:latest') {
-        onModelChange('minigpt4:latest');
-      }
-    };
-    reader.readAsDataURL(file);
-  };
 
   const handleSubmit = async (e: React.FormEvent, customMessages?: Message[]) => {
     e.preventDefault()
@@ -193,38 +184,6 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
       } catch {}
     }
 
-    // --- RAG: Retrieve context and prepend to prompt ---
-    let ragContext = '';
-    if (
-      input && input.trim().length > 0 &&
-      model !== 'minigpt4:latest' &&
-      model !== 'llava:latest'
-    ) {
-      try {
-        const ragRes = await fetch(`${RAG_BACKEND_URL}/search?q=${encodeURIComponent(input)}`);
-        if (ragRes.ok) {
-          const ragData = await ragRes.json();
-          if (ragData.documents && ragData.documents.length > 0) {
-            ragContext = ragData.documents.map((doc: string, i: number) => {
-              const meta = ragData.metadatas[i];
-              return `Source: ${meta.title}\n${doc}`;
-            }).join('\n\n');
-          }
-        }
-      } catch (err) {
-        // If RAG fails, continue without context
-        console.warn('RAG context fetch failed:', err);
-      }
-    }
-    if (ragContext) {
-      // Prepend as a system message
-      newMessages = [
-        { role: 'system', content: `Use the following context to answer the question.\n${ragContext}` },
-        ...newMessages
-      ];
-    }
-    // --- END RAG ---
-
     setMessages([...messages, ...newMessages]);
     onMessagesChange([...messages, ...newMessages]);
     setIsLoading(true);
@@ -233,11 +192,13 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
       onTitleChange(input.slice(0, 40) + (input.length > 40 ? '...' : ''))
     }
 
-    // If model is 'auto' and prompt is very long, auto-select 'mistral:latest' for best results
+    // SMART MODEL SELECTION
     let usedModel = model;
-    if (input.length > 1500 && model === 'auto') {
+    if (model === 'auto') {
+      usedModel = selectSmartModel(input, shouldInjectInstructions, !!attachedImage);
+      onModelChange(usedModel);
+    } else if (input.length > 1500 && model === 'mistral:latest') {
       usedModel = 'mistral:latest';
-      onModelChange('mistral:latest');
     }
 
     // Prepare payload
@@ -488,26 +449,6 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
     } catch {}
   }, [model]);
 
-  const handleDataIngested = (data: IngestedData) => {
-    setIngestedData(data);
-    // Add the ingested data as a system message
-    const systemMessage: Message = {
-      role: 'system',
-      content: `Here is information from ${data.source} about "${data.title}":\n\n${data.content}\n\nPlease use this information to provide more accurate and detailed responses.`
-    };
-    setMessages([...messages, systemMessage]);
-    onMessagesChange([...messages, systemMessage]);
-  };
-
-  // When switching conversations, save current and load new
-  const switchConversation = (conversationId: string) => {
-    setChatHistories(prev => ({ ...prev, [currentConversationId]: messages }));
-    setMessages(chatHistories[conversationId] || []);
-    setCurrentConversationId(conversationId);
-    setAttachedImage(null);
-    setInput('');
-  };
-
   // When starting a new chat
   const startNewChat = () => {
     const newId = uuidv4();
@@ -557,11 +498,8 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
         flexDirection: 'column',
         gap: 2,
         bgcolor: 'transparent',
-        background: 'linear-gradient(to bottom, #2196f3 0%, #ffffff 100%)',
+        background: 'linear-gradient(to bottom, #ff6600 0%, #ffffff 100%)',
       }}>
-        <Collapse in={showDataIngestion}>
-          <DataIngestion onDataIngested={handleDataIngested} />
-        </Collapse>
         
         {messages.map((msg, index) => (
           <Box
@@ -674,12 +612,9 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
       >
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
           <ModelSelector model={model} onModelChange={onModelChange} />
-          <IconButton
-            onClick={() => setShowDataIngestion(!showDataIngestion)}
-            title={showDataIngestion ? "Hide Knowledge Base Search" : "Show Knowledge Base Search"}
-          >
-            <SearchIcon />
-          </IconButton>
+          <Typography variant="caption" sx={{ color: 'text.secondary', ml: 2, fontStyle: 'italic' }}>
+            {getModelDescription(model)}
+          </Typography>
         </Box>
         <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-end' }}>
           {/* Image preview */}
@@ -738,20 +673,6 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
               {input.length} / {MAX_INPUT_LENGTH} characters
             </Typography>
           </Box>
-          {/* Image attachment button */}
-          <input
-            accept="image/*"
-            style={{ display: 'none' }}
-            id="image-upload"
-            type="file"
-            onChange={handleImageChange}
-            title="Upload image"
-          />
-          <label htmlFor="image-upload">
-            <IconButton aria-label="Attach file" component="span" sx={{ mb: 0.5 }}>
-              <AttachFileIcon />
-            </IconButton>
-          </label>
           {isLoading ? (
             <IconButton 
               color="error" 
@@ -814,13 +735,6 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
           )}
         </Box>
       </Box>
-      {fileIngestStatus && (
-        <Box sx={{ mt: 1 }}>
-          <Typography variant="caption" color={fileIngestStatus.includes('Failed') ? 'error' : 'success.main'}>
-            {fileIngestStatus}
-          </Typography>
-        </Box>
-      )}
     </Box>
   )
 }

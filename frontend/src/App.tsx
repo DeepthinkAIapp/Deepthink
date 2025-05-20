@@ -13,7 +13,7 @@ import GuestPostOutreachPage from './components/GuestPostOutreachPage';
 import SearchIntentToolPage from './components/SearchIntentToolPage';
 import DeepthinkImageGeneratorPage from './components/DeepthinkImageGeneratorPage';
 import BlogPage from './pages/BlogPage';
-import BlogPost from './pages/BlogPost';
+import BlogPost from './components/BlogPost';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -192,7 +192,7 @@ function App() {
                           MenuListProps={{ 'aria-labelledby': 'mobile-menu-button' }}
                           PaperProps={{ sx: { bgcolor: mode === 'dark' ? '#232936' : '#fff' } }}
                         >
-                          <MenuItem component={Link} to="/" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>DeepThink AI</MenuItem>
+                          <MenuItem component={Link} to="/chat" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>DeepThink AI</MenuItem>
                           <MenuItem component={Link} to="/monetization-planner" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Monetization Planner</MenuItem>
                           <MenuItem component={Link} to="/guestpost-outreach" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Guest Post Outreach Ideas</MenuItem>
                           <MenuItem component={Link} to="/search-intent-tool" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Search Intent Tool</MenuItem>

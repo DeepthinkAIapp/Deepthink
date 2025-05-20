@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import { getApiUrl } from '../config';
+import { Helmet } from 'react-helmet-async';
 
 const LABELS = ['Domain Rating', 'Backlinks', 'Linking Websites'];
 
@@ -42,6 +43,21 @@ export default function WebsiteAuthorityCheckerPage() {
 
   return (
     <div style={{ maxWidth: 600, margin: '2em auto', padding: 24, background: '#fff', borderRadius: 12, boxShadow: '0 2px 12px #0001', position: 'relative' }}>
+      <Helmet>
+        <title>Website Authority Checker | DeepThink AI</title>
+        <meta name="description" content="Check your website's authority with DeepThink AI's Website Authority Checker. Get insights on domain rating, backlinks, and linking websites." />
+        <link rel="canonical" href="https://www.deepthinkai.app/website-authority-checker" />
+        <meta property="og:title" content="Website Authority Checker | DeepThink AI" />
+        <meta property="og:description" content="Check your website's authority with DeepThink AI's Website Authority Checker. Get insights on domain rating, backlinks, and linking websites." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.deepthinkai.app/website-authority-checker" />
+        <meta property="og:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Website Authority Checker | DeepThink AI" />
+        <meta name="twitter:description" content="Check your website's authority with DeepThink AI's Website Authority Checker. Get insights on domain rating, backlinks, and linking websites." />
+        <meta name="twitter:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:url" content="https://www.deepthinkai.app/website-authority-checker" />
+      </Helmet>
       <h2 style={{
         color: theme.palette.mode === 'dark' ? '#222' : undefined,
         fontWeight: 700,

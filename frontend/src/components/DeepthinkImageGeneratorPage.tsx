@@ -10,6 +10,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import AnalysisCard from './AnalysisCard';
+import { Helmet } from 'react-helmet-async';
 
 const styleOptions = [
   'Photorealistic', 'Cyberpunk', 'Anime', 'Watercolor', 'Fantasy', 'Concept Art', '3D Render', 'Oil Painting', 'Line Art', 'Cartoon', 'Steampunk', 'Noir', 'Other'
@@ -454,6 +455,21 @@ Seed: ${options.seed || 'none'}
         background: `rgba(255,255,255,0.95)`
       }}
     >
+      <Helmet>
+        <title>Image Generator | DeepThink AI</title>
+        <meta name="description" content="Generate stunning images with DeepThink AI's Image Generator. Create photorealistic, cyberpunk, anime, and more styles with advanced AI." />
+        <link rel="canonical" href="https://www.deepthinkai.app/image-generator" />
+        <meta property="og:title" content="Image Generator | DeepThink AI" />
+        <meta property="og:description" content="Generate stunning images with DeepThink AI's Image Generator. Create photorealistic, cyberpunk, anime, and more styles with advanced AI." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.deepthinkai.app/image-generator" />
+        <meta property="og:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Image Generator | DeepThink AI" />
+        <meta name="twitter:description" content="Generate stunning images with DeepThink AI's Image Generator. Create photorealistic, cyberpunk, anime, and more styles with advanced AI." />
+        <meta name="twitter:image" content="https://www.deepthinkai.app/images/logo.png" />
+        <meta name="twitter:url" content="https://www.deepthinkai.app/image-generator" />
+      </Helmet>
       {/* Background image overlay */}
       <Box
         sx={{
