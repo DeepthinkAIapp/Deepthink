@@ -115,7 +115,7 @@ const WelcomeScreen: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ minHeight: '100vh', background: `url(/images/logo.png) center center no-repeat`, backgroundSize: '40%', py: 6, display: 'flex', alignItems: 'center', position: 'relative' }}>
+      <Box sx={{ minHeight: '100vh', background: `url(/images/blog/logo.png) center center no-repeat`, backgroundSize: '40%', py: 6, display: 'flex', alignItems: 'center', position: 'relative' }}>
         {/* Light/Dark mode toggle button in top right */}
         <Box sx={{ position: 'absolute', top: 24, right: 32, zIndex: 10 }}>
           <IconButton onClick={handleToggleMode} color="inherit" sx={{ bgcolor: mode === 'dark' ? 'rgba(36,40,48,0.85)' : 'rgba(255,255,255,0.85)', boxShadow: 2 }}>
@@ -138,7 +138,7 @@ const WelcomeScreen: React.FC = () => {
           <Typography variant="h4" align="center" fontWeight={900} sx={{ letterSpacing: 2, color: '#ff6600', mb: 1, textTransform: 'uppercase' }}>
             DEEPTHINK AI
           </Typography>
-          <Avatar src="/images/logo.png" alt="Deepthink AI Logo" sx={{ width: 80, height: 80, mb: 2, boxShadow: 2 }} />
+          <Avatar src="/images/blog/logo.png" alt="Deepthink AI Logo" sx={{ width: 80, height: 80, mb: 2, boxShadow: 2 }} />
           <Typography variant="h2" align="center" fontWeight={800} sx={{ mt: 1, mb: 1, color: mode === 'dark' ? '#fff' : '#232936', fontSize: { xs: '2.2rem', sm: '3rem' } }}>
             Unlock Smarter Research. Instantly.
           </Typography>

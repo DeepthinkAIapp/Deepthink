@@ -228,7 +228,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
             background: 'rgba(255,255,255,0.7)'
           }}>
             <img
-              src="/images/android-chrome-512x512.png"
+              src="/images/blog/logo.png"
               alt="Deepthink AI Logo"
               className="pulsate-logo"
               style={{ width: 120, height: 120 }}

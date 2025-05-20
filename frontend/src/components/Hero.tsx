@@ -33,7 +33,7 @@ const Hero: React.FC<HeroProps> = ({ onStart, children }) => {
       </div>
       <div className="hero-image">
         <img 
-          src={"/images/android-chrome-512x512.png"} 
+          src={"/images/blog/logo.png"} 
           alt="Deepthink AI Illustration showing advanced research capabilities" 
           loading="eager"
         />
