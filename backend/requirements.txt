@@ -25,6 +25,7 @@ beautifulsoup4==4.12.3
 selenium==4.15.2
 webdriver-manager==4.0.1
 undetected-chromedriver==3.5.5
+gradio-client
 Pillow==10.1.0
 python-jose==3.3.0
 passlib==1.7.4
