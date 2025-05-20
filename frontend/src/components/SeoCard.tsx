@@ -10,7 +10,7 @@ interface SeoCardProps {
 export default function SeoCard({
   title = 'Deepthink AI – Deep Research Assistant',
   description = 'Deepthink AI lets you chat with open-source AI models like Gemma, Mistral, DeepSeek, and more. Fast, private, and free.',
-  image = 'https://www.deepthinkai.app/og-image.png', // Replace with your actual OG image URL
+  image = 'https://www.deepthinkai.app/images/logo.png',
   url = 'https://www.deepthinkai.app',
 }: SeoCardProps) {
   return (

@@ -138,7 +138,7 @@ const WelcomeScreen: React.FC = () => {
           <Typography variant="h4" align="center" fontWeight={900} sx={{ letterSpacing: 2, color: '#ff6600', mb: 1, textTransform: 'uppercase' }}>
             DEEPTHINK AI
           </Typography>
-          <Avatar src="/brand/logo.png" alt="Deepthink AI Logo" sx={{ width: 80, height: 80, mb: 2, boxShadow: 2 }} />
+          <Avatar src={`${import.meta.env.BASE_URL}images/logo.png`} alt="Deepthink AI Logo" sx={{ width: 80, height: 80, mb: 2, boxShadow: 2 }} />
           <Typography variant="h2" align="center" fontWeight={800} sx={{ mt: 1, mb: 1, color: mode === 'dark' ? '#fff' : '#232936', fontSize: { xs: '2.2rem', sm: '3rem' } }}>
             Unlock Smarter Research. Instantly.
           </Typography>
