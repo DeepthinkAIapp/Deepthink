@@ -535,7 +535,7 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
           background: theme.palette.mode === 'dark' ? 'rgba(24,28,36,0.7)' : 'rgba(255,255,255,0.7)'
         }}>
           <img
-            src={`${import.meta.env.BASE_URL}images/logo.png`}
+            src="/images/logo.png"
             alt="Deepthink AI Logo"
             className="pulsate-logo"
             style={{ width: 120, height: 120 }}
