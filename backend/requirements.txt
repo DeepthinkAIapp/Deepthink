@@ -46,7 +46,7 @@ lxml==5.1.0
 fake-useragent==1.4.0
 
 # Additional Search Engine Support
-yandex-search==1.0.1
+yandex-search==0.3.2
 googlesearch-python==1.2.3
 
 # Rate Limiting and Caching
