@@ -31831,3 +31831,612 @@ Stacktrace:
 2025-05-18 20:22:08,459 [INFO] DeepThinkAI: Request 522e6b4a-b5d3-4016-b026-7ebb8ed7f4e9: Received subniche/content ideas request
 2025-05-18 20:22:08,461 [INFO] DeepThinkAI: Request 522e6b4a-b5d3-4016-b026-7ebb8ed7f4e9: Using model gemma:7b
 2025-05-18 20:22:21,166 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:00:51,431 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-18 21:01:23,808 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-18 21:14:03,558 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 21:21:22,251 [INFO] DeepThinkAI: Starting chat request 037ac102-915f-4f25-bf5b-f1ea37430644 with model: gemma:7b
+2025-05-18 21:21:26,310 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:25:27,950 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:26:57,913 [INFO] DeepThinkAI: Starting chat request b0891b18-bcbe-4bbf-a445-c6e25958fced with model: gemma:7b
+2025-05-18 21:27:02,303 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:27:08,833 [INFO] DeepThinkAI: Starting chat request 6d451285-9ce0-41ec-89d9-4ecd17c05132 with model: gemma:7b
+2025-05-18 21:27:09,455 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:32:25,830 [INFO] DeepThinkAI: Starting chat request ed9926a2-64c7-4d05-be1c-5cfce068ba73 with model: gemma:7b
+2025-05-18 21:32:29,641 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:32:37,209 [INFO] DeepThinkAI: Starting chat request f99bdd51-95b5-447d-bee2-8d1346289950 with model: gemma:7b
+2025-05-18 21:32:37,674 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:33:21,997 [INFO] DeepThinkAI: Starting chat request 8df780eb-7b80-45ff-a314-e8e0c74d2aba with model: gemma:7b
+2025-05-18 21:33:22,607 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:33:51,368 [INFO] DeepThinkAI: Starting chat request 4b139806-cd0b-4ab4-a57f-43f849a6d26f with model: gemma:7b
+2025-05-18 21:33:51,867 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:35:04,893 [INFO] DeepThinkAI: Starting chat request 1e7502ab-5ad6-4080-8136-a1a44d943dd0 with model: gemma:7b
+2025-05-18 21:35:05,619 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:35:16,148 [INFO] DeepThinkAI: Starting monetization plan request 4013aea7-9f2f-4803-84c1-a35aed380f5b for niche: marathon
+2025-05-18 21:35:18,308 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:36:31,049 [INFO] DeepThinkAI: Starting chat request f6375c7f-81dc-443d-bf16-801e5789d06a with model: gemma:7b
+2025-05-18 21:36:31,793 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:37:38,244 [INFO] DeepThinkAI: Starting chat request ba5eaa12-fc79-4d90-8618-9dc76b4d1193 with model: gemma:7b
+2025-05-18 21:37:38,949 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:39:14,767 [INFO] DeepThinkAI: Starting chat request 8fb930a0-3575-4505-84dc-b1e6d200b890 with model: gemma:7b
+2025-05-18 21:39:15,431 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:41:17,515 [INFO] DeepThinkAI: Starting chat request e030d32d-d142-46a0-8cde-6af0a94a3a41 with model: gemma:7b
+2025-05-18 21:41:18,263 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:42:30,578 [INFO] DeepThinkAI: Starting chat request e6ff7998-2893-440e-bb90-9ace12714697 with model: gemma:7b
+2025-05-18 21:42:31,273 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:42:49,707 [INFO] DeepThinkAI: Starting chat request 7913bdcc-9d34-4b9c-a5a2-535fb6837f6b with model: gemma:7b
+2025-05-18 21:42:50,422 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:43:13,825 [INFO] DeepThinkAI: Starting chat request 15f88bd1-fbee-4721-8168-43289ed688e0 with model: gemma:7b
+2025-05-18 21:43:14,326 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:45:10,573 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 21:45:10,584 [INFO] DeepThinkAI: Starting chat request 1210bba9-ec60-473b-8a71-91d191c07f1f with model: phi4:latest
+2025-05-18 21:45:19,930 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:45:35,660 [INFO] DeepThinkAI: Starting chat request 4c68da48-5943-4d40-b4a9-6f5bf87eeae3 with model: phi4:latest
+2025-05-18 21:45:36,442 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:48:36,774 [INFO] DeepThinkAI: Starting chat request c6178ecf-fd03-4510-aa3c-2e4735625565 with model: auto
+2025-05-18 21:48:36,775 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-18 21:48:42,987 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:49:04,485 [INFO] DeepThinkAI: Starting chat request 89cbaa2b-a4cc-472f-ba1f-77a0f3ff899e with model: auto
+2025-05-18 21:49:04,486 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-18 21:49:04,993 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:49:16,023 [INFO] DeepThinkAI: Starting chat request c200ff89-3e69-4a30-aef6-dff0a63e6d04 with model: auto
+2025-05-18 21:49:16,023 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-18 21:49:16,530 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:49:33,800 [INFO] DeepThinkAI: Starting chat request d63d4070-1c97-486e-b4f2-e1c5fcd27c62 with model: auto
+2025-05-18 21:49:33,801 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-18 21:49:34,584 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:50:32,124 [INFO] DeepThinkAI: Starting chat request 1c614eec-805f-4548-8ce0-8cfe0b5bdc3c with model: auto
+2025-05-18 21:50:32,125 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-18 21:50:32,834 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:53:53,323 [INFO] DeepThinkAI: Starting chat request 38c6cf46-2836-401f-9bc3-4d6b42c6c743 with model: gemma:7b
+2025-05-18 21:53:53,980 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:54:08,356 [INFO] DeepThinkAI: Starting chat request 40d81a6b-55a7-4367-900d-14bc5d55ef5d with model: auto
+2025-05-18 21:54:08,357 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-18 21:54:09,008 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:54:41,817 [INFO] DeepThinkAI: Starting chat request b44085e6-3608-4bed-a9a6-5096deec820e with model: gemma:7b
+2025-05-18 21:54:42,317 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:54:56,607 [INFO] DeepThinkAI: Starting chat request 3110f46f-f97d-4862-895a-4c8b1942738c with model: gemma:7b
+2025-05-18 21:54:57,326 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:56:02,898 [INFO] DeepThinkAI: Starting chat request 2cd40c33-b9d4-441a-84d4-5bb9ec5441cb with model: gemma:7b
+2025-05-18 21:56:03,682 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:56:12,315 [INFO] DeepThinkAI: Starting chat request eb1ef215-265c-4ed3-a1f0-1d6f3374ca7d with model: gemma:7b
+2025-05-18 21:56:12,835 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:56:29,573 [INFO] DeepThinkAI: Starting chat request a6ef8d92-1245-49b9-a8f6-9f6410d5cfe0 with model: gemma:7b
+2025-05-18 21:56:30,355 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 21:56:56,262 [INFO] DeepThinkAI: Starting chat request fbc3145b-407a-4000-88c8-210c66655cd2 with model: gemma:7b
+2025-05-18 21:56:56,765 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:00:44,133 [INFO] DeepThinkAI: Starting chat request 4a4fbfb7-4913-4548-ba7f-b0ecca317426 with model: gemma:7b
+2025-05-18 22:00:44,871 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:00:49,991 [INFO] DeepThinkAI: Starting chat request d7d628d5-abf2-4f90-9c9a-75c254fbe0d0 with model: gemma:7b
+2025-05-18 22:00:50,442 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:00:56,316 [INFO] DeepThinkAI: Starting chat request a262818d-047b-4dcf-abfc-6187345b53fc with model: gemma:7b
+2025-05-18 22:00:56,805 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:02:53,728 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 22:04:16,249 [INFO] DeepThinkAI: Starting chat request 3e1e4f49-712f-4c8f-85a2-0d1c85da855d with model: gemma:7b
+2025-05-18 22:04:17,001 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:04:26,332 [INFO] DeepThinkAI: Starting chat request 8f46b0fb-d61a-42b5-812b-5e174b281b5a with model: gemma:7b
+2025-05-18 22:04:27,057 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:04:31,234 [INFO] DeepThinkAI: Starting chat request d5dd8d26-3c0e-45d7-8087-f216a4ea8a70 with model: gemma:7b
+2025-05-18 22:04:31,713 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:09:27,966 [INFO] DeepThinkAI: Starting chat request b01ed789-ca38-45fc-9bd8-18d2b0513039 with model: gemma:7b
+2025-05-18 22:09:28,684 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:13:10,550 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 22:18:50,950 [ERROR] DeepThinkAI: Unhandled exception: All connection attempts failed
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: All connection attempts failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 191, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 926, in add_request_id
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 191, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 555, in monitor_requests
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 191, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 283, in request_size_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 191, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 267, in timeout_middleware
+    return await asyncio.wait_for(call_next(request), timeout=REQUEST_TIMEOUT)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\asyncio\tasks.py", line 489, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\gzip.py", line 24, in __call__
+    await responder(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\gzip.py", line 44, in __call__
+    await self.app(scope, receive, self.send_with_gzip)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\trustedhost.py", line 34, in __call__
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\prometheus_fastapi_instrumentator\middleware.py", line 169, in __call__
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\prometheus_fastapi_instrumentator\middleware.py", line 167, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 758, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 778, in app
+    await route.handle(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 299, in handle
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 79, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 64, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 74, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 278, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 2221, in deforum_generate
+    response = await client.post(DEFORUM_API_URL, json=payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: All connection attempts failed
+2025-05-18 22:19:10,769 [INFO] DeepThinkAI: Request f60a95e1-139b-451d-8989-67b242ccf9b8: Received affiliate article ideas request
+2025-05-18 22:19:21,818 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:30:14,563 [INFO] DeepThinkAI: Starting chat request e82e9616-4d05-4d11-a08e-9cdb0f348d55 with model: gemma:7b
+2025-05-18 22:30:18,373 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:37:53,281 [INFO] DeepThinkAI: Starting chat request 01f579a6-81e6-4975-a21c-47c3acc594b7 with model: gemma:7b
+2025-05-18 22:37:57,133 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:38:05,773 [INFO] DeepThinkAI: Starting chat request 2316b0f5-2808-4cd1-85c5-a520da818c6f with model: gemma:7b
+2025-05-18 22:38:06,387 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:38:43,945 [INFO] DeepThinkAI: Starting chat request 7dd364d0-5fa6-4055-8bd5-616fbe93dfc2 with model: gemma:7b
+2025-05-18 22:38:44,440 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:44:28,805 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 22:44:47,188 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 22:45:34,917 [INFO] DeepThinkAI: Starting chat request 2f876923-7268-4569-9feb-27c3c758464e with model: gemma:7b
+2025-05-18 22:45:38,982 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:45:47,768 [INFO] DeepThinkAI: Starting chat request 5181defa-ecb1-49b6-b9c6-f66e5569f9a6 with model: llama3.1:latest
+2025-05-18 22:45:53,961 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:46:13,569 [INFO] DeepThinkAI: Starting chat request 4c61bd9f-c702-458c-8231-c49cf7b0c1fa with model: llama3.1:latest
+2025-05-18 22:46:14,079 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:46:25,358 [INFO] DeepThinkAI: Starting chat request 035363b0-6009-499e-ac14-6dd38559e78f with model: llama3.1:latest
+2025-05-18 22:46:25,845 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:46:41,637 [INFO] DeepThinkAI: Starting chat request 434d8097-6fc6-47c6-bb02-68871b55fb2b with model: llama3.1:latest
+2025-05-18 22:46:42,356 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:46:53,339 [INFO] DeepThinkAI: Starting chat request 89ab9e25-cecb-44e9-b77e-c84b606f11de with model: llama3.1:latest
+2025-05-18 22:46:53,824 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 22:48:20,370 [INFO] DeepThinkAI: Starting chat request 7423dbd3-c7a8-4107-942b-543544a912cc with model: llama3.1:latest
+2025-05-18 22:48:21,014 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 23:17:54,086 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-18 23:17:59,781 [INFO] DeepThinkAI: Starting chat request 68706b56-dc47-4d0b-9abf-81c2b0303a14 with model: gemma:7b
+2025-05-18 23:18:06,162 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 23:28:08,711 [INFO] DeepThinkAI: Starting chat request c8ecabee-b744-4e55-84bd-961d7ae0eae5 with model: llama3.1:latest
+2025-05-18 23:28:14,133 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-18 23:40:03,901 [INFO] DeepThinkAI: Starting chat request f83a05c9-62bf-4843-b299-d65498859ad3 with model: llama3.1:latest
+2025-05-18 23:40:06,842 [ERROR] DeepThinkAI: Unhandled exception: No response returned.
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\anyio\streams\memory.py", line 98, in receive
+    return self.receive_nowait()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\anyio\streams\memory.py", line 93, in receive_nowait
+    raise WouldBlock
+anyio.WouldBlock
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 159, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\anyio\streams\memory.py", line 118, in receive
+    raise EndOfStream
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 191, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 928, in add_request_id
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 191, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 555, in monitor_requests
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 191, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 283, in request_size_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 165, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 151, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 191, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 267, in timeout_middleware
+    return await asyncio.wait_for(call_next(request), timeout=REQUEST_TIMEOUT)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\asyncio\tasks.py", line 489, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 166, in call_next
+    raise RuntimeError("No response returned.")
+RuntimeError: No response returned.
+2025-05-19 00:26:35,403 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-19 00:30:39,334 [INFO] DeepThinkAI: Starting chat request 9b56573a-fb65-4c86-a510-831d171b8e9f with model: gemma:7b
+2025-05-19 00:30:43,152 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 00:34:14,752 [INFO] DeepThinkAI: Starting chat request 37b0b00d-2872-410b-9e90-d748371a68aa with model: gemma:7b
+2025-05-19 00:34:15,472 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 00:45:47,301 [INFO] DeepThinkAI: Starting chat request ebafd4e5-7a57-4c75-a25a-2acf7c9c6a2a with model: llama3.1:latest
+2025-05-19 00:45:51,106 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 00:46:41,931 [INFO] DeepThinkAI: Starting chat request b7976c2c-6a2d-41b7-b387-e962edc9c08d with model: llava:latest
+2025-05-19 00:46:48,231 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 00:47:56,620 [INFO] DeepThinkAI: Starting chat request 3b3a3b41-c66e-49f3-b45f-61d1099b2873 with model: llava:latest
+2025-05-19 00:47:57,253 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 00:48:53,065 [INFO] DeepThinkAI: Starting chat request 2fd36bbf-da3f-4a2e-b6c5-7518e9e68a8f with model: gemma:7b
+2025-05-19 00:48:57,261 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 00:58:34,665 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-19 01:19:52,467 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-19 01:21:09,307 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-19 01:23:21,584 [INFO] DeepThinkAI: Starting chat request e7b96cfd-78b8-44df-bd48-2edd0157fb16 with model: llava:latest
+2025-05-19 01:23:25,006 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 01:23:36,662 [INFO] DeepThinkAI: Starting chat request d034601e-46a0-4592-83bd-2d6827ef6525 with model: llava:latest
+2025-05-19 01:23:37,378 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 01:23:56,112 [INFO] DeepThinkAI: Starting chat request 95007773-bc8c-435a-9ae1-300475e5706b with model: llava:latest
+2025-05-19 01:23:56,586 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 01:25:11,948 [INFO] DeepThinkAI: Starting chat request 615ff30c-402a-42be-906f-1f2fc447ca80 with model: auto
+2025-05-19 01:25:11,949 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-19 01:25:16,093 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 01:32:22,899 [INFO] DeepThinkAI: Starting chat request 692f1337-baa2-45b3-86c2-a88f3b296a9c with model: gemma:7b
+2025-05-19 01:32:26,667 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 01:37:57,103 [INFO] DeepThinkAI: Starting chat request a0bfdd21-6ab9-4d72-aee7-10619ff5d7c9 with model: gemma:7b
+2025-05-19 01:38:00,659 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 01:40:14,124 [INFO] DeepThinkAI: Starting chat request fb196f51-a2cd-4cba-b957-6f50b4e62123 with model: gemma:7b
+2025-05-19 01:40:14,917 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 01:40:36,278 [INFO] DeepThinkAI: Starting chat request 2d0ef5ed-41a3-46b9-8479-9dca6d3f3b2d with model: llava:latest
+2025-05-19 01:40:40,100 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 02:20:04,706 [INFO] DeepThinkAI: Starting chat request 08cd8344-cd9f-4837-bb3d-4a115b54cb88 with model: gemma:7b
+2025-05-19 02:20:10,601 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 02:20:30,182 [INFO] DeepThinkAI: Starting chat request c956daa5-2480-44dd-a5f4-8f39348b317e with model: gemma:7b
+2025-05-19 02:20:30,966 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 02:20:53,167 [INFO] DeepThinkAI: Starting chat request 9fc7e031-f292-41ef-aacb-c83bbf957434 with model: auto
+2025-05-19 02:20:53,167 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-19 02:20:53,681 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 02:21:24,512 [INFO] DeepThinkAI: Starting chat request 9a569c02-adcc-413f-86b3-4492623885f3 with model: auto
+2025-05-19 02:21:24,512 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-19 02:21:25,288 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 02:21:40,110 [INFO] DeepThinkAI: Starting chat request 4c6b6d18-9db4-40b6-9d2a-364e9dca9a86 with model: auto
+2025-05-19 02:21:40,110 [INFO] DeepThinkAI: Auto-selected model: gemma:7b
+2025-05-19 02:21:40,649 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 22:11:17,854 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-19 22:16:56,092 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-19 22:22:51,029 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-19 22:24:59,270 [INFO] DeepThinkAI: Database pool initialized with 10 connections
+2025-05-19 22:57:03,346 [INFO] DeepThinkAI: Starting chat request 97427927-bd62-4e6b-9e36-83b9fc0dcc53 with model: gemma:7b
+2025-05-19 22:57:17,351 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 22:57:39,702 [INFO] DeepThinkAI: Starting chat request fc3f3c14-b116-4048-91c7-cb73f53bf4ac with model: minigpt4:latest
+2025-05-19 22:57:40,435 [INFO] httpx: HTTP Request: POST http://localhost:7860/api/chat "HTTP/1.1 404 Not Found"
+2025-05-19 22:57:40,436 [ERROR] DeepThinkAI: Error streaming MiniGPT-4 response: Attempted to access streaming response content, without having called `read()`.
+2025-05-19 22:57:40,436 [ERROR] DeepThinkAI: Error in MiniGPT-4 stream: Attempted to access streaming response content, without having called `read()`.
+2025-05-19 23:01:13,209 [ERROR] DeepThinkAI: Validation error: [{'type': 'string_too_short', 'loc': ('body', 'messages', 4, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}]
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 346, in app
+    raise validation_error
+fastapi.exceptions.RequestValidationError: [{'type': 'string_too_short', 'loc': ('body', 'messages', 4, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}]
+2025-05-19 23:01:43,658 [ERROR] DeepThinkAI: Validation error: [{'type': 'string_too_short', 'loc': ('body', 'messages', 4, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}, {'type': 'string_too_short', 'loc': ('body', 'messages', 9, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}]
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 346, in app
+    raise validation_error
+fastapi.exceptions.RequestValidationError: [{'type': 'string_too_short', 'loc': ('body', 'messages', 4, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}, {'type': 'string_too_short', 'loc': ('body', 'messages', 9, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}]
+2025-05-19 23:01:51,501 [ERROR] DeepThinkAI: Validation error: [{'type': 'string_too_short', 'loc': ('body', 'messages', 4, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}, {'type': 'string_too_short', 'loc': ('body', 'messages', 9, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}]
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 346, in app
+    raise validation_error
+fastapi.exceptions.RequestValidationError: [{'type': 'string_too_short', 'loc': ('body', 'messages', 4, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}, {'type': 'string_too_short', 'loc': ('body', 'messages', 9, 'content'), 'msg': 'String should have at least 1 character', 'input': '', 'ctx': {'min_length': 1}}]
+2025-05-19 23:03:00,282 [INFO] DeepThinkAI: Starting chat request dcf6d2ac-166d-4d21-b0fd-956449ab850a with model: auto
+2025-05-19 23:03:00,283 [INFO] DeepThinkAI: Auto-selected model: auto
+2025-05-19 23:03:00,727 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-19 23:03:26,757 [INFO] DeepThinkAI: Starting chat request dfb149f9-313e-4c13-8216-5c42a55d363b with model: gemma:7b
+2025-05-19 23:03:34,065 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 23:03:58,805 [INFO] DeepThinkAI: Starting chat request 7061b6e7-2ca2-4ec1-8e7f-49bc8ccd9296 with model: minigpt4:latest
+2025-05-19 23:03:59,579 [INFO] httpx: HTTP Request: POST http://localhost:7860/api/chat "HTTP/1.1 404 Not Found"
+2025-05-19 23:03:59,580 [ERROR] DeepThinkAI: Error streaming MiniGPT-4 response: Attempted to access streaming response content, without having called `read()`.
+2025-05-19 23:03:59,580 [ERROR] DeepThinkAI: Error in MiniGPT-4 stream: 500: Attempted to access streaming response content, without having called `read()`.
+2025-05-19 23:09:00,979 [INFO] DeepThinkAI: Starting chat request b686ea6f-efcd-4848-ae40-c56a7675651f with model: minigpt4:latest
+2025-05-19 23:09:01,736 [INFO] httpx: HTTP Request: POST http://localhost:7860/api/chat "HTTP/1.1 404 Not Found"
+2025-05-19 23:09:01,736 [ERROR] DeepThinkAI: Error streaming MiniGPT-4 response: Attempted to access streaming response content, without having called `read()`.
+2025-05-19 23:09:01,737 [ERROR] DeepThinkAI: Error in MiniGPT-4 stream: 500: Attempted to access streaming response content, without having called `read()`.
+2025-05-19 23:10:23,096 [INFO] DeepThinkAI: Starting chat request 0421ac7f-b4e0-4d73-9166-f65ba62f0f02 with model: gemma:7b
+2025-05-19 23:10:30,078 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 23:10:52,890 [INFO] DeepThinkAI: Starting chat request 6061a70b-ce10-44b7-a34b-363fb2071f8c with model: minigpt4:latest
+2025-05-19 23:10:53,962 [INFO] httpx: HTTP Request: POST http://localhost:7860/api/chat "HTTP/1.1 404 Not Found"
+2025-05-19 23:10:53,964 [ERROR] DeepThinkAI: Error in MiniGPT-4 stream: 500: MiniGPT-4 API error: {"detail":"Not Found"}
+2025-05-19 23:32:57,464 [INFO] DeepThinkAI: Starting chat request b6b89698-6909-4541-8a76-e83ba8b9954b with model: minigpt4:latest
+2025-05-19 23:32:58,174 [INFO] httpx: HTTP Request: POST http://localhost:7860/api/chat "HTTP/1.1 404 Not Found"
+2025-05-19 23:32:58,176 [ERROR] DeepThinkAI: Error in MiniGPT-4 stream: 500: MiniGPT-4 API error: {"detail":"Not Found"}
+2025-05-19 23:33:16,560 [INFO] DeepThinkAI: Starting chat request 6fb46c28-5989-424c-b83a-a2b2227098a3 with model: gemma:7b
+2025-05-19 23:33:23,567 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-19 23:33:53,883 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-19 23:33:54,325 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-19 23:33:54,922 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/add68ee7-b748-443a-b189-cda91ed4d720 "HTTP/1.1 200 OK"
+2025-05-19 23:33:55,003 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-19 23:33:55,456 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:33:55,939 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=add68ee7-b748-443a-b189-cda91ed4d720 "HTTP/1.1 200 OK"
+2025-05-19 23:36:46,386 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-19 23:36:46,836 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-19 23:36:47,326 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/1a9371b9-46bd-4f3d-be47-cf4104222e68 "HTTP/1.1 200 OK"
+2025-05-19 23:36:47,339 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-19 23:36:47,782 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:36:48,251 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=1a9371b9-46bd-4f3d-be47-cf4104222e68 "HTTP/1.1 200 OK"
+2025-05-19 23:39:21,952 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-19 23:39:22,397 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-19 23:39:23,010 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/15e9bd13-3937-4c3b-a1e3-5b18edd0e0e4 "HTTP/1.1 200 OK"
+2025-05-19 23:39:23,060 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-19 23:39:23,508 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:39:23,977 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=15e9bd13-3937-4c3b-a1e3-5b18edd0e0e4 "HTTP/1.1 200 OK"
+2025-05-19 23:41:58,301 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-19 23:41:58,749 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-19 23:41:59,391 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/b20c1267-f6e3-4498-98b6-aa63a2f545f6 "HTTP/1.1 200 OK"
+2025-05-19 23:41:59,458 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-19 23:41:59,912 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:42:00,379 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=b20c1267-f6e3-4498-98b6-aa63a2f545f6 "HTTP/1.1 200 OK"
+2025-05-19 23:42:01,015 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:42:01,440 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=b20c1267-f6e3-4498-98b6-aa63a2f545f6 "HTTP/1.1 200 OK"
+2025-05-19 23:42:10,136 [INFO] DeepThinkAI: Starting chat request 53d42697-0d08-4541-b1df-440913f4773e with model: minigpt4:latest
+2025-05-19 23:42:10,807 [INFO] httpx: HTTP Request: POST http://localhost:7860/api/chat "HTTP/1.1 404 Not Found"
+2025-05-19 23:42:10,808 [ERROR] DeepThinkAI: Error in MiniGPT-4 stream: 500: MiniGPT-4 API error: {"detail":"Not Found"}
+2025-05-19 23:42:49,093 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-19 23:42:49,521 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-19 23:42:50,114 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/00a1a329-e42c-43da-8859-72abf22010dd "HTTP/1.1 200 OK"
+2025-05-19 23:42:50,125 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-19 23:42:50,575 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:42:51,019 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=00a1a329-e42c-43da-8859-72abf22010dd "HTTP/1.1 200 OK"
+2025-05-19 23:42:51,460 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:42:51,892 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=00a1a329-e42c-43da-8859-72abf22010dd "HTTP/1.1 200 OK"
+2025-05-19 23:48:00,642 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-19 23:48:01,071 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-19 23:48:01,711 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/206c3238-e951-4d24-9c12-cdfdb000bea3 "HTTP/1.1 200 OK"
+2025-05-19 23:48:01,774 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-19 23:48:02,228 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:48:02,680 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=206c3238-e951-4d24-9c12-cdfdb000bea3 "HTTP/1.1 200 OK"
+2025-05-19 23:48:03,222 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:48:03,646 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=206c3238-e951-4d24-9c12-cdfdb000bea3 "HTTP/1.1 200 OK"
+2025-05-19 23:48:03,678 [ERROR] DeepThinkAI: MiniGPT-4 Gradio API error: The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+2025-05-19 23:50:12,526 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-19 23:50:12,970 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-19 23:50:13,524 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/917ad347-4317-4ced-9439-188504eb08f1 "HTTP/1.1 200 OK"
+2025-05-19 23:50:13,624 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-19 23:50:14,089 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:50:14,557 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=917ad347-4317-4ced-9439-188504eb08f1 "HTTP/1.1 200 OK"
+2025-05-19 23:50:15,037 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:50:15,466 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=917ad347-4317-4ced-9439-188504eb08f1 "HTTP/1.1 200 OK"
+2025-05-19 23:56:35,267 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-19 23:56:35,706 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-19 23:56:36,416 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/a01c549a-6667-4108-b2a3-7ffbcaa5f823 "HTTP/1.1 200 OK"
+2025-05-19 23:56:36,457 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-19 23:56:36,922 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:56:37,399 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=a01c549a-6667-4108-b2a3-7ffbcaa5f823 "HTTP/1.1 200 OK"
+2025-05-19 23:56:37,997 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-19 23:56:38,438 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=a01c549a-6667-4108-b2a3-7ffbcaa5f823 "HTTP/1.1 200 OK"
+2025-05-19 23:56:38,453 [ERROR] DeepThinkAI: MiniGPT-4 Gradio API error: The upstream Gradio app has raised an exception but has not enabled verbose error reporting. To enable, set show_error=True in launch().
+2025-05-19 23:57:16,291 [INFO] DeepThinkAI: Starting chat request f9b5519f-2415-40c1-b43f-0ac8cbd7edb8 with model: minigpt4:latest
+2025-05-19 23:57:16,958 [INFO] httpx: HTTP Request: POST http://localhost:7860/api/chat "HTTP/1.1 404 Not Found"
+2025-05-19 23:57:16,959 [ERROR] DeepThinkAI: Error in MiniGPT-4 stream: 500: MiniGPT-4 API error: {"detail":"Not Found"}
+2025-05-19 23:59:33,378 [INFO] DeepThinkAI: Starting chat request 2faf6201-fce5-4e21-a5df-c9de41aa8540 with model: minigpt4:latest
+2025-05-19 23:59:34,065 [INFO] httpx: HTTP Request: POST http://localhost:7860/api/chat "HTTP/1.1 404 Not Found"
+2025-05-19 23:59:34,066 [ERROR] DeepThinkAI: Error in MiniGPT-4 stream: 500: MiniGPT-4 API error: {"detail":"Not Found"}
+2025-05-20 00:00:02,187 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-20 00:00:02,630 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-20 00:00:03,271 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:00:03,286 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/cbafcf5a-a216-43c0-9a80-3dd2769945bc "HTTP/1.1 200 OK"
+2025-05-20 00:00:03,702 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=cbafcf5a-a216-43c0-9a80-3dd2769945bc "HTTP/1.1 200 OK"
+2025-05-20 00:00:04,256 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-20 00:00:04,713 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:00:05,136 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=cbafcf5a-a216-43c0-9a80-3dd2769945bc "HTTP/1.1 200 OK"
+2025-05-20 00:00:06,098 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:00:06,522 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=cbafcf5a-a216-43c0-9a80-3dd2769945bc "HTTP/1.1 200 OK"
+2025-05-20 00:00:07,011 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:00:07,426 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=cbafcf5a-a216-43c0-9a80-3dd2769945bc "HTTP/1.1 200 OK"
+2025-05-20 00:01:05,155 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-20 00:01:05,635 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-20 00:01:06,250 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:01:06,263 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/824344dc-3209-441e-ba61-5593f2aaa0b2 "HTTP/1.1 200 OK"
+2025-05-20 00:01:06,666 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=824344dc-3209-441e-ba61-5593f2aaa0b2 "HTTP/1.1 200 OK"
+2025-05-20 00:01:07,143 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-20 00:01:07,579 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:01:08,058 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=824344dc-3209-441e-ba61-5593f2aaa0b2 "HTTP/1.1 200 OK"
+2025-05-20 00:01:08,519 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:01:08,934 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=824344dc-3209-441e-ba61-5593f2aaa0b2 "HTTP/1.1 200 OK"
+2025-05-20 00:01:09,395 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:01:09,820 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=824344dc-3209-441e-ba61-5593f2aaa0b2 "HTTP/1.1 200 OK"
+2025-05-20 00:01:40,659 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-20 00:01:41,117 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-20 00:01:41,731 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:01:41,732 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/2b189532-0541-4e88-8359-9c9e4c23945b "HTTP/1.1 200 OK"
+2025-05-20 00:01:42,151 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=2b189532-0541-4e88-8359-9c9e4c23945b "HTTP/1.1 200 OK"
+2025-05-20 00:01:42,636 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-20 00:01:43,069 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:01:43,524 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=2b189532-0541-4e88-8359-9c9e4c23945b "HTTP/1.1 200 OK"
+2025-05-20 00:01:43,973 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:01:44,395 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=2b189532-0541-4e88-8359-9c9e4c23945b "HTTP/1.1 200 OK"
+2025-05-20 00:01:44,847 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:01:45,265 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=2b189532-0541-4e88-8359-9c9e4c23945b "HTTP/1.1 200 OK"
+2025-05-20 00:03:16,875 [INFO] DeepThinkAI: Starting chat request 344c09f5-ffcd-4d30-ba3d-92b4ae88fbac with model: auto
+2025-05-20 00:03:16,876 [INFO] DeepThinkAI: Auto-selected model: auto
+2025-05-20 00:03:17,305 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 00:03:52,522 [INFO] DeepThinkAI: Starting chat request 1d448393-f21c-47b0-abf5-508d77627b3b with model: auto
+2025-05-20 00:03:52,522 [INFO] DeepThinkAI: Auto-selected model: auto
+2025-05-20 00:03:52,962 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 00:04:10,118 [INFO] DeepThinkAI: Starting chat request 2a464296-8d3d-431b-b957-eb67cc6dfd26 with model: gemma:7b
+2025-05-20 00:04:17,098 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 00:11:41,460 [INFO] DeepThinkAI: Starting chat request dc4fa69c-0989-4e71-866c-795b6477f7ad with model: gemma:7b
+2025-05-20 00:11:48,387 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 00:18:22,107 [INFO] DeepThinkAI: Starting chat request 45f54308-2ef9-47fa-b87c-85cdd88ba82d with model: gemma:7b
+2025-05-20 00:18:28,718 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 00:18:48,748 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-20 00:18:49,187 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-20 00:18:49,863 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:18:49,877 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/84ea23e0-d69d-4f78-bb72-f96c815a3053 "HTTP/1.1 200 OK"
+2025-05-20 00:18:50,290 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=84ea23e0-d69d-4f78-bb72-f96c815a3053 "HTTP/1.1 200 OK"
+2025-05-20 00:18:50,775 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-20 00:18:51,194 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:18:51,638 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=84ea23e0-d69d-4f78-bb72-f96c815a3053 "HTTP/1.1 200 OK"
+2025-05-20 00:18:52,230 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:18:52,662 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=84ea23e0-d69d-4f78-bb72-f96c815a3053 "HTTP/1.1 200 OK"
+2025-05-20 00:18:53,120 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:18:53,552 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=84ea23e0-d69d-4f78-bb72-f96c815a3053 "HTTP/1.1 200 OK"
+2025-05-20 00:21:49,008 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-20 00:21:49,444 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-20 00:21:50,084 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/d9671b2a-b582-4725-93a5-d32861282c03 "HTTP/1.1 200 OK"
+2025-05-20 00:21:50,104 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:21:50,532 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=d9671b2a-b582-4725-93a5-d32861282c03 "HTTP/1.1 200 OK"
+2025-05-20 00:21:51,058 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-20 00:21:51,483 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:21:51,923 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=d9671b2a-b582-4725-93a5-d32861282c03 "HTTP/1.1 200 OK"
+2025-05-20 00:21:52,850 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:21:53,292 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=d9671b2a-b582-4725-93a5-d32861282c03 "HTTP/1.1 200 OK"
+2025-05-20 00:21:53,733 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:21:54,160 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=d9671b2a-b582-4725-93a5-d32861282c03 "HTTP/1.1 200 OK"
+2025-05-20 00:22:28,655 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/config "HTTP/1.1 200 OK"
+2025-05-20 00:22:29,098 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/info?serialize=False "HTTP/1.1 200 OK"
+2025-05-20 00:22:29,739 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:22:29,739 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/heartbeat/38f69254-6118-4d33-a342-1f8e7a0cac56 "HTTP/1.1 200 OK"
+2025-05-20 00:22:30,153 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=38f69254-6118-4d33-a342-1f8e7a0cac56 "HTTP/1.1 200 OK"
+2025-05-20 00:22:30,649 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/upload "HTTP/1.1 200 OK"
+2025-05-20 00:22:31,069 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:22:31,523 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=38f69254-6118-4d33-a342-1f8e7a0cac56 "HTTP/1.1 200 OK"
+2025-05-20 00:22:32,018 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:22:32,437 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=38f69254-6118-4d33-a342-1f8e7a0cac56 "HTTP/1.1 200 OK"
+2025-05-20 00:22:32,905 [INFO] httpx: HTTP Request: POST http://127.0.0.1:7860/gradio_api/queue/join "HTTP/1.1 200 OK"
+2025-05-20 00:22:33,350 [INFO] httpx: HTTP Request: GET http://127.0.0.1:7860/gradio_api/queue/data?session_hash=38f69254-6118-4d33-a342-1f8e7a0cac56 "HTTP/1.1 200 OK"
+2025-05-20 00:26:12,916 [INFO] DeepThinkAI: Starting chat request f05c5b7c-7fa2-4c84-996d-f42f6808e54a with model: gemma:7b
+2025-05-20 00:26:19,979 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 00:28:24,997 [INFO] DeepThinkAI: Starting chat request f8744cc1-eff1-4e29-838a-deb395eec8ee with model: gemma:7b
+2025-05-20 00:28:29,204 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 00:32:08,427 [INFO] DeepThinkAI: Starting chat request b6107a39-3d24-486a-90c8-e773575f26d5 with model: gemma:7b
+2025-05-20 00:32:22,096 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 00:32:30,879 [INFO] DeepThinkAI: Starting chat request 60f81da6-37df-4c85-b019-52d2d1908ea6 with model: gemma:7b
+2025-05-20 00:32:55,278 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 00:33:06,193 [INFO] DeepThinkAI: Starting chat request e32cca1e-d243-4f4b-a82b-1cc89a6c73e1 with model: gemma:7b
+2025-05-20 00:35:13,611 [INFO] DeepThinkAI: Starting chat request 22d46f00-ce15-4b93-80a3-18a8bed66ab3 with model: gemma:7b
+2025-05-20 00:49:41,887 [INFO] DeepThinkAI: Starting chat request 3c6ed9d3-f8bf-4f59-a4d3-e3c2150cc60b with model: gemma:7b
+2025-05-20 00:49:52,736 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"

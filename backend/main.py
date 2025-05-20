@@ -69,7 +69,15 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.edge.service import Service
 import random
 from ahrefs_scraper import router as ahrefs_router
+from minigpt4_integration import process_image_for_minigpt4, stream_minigpt4_response, call_minigpt4_gradio
 
+# Create FastAPI app instance
+app = FastAPI(title="DeepThinkAI API", version="1.0.0")
+
+# Initialize rate limiter
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Configure logging
 logging.basicConfig(
@@ -169,47 +177,13 @@ REQUEST_TIMEOUT = int(os.getenv("REQUEST_TIMEOUT", "200"))  # seconds
 ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-    "https://*.ngrok-free.app",
-    "https://*.ngrok.io",
-    "https://*.ngrok.app",
+    "https://19a8-2601-681-8400-6350-d929-445-fd8e-ef3f.ngrok-free.app",
     "https://www.deepthinkai.app",
-    "https://deepthinkai.app",
-    "https://fda1-2601-681-8400-6350-8959-784e-ae86-4d3b.ngrok-free.app"
+    "https://deepthinkai.app"
 ]
 
-# Remove duplicates
-ALLOWED_ORIGINS = list(dict.fromkeys(ALLOWED_ORIGINS))
+app.state.cors_origins = ALLOWED_ORIGINS
 
-# Rate limiter configuration
-limiter = Limiter(key_func=get_remote_address)
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Startup
-    await db_pool.initialize()
-    await init_db()
-    yield
-    # Shutdown
-    await db_pool.close_all()
-
-app = FastAPI(title="DeepThinkAI API", lifespan=lifespan)
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-
-# Initialize Prometheus instrumentation
-Instrumentator().instrument(app).expose(app)
-
-# Include the Ahrefs router
-app.include_router(ahrefs_router)
-
-# Security middleware
-app.add_middleware(
-    TrustedHostMiddleware, 
-    allowed_hosts=["*"]  # Configure this based on your deployment environment
-)
-app.add_middleware(GZipMiddleware, minimum_size=1000)
-
-# CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
@@ -223,41 +197,52 @@ app.add_middleware(
 # Add CORS preflight handler
 @app.options("/{full_path:path}")
 async def options_handler(request: Request, full_path: str):
-    return JSONResponse(
-        status_code=200,
-        headers={
-            "Access-Control-Allow-Origin": request.headers.get("origin", "*"),
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Credentials": "true",
-            "Access-Control-Max-Age": "3600",
-        }
-    )
+    origin = request.headers.get("origin")
+    if origin in app.state.cors_origins:
+        return JSONResponse(
+            status_code=200,
+            headers={
+                "Access-Control-Allow-Origin": origin,
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Max-Age": "3600",
+            }
+        )
+    return JSONResponse(status_code=400, content={"detail": "Invalid origin"})
 
 # Enhanced error handling for CORS
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    origin = request.headers.get("origin")
+    headers = {}
+    if origin in app.state.cors_origins:
+        headers = {
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Credentials": "true",
+        }
     return JSONResponse(
         status_code=500,
         content={"detail": f"Internal server error: {str(exc)}"},
-        headers={
-            "Access-Control-Allow-Origin": request.headers.get("origin", "*"),
-            "Access-Control-Allow-Credentials": "true",
-        }
+        headers=headers
     )
 
 # Enhanced validation error handler with CORS headers
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     logger.error(f"Validation error: {exc}", exc_info=True)
+    origin = request.headers.get("origin")
+    headers = {}
+    if origin in app.state.cors_origins:
+        headers = {
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Credentials": "true",
+        }
     return JSONResponse(
         status_code=422,
         content={"detail": f"Validation error: {str(exc)}"},
-        headers={
-            "Access-Control-Allow-Origin": request.headers.get("origin", "*"),
-            "Access-Control-Allow-Credentials": "true",
-        }
+        headers=headers
     )
 
 # Request timeout middleware
@@ -405,6 +390,7 @@ async def init_db():
             CREATE TABLE IF NOT EXISTS chat_history (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id TEXT NOT NULL,
+                chat_id TEXT,
                 role TEXT NOT NULL,
                 content TEXT NOT NULL,
                 timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -582,20 +568,123 @@ async def monitor_model_response(model: str, func: callable, *args, **kwargs):
         ERROR_COUNT.labels(type='model_error', endpoint=model).inc()
         raise
 
-# Enhanced chat endpoint with monitoring
+# Add MiniGPT-4 URL to environment variables
+MINIGPT4_URL = os.getenv("MINIGPT4_URL", "http://localhost:7860")
+
+def select_best_model(messages: List[Message], image: Optional[str] = None) -> str:
+    # If image is present, use MiniGPT-4
+    if image:
+        return 'minigpt4:latest'
+    
+    # Otherwise, use existing logic
+    last_message = messages[-1].content.lower()
+    
+    # Check for specific use cases
+    if any(word in last_message for word in ['image', 'picture', 'photo', 'visual']):
+        return 'minigpt4:latest'
+    
+    # Long context handling
+    if len(last_message) > 1500:
+        return 'mistral:latest'
+    
+    # Default to auto selection
+    return 'auto'
+
 @app.post("/api/chat")
 @limiter.limit(f"{RATE_LIMIT_REQUESTS}/{RATE_LIMIT_PERIOD}seconds")
 async def chat(request: Request, chat_request: EnhancedChatRequest, background_tasks: BackgroundTasks):
     request_id = getattr(request.state, "request_id", str(uuid.uuid4()))
     ACTIVE_REQUESTS.inc()
     logger.info(f"Starting chat request {request_id} with model: {chat_request.model}")
+    
     try:
-        # If model is 'auto', use select_best_model to choose the appropriate model
-        selected_model = chat_request.model
-        if selected_model == 'auto':
-            selected_model = select_best_model(chat_request.messages, chat_request.image)
-            logger.info(f"Auto-selected model: {selected_model}")
+        # Always inject system prompt if custom instructions are present
+        custom_instructions = getattr(chat_request, 'customInstructions', None) or getattr(chat_request, 'custom_instructions', None)
+        if custom_instructions and (custom_instructions.get('about') or custom_instructions.get('style')):
+            system_content = ' '.join(filter(None, [custom_instructions.get('about', ''), custom_instructions.get('style', '')])).strip()
+            if system_content:
+                # Remove any existing system message to avoid duplicates
+                chat_request.messages = [m for m in chat_request.messages if m.role != 'system']
+                chat_request.messages.insert(0, type(chat_request.messages[0])(role='system', content=system_content))
 
+        # Intercept creator and name questions for all models
+        last_user_message = next((msg.content for msg in reversed(chat_request.messages) if msg.role == 'user'), None)
+        if last_user_message:
+            if is_creator_question(last_user_message):
+                async def event_stream():
+                    yield f"data: {{\"message\": {{\"content\": \"{CREATOR_RESPONSE}\"}}, \"done\": true}}\n\n"
+                    yield "data: [DONE]\n\n"
+                return StreamingResponse(
+                    event_stream(),
+                    media_type="text/event-stream",
+                    headers={
+                        "X-Request-ID": request_id,
+                        "Cache-Control": "no-cache",
+                        "Connection": "keep-alive",
+                    }
+                )
+            if is_name_question(last_user_message):
+                async def event_stream():
+                    yield f"data: {{\"message\": {{\"content\": \"{NAME_RESPONSE}\"}}, \"done\": true}}\n\n"
+                    yield "data: [DONE]\n\n"
+                return StreamingResponse(
+                    event_stream(),
+                    media_type="text/event-stream",
+                    headers={
+                        "X-Request-ID": request_id,
+                        "Cache-Control": "no-cache",
+                        "Connection": "keep-alive",
+                    }
+                )
+
+        # Select model if auto
+        if chat_request.model == 'auto':
+            chat_request.model = select_best_model(chat_request.messages, chat_request.image)
+            logger.info(f"Auto-selected model: {chat_request.model}")
+        
+        # Process image if present
+        image_data = None
+        if chat_request.image:
+            try:
+                image_data = await process_image_for_minigpt4(chat_request.image)
+            except Exception as e:
+                logger.error(f"Error processing image: {str(e)}")
+                raise HTTPException(status_code=400, detail="Invalid image format")
+        
+        # Handle MiniGPT-4 requests
+        if chat_request.model == 'minigpt4:latest':
+            async def event_stream():
+                try:
+                    # Get the last user message
+                    last_message = next((msg.content for msg in reversed(chat_request.messages) 
+                                      if msg.role == 'user'), None)
+                    if not last_message:
+                        raise HTTPException(status_code=400, detail="No user message found")
+                    
+                    # Stream MiniGPT-4 response
+                    async for chunk in stream_minigpt4_response(last_message, image_data):
+                        if chunk.get('error'):
+                            raise HTTPException(status_code=500, detail=chunk['error'])
+                        
+                        yield f"data: {json.dumps(chunk)}\n\n"
+                    
+                    yield "data: [DONE]\n\n"
+                
+                except Exception as e:
+                    logger.error(f"Error in MiniGPT-4 stream: {str(e)}")
+                    yield f"data: {json.dumps({'error': str(e)})}\n\n"
+            
+            return StreamingResponse(
+                event_stream(),
+                media_type="text/event-stream",
+                headers={
+                    "X-Request-ID": request_id,
+                    "Cache-Control": "no-cache",
+                    "Connection": "keep-alive",
+                }
+            )
+        
+        # Handle other models with existing logic
         async def event_stream():
             try:
                 async with httpx.AsyncClient(timeout=60.0) as client:
@@ -603,7 +692,7 @@ async def chat(request: Request, chat_request: EnhancedChatRequest, background_t
                         "POST",
                         OLLAMA_API_URL,
                         json={
-                            "model": selected_model,
+                            "model": chat_request.model,
                             "messages": [{"role": m.role, "content": m.content} for m in chat_request.messages],
                             "stream": True
                         }
@@ -624,7 +713,9 @@ async def chat(request: Request, chat_request: EnhancedChatRequest, background_t
                 yield f"data: {{\"error\": \"{str(e)}\"}}\n\n"
             finally:
                 ACTIVE_REQUESTS.dec()
+        
         return StreamingResponse(event_stream(), media_type="text/event-stream")
+    
     except Exception as e:
         ACTIVE_REQUESTS.dec()
         ERROR_COUNT.labels(type=type(e).__name__, endpoint='/api/chat').inc()
@@ -821,6 +912,19 @@ def is_creator_question(text: str) -> bool:
     text = text.lower()
     return any(re.search(pattern, text) for pattern in CREATOR_PATTERNS)
 
+NAME_RESPONSE = "My name is Deepthink AI."
+NAME_PATTERNS = [
+    r'what.*(your|the) name',
+    r'who.*are you',
+    r'what.*are you called',
+    r'what.*should i call you',
+    r'your name',
+    r'who.*is this',
+]
+def is_name_question(text: str) -> bool:
+    text = text.lower()
+    return any(re.search(pattern, text) for pattern in NAME_PATTERNS)
+
 # Enhanced health check endpoint with detailed metrics
 @app.get("/health")
 async def health_check():
@@ -852,72 +956,6 @@ sentiment_pipeline = None
 
 # Cache for model selection to avoid repeated checks
 MODEL_SELECTION_CACHE = {}
-
-def select_best_model(messages: List[Message], image: Optional[str] = None) -> str:
-    # If image is present, use vision model
-    if image:
-        return "llava:latest"
-
-    # Create cache key from message content
-    cache_key = "|".join(m.content or "" for m in messages)
-    if cache_key in MODEL_SELECTION_CACHE:
-        return MODEL_SELECTION_CACHE[cache_key]
-
-    # Content Outline Creator - needs long context and complex reasoning
-    if messages and any(
-        'content outline' in (m.content or '').lower() or 
-        'comprehensive content creation assistant' in (m.content or '').lower() or
-        'seo-optimized content outline' in (m.content or '').lower()
-        for m in messages
-    ):
-        MODEL_SELECTION_CACHE[cache_key] = "phi4:latest"
-        return "phi4:latest"
-
-    # Search Intent Tool - needs deep understanding of search behavior
-    if messages and any(
-        'search intent' in (m.content or '').lower() or 
-        'intent analysis' in (m.content or '').lower() or
-        'search behavior' in (m.content or '').lower()
-        for m in messages
-    ):
-        MODEL_SELECTION_CACHE[cache_key] = "gemma3:12b"
-        return "gemma3:12b"
-
-    # Monetization Planner - needs business/financial understanding
-    if messages and any(
-        'monetization' in (m.content or '').lower() or
-        'revenue' in (m.content or '').lower() or
-        'business model' in (m.content or '').lower()
-        for m in messages
-    ):
-        MODEL_SELECTION_CACHE[cache_key] = "gemma:7b"
-        return "gemma:7b"
-
-    # For long prompts, use mistral:latest
-    if messages and any(len(m.content or '') > 1500 for m in messages):
-        MODEL_SELECTION_CACHE[cache_key] = "mistral:latest"
-        return "mistral:latest"
-
-    # Default to gemma:7b for other tasks
-    MODEL_SELECTION_CACHE[cache_key] = "gemma:7b"
-    return "gemma:7b"
-
-# Request ID middleware with logging context
-logger.addFilter(RequestContextFilter())
-
-# Update the logging format to include request_id
-for handler in logger.handlers:
-    handler.setFormatter(logging.Formatter(
-        '%(asctime)s [%(levelname)s] %(name)s: %(message)s - RequestID: %(request_id)s'
-    ))
-
-# Add this middleware before your endpoints
-@app.middleware("http")
-async def add_request_id(request: Request, call_next):
-    request.state.request_id = str(uuid.uuid4())
-    response = await call_next(request)
-    response.headers["X-Request-ID"] = request.state.request_id
-    return response 
 
 @app.post("/api/generate")
 async def generate_completion(
@@ -2617,6 +2655,15 @@ def get_brave_count_selenium(domain):
     except Exception as e:
         logger.error(f"Error initializing Brave WebDriver: {str(e)}")
         return 0
+
+@app.post("/api/minigpt4-chat")
+async def minigpt4_chat(prompt: str = Body(...), image: str = Body(...)):
+    try:
+        result = await call_minigpt4_gradio(prompt, image)
+        return {"response": result}
+    except Exception as e:
+        logger.error(f"MiniGPT-4 Gradio API error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"MiniGPT-4 error: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

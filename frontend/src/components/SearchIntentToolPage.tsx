@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, Dispatch, SetStateAction } from "react";
 import { Box, Typography, TextField, Button, Alert, CircularProgress } from "@mui/material";
 import "./MonetizationPlannerPage.css";
 import { useTheme } from '@mui/material/styles';
@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import ChatInterface from './ChatInterface';
 import { getApiUrl } from '../config';
 
-type Message = { role: 'user' | 'assistant', content: string };
+type Message = { role: 'user' | 'assistant' | 'system', content: string };
 
 const SearchIntentToolPage: React.FC = () => {
   const [keyword, setKeyword] = useState("");

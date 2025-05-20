@@ -27,4 +27,9 @@ __pycache__/
 *.local
 *.sublime*
 .idea/
-.vscode/ 
+.vscode/
+
+# Ignore large model folders
+vicuna-7b/
+vicuna-7b-delta-v1.1/
+llama-7b-hf/ 

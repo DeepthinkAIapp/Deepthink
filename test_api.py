@@ -1,16 +1,15 @@
 import requests
 
-def test_ollama_api():
-    url = "http://localhost:11434/api/chat"
+def test_chat_endpoint():
+    url = "http://localhost:8000/api/chat"
     payload = {
-        "model": "mistral:latest",
         "messages": [
             {
                 "role": "user",
                 "content": "Hello, are you working?"
             }
         ],
-        "stream": False
+        "model": "mistral:latest"
     }
     
     try:
@@ -21,4 +20,4 @@ def test_ollama_api():
         print(f"Error: {str(e)}")
 
 if __name__ == "__main__":
-    test_ollama_api() 
+    test_chat_endpoint() 

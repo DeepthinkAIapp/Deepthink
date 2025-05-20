@@ -37,15 +37,7 @@ def setup_ngrok():
         
         # Open ngrok tunnel
         port = 8000
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public_url = ngrok.connect(port, "http", url="http://127.0.0.1:4040").public_url
-=======
-        public_url = ngrok.connect(port, "http").public_url
->>>>>>> 05239bdfc5bcb0addc59e7c294447b4ee076836b
-=======
-        public_url = ngrok.connect(port, "http").public_url
->>>>>>> 05239bdfc5bcb0addc59e7c294447b4ee076836b
+        public_url = ngrok.connect(port, "http", url="https://19a8-2601-681-8400-6350-d929-445-fd8e-ef3f.ngrok-free.app").public_url
         logger.info(f"ngrok tunnel established at: {public_url}")
         return public_url
     except Exception as e:

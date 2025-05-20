@@ -8,11 +8,13 @@ interface ModelSelectorProps {
 
 const AVAILABLE_MODELS = [
   { value: 'auto', label: 'Auto (Smart Selection)' },
+  { value: 'llama3.1:latest', label: 'Llama 3.1 (Best for Instructions)' },
   { value: 'gemma:7b', label: 'Gemma 7B (General Purpose)' },
   { value: 'gemma3:12b', label: 'Gemma 12B (Deep Understanding)' },
   { value: 'phi4:latest', label: 'Phi-4 (Complex Reasoning)' },
   { value: 'mistral:latest', label: 'Mistral (Long Context)' },
   { value: 'llava:latest', label: 'LLaVA (Vision)' },
+  { value: 'minigpt4:latest', label: 'MiniGPT-4 (Advanced Vision)' },
 ];
 
 export default function ModelSelector({ model, onModelChange }: ModelSelectorProps) {

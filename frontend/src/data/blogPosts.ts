@@ -139,10 +139,10 @@ export const blogPosts = {
       },
       conclusion: "The Deepthink AI brain represents a significant step forward in AI-powered tool integration. By combining multiple advanced models with intelligent selection and tool-specific optimizations, we've created a system that truly enhances every aspect of our tool suite. As we continue to develop and improve our AI capabilities, we're committed to providing our users with the most advanced, efficient, and effective AI-powered tools available."
     },
-    image: "/images/ai1.png",
+    image: "/images/blog/prompthero-prompt-9503d8ce603.webp",
     date: "2024-03-20",
     readTime: "10 min read",
-    author: "Deepthink AI Team",
+    author: "DeepThink AI",
     caseStudy: {
       title: "Case Study: Boosting Productivity for a Marketing Agency",
       description: "A mid-sized marketing agency integrated Deepthink AI across their workflow. By leveraging the AI brain for content ideation, image generation, and campaign planning, they reduced project turnaround time by 30% and increased client satisfaction scores. The agency reported that the free access to all tools allowed them to scale without increasing costs."
@@ -285,10 +285,10 @@ export const blogPosts = {
       },
       conclusion: "The future of image generation is here, and it's powered by AI. Our technology is not just changing how we create images—it's revolutionizing the entire creative process. As we continue to develop and refine our image generation capabilities, we're committed to providing creators with the most advanced, intuitive, and powerful tools available."
     },
-    image: "/images/Flux_Dev_a_futuristic_landscape_depicting_a_legion_of_advanced_0.jpg",
+    image: "/images/blog/prompthero-prompt-2479e948aee.webp",
     date: "2024-03-18",
     readTime: "8 min read",
-    author: "Sarah Chen",
+    author: "DeepThink AI",
     caseStudy: {
       title: "Case Study: Social Media Manager Creates Viral Campaigns",
       description: "A social media manager used our free AI Image Generator to create unique visuals for a product launch. The campaign's engagement rate doubled, and the brand saved thousands on design costs."
@@ -435,10 +435,10 @@ export const blogPosts = {
       },
       conclusion: "Understanding and optimizing for search intent is no longer optional—it's essential for digital success. Our AI-powered Search Intent Tool provides the insights and capabilities needed to create content that truly resonates with your audience and achieves your business goals."
     },
-    image: "/images/Leonardo_Phoenix_10_A_futuristic_AI_chat_assistant_depicted_as_0.jpg",
+    image: "/images/blog/prompthero-prompt-b6d0d1fd443.webp",
     date: "2024-03-15",
     readTime: "7 min read",
-    author: "Michael Rodriguez",
+    author: "DeepThink AI",
     caseStudy: {
       title: "Case Study: Blogger Increases Organic Traffic by 50%",
       description: "A content creator used our free Search Intent Tool to optimize old blog posts. Within two months, organic search traffic increased by 50%, and several posts ranked on the first page of Google."
@@ -604,10 +604,10 @@ export const blogPosts = {
       },
       conclusion: "AI-powered monetization is revolutionizing how businesses approach revenue generation. Our Monetization Planner provides the tools and insights needed to develop and implement effective strategies that drive growth and success in the digital age."
     },
-    image: "/images/prompthero-prompt-cf22ec9ebab.webp",
+    image: "/images/blog/prompthero-prompt-75f921002e7.webp",
     date: "2024-03-12",
     readTime: "9 min read",
-    author: "Emma Thompson",
+    author: "DeepThink AI",
     caseStudy: {
       title: "Case Study: Startup Finds New Revenue Streams",
       description: "A SaaS startup used our free Monetization Planner to identify and test new revenue streams. Within a quarter, they launched a successful subscription model and increased monthly recurring revenue by 40%."
@@ -773,10 +773,10 @@ export const blogPosts = {
       },
       conclusion: "AI-powered guest posting is transforming how businesses approach content marketing. Our Guest Post Outreach tool provides the capabilities needed to develop and implement effective guest posting strategies that drive results and build valuable relationships."
     },
-    image: "/images/Flux_Dev_a_futuristic_landscape_depicting_a_legion_of_advanced_2.jpg",
+    image: "/images/blog/prompthero-prompt-ea9cab710f7.webp",
     date: "2024-03-10",
     readTime: "6 min read",
-    author: "David Kim",
+    author: "DeepThink AI",
     caseStudy: {
       title: "Case Study: SEO Agency Secures High-Authority Backlinks",
       description: "An SEO agency used our free Guest Post Outreach tool to automate prospecting and outreach. They secured 10 high-authority backlinks in a month, boosting their clients' rankings."
@@ -964,10 +964,10 @@ export const blogPosts = {
       },
       conclusion: "The future of AI tools is bright and full of possibilities. At Deepthink AI, we're committed to leading this transformation, developing innovative solutions that empower users and drive progress in the digital age."
     },
-    image: "/images/image1.png",
+    image: "/images/blog/prompthero-prompt-62ba85d9d2c.webp",
     date: "2024-03-08",
     readTime: "11 min read",
-    author: "Deepthink AI Team",
+    author: "DeepThink AI",
     caseStudy: {
       title: "Case Study: Early Adopter Gains Competitive Edge",
       description: "A digital agency that adopted Deepthink AI's free tools early was able to automate routine tasks, freeing up their team for more creative work and winning more clients."

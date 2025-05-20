@@ -5,7 +5,8 @@ import {
   TextField, 
   IconButton,
   Typography,
-  Avatar
+  Avatar,
+  Collapse
 } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import StopIcon from '@mui/icons-material/Stop'
@@ -17,16 +18,21 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { getApiUrl, API_CONFIG } from '../config'
 import { useTheme } from '@mui/material/styles'
 import ModelSelector from './ModelSelector'
+import DataIngestion from './DataIngestion'
+import SearchIcon from '@mui/icons-material/Search'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import { v4 as uuidv4 } from 'uuid'
+import { useAuth } from '../contexts/AuthContext'
+import md5 from 'md5'
 
 console.log('API Base URL:', API_CONFIG.BASE_URL);
 
 interface Message {
-  role: 'user' | 'assistant'
+  role: 'user' | 'assistant' | 'system'
   content: string
 }
 
 interface ChatInterfaceProps {
-  messages: Message[];
   onMessagesChange: (messages: Message[]) => void;
   onTitleChange?: (title: string) => void;
   model: string;
@@ -40,7 +46,16 @@ interface ChatPayload {
   image?: string;
 }
 
+interface IngestedData {
+  title: string;
+  content: string;
+  source: string;
+}
+
 const MAX_INPUT_LENGTH = 8000;
+const CUSTOM_INSTRUCTIONS_KEY = 'deepthinkai_custom_instructions';
+const CUSTOM_INSTRUCTIONS_TOGGLE_KEY = 'deepthinkai_custom_instructions_enabled';
+const RAG_BACKEND_URL = 'http://localhost:8001';
 
 function stripThinkBlocks(text: string) {
   // Remove all <think>...</think> blocks
@@ -60,6 +75,7 @@ function maskModelNames(text: string): string {
     'llama2-uncensored', 'llama2-uncensored:latest',
     'codellama', 'codellama:latest',
     'llama3.2-vision', 'llama3.2-vision:latest',
+    'minigpt4', 'minigpt4:latest',
   ];
   let masked = text;
   modelNames.forEach(name => {
@@ -68,7 +84,19 @@ function maskModelNames(text: string): string {
   return masked;
 }
 
-function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onModelChange, onLoadingChange }: ChatInterfaceProps) {
+// Utility to clean MiniGPT-4/vision model responses
+function cleanMiniGptResponse(content: string): string {
+  // Remove "describe this image <Img>...</Img>" and similar leading blocks
+  // This regex removes from "describe this image" up to the closing </Img> (case-insensitive, non-greedy)
+  return content.replace(/describe this image\s*<img>[\s\S]*?<\/img>/i, '').trim();
+}
+
+function gravatarUrl(email: string, size = 64) {
+  const hash = email ? md5(email.trim().toLowerCase()) : '';
+  return `https://www.gravatar.com/avatar/${hash}?s=${size}&d=identicon`;
+}
+
+function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, onLoadingChange }: ChatInterfaceProps) {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [currentRequestId, setCurrentRequestId] = useState<string | null>(null);
@@ -77,6 +105,13 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const theme = useTheme();
+  const [showDataIngestion, setShowDataIngestion] = useState(false);
+  const [ingestedData, setIngestedData] = useState<IngestedData | null>(null);
+  const [fileIngestStatus, setFileIngestStatus] = useState<string | null>(null);
+  const [chatHistories, setChatHistories] = useState<{ [id: string]: Message[] }>({});
+  const [currentConversationId, setCurrentConversationId] = useState<string>(() => uuidv4());
+  const [messages, setMessages] = useState<Message[]>([]);
+  const { user } = useAuth();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -85,16 +120,44 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
     if (onLoadingChange) onLoadingChange(isLoading);
   }, [messages, isLoading, input]);
 
-  // Handle image file selection
+  useEffect(() => {
+    console.log('ChatInterface messages prop:', messages);
+  }, [messages]);
+
+  // Handle image or file selection
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        setAttachedImage(ev.target?.result as string);
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+    const ext = file.name.split('.').pop()?.toLowerCase();
+    if (ext === 'txt' || ext === 'md') {
+      // Ingest text/markdown file to RAG backend using FormData
+      setFileIngestStatus(null);
+      const formData = new FormData();
+      formData.append('file', file);
+      fetch(`${RAG_BACKEND_URL}/ingest`, {
+        method: 'POST',
+        body: formData,
+      })
+        .then(async (res) => {
+          if (!res.ok) throw new Error('Failed to ingest file');
+          setFileIngestStatus('File ingested into knowledge base!');
+        })
+        .catch(() => {
+          setFileIngestStatus('Failed to ingest file.');
+        });
+      return;
     }
+    // Otherwise, treat as image
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const imageData = ev.target?.result as string;
+      setAttachedImage(imageData);
+      // Auto-select MiniGPT-4 when an image is attached
+      if (model !== 'minigpt4:latest') {
+        onModelChange('minigpt4:latest');
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e: React.FormEvent, customMessages?: Message[]) => {
@@ -108,9 +171,66 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
     } else {
       const userMessage: Message = { role: 'user', content: input };
       newMessages = [...messages, userMessage];
-      onMessagesChange(newMessages);
       setInput('');
     }
+    // Inject custom instructions as system message only at the start of a new chat
+    let shouldInjectInstructions = false;
+    try {
+      const enabled = localStorage.getItem(CUSTOM_INSTRUCTIONS_TOGGLE_KEY);
+      shouldInjectInstructions = enabled === null || enabled === 'true';
+    } catch {}
+    if (shouldInjectInstructions && newMessages.length === 1) {
+      try {
+        const saved = localStorage.getItem(CUSTOM_INSTRUCTIONS_KEY);
+        if (saved) {
+          const customInstructions = JSON.parse(saved);
+          if (customInstructions && (customInstructions.about || customInstructions.style)) {
+            const systemContent = [customInstructions.about, customInstructions.style].filter(Boolean).join('\n\n').trim();
+            if (systemContent) {
+              newMessages = [
+                { role: 'system', content: systemContent },
+                ...newMessages
+              ];
+            }
+          }
+        }
+      } catch {}
+    }
+
+    // --- RAG: Retrieve context and prepend to prompt ---
+    let ragContext = '';
+    if (
+      input && input.trim().length > 0 &&
+      model !== 'minigpt4:latest' &&
+      model !== 'llava:latest'
+    ) {
+      try {
+        const ragRes = await fetch(`${RAG_BACKEND_URL}/search?q=${encodeURIComponent(input)}`);
+        if (ragRes.ok) {
+          const ragData = await ragRes.json();
+          if (ragData.documents && ragData.documents.length > 0) {
+            ragContext = ragData.documents.map((doc: string, i: number) => {
+              const meta = ragData.metadatas[i];
+              return `Source: ${meta.title}\n${doc}`;
+            }).join('\n\n');
+          }
+        }
+      } catch (err) {
+        // If RAG fails, continue without context
+        console.warn('RAG context fetch failed:', err);
+      }
+    }
+    if (ragContext) {
+      // Prepend as a system message
+      newMessages = [
+        { role: 'system', content: `Use the following context to answer the question.\n${ragContext}` },
+        ...newMessages
+      ];
+    }
+    // --- END RAG ---
+
+    setMessages([...messages, ...newMessages]);
+    onMessagesChange([...messages, ...newMessages]);
     setIsLoading(true);
     // Optionally update chat title based on first user message
     if (onTitleChange && newMessages.length === 1) {
@@ -125,14 +245,81 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
     }
 
     // Prepare payload
-    const payload: ChatPayload = {
+    const payload: ChatPayload & { customInstructions?: any } = {
       model: usedModel,
       messages: [
-        ...newMessages
+        ...newMessages.filter(m => m.content && m.content.trim().length > 0)
       ]
     };
     if (attachedImage) {
       payload.image = attachedImage;
+    }
+    // If custom instructions are present and enabled, auto-select llama3.1:latest unless user has chosen a different model
+    if (shouldInjectInstructions) {
+      try {
+        const saved = localStorage.getItem(CUSTOM_INSTRUCTIONS_KEY);
+        if (saved) {
+          const customInstructions = JSON.parse(saved);
+          if (customInstructions && (customInstructions.about || customInstructions.style)) {
+            payload.customInstructions = customInstructions;
+            if (usedModel === 'auto') {
+              usedModel = 'llama3.1:latest';
+              payload.model = usedModel;
+              onModelChange && onModelChange('llama3.1:latest');
+            }
+          }
+        }
+      } catch {}
+    }
+
+    // If using MiniGPT-4 and an image is attached, use the new endpoint
+    if (model === 'minigpt4:latest' && attachedImage) {
+      try {
+        setIsLoading(true);
+        const lastUserMessage = newMessages.filter(m => m.role === 'user').slice(-1)[0]?.content || input;
+        const response = await fetch(getApiUrl('/api/minigpt4-chat'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: lastUserMessage, image: attachedImage }),
+        });
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ detail: 'Unknown error' }));
+          throw new Error(errorData.detail || `Network response was not ok (${response.status})`);
+        }
+        const data = await response.json();
+        let content = '';
+        if (Array.isArray(data.response)) {
+          content = data.response.map((item: any) => {
+            if (typeof item === 'string') return item;
+            if (typeof item === 'object' && item !== null) return JSON.stringify(item);
+            return String(item);
+          }).join('\n');
+        } else if (typeof data.response === 'object' && data.response !== null) {
+          content = JSON.stringify(data.response, null, 2);
+        } else {
+          content = data.response?.toString() || '';
+        }
+        // Clean MiniGPT-4 response
+        const cleanedContent = cleanMiniGptResponse(content);
+        const assistantMessage: Message = { role: 'assistant', content: cleanedContent };
+        setMessages([...messages, assistantMessage]);
+        onMessagesChange([...messages, assistantMessage]);
+        setCanResume(true);
+      } catch (error) {
+        console.error('Error in MiniGPT-4 image chat:', error);
+        const errorMessage: Message = {
+          role: 'assistant',
+          content: error instanceof Error ? error.message : 'Sorry, there was an error processing your request.'
+        };
+        setMessages([...messages, ...(customMessages || []), errorMessage]);
+        onMessagesChange([...messages, ...(customMessages || []), errorMessage]);
+        setCanResume(true);
+      } finally {
+        setIsLoading(false);
+        setCurrentRequestId(null);
+        if (attachedImage) setAttachedImage(null);
+      }
+      return;
     }
 
     try {
@@ -174,7 +361,7 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
 
       // Add assistant message placeholder
       let lastMessages: Message[] = [...newMessages, { role: 'assistant', content: '' }];
-      onMessagesChange(lastMessages);
+      onMessagesChange([...messages, ...lastMessages]);
       let assistantContent = '';
 
       let buffer = '';
@@ -202,18 +389,26 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
                   console.error('Received error:', data.error);
                   throw new Error(data.error);
                 }
-                if (data.done) {
-                  console.log('Received done signal');
-                  return;
-                }
                 if (data.message && data.message.content) {
                   assistantContent += data.message.content;
-                  // Update the last assistant message in the local array
                   lastMessages[lastMessages.length - 1] = {
                     role: 'assistant',
                     content: assistantContent,
                   };
-                  onMessagesChange([...lastMessages]);
+                  setMessages([...messages, ...lastMessages]);
+                  onMessagesChange([...messages, ...lastMessages]);
+                }
+                // If done, ensure the last assistant message is updated one final time
+                if (data.done) {
+                  lastMessages[lastMessages.length - 1] = {
+                    role: 'assistant',
+                    content: assistantContent,
+                  };
+                  console.log('Final assistantContent:', assistantContent);
+                  console.log('Final lastMessages:', lastMessages);
+                  setMessages([...messages, ...lastMessages]);
+                  console.log('Received done signal');
+                  return;
                 }
               } catch (err) {
                 // If JSON.parse fails, skip this chunk and wait for the next one
@@ -223,6 +418,14 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
             }
           }
         }
+        // After stream ends, ensure the last assistant message is updated
+        lastMessages[lastMessages.length - 1] = {
+          role: 'assistant',
+          content: assistantContent,
+        };
+        console.log('Stream end assistantContent:', assistantContent);
+        console.log('Stream end lastMessages:', lastMessages);
+        setMessages([...messages, ...lastMessages]);
       } catch (err) {
         console.error('Error processing stream:', err);
         if (err instanceof Error) {
@@ -237,7 +440,8 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
         role: 'assistant', 
         content: error instanceof Error ? error.message : 'Sorry, there was an error processing your request.' 
       }
-      onMessagesChange([...messages, ...(customMessages || []), errorMessage] as Message[])
+      setMessages([...messages, ...(customMessages || []), errorMessage]);
+      onMessagesChange([...messages, ...(customMessages || []), errorMessage]);
       setCanResume(true);
     } finally {
       console.log('Cleaning up request');
@@ -283,10 +487,61 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
 
   // Auto-select vision model if image is attached
   useEffect(() => {
-    if (attachedImage && model !== 'llava:latest') {
-      onModelChange('llava:latest');
+    if (attachedImage) {
+      if (model !== 'minigpt4:latest' && model !== 'llava:latest') {
+        onModelChange('minigpt4:latest');
+      }
     }
-  }, [messages, isLoading, input, attachedImage]);
+  }, [attachedImage, model, onModelChange]);
+
+  // Ensure model selector is set to llama3.1:latest when custom instructions are active and enabled
+  useEffect(() => {
+    try {
+      const enabled = localStorage.getItem(CUSTOM_INSTRUCTIONS_TOGGLE_KEY);
+      const shouldInjectInstructions = enabled === null || enabled === 'true';
+      if (shouldInjectInstructions) {
+        const saved = localStorage.getItem(CUSTOM_INSTRUCTIONS_KEY);
+        if (saved) {
+          const customInstructions = JSON.parse(saved);
+          if (customInstructions && (customInstructions.about || customInstructions.style)) {
+            if (model !== 'llama3.1:latest') {
+              onModelChange('llama3.1:latest');
+            }
+          }
+        }
+      }
+    } catch {}
+  }, [model]);
+
+  const handleDataIngested = (data: IngestedData) => {
+    setIngestedData(data);
+    // Add the ingested data as a system message
+    const systemMessage: Message = {
+      role: 'system',
+      content: `Here is information from ${data.source} about "${data.title}":\n\n${data.content}\n\nPlease use this information to provide more accurate and detailed responses.`
+    };
+    setMessages([...messages, systemMessage]);
+    onMessagesChange([...messages, systemMessage]);
+  };
+
+  // When switching conversations, save current and load new
+  const switchConversation = (conversationId: string) => {
+    setChatHistories(prev => ({ ...prev, [currentConversationId]: messages }));
+    setMessages(chatHistories[conversationId] || []);
+    setCurrentConversationId(conversationId);
+    setAttachedImage(null);
+    setInput('');
+  };
+
+  // When starting a new chat
+  const startNewChat = () => {
+    const newId = uuidv4();
+    setChatHistories(prev => ({ ...prev, [currentConversationId]: messages }));
+    setMessages([]);
+    setCurrentConversationId(newId);
+    setAttachedImage(null);
+    setInput('');
+  };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}>
@@ -322,13 +577,17 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
         flex: 1, 
         overflowY: 'auto', 
         p: 2,
-        pt: { xs: '80px', sm: '80px' },
+        pt: { xs: '100px', sm: '100px' },
         display: 'flex',
         flexDirection: 'column',
         gap: 2,
         bgcolor: 'transparent',
         background: 'linear-gradient(to bottom, #2196f3 0%, #ffffff 100%)',
       }}>
+        <Collapse in={showDataIngestion}>
+          <DataIngestion onDataIngested={handleDataIngested} />
+        </Collapse>
+        
         {messages.map((msg, index) => (
           <Box
             key={index}
@@ -342,20 +601,37 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
           >
             <Avatar
               sx={{
-                bgcolor: msg.role === 'user' ? 'primary.main' : 'secondary.main',
+                bgcolor: msg.role === 'user' ? 'primary.main' : msg.role === 'system' ? 'info.main' : undefined,
                 width: 32,
                 height: 32,
+                ...(msg.role === 'assistant' && {
+                  background: 'linear-gradient(135deg, #ff9800 0%, #ff6b00 100%)',
+                  color: '#fff',
+                  border: '2px solid #fff',
+                })
               }}
+              src={
+                msg.role === 'user'
+                  ? (user?.photoURL || (user?.email ? gravatarUrl(user.email) : undefined))
+                  : msg.role === 'assistant'
+                    ? `${import.meta.env.BASE_URL}images/android-chrome-512x512.png`
+                    : undefined
+              }
+              alt={msg.role === 'user' ? (user?.displayName || user?.email || 'User') : 'AI'}
             >
-              {msg.role === 'user' ? 'U' : 'AI'}
+              {msg.role === 'user'
+                ? (user?.displayName ? user.displayName[0] : 'U')
+                : msg.role === 'system'
+                  ? <InfoOutlinedIcon fontSize="small" />
+                  : null}
             </Avatar>
             <Paper
               elevation={1}
               sx={{
                 p: 2,
-                bgcolor: 'white',
+                bgcolor: msg.role === 'system' ? '#e3f2fd' : 'white',
                 color: theme.palette.mode === 'dark' ? '#111' : (msg.role === 'user' ? '#ff6b00' : 'text.primary'),
-                border: msg.role === 'user' ? '2px solid #ff6b00' : '1px solid #e3eafc',
+                border: msg.role === 'system' ? '2px dashed #2196f3' : msg.role === 'user' ? '2px solid #ff6b00' : '1px solid #e3eafc',
                 boxShadow: msg.role === 'user' ? '0 2px 8px rgba(255,107,0,0.08)' : '0 2px 8px rgba(33,150,243,0.08)',
                 borderRadius: 3,
                 position: 'relative',
@@ -366,8 +642,8 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
                   [msg.role === 'user' ? 'right' : 'left']: -8,
                   width: 16,
                   height: 16,
-                  bgcolor: 'white',
-                  border: msg.role === 'user' ? '2px solid #ff6b00' : '1px solid #e3eafc',
+                  bgcolor: msg.role === 'system' ? '#e3f2fd' : 'white',
+                  border: msg.role === 'system' ? '2px dashed #2196f3' : msg.role === 'user' ? '2px solid #ff6b00' : '1px solid #e3eafc',
                   transform: 'rotate(45deg)',
                   zIndex: 0
                 }
@@ -421,7 +697,15 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
           boxShadow: '0 -2px 8px rgba(33,150,243,0.08)'
         }}
       >
-        <ModelSelector model={model} onModelChange={onModelChange} />
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+          <ModelSelector model={model} onModelChange={onModelChange} />
+          <IconButton
+            onClick={() => setShowDataIngestion(!showDataIngestion)}
+            title={showDataIngestion ? "Hide Knowledge Base Search" : "Show Knowledge Base Search"}
+          >
+            <SearchIcon />
+          </IconButton>
+        </Box>
         <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-end' }}>
           {/* Image preview */}
           {attachedImage && (
@@ -555,6 +839,13 @@ function ChatInterface({ messages, onMessagesChange, onTitleChange, model, onMod
           )}
         </Box>
       </Box>
+      {fileIngestStatus && (
+        <Box sx={{ mt: 1 }}>
+          <Typography variant="caption" color={fileIngestStatus.includes('Failed') ? 'error' : 'success.main'}>
+            {fileIngestStatus}
+          </Typography>
+        </Box>
+      )}
     </Box>
   )
 }

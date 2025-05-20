@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { getApiUrl } from '../config';
 
-type Message = { role: 'user' | 'assistant', content: string };
+type Message = { role: 'user' | 'assistant' | 'system', content: string };
 
 const GuestPostOutreachPage: React.FC = () => {
   const [niche, setNiche] = useState("");

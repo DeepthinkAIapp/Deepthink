@@ -4,7 +4,7 @@
 // API Configuration
 export const API_CONFIG = {
   // Use Vite environment variable for API URL
-  BASE_URL: import.meta.env.VITE_API_URL || 'https://3c0a-2601-681-8400-6350-e56a-a571-bd45-4b51.ngrok-free.app',
+  BASE_URL: import.meta.env.VITE_API_URL || 'https://19a8-2601-681-8400-6350-d929-445-fd8e-ef3f.ngrok-free.app',
   // API endpoints
   CHAT: '/api/chat',
   GENERATE: '/api/generate',
@@ -15,7 +15,14 @@ export const API_CONFIG = {
   GENERATED_IMAGES: '/api/generated-images',
   CHAT_HISTORY: '/api/chat/history',
   HEALTH: '/health',
-  AUTHORITY_CHECKER: '/api/authority-checker'
+  AUTHORITY_CHECKER: '/api/authority-checker',
+  // Default fetch options
+  DEFAULT_FETCH_OPTIONS: {
+    credentials: 'include' as RequestCredentials,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
 };
 
 // Helper function to get the full API URL for a specific endpoint
@@ -27,7 +34,10 @@ export const getApiUrl = (endpoint: string) => {
 // Helper function to check if the API is available
 export const checkApiHealth = async () => {
   try {
-    const response = await fetch(getApiUrl(API_CONFIG.HEALTH));
+    const response = await fetch(getApiUrl(API_CONFIG.HEALTH), {
+      ...API_CONFIG.DEFAULT_FETCH_OPTIONS,
+      method: 'GET',
+    });
     if (!response.ok) {
       console.error('API health check failed:', response.status, response.statusText);
       return false;

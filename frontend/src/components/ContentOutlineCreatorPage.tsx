@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from "react";
 import { Box, Typography, TextField, Button, Paper, Alert, useTheme } from "@mui/material";
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -7,7 +7,7 @@ import ChatInterface from './ChatInterface';
 import remarkGfm from 'remark-gfm';
 import { getApiUrl } from '../config';
 
-type Message = { role: 'user' | 'assistant', content: string };
+type Message = { role: 'user' | 'assistant' | 'system', content: string };
 
 const ONBOARDING_MESSAGE = `# Step 1: Subniche Content Idea Generator\nWhat's your main niche? (e.g., fitness, personal finance, gardening, tech, parenting, etc.)\n\nOnce you provide that, I'll:\n\n- Generate 5 relevant sub-niches within your main niche.\n- For each sub-niche, create 5 SEO-friendly content topic ideas.\n- Present everything in a clean, organized format.\n\n# Step 2: Targeted Keyword Idea Generator\nAfter you pick a sub-niche, I'll generate:\n\n- 15 informational article ideas (easy to rank for)\n- 5 transactional/affiliate post ideas\n- 2 pillar posts (1 affiliate, 1 informational)\nAll with SEO-friendly titles & target keywords in a table.\n\n# Step 3: SEO-Optimized Content Outline Creator\nYou'll choose one keyword, and I'll create a full outline with:\n- ✔ Title (H1) – Optimized & engaging\n- ✔ Meta description – Click-worthy & keyword-rich\n- ✔ Introduction – Hook + context\n- ✔ H2s with bullet points – Logical flow, semantic keywords\n- ✔ Conclusion – Recap + call to action\n- ✔ 50-100 semantic keywords – For NLP & depth\n\n# Step 4: AI Content Machine (Paragraph Generator)\nFor each H2, I'll write 400+ words in a human-like, conversational tone with:\n- ✅ Personal anecdotes (made-up but realistic)\n- ✅ Practical tips (from "experience")\n- ✅ Semantic keywords (naturally placed)\n- ✅ Burstiness (short + long sentences)\n- ✅ Occasional slang/errors (for authenticity)\n- ✅ Featured snippet-ready (clear, helpful answers)\n\nLet's Get Started!\n\nWhat's your main niche? (e.g., "gardening," "personal finance," "tech gadgets")\n\nOnce you tell me, I'll generate sub-niches + content ideas immediately!\n\n*(Example: If you say "fitness," I might suggest sub-niches like "home workouts," "weight loss nutrition," "running for beginners," etc., each with 5 blog topic ideas.)*\n\nYour turn! 🚀`;
 
