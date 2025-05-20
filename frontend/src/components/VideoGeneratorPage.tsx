@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { getApiUrl } from '../config';
+import { getApiUrl, getSdApiUrl, API_CONFIG } from '../config';
 
 const SAMPLERS = [
   'Euler a', 'Euler', 'LMS', 'Heun', 'DPM2', 'DPM2 a', 'DPM++ 2S a', 'DPM++ 2M', 'DPM++ SDE', 'DPM fast', 'DPM adaptive', 'LMS Karras', 'DPM2 Karras', 'DPM2 a Karras', 'DPM++ 2S a Karras', 'DPM++ 2M Karras', 'DPM++ SDE Karras', 'DDIM', 'PLMS'
@@ -430,13 +430,12 @@ const VideoGeneratorPage: React.FC = () => {
   }, []);
 
   const pollJobStatus = async (batchId: string) => {
-    const statusUrl = getApiUrl(`/deforum_api/batches?id=${batchId}`);
+    const statusUrl = getSdApiUrl(`${API_CONFIG.SD_DEFORUM}/batches?id=${batchId}`);
     let isComplete = false;
     setMessage('Video is being generated...');
     while (!isComplete) {
       const res = await fetch(statusUrl);
       const data = await res.json();
-      // Adjust the following logic to match your Deforum API's response
       if (data.status === 'completed' && data.output_video_url) {
         isComplete = true;
         setMessage('Video generation complete!');
@@ -465,7 +464,7 @@ const VideoGeneratorPage: React.FC = () => {
         init_image: useInit ? deforumSettings.init_image : ''
       });
       console.log('Sending settings:', safeSettings);
-      const res = await fetch(getApiUrl('/api/deforum-generate'), {
+      const res = await fetch(getSdApiUrl(API_CONFIG.SD_DEFORUM), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(safeSettings)
@@ -485,14 +484,13 @@ const VideoGeneratorPage: React.FC = () => {
     }
   };
 
-  // Stop Processing logic
   const handleStopProcessing = async () => {
     if (!batchId) return;
     setLoading(false);
     setBatchId(null);
     setMessage('Stopping job...');
     try {
-      const res = await fetch(getApiUrl('/api/deforum-stop'), {
+      const res = await fetch(getSdApiUrl(`${API_CONFIG.SD_DEFORUM}/stop`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ batch_id: batchId })

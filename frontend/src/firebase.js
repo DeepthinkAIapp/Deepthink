@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
 const firebaseConfig = {
@@ -10,8 +10,8 @@ const firebaseConfig = {
   appId: "1:1048364078135:web:cae558a3c38cc68b4a1bb2"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase using singleton pattern
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 

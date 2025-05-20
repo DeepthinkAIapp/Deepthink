@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, TextField, Button, Typography, CircularProgress } from '@mui/material';
-import { getApiUrl } from '../config';
+import { getApiUrl, getSdApiUrl, API_CONFIG } from '../config';
 
 const DeepthinkImageGeneratorPage = () => {
   const [prompt, setPrompt] = useState('');
@@ -12,10 +12,17 @@ const DeepthinkImageGeneratorPage = () => {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fetch(getApiUrl('/api/generate-image'), {
+      const response = await fetch(getSdApiUrl(API_CONFIG.SD_TXT2IMG), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ 
+          prompt,
+          steps: 20,
+          width: 512,
+          height: 512,
+          cfg_scale: 7,
+          sampler_name: "Euler a"
+        }),
       });
 
       if (!response.ok) {
@@ -23,7 +30,11 @@ const DeepthinkImageGeneratorPage = () => {
       }
 
       const data = await response.json();
-      setImageUrl(data.imageUrl);
+      if (data.images && data.images.length > 0) {
+        setImageUrl(`data:image/png;base64,${data.images[0]}`);
+      } else {
+        throw new Error('No image generated');
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
