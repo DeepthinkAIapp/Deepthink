@@ -3,7 +3,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/
 
 const firebaseConfig = {
   apiKey: "AIzaSyAKivxxAAIc-gpsplZYyk0nSioL9mljUks",
-  authDomain: "deepthinkai-2b58f.firebaseapp.com",
+  authDomain: "deepthinkai.app",
   projectId: "deepthinkai-2b58f",
   storageBucket: "deepthinkai-2b58f.firebasestorage.app",
   messagingSenderId: "1048364078135",
@@ -14,6 +14,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
 
 // Google Sign In
 export const signInWithGoogle = async () => {
