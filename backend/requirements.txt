@@ -21,7 +21,7 @@ transformers==4.35.2
 wordninja==2.0.0
 prometheus-client==0.17.1
 prometheus-fastapi-instrumentator==6.1.0
-beautifulsoup4==4.12.2
+beautifulsoup4==4.12.3
 selenium==4.15.2
 webdriver-manager==4.0.1
 Pillow==10.1.0
@@ -43,7 +43,6 @@ free-proxy==1.1.1
 
 # Scraping and Parsing
 lxml==5.1.0
-beautifulsoup4==4.12.3
 fake-useragent==1.4.0
 
 # Additional Search Engine Support
