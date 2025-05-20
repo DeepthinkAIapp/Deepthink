@@ -47,7 +47,31 @@ const GuestPostOutreachPage: React.FC = () => {
         body: JSON.stringify({ niche, prompt }),
         signal: abortController.current.signal,
       });
-      if (!response.body) throw new Error("No response body");
+      if (!response.body) {
+        // Fallback: non-streamed response
+        const data = await response.json();
+        let content = '';
+        if (typeof data.ideas === "string") {
+          content = data.ideas;
+        } else if (typeof data.content === "string") {
+          content = data.content;
+        } else if (data.message && typeof data.message.content === "string") {
+          content = data.message.content;
+        }
+        if (content) {
+          setIdeas(content);
+          setChatMessages([
+            {
+              role: 'assistant',
+              content: `Context: The user is seeking guest post opportunities in the niche "${niche}". Here are the top sites and content gaps:\n\n${content}\n\nWhen the user asks for a custom pitch, use this context to tailor your response.`
+            }
+          ]);
+        } else {
+          setIdeas("[No content returned]");
+        }
+        setLoading(false);
+        return;
+      }
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let buffer = "";
@@ -63,8 +87,16 @@ const GuestPostOutreachPage: React.FC = () => {
             try {
               const jsonStr = sse.replace(/^data: /, "");
               const data = JSON.parse(jsonStr);
+              let content = '';
               if (typeof data.ideas === "string") {
-                fullIdeas += data.ideas;
+                content = data.ideas;
+              } else if (typeof data.content === "string") {
+                content = data.content;
+              } else if (data.message && typeof data.message.content === "string") {
+                content = data.message.content;
+              }
+              if (content) {
+                fullIdeas += content;
                 setIdeas(fullIdeas);
                 generatedIdeas = fullIdeas;
               }

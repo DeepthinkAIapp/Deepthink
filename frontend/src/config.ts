@@ -3,8 +3,8 @@
 
 // API Configuration
 export const API_CONFIG = {
-  // Use Vite environment variable for API URL or fallback to ngrok URL
-  BASE_URL: import.meta.env.VITE_API_URL || 'https://19a8-2601-681-8400-6350-d929-445-fd8e-ef3f.ngrok-free.app',
+  // Use consistent API URL for both development and production
+  BASE_URL: 'http://localhost:8000',
   // API endpoints
   CHAT: '/api/chat',
   GENERATE: '/api/generate',

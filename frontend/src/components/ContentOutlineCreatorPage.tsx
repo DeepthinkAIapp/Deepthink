@@ -264,6 +264,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
           <Paper elevation={3} sx={{ mt: 1, p: 1.5, bgcolor: theme.palette.mode === 'dark' ? '#232936' : undefined }}>
             <ReactMarkdown>{ONBOARDING_MESSAGE}</ReactMarkdown>
           </Paper>
+          <Box sx={{ height: 24 }} />
           <TextField
             label="What's your main niche? (e.g., fitness, personal finance, gardening, tech, parenting, etc.)"
             variant="outlined"
@@ -279,7 +280,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
               }
             }}
           />
-          <Box sx={{ display: "flex", gap: 2 }}>
+          <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
             <Button
               variant="contained"
               color="primary"
@@ -304,8 +305,8 @@ const ContentOutlineCreatorPage: React.FC = () => {
           </Box>
           {/* Step 1 Results */}
           {subniches && (
-            <Paper elevation={3} sx={{ mt: 2, p: 1.5 }}>
-              <Typography variant="h6">Sub-niches & Content Ideas</Typography>
+            <Paper elevation={3} sx={{ mt: 4, p: 2 }}>
+              <Typography variant="h6" sx={{ mb: 2 }}>Sub-niches & Content Ideas</Typography>
               {Array.isArray(subniches) ? (
                 <Box>
                   {subniches.map((item, idx) => {
@@ -319,12 +320,12 @@ const ContentOutlineCreatorPage: React.FC = () => {
                     else if (typeof item.content_topics === 'string') ideas = (item.content_topics as string).split(/\n|;|,|\|/).map((s: string) => s.trim()).filter(Boolean);
 
                     return (
-                      <Box key={idx} sx={{ mb: 2 }}>
-                        <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>{item.name || item.subniche || item.sub_niche || `Sub-niche ${idx + 1}`}</Typography>
+                      <Box key={idx} sx={{ mb: 3 }}>
+                        <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>{item.name || item.subniche || item.sub_niche || `Sub-niche ${idx + 1}`}</Typography>
                         {ideas.length > 0 && (
-                          <ul>
+                          <ul style={{ marginBottom: 12 }}>
                             {ideas.map((idea: string, i: number) => (
-                              <li key={i}>{idea}</li>
+                              <li key={i} style={{ marginBottom: 4 }}>{idea}</li>
                             ))}
                           </ul>
                         )}
@@ -348,21 +349,21 @@ const ContentOutlineCreatorPage: React.FC = () => {
           )}
           {/* Step 2 Results: Keyword Table */}
           {keywordTable && (
-            <div style={{ margin: '32px 0 32px 0', padding: 0 }}>
-              <Typography variant="h5" sx={{ mb: 2, fontWeight: 700 }}>
+            <div style={{ margin: '48px 0 48px 0', padding: 0 }}>
+              <Typography variant="h5" sx={{ mb: 3, fontWeight: 700 }}>
                 Keyword & Article Ideas for: {selectedSubniche}
               </Typography>
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
                   table: ({node, ...props}) => (
-                    <table style={{ borderCollapse: 'collapse', width: '100%', marginBottom: 16, fontSize: 15, background: 'white' }} {...props} />
+                    <table style={{ borderCollapse: 'collapse', width: '100%', marginBottom: 24, fontSize: 15, background: 'white', boxShadow: '0 2px 8px #0001' }} {...props} />
                   ),
                   th: ({node, ...props}) => (
                     <th style={{ border: '1px solid #ccc', padding: 8, background: '#e3eafc', fontWeight: 700, textAlign: 'left' }} {...props} />
                   ),
                   td: ({node, ...props}) => (
-                    <td style={{ border: '1px solid #ccc', padding: 8, verticalAlign: 'top' }} {...props} />
+                    <td style={{ border: '1px solid #ccc', padding: 8, verticalAlign: 'top', background: '#fff' }} {...props} />
                   ),
                   h1: ({node, ...props}) => (
                     <h1 style={{ fontSize: 24, fontWeight: 700, margin: '24px 0 12px' }} {...props} />
@@ -395,12 +396,22 @@ const ContentOutlineCreatorPage: React.FC = () => {
                   }
                 }}
               >
+                {/* Try to fix the table if it's not valid Markdown */}
                 {fixMarkdownTable(keywordTable)}
               </ReactMarkdown>
+              {/* Fallback: If the table is still not readable, show raw text */}
+              {(!/\|\s*Type\s*\|/i.test(keywordTable) && !/\|\s*Title\s*\|/i.test(keywordTable)) && (
+                <Paper sx={{ mt: 2, p: 2, background: '#fff' }}>
+                  <Typography variant="body2" color="text.secondary">
+                    Could not format as a table. Here is the raw response:
+                  </Typography>
+                  <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', fontSize: 14 }}>{keywordTable}</pre>
+                </Paper>
+              )}
             </div>
           )}
           {keywordTable && (
-            <Box sx={{ mt: 4 }}>
+            <Box sx={{ mt: 6 }}>
               <ChatInterface
                 onMessagesChange={setChatMessages}
                 model="auto"
@@ -410,7 +421,7 @@ const ContentOutlineCreatorPage: React.FC = () => {
           )}
           {/* Fallback for raw AI response */}
           {aiResponse && (
-            <Paper elevation={3} sx={{ mt: 2, p: 1.5 }}>
+            <Paper elevation={3} sx={{ mt: 4, p: 2 }}>
               <Typography variant="h6">AI Response</Typography>
               <ReactMarkdown>{aiResponse}</ReactMarkdown>
             </Paper>

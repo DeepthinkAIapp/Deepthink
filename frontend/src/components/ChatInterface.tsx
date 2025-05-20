@@ -527,7 +527,7 @@ function ChatInterface({ onMessagesChange, onTitleChange, model, onModelChange, 
                 msg.role === 'user'
                   ? (user?.photoURL || (user?.email ? gravatarUrl(user.email) : undefined))
                   : msg.role === 'assistant'
-                    ? '/images/logo.png'
+                    ? '/images/blog/logo.png'
                     : undefined
               }
               alt={msg.role === 'user' ? (user?.displayName || user?.email || 'User') : 'AI'}

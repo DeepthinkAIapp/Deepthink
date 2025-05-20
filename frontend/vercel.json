@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://19a8-2601-681-8400-6350-d929-445-fd8e-ef3f.ngrok-free.app/api/:path*"
+      "destination": "https://your-app-name.onrender.com/api/:path*"
     },
     {
       "source": "/((?!api).*)",

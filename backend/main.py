@@ -171,15 +171,16 @@ RATE_LIMIT_PERIOD = int(os.getenv("RATE_LIMIT_PERIOD", "60"))
 
 # Request Configuration
 MAX_REQUEST_SIZE = int(os.getenv("MAX_REQUEST_SIZE", "104857600"))  # 100MB in bytes
-REQUEST_TIMEOUT = int(os.getenv("REQUEST_TIMEOUT", "200"))  # seconds
+REQUEST_TIMEOUT = 300.0  # 5 minutes
 
 # CORS Configuration
 ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
-    "https://19a8-2601-681-8400-6350-d929-445-fd8e-ef3f.ngrok-free.app",
+    "http://localhost:8000",
     "https://www.deepthinkai.app",
-    "https://deepthinkai.app"
+    "https://deepthinkai.app",
+    "https://deepthinkai.vercel.app"  # Add Vercel preview deployments
 ]
 
 app.state.cors_origins = ALLOWED_ORIGINS
@@ -962,7 +963,7 @@ async def generate_completion(
     model: str = Body(...),
     prompt: str = Body(...)
 ):
-    async with httpx.AsyncClient(timeout=30.0) as client:
+    async with httpx.AsyncClient(timeout=300.0) as client:  # 5 minutes timeout
         response = await client.post(
             "http://localhost:11434/api/generate",
             json={"model": model, "prompt": prompt, "stream": False}
@@ -1102,7 +1103,7 @@ async def content_outline_creator(request: Request):
         
         async def event_stream():
             try:
-                async with httpx.AsyncClient(timeout=60.0) as client:
+                async with httpx.AsyncClient(timeout=300.0) as client:  # 5 minutes timeout
                     async with client.stream(
                         "POST",
                         OLLAMA_API_URL,
@@ -1208,7 +1209,7 @@ async def content_outline_subniches(request: Request):
         ACTIVE_REQUESTS.inc()
         
         try:
-            async with httpx.AsyncClient(timeout=120.0) as client:  # Increased timeout to 120 seconds
+            async with httpx.AsyncClient(timeout=300.0) as client:  # 5 minutes timeout
                 response = await client.post(
                     OLLAMA_API_URL,
                     json={
@@ -1339,30 +1340,29 @@ async def guestpost(guestpost_request: GuestPostRequest):
             Message(role="system", content="You are Deepthink AI, an expert in guest post outreach. Given a user's niche, identify 5-10 high authority websites in that niche that have published articles in the last 3 months, accept guest posts, and analyze for content gaps and good guest post ideas."),
             Message(role="user", content=user_prompt)
         ]
-        selected_model = select_best_model(messages)
+        selected_model = "phi4:latest"  # Always use phi4 for this endpoint
+        prompt = "\n\n".join([m.content for m in messages])
+        logger.info(f"[GuestPost] Sending prompt to Ollama: {prompt}")
         async def event_stream():
             try:
-                async with httpx.AsyncClient(timeout=60.0) as client:
-                    async with client.stream(
-                        "POST",
+                async with httpx.AsyncClient(timeout=300.0) as client:
+                    response = await client.post(
                         OLLAMA_API_URL,
                         json={
                             "model": selected_model,
                             "messages": [{"role": m.role, "content": m.content} for m in messages],
-                            "stream": True
+                            "stream": False
                         }
-                    ) as response:
-                        async for line in response.aiter_lines():
-                            if line.strip():
-                                try:
-                                    data = json.loads(line)
-                                    if 'message' in data and 'content' in data['message']:
-                                        data['message']['content'] = mask_model_names(data['message']['content'])
-                                        yield f"data: {{\"ideas\": {json.dumps(data['message']['content'])}}}\n\n"
-                                    else:
-                                        yield f"data: {line}\n\n"
-                                except Exception:
-                                    yield f"data: {line}\n\n"
+                    )
+                    logger.info(f"[GuestPost] Raw Ollama response: {response.text}")
+                    response.raise_for_status()
+                    data = response.json()
+                    content = data.get("response", "")
+                    if content:
+                        content = mask_model_names(content)
+                        yield f"data: {{\"ideas\": {json.dumps(content)} }}\n\n"
+                    else:
+                        yield f"data: {{\"ideas\": \"[No content returned]\" }}\n\n"
             except Exception as e:
                 logger.error(f"Error in event_stream for /api/guestpost: {str(e)}", exc_info=True)
                 yield f"data: {{\"ideas\": \"[Error] {str(e)}\"}}\n\n"
@@ -1427,7 +1427,7 @@ async def search_intent(search_intent_request: SearchIntentRequest):
         selected_model = select_best_model(messages)
         async def event_stream():
             try:
-                async with httpx.AsyncClient(timeout=180.0) as client:
+                async with httpx.AsyncClient(timeout=300.0) as client:  # 5 minutes timeout
                     async with client.stream(
                         "POST",
                         OLLAMA_API_URL,
@@ -1908,7 +1908,7 @@ async def content_outline_keywords(request: Request):
         ACTIVE_REQUESTS.inc()
         
         try:
-            async with httpx.AsyncClient(timeout=500.0) as client:
+            async with httpx.AsyncClient(timeout=300.0) as client:  # 5 minutes timeout
                 response = await client.post(
                     OLLAMA_API_URL,
                     json={
@@ -2025,6 +2025,7 @@ async def affiliate_article_ideas(request: Request):
         ]
         selected_model = select_best_model(messages)
         ACTIVE_REQUESTS.inc()
+        # Use /api/chat for this endpoint, with correct URL and payload
         async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(
                 OLLAMA_API_URL,
@@ -2041,7 +2042,7 @@ async def affiliate_article_ideas(request: Request):
             content_clean = re.sub(r'^```[a-zA-Z]*|^```|```$', '', content.strip(), flags=re.MULTILINE).strip()
             return {"content": content_clean}
     except Exception as e:
-        logger.error(f"Request {request_id}: Error in affiliate article ideas: {str(e)}", exc_info=True)
+        logger.error(f"Request {request_id}: Error in affiliate article ideas: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/youtube-content-planner")
@@ -2052,7 +2053,7 @@ async def youtube_content_planner(request: Request):
     prompt = data.get("prompt", "")
     niche = data.get("niche", "")
     subniche = data.get("subniche", "")
-    model = "mistral:latest"
+    model = data.get("model", "mistral:latest")
 
     # Step 1: Generate subniches and topic ideas
     if prompt and niche and not subniche:
@@ -2061,18 +2062,18 @@ async def youtube_content_planner(request: Request):
             Message(role="system", content=prompt),
             Message(role="user", content=user_prompt)
         ]
-        async with httpx.AsyncClient(timeout=60.0) as client:
+        async with httpx.AsyncClient(timeout=300.0) as client:  # 5 minutes timeout
             response = await client.post(
-                OLLAMA_API_URL,
+                "http://localhost:11434/api/generate",  # Use correct Ollama endpoint
                 json={
                     "model": model,
-                    "messages": [{"role": m.role, "content": m.content} for m in messages],
+                    "prompt": f"{messages[0].content}\n\n{messages[1].content}",
                     "stream": False
                 }
             )
             response.raise_for_status()
             data = response.json()
-            content = data.get("message", {}).get("content", "")
+            content = data.get("response", "")  # Ollama uses "response" instead of "message.content"
             # Try to extract JSON if present
             try:
                 content_clean = re.sub(r'^```json|^```|```$', '', content.strip(), flags=re.MULTILINE).strip()
@@ -2097,8 +2098,26 @@ async def youtube_content_planner(request: Request):
                             topicIdeas[current_sub].append(topic)
                 if subniches and topicIdeas:
                     return {"subniches": subniches, "topicIdeas": topicIdeas}
-            # Fallback: return raw content
-            return {"content": content}
+            # Fallback: parse from raw content
+            lines = content.splitlines()
+            subniches = []
+            topicIdeas = {}
+            current_sub = None
+            for line in lines:
+                if line.strip():
+                    if not current_sub or line.startswith("Sub-niche") or line.startswith("Subniche"):
+                        current_sub = line.replace("Sub-niche", "").replace("Subniche", "").strip(": ")
+                        if current_sub:
+                            subniches.append(current_sub)
+                            topicIdeas[current_sub] = []
+                    elif current_sub and (line.strip().startswith("-") or line.strip().startswith("*") or line.strip().startswith("•")):
+                        topic = line.split(" ", 1)[-1].strip("-*• ").strip()
+                        if topic:
+                            topicIdeas[current_sub].append(topic)
+            if subniches and topicIdeas:
+                return {"subniches": subniches, "topicIdeas": topicIdeas}
+            # Final fallback: return raw content as subniches/topics
+            return {"subniches": [niche], "topicIdeas": {niche: [content]}}
 
     # Step 2: Generate video ideas for a subniche
     if prompt and niche and subniche:
@@ -2107,18 +2126,18 @@ async def youtube_content_planner(request: Request):
             Message(role="system", content=prompt),
             Message(role="user", content=user_prompt)
         ]
-        async with httpx.AsyncClient(timeout=60.0) as client:
+        async with httpx.AsyncClient(timeout=300.0) as client:  # 5 minutes timeout
             response = await client.post(
-                OLLAMA_API_URL,
+                "http://localhost:11434/api/generate",  # Use correct Ollama endpoint
                 json={
                     "model": model,
-                    "messages": [{"role": m.role, "content": m.content} for m in messages],
+                    "prompt": f"{messages[0].content}\n\n{messages[1].content}",
                     "stream": False
                 }
             )
             response.raise_for_status()
             data = response.json()
-            content = data.get("message", {}).get("content", "")
+            content = data.get("response", "")  # Ollama uses "response" instead of "message.content"
             # Try to extract table rows
             videoIdeas = []
             table_rows = re.findall(r"\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|", content)
@@ -2133,8 +2152,22 @@ async def youtube_content_planner(request: Request):
                 guidance = guidance_match.group(1).strip()
             if videoIdeas:
                 return {"videoIdeas": videoIdeas, "guidance": guidance}
-            # Fallback: return raw content
-            return {"content": content}
+            # Fallback: parse from raw content
+            lines = content.splitlines()
+            videoIdeas = []
+            current_title = None
+            for line in lines:
+                if line.strip():
+                    if line.startswith("Title:") or line.startswith("Video:"):
+                        current_title = line.split(":", 1)[1].strip()
+                    elif current_title and (line.startswith("Keyword:") or line.startswith("Target:")):
+                        keyword = line.split(":", 1)[1].strip()
+                        videoIdeas.append({"title": current_title, "keyword": keyword})
+                        current_title = None
+            if videoIdeas:
+                return {"videoIdeas": videoIdeas, "guidance": guidance}
+            # Final fallback: return raw content as a single video idea
+            return {"videoIdeas": [{"title": content, "keyword": subniche}], "guidance": ""}
 
     return JSONResponse({"error": "Invalid request"}, status_code=400)
 
@@ -2703,6 +2736,41 @@ async def minigpt4_chat(prompt: str = Body(...), image: str = Body(...)):
         raise HTTPException(status_code=500, detail=f"MiniGPT-4 error: {str(e)}")
 
 app.include_router(ahrefs_router)
+
+@app.post("/api/affiliate-article-ideas-by-domain")
+async def affiliate_article_ideas_by_domain(request: Request):
+    request_id = getattr(request.state, "request_id", str(uuid.uuid4()))
+    logger.info(f"Request {request_id}: Received affiliate article ideas by domain request")
+    try:
+        body = await request.json()
+        domain = body.get("domain", "").strip()
+        if not domain:
+            raise HTTPException(status_code=400, detail="Domain is required")
+        prompt = f"Generate 20 targeted transactional affiliate article ideas for the domain: {domain}"
+        messages = [
+            Message(role="system", content=prompt),
+            Message(role="user", content=prompt)
+        ]
+        selected_model = select_best_model(messages)
+        ACTIVE_REQUESTS.inc()
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            response = await client.post(
+                OLLAMA_API_URL,
+                json={
+                    "model": selected_model,
+                    "messages": [{"role": m.role, "content": m.content} for m in messages],
+                    "stream": False
+                }
+            )
+            response.raise_for_status()
+            data = response.json()
+            content = data.get("message", {}).get("content", "")
+            # Strip Markdown code block formatting if present
+            content_clean = re.sub(r'^```[a-zA-Z]*|^```|```$', '', content.strip(), flags=re.MULTILINE).strip()
+            return {"content": content_clean}
+    except Exception as e:
+        logger.error(f"Request {request_id}: Error in affiliate article ideas by domain: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn

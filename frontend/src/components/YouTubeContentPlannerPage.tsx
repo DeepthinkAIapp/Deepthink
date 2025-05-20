@@ -59,6 +59,7 @@ const YouTubeContentPlannerPage: React.FC = () => {
         body: JSON.stringify({
           prompt: SYSTEM_PROMPT_1,
           niche,
+          model: "mistral:latest"
         }),
       });
       if (!response.ok) throw new Error("Failed to get sub-niches");
@@ -93,6 +94,7 @@ const YouTubeContentPlannerPage: React.FC = () => {
           prompt: SYSTEM_PROMPT_2,
           niche,
           subniche: selectedSubniche,
+          model: "mistral:latest"
         }),
       });
       if (!response.ok) throw new Error("Failed to get video ideas");

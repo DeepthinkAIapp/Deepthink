@@ -15,6 +15,7 @@ const SearchIntentToolPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const abortController = useRef<AbortController | null>(null);
   const theme = useTheme();
+  const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([]);
 
   const handleGenerate = async () => {
     setAnalysis("");

@@ -33116,3 +33116,1192 @@ fastapi.exceptions.HTTPException: 504: The request took too long to process. Ple
 2025-05-20 06:34:23,589 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
 2025-05-20 06:35:33,979 [INFO] DeepThinkAI: Starting search intent analysis request 088eb644-87af-4495-9c32-dacbc3c65232 for keyword: how to grow tomatoes
 2025-05-20 06:35:37,124 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 08:08:01,920 [INFO] DeepThinkAI: Starting chat request c7ffa7df-0b82-4f07-a861-634013e63344 with model: gemma:7b
+2025-05-20 08:08:09,976 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 08:11:00,245 [INFO] DeepThinkAI: Starting chat request 42a6d63a-5c95-49aa-a8e6-a7bc11f68319 with model: auto
+2025-05-20 08:11:00,246 [INFO] DeepThinkAI: Auto-selected model: auto
+2025-05-20 08:11:00,694 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 08:11:52,310 [INFO] DeepThinkAI: Starting chat request f88f7c21-d1f6-4df8-be64-6fcd7e7efe4a with model: llama3.1:latest
+2025-05-20 08:12:00,472 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 08:27:01,139 [INFO] DeepThinkAI: Starting chat request 7bf91558-23d4-48c4-a147-17d0ccd5f3e3 with model: llama3.1:latest
+2025-05-20 08:27:06,099 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 08:29:55,941 [INFO] DeepThinkAI: Request 8f8f7891-2774-4e46-8a85-4e157d0407c2: Received subniche/content ideas request
+2025-05-20 08:29:55,943 [INFO] DeepThinkAI: Request 8f8f7891-2774-4e46-8a85-4e157d0407c2: Using model mistral:latest
+2025-05-20 08:30:54,152 [INFO] DeepThinkAI: Request 6f375270-b2b4-4374-8b87-c787aba19762: Received subniche/content ideas request
+2025-05-20 08:30:54,154 [INFO] DeepThinkAI: Request 6f375270-b2b4-4374-8b87-c787aba19762: Using model mistral:latest
+2025-05-20 08:31:06,126 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 08:31:17,799 [INFO] DeepThinkAI: Starting search intent analysis request d8a31055-200a-4bc0-b431-d927d4990d6e for keyword: podcast
+2025-05-20 08:32:00,915 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 08:32:30,350 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 08:32:32,630 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 08:34:22,268 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 08:37:07,104 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 08:37:31,546 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 08:38:19,344 [INFO] DeepThinkAI: Request 597d7b0a-f1ab-4239-81e6-c36d252ff25f: Received affiliate article ideas request
+2025-05-20 08:38:19,776 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 08:38:19,777 [ERROR] DeepThinkAI: Request 597d7b0a-f1ab-4239-81e6-c36d252ff25f: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 08:45:10,265 [INFO] DeepThinkAI: Request 9d9e7c47-df99-4022-8c1e-811277adadea: Received affiliate article ideas request
+2025-05-20 08:45:10,696 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 08:45:10,697 [ERROR] DeepThinkAI: Request 9d9e7c47-df99-4022-8c1e-811277adadea: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 08:47:09,820 [INFO] DeepThinkAI: Request bf07ad15-863d-4361-80a9-29d4b63e5a15: Received affiliate article ideas request
+2025-05-20 08:47:10,308 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 08:47:10,310 [ERROR] DeepThinkAI: Request bf07ad15-863d-4361-80a9-29d4b63e5a15: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 08:55:04,287 [INFO] DeepThinkAI: Request 9cb68b33-af24-4015-83d9-bae68337db06: Received affiliate article ideas request
+2025-05-20 08:55:04,785 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 08:55:04,786 [ERROR] DeepThinkAI: Request 9cb68b33-af24-4015-83d9-bae68337db06: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 08:57:09,538 [INFO] DeepThinkAI: Request d5ab4eeb-ab54-4d01-9d53-7ddab89e60f2: Received affiliate article ideas request
+2025-05-20 08:57:10,018 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 08:57:10,019 [ERROR] DeepThinkAI: Request d5ab4eeb-ab54-4d01-9d53-7ddab89e60f2: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 08:57:44,818 [INFO] DeepThinkAI: Request 70ebbe44-0f2b-4642-824b-e17516c1d42a: Received affiliate article ideas request
+2025-05-20 08:57:45,271 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 08:57:45,272 [ERROR] DeepThinkAI: Request 70ebbe44-0f2b-4642-824b-e17516c1d42a: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 09:00:21,150 [INFO] DeepThinkAI: Request adf5b84f-5070-441d-9e15-391e92d93db1: Received affiliate article ideas request
+2025-05-20 09:00:21,576 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:00:21,578 [ERROR] DeepThinkAI: Request adf5b84f-5070-441d-9e15-391e92d93db1: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 09:01:50,238 [INFO] DeepThinkAI: Request 984d9f5e-11a3-4ac3-a666-0289c2000f30: Received subniche/content ideas request
+2025-05-20 09:01:50,239 [INFO] DeepThinkAI: Request 984d9f5e-11a3-4ac3-a666-0289c2000f30: Using model mistral:latest
+2025-05-20 09:03:10,504 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:03:20,640 [INFO] DeepThinkAI: Request 8f5ac8d3-55ae-4cf1-962d-e5a639677ec4: Received keyword/article ideas request
+2025-05-20 09:03:20,641 [INFO] DeepThinkAI: Request 8f5ac8d3-55ae-4cf1-962d-e5a639677ec4: Using model mistral:latest
+2025-05-20 09:05:37,289 [INFO] DeepThinkAI: Request e4d5c002-2d86-4b9c-9dd7-871ef0252c07: Received affiliate article ideas request
+2025-05-20 09:05:37,804 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:05:37,805 [ERROR] DeepThinkAI: Request e4d5c002-2d86-4b9c-9dd7-871ef0252c07: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 09:05:44,775 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:07:05,599 [INFO] DeepThinkAI: Request 4850f474-4061-4f38-8894-a462d32cffe5: Received affiliate article ideas request
+2025-05-20 09:07:06,102 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:07:06,103 [ERROR] DeepThinkAI: Request 4850f474-4061-4f38-8894-a462d32cffe5: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 09:08:01,311 [INFO] DeepThinkAI: Request a0e663ba-e52a-40af-9aad-b2952686859c: Received keyword/article ideas request
+2025-05-20 09:08:01,317 [INFO] DeepThinkAI: Request a0e663ba-e52a-40af-9aad-b2952686859c: Using model mistral:latest
+2025-05-20 09:09:39,965 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:10:11,834 [INFO] DeepThinkAI: Request 9e6046ef-2fe2-4160-ba36-35db0827a08b: Received affiliate article ideas request
+2025-05-20 09:10:12,267 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:10:12,268 [ERROR] DeepThinkAI: Request 9e6046ef-2fe2-4160-ba36-35db0827a08b: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 09:12:22,728 [INFO] DeepThinkAI: Starting search intent analysis request 43858c4f-146d-4c31-bd64-41a6c301a479 for keyword: home gyms
+2025-05-20 09:12:25,739 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:16:14,521 [INFO] DeepThinkAI: Starting search intent analysis request 979f120e-ad66-45e7-860e-07fcf40e7b5c for keyword: best marathons
+2025-05-20 09:16:15,785 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:18:29,426 [INFO] DeepThinkAI: Starting chat request 1b3a8159-26eb-427e-afdc-b5bd1b28276d with model: llama3.1:latest
+2025-05-20 09:18:37,338 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:20:57,497 [ERROR] DeepThinkAI: Unhandled exception: 
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 540, in monitor_requests
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 268, in request_size_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 252, in timeout_middleware
+    return await asyncio.wait_for(call_next(request), timeout=REQUEST_TIMEOUT)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\asyncio\tasks.py", line 489, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 2065, in youtube_content_planner
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-05-20 09:23:33,497 [ERROR] DeepThinkAI: Unhandled exception: 
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 540, in monitor_requests
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 268, in request_size_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 252, in timeout_middleware
+    return await asyncio.wait_for(call_next(request), timeout=REQUEST_TIMEOUT)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\asyncio\tasks.py", line 489, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 2065, in youtube_content_planner
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-05-20 09:25:25,365 [ERROR] DeepThinkAI: Unhandled exception: 
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 540, in monitor_requests
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 268, in request_size_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 252, in timeout_middleware
+    return await asyncio.wait_for(call_next(request), timeout=REQUEST_TIMEOUT)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\asyncio\tasks.py", line 489, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 2065, in youtube_content_planner
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-05-20 09:27:23,002 [ERROR] DeepThinkAI: Unhandled exception: 
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 540, in monitor_requests
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 268, in request_size_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 179, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 252, in timeout_middleware
+    return await asyncio.wait_for(call_next(request), timeout=REQUEST_TIMEOUT)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\asyncio\tasks.py", line 489, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 154, in call_next
+    raise app_exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\base.py", line 141, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "c:\llama\.venv\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\llama\backend\main.py", line 2065, in youtube_content_planner
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-05-20 09:32:16,848 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2025-05-20 09:33:51,257 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2025-05-20 09:34:03,173 [INFO] DeepThinkAI: Starting guest post outreach request 4b20a5f8-ad20-490e-b93e-12fdf3be445b for niche: home gyms
+2025-05-20 09:34:03,609 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:34:20,045 [INFO] DeepThinkAI: Starting guest post outreach request 1193208b-5ce2-41bd-9422-e88844014cb9 for niche: parenting
+2025-05-20 09:34:20,472 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:37:44,635 [INFO] DeepThinkAI: Starting guest post outreach request d9323f0c-0433-4489-8721-84f97034ed1d for niche: parenting
+2025-05-20 09:37:45,107 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:38:21,907 [INFO] DeepThinkAI: Starting guest post outreach request 225fb3ee-f0d7-4fed-856e-ae930386a595 for niche: parenting
+2025-05-20 09:38:22,401 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:40:10,676 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2025-05-20 09:40:27,805 [INFO] DeepThinkAI: Starting guest post outreach request 4f935d1a-de8e-4b0d-8038-ada7057396a9 for niche: parenting
+2025-05-20 09:40:28,259 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:43:10,068 [INFO] DeepThinkAI: Starting guest post outreach request f3831329-8f2b-4d00-b629-721b1cd0aaed for niche: parenting
+2025-05-20 09:43:10,638 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:43:17,393 [INFO] DeepThinkAI: Starting guest post outreach request 3a20536d-0d5e-4493-a9e1-af6ce09eac58 for niche: parenting
+2025-05-20 09:43:17,828 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 09:46:06,385 [INFO] DeepThinkAI: Starting guest post outreach request 3445a9c7-22c9-4920-aa26-7cb53a68d78c for niche: parenting
+2025-05-20 09:46:17,682 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:46:47,139 [INFO] DeepThinkAI: Starting guest post outreach request 1d1b8b36-9417-4276-b493-6ceaa0d74b30 for niche: parenting
+2025-05-20 09:46:47,653 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:47:14,579 [INFO] DeepThinkAI: Starting guest post outreach request 953a9db9-37b5-41e0-9792-33c3753026d4 for niche: parenting
+2025-05-20 09:47:15,035 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:47:37,870 [INFO] DeepThinkAI: Starting guest post outreach request bda41709-be86-4485-a5bf-32b8880070c2 for niche: parenting
+2025-05-20 09:47:38,342 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:49:07,060 [INFO] DeepThinkAI: Starting guest post outreach request 638e17e5-3971-456e-a6f4-869afff11960 for niche: parenting
+2025-05-20 09:49:07,528 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:49:37,445 [INFO] DeepThinkAI: Starting guest post outreach request d34e44f5-d4c7-4317-a78f-8d2a64e517d5 for niche: parenting classes
+2025-05-20 09:49:37,882 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:51:11,451 [INFO] DeepThinkAI: Starting guest post outreach request 69002e9b-5141-4b90-b114-4508cfaf9a5a for niche: parenting
+2025-05-20 09:51:11,891 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:52:24,494 [INFO] DeepThinkAI: Starting guest post outreach request f67fac76-b5ba-4848-bd54-6a254b6cd45b for niche: parenting
+2025-05-20 09:52:24,930 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:58:13,306 [INFO] DeepThinkAI: Starting guest post outreach request d1a96ce9-584f-496d-95f7-35973ddc8556 for niche: parenting classes
+2025-05-20 09:58:13,802 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 09:58:20,508 [INFO] DeepThinkAI: Starting guest post outreach request 7d6ea1ca-dbf9-4e2d-97c7-2be05fa60345 for niche: parenting classes
+2025-05-20 09:58:20,967 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:00:34,931 [INFO] DeepThinkAI: Starting guest post outreach request e0505b1b-b9f3-43f0-8572-6ce985caf468 for niche: parenting
+2025-05-20 10:00:35,414 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:02:50,802 [INFO] DeepThinkAI: Starting guest post outreach request 41c9ddf9-b14c-4d44-85d3-369a67cd58b4 for niche: parenting
+2025-05-20 10:02:50,802 [INFO] DeepThinkAI: [GuestPost] Sending prompt to Ollama: You are Deepthink AI, an expert in guest post outreach. Given a user's niche, identify 5-10 high authority websites in that niche that have published articles in the last 3 months, accept guest posts, and analyze for content gaps and good guest post ideas.
+
+I need you to identify 5-10 high authority websites in my niche (parenting) that have published articles within the last 3 months. These sites should accept guest posts. Analyze their sites for content gaps and ideas for good guest posts.
+2025-05-20 10:02:51,300 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:02:51,301 [INFO] DeepThinkAI: [GuestPost] Raw Ollama response: {"model":"phi4:latest","created_at":"2025-05-20T16:02:51.299677Z","message":{"role":"assistant","content":""},"done_reason":"load","done":true}
+2025-05-20 10:03:31,169 [INFO] DeepThinkAI: Starting guest post outreach request 0f966215-298b-4465-9f68-0cd6fea47e1f for niche: parenting
+2025-05-20 10:03:31,170 [INFO] DeepThinkAI: [GuestPost] Sending prompt to Ollama: You are Deepthink AI, an expert in guest post outreach. Given a user's niche, identify 5-10 high authority websites in that niche that have published articles in the last 3 months, accept guest posts, and analyze for content gaps and good guest post ideas.
+
+I need you to identify 5-10 high authority websites in my niche (parenting) that have published articles within the last 3 months. These sites should accept guest posts. Analyze their sites for content gaps and ideas for good guest posts.
+2025-05-20 10:03:31,629 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:03:31,630 [INFO] DeepThinkAI: [GuestPost] Raw Ollama response: {"model":"phi4:latest","created_at":"2025-05-20T16:03:31.628657Z","message":{"role":"assistant","content":""},"done_reason":"load","done":true}
+2025-05-20 10:06:35,249 [INFO] DeepThinkAI: Starting guest post outreach request d4b94e53-fb88-453b-9f73-9baaf5bfaa96 for niche: parenting
+2025-05-20 10:06:35,249 [INFO] DeepThinkAI: [GuestPost] Sending prompt to Ollama: You are Deepthink AI, an expert in guest post outreach. Given a user's niche, identify 5-10 high authority websites in that niche that have published articles in the last 3 months, accept guest posts, and analyze for content gaps and good guest post ideas.
+
+I need you to identify 5-10 high authority websites in my niche (parenting) that have published articles within the last 3 months. These sites should accept guest posts. Analyze their sites for content gaps and ideas for good guest posts.
+2025-05-20 10:07:35,715 [ERROR] DeepThinkAI: Error in event_stream for /api/guestpost: 
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1348, in event_stream
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-05-20 10:08:10,299 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 10:09:26,492 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2025-05-20 10:10:32,607 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2025-05-20 10:10:43,324 [INFO] DeepThinkAI: Request a3067f01-7a7e-43e4-8155-a5b4bc1cf959: Received affiliate article ideas request
+2025-05-20 10:10:43,753 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 404 Not Found"
+2025-05-20 10:10:43,754 [ERROR] DeepThinkAI: Request a3067f01-7a7e-43e4-8155-a5b4bc1cf959: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2036, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:11:42,022 [INFO] DeepThinkAI: Request f5555591-d4a8-476f-b0ae-4dc1d6990804: Received affiliate article ideas request
+2025-05-20 10:11:42,470 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 404 Not Found"
+2025-05-20 10:11:42,471 [ERROR] DeepThinkAI: Request f5555591-d4a8-476f-b0ae-4dc1d6990804: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2036, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:15:19,561 [INFO] DeepThinkAI: Request 46383b47-873c-44a7-8648-b7cd1892bec4: Received affiliate article ideas request
+2025-05-20 10:15:20,127 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 404 Not Found"
+2025-05-20 10:15:20,128 [ERROR] DeepThinkAI: Request 46383b47-873c-44a7-8648-b7cd1892bec4: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2036, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:16:53,725 [INFO] DeepThinkAI: Starting chat request c43f8a07-2957-4fc3-adac-d7886e584f8b with model: gemma:7b
+2025-05-20 10:16:54,148 [ERROR] DeepThinkAI: Error in event_stream for /api/chat: Request URL is missing an 'http://' or 'https://' protocol.
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 207, in handle_async_request
+    raise UnsupportedProtocol(
+httpcore.UnsupportedProtocol: Request URL is missing an 'http://' or 'https://' protocol.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 691, in event_stream
+    async with client.stream(
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1617, in stream
+    response = await self.send(
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.UnsupportedProtocol: Request URL is missing an 'http://' or 'https://' protocol.
+2025-05-20 10:17:30,559 [INFO] DeepThinkAI: Starting chat request a19360d0-8767-44be-9ef5-992e2e6ab96b with model: gemma:7b
+2025-05-20 10:17:30,976 [ERROR] DeepThinkAI: Error in event_stream for /api/chat: Request URL is missing an 'http://' or 'https://' protocol.
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 207, in handle_async_request
+    raise UnsupportedProtocol(
+httpcore.UnsupportedProtocol: Request URL is missing an 'http://' or 'https://' protocol.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 691, in event_stream
+    async with client.stream(
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1617, in stream
+    response = await self.send(
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.UnsupportedProtocol: Request URL is missing an 'http://' or 'https://' protocol.
+2025-05-20 10:19:27,585 [INFO] DeepThinkAI: Starting chat request 429e50b7-9f59-45f8-a7d6-213d2c2ea19a with model: gemma:7b
+2025-05-20 10:19:28,018 [ERROR] DeepThinkAI: Error in event_stream for /api/chat: Request URL is missing an 'http://' or 'https://' protocol.
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 207, in handle_async_request
+    raise UnsupportedProtocol(
+httpcore.UnsupportedProtocol: Request URL is missing an 'http://' or 'https://' protocol.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 691, in event_stream
+    async with client.stream(
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1617, in stream
+    response = await self.send(
+               ^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.UnsupportedProtocol: Request URL is missing an 'http://' or 'https://' protocol.
+2025-05-20 10:19:58,984 [INFO] DeepThinkAI: Starting chat request d74f8ed8-41e9-4675-89a6-7b03e6dc3976 with model: gemma:7b
+2025-05-20 10:20:07,735 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:22:03,373 [INFO] DeepThinkAI: Starting guest post outreach request 8bb94af0-de1e-4eb7-b2ad-470789f4b904 for niche: fitness stuff
+2025-05-20 10:22:03,374 [INFO] DeepThinkAI: [GuestPost] Sending prompt to Ollama: You are Deepthink AI, an expert in guest post outreach. Given a user's niche, identify 5-10 high authority websites in that niche that have published articles in the last 3 months, accept guest posts, and analyze for content gaps and good guest post ideas.
+
+I need you to identify 5-10 high authority websites in my niche (fitness stuff) that have published articles within the last 3 months. These sites should accept guest posts. Analyze their sites for content gaps and ideas for good guest posts.
+2025-05-20 10:23:03,821 [ERROR] DeepThinkAI: Error in event_stream for /api/guestpost: 
+Traceback (most recent call last):
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 373, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 1348, in event_stream
+    response = await client.post(
+               ^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1892, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1574, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1661, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1689, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1726, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_client.py", line 1763, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 372, in handle_async_request
+    with map_httpcore_exceptions():
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "c:\llama\.venv\Lib\site-packages\httpx\_transports\default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+2025-05-20 10:23:33,942 [INFO] DeepThinkAI: Starting chat request 28857242-7581-4380-9295-b07009715482 with model: gemma:7b
+2025-05-20 10:23:44,530 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:24:12,902 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 10:24:55,672 [INFO] undetected_chromedriver.patcher: patching driver executable C:\Users\jerem\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+2025-05-20 10:27:00,927 [INFO] httpx: HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2025-05-20 10:27:24,554 [INFO] DeepThinkAI: Request 00111039-599a-4572-9076-d253d35ba8a2: Received affiliate article ideas request
+2025-05-20 10:27:24,980 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:27:24,981 [ERROR] DeepThinkAI: Request 00111039-599a-4572-9076-d253d35ba8a2: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2036, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:27:25,057 [INFO] DeepThinkAI: Starting search intent analysis request 083eab53-b9fe-426c-ad91-da3a273f43da for keyword: marathon trainers
+2025-05-20 10:27:27,436 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:31:48,602 [INFO] DeepThinkAI: Request 1a33984a-3ba3-44a3-abba-c929721902af: Received affiliate article ideas request
+2025-05-20 10:31:49,085 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 404 Not Found"
+2025-05-20 10:31:49,086 [ERROR] DeepThinkAI: Request 1a33984a-3ba3-44a3-abba-c929721902af: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:32:18,958 [INFO] DeepThinkAI: Request a57ed7d0-ba53-4320-a510-825c5ecb1836: Received affiliate article ideas request
+2025-05-20 10:32:19,400 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 404 Not Found"
+2025-05-20 10:32:19,401 [ERROR] DeepThinkAI: Request a57ed7d0-ba53-4320-a510-825c5ecb1836: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/generate'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:35:02,990 [INFO] DeepThinkAI: Request 062a5b47-30d6-4eb5-aa6e-60fece32b86e: Received affiliate article ideas request
+2025-05-20 10:35:03,559 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:35:03,560 [ERROR] DeepThinkAI: Request 062a5b47-30d6-4eb5-aa6e-60fece32b86e: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:35:22,347 [INFO] DeepThinkAI: Request 5426bef6-3be8-4841-896d-b0ea95eeab26: Received affiliate article ideas request
+2025-05-20 10:35:22,782 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:35:22,783 [ERROR] DeepThinkAI: Request 5426bef6-3be8-4841-896d-b0ea95eeab26: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:42:58,208 [INFO] DeepThinkAI: Request 8f5a7b40-0a95-44be-801a-2c3bf2a9d216: Received affiliate article ideas request
+2025-05-20 10:42:58,706 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:42:58,707 [ERROR] DeepThinkAI: Request 8f5a7b40-0a95-44be-801a-2c3bf2a9d216: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:44:46,455 [INFO] httpx: HTTP Request: GET http://127.0.0.1:11434/api/tags "HTTP/1.1 200 OK"
+2025-05-20 10:46:07,415 [INFO] DeepThinkAI: Request 6abd154d-af6c-45b9-bf7b-ae35c52e1074: Received affiliate article ideas request
+2025-05-20 10:46:07,842 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:46:07,844 [ERROR] DeepThinkAI: Request 6abd154d-af6c-45b9-bf7b-ae35c52e1074: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:46:13,728 [INFO] DeepThinkAI: Request ef35f4fd-97dd-4222-8e59-f17006492391: Received affiliate article ideas request
+2025-05-20 10:46:14,148 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:46:14,149 [ERROR] DeepThinkAI: Request ef35f4fd-97dd-4222-8e59-f17006492391: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:48:13,912 [INFO] DeepThinkAI: Request 58a23dd4-5442-496d-b886-7c244dd1dd7c: Received affiliate article ideas request
+2025-05-20 10:48:14,361 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:48:14,362 [ERROR] DeepThinkAI: Request 58a23dd4-5442-496d-b886-7c244dd1dd7c: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+Traceback (most recent call last):
+  File "C:\llama\backend\main.py", line 2037, in affiliate_article_ideas
+    response.raise_for_status()
+  File "c:\llama\.venv\Lib\site-packages\httpx\_models.py", line 761, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:51:31,251 [INFO] DeepThinkAI: Request 6c224930-3853-41e2-89b8-a340dc8fe565: Received affiliate article ideas request
+2025-05-20 10:51:31,699 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:51:31,700 [ERROR] DeepThinkAI: Request 6c224930-3853-41e2-89b8-a340dc8fe565: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:52:16,471 [INFO] DeepThinkAI: Request 8fe6523b-223a-41c6-b056-5c496add8c38: Received affiliate article ideas request
+2025-05-20 10:52:16,972 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:52:16,973 [ERROR] DeepThinkAI: Request 8fe6523b-223a-41c6-b056-5c496add8c38: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:52:39,395 [INFO] DeepThinkAI: Starting chat request 0d723a59-a6ad-4363-b776-ed7d88ec237e with model: gemma:7b
+2025-05-20 10:52:45,622 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:54:06,713 [INFO] DeepThinkAI: Starting search intent analysis request 4f7f680a-f5b2-428a-ae28-bab9f6b8c805 for keyword: best blog tools
+2025-05-20 10:54:11,108 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:54:46,290 [INFO] DeepThinkAI: Request 5595ffd3-e87e-47c2-a8f3-cc6c62f0a0aa: Received affiliate article ideas request
+2025-05-20 10:54:46,719 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:54:46,720 [ERROR] DeepThinkAI: Request 5595ffd3-e87e-47c2-a8f3-cc6c62f0a0aa: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:55:29,818 [INFO] DeepThinkAI: Request 6b9769d2-9647-4d6a-901f-d60332998e17: Received affiliate article ideas request
+2025-05-20 10:55:30,249 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:55:30,250 [ERROR] DeepThinkAI: Request 6b9769d2-9647-4d6a-901f-d60332998e17: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:56:52,350 [INFO] DeepThinkAI: Request 9c291f6f-2723-4a8d-9737-86d40d1213b5: Received affiliate article ideas request
+2025-05-20 10:56:52,779 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2025-05-20 10:56:52,780 [ERROR] DeepThinkAI: Request 9c291f6f-2723-4a8d-9737-86d40d1213b5: Error in affiliate article ideas: Client error '404 Not Found' for url 'http://127.0.0.1:11434/api/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-05-20 10:57:44,297 [INFO] DeepThinkAI: Starting chat request d7905a06-7239-4189-bf90-aa1516d11d33 with model: gemma:7b
+2025-05-20 10:57:48,769 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:58:01,973 [INFO] DeepThinkAI: Request a1dd0cbb-8805-4f85-8d71-19c865af6290: Received subniche/content ideas request
+2025-05-20 10:58:01,974 [INFO] DeepThinkAI: Request a1dd0cbb-8805-4f85-8d71-19c865af6290: Using model mistral:latest
+2025-05-20 10:58:16,375 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 10:58:19,770 [INFO] DeepThinkAI: Request 3f037328-a3c8-41e6-af4a-0a0f7a7ab0fd: Received keyword/article ideas request
+2025-05-20 10:58:19,771 [INFO] DeepThinkAI: Request 3f037328-a3c8-41e6-af4a-0a0f7a7ab0fd: Using model mistral:latest
+2025-05-20 10:58:38,441 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 11:00:29,123 [INFO] DeepThinkAI: Request 6ddec8b4-ba9e-424d-91e4-b6da7afe0b8d: Received keyword/article ideas request
+2025-05-20 11:00:29,127 [INFO] DeepThinkAI: Request 6ddec8b4-ba9e-424d-91e4-b6da7afe0b8d: Using model mistral:latest
+2025-05-20 11:00:46,524 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 11:01:04,686 [INFO] DeepThinkAI: Starting chat request 47496c68-072d-4409-bea8-0aecc328e5f3 with model: llama3.1:latest
+2025-05-20 11:01:10,903 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 11:02:07,290 [INFO] DeepThinkAI: Starting chat request 32c04de4-4d09-43e8-b23a-c0f9e4953eba with model: llama3.1:latest
+2025-05-20 11:02:08,038 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 11:03:04,710 [INFO] DeepThinkAI: Starting monetization plan request 70a29963-8bb7-44f8-be9a-4a746790a9da for niche: baby podcast
+2025-05-20 11:03:09,401 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 11:04:02,237 [INFO] DeepThinkAI: Starting guest post outreach request 364aeaf4-92c1-4833-9236-808d95f5f22e for niche: fitness workouts
+2025-05-20 11:04:02,238 [INFO] DeepThinkAI: [GuestPost] Sending prompt to Ollama: You are Deepthink AI, an expert in guest post outreach. Given a user's niche, identify 5-10 high authority websites in that niche that have published articles in the last 3 months, accept guest posts, and analyze for content gaps and good guest post ideas.
+
+I need you to identify 5-10 high authority websites in my niche (fitness workouts) that have published articles within the last 3 months. These sites should accept guest posts. Analyze their sites for content gaps and ideas for good guest posts.
+2025-05-20 11:05:20,175 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 11:05:20,176 [INFO] DeepThinkAI: [GuestPost] Raw Ollama response: {"model":"phi4:latest","created_at":"2025-05-20T17:05:20.1753938Z","message":{"role":"assistant","content":"To identify high-authority websites in the fitness workouts niche that accept guest posts, I will consider a few factors such as Domain Authority (DA), recent publication history, and openness to guest contributions. Here are some reputable websites based on these criteria:\n\n1. **Men's Health**\n   - **Domain Authority:** High\n   - **Recent Articles:** Focuses on workout routines, nutrition, and fitness trends.\n   - **Guest Post Acceptance:** Often invites industry experts for guest articles.\n   - **Content Gaps \u0026 Ideas:** There may be opportunities to write about niche workouts like \"Home Workouts for Limited Space\" or \"Innovative HIIT Routines.\"\n\n2. **Women's Health**\n   - **Domain Authority:** High\n   - **Recent Articles:** Covers women-centric fitness programs and mental wellness.\n   - **Guest Post Acceptance:** Collaborates with fitness influencers and experts regularly.\n   - **Content Gaps \u0026 Ideas:** Topics like \"Post-Pregnancy Fitness Regimens\" or \"Mindful Yoga Practices for Busy Moms\" could be appealing.\n\n3. **Bodybuilding.com**\n   - **Domain Authority:** High\n   - **Recent Articles:** Provides comprehensive workout plans, nutrition advice, and supplement guides.\n   - **Guest Post Acceptance:** Frequently invites fitness experts to contribute articles.\n   - **Content Gaps \u0026 Ideas:** Consider writing about \"Supplement-Free Fitness Goals\" or \"Sustainable Bodybuilding Practices.\"\n\n4. **Fitness Blender**\n   - **Domain Authority:** Moderate\n   - **Recent Articles:** Offers free workout videos and routines for various fitness levels.\n   - **Guest Post Acceptance:** Open to experts sharing new exercise tips and routines.\n   - **Content Gaps \u0026 Ideas:** Propose articles on \"Workout Routines for Beginners\" or \"Incorporating Dance into Your Fitness Routine.\"\n\n5. **Calm Mag**\n   - **Domain Authority:** Moderate\n   - **Recent Articles:** Emphasizes mind-body wellness, including yoga and meditation.\n   - **Guest Post Acceptance:** Welcomes articles from wellness experts.\n   - **Content Gaps \u0026 Ideas:** Write about \"Integrating Mindfulness into Workouts\" or \"The Benefits of Outdoor Exercise.\"\n\n6. **T-Nation (Bodybuilding.com's Section)**\n   - **Domain Authority:** High\n   - **Recent Articles:** Focuses on bodybuilding and advanced workout techniques.\n   - **Guest Post Acceptance:** Seeks expert advice in body transformation strategies.\n   - **Content Gaps \u0026 Ideas:** Unique topics like \"Rehabilitation Exercises for Athletes\" or \"Advanced Plyometrics for Strength Training.\"\n\n7. **Prevention (Health)** \n   - **Domain Authority:** High\n   - **Recent Articles:** Covers overall health, including fitness and injury prevention.\n   - **Guest Post Acceptance:** Collaborates with medical professionals and fitness experts.\n   - **Content Gaps \u0026 Ideas:** Topics such as \"Injury Prevention Techniques for Runners\" or \"Balancing Fitness with Busy Lifestyles.\"\n\n8. **Shape Magazine**\n   - **Domain Authority:** High\n   - **Recent Articles:** Features celebrity workouts, diet plans, and motivational stories.\n   - **Guest Post Acceptance:** Often seeks guest posts from fitness influencers and coaches.\n   - **Content Gaps \u0026 Ideas:** Write on \"Celebrity Workout Regimens You Can Try at Home\" or \"Achieving Fitness Goals with Minimal Equipment.\"\n\nFor each site, it is beneficial to tailor your pitch based on their content focus and identified gaps. Here are some general tips for pitching guest posts:\n- Highlight how your proposed topic fills a gap in their existing content.\n- Demonstrate your expertise with examples of previous work or unique insights.\n- Offer flexibility in adjusting the article's angle based on feedback.\n\nBefore proceeding, it's always good to check each site's current submission guidelines and any recent changes to their guest post policies."},"done_reason":"stop","done":true,"total_duration":77517361900,"load_duration":8135298100,"prompt_eval_count":123,"prompt_eval_duration":625478500,"eval_count":796,"eval_duration":68755043500}
+2025-05-20 11:10:19,585 [INFO] DeepThinkAI: Starting guest post outreach request 66ecd81f-9e35-47e8-8f83-5888dd2626df for niche: fitness workouts
+2025-05-20 11:10:19,585 [INFO] DeepThinkAI: [GuestPost] Sending prompt to Ollama: You are Deepthink AI, an expert in guest post outreach. Given a user's niche, identify 5-10 high authority websites in that niche that have published articles in the last 3 months, accept guest posts, and analyze for content gaps and good guest post ideas.
+
+I need you to identify 5-10 high authority websites in my niche (fitness workouts) that have published articles within the last 3 months. These sites should accept guest posts. Analyze their sites for content gaps and ideas for good guest posts.
+2025-05-20 11:11:06,077 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 11:11:06,079 [INFO] DeepThinkAI: [GuestPost] Raw Ollama response: {"model":"phi4:latest","created_at":"2025-05-20T17:11:06.0765575Z","message":{"role":"assistant","content":"To identify high-authority websites in the fitness workouts niche that accept guest posts, I'll focus on platforms known for publishing quality health and fitness-related content. Here are some key steps and suggestions:\n\n### 1. **Identify Potential Websites:**\n   Look at established health and fitness publications known for their comprehensive coverage of workout routines, nutrition advice, and wellness tips.\n\n#### Suggested High-Authority Websites:\n1. **Men's Health**\n2. **Women's Health**\n3. **Shape Magazine (TLC)**\n4. **Fitness Blender**\n5. **Bodybuilding.com**\n6. **Fitbit Blog**\n7. **Healthline – Fitness Section**\n8. **MyFitnessPal Blog**\n9. **TODAY’s Health and Wellness**\n10. **Well+Good**\n\n### 2. **Check for Recent Content:**\n   Ensure these sites have published articles within the last three months related to fitness workouts.\n\n- **Men's Health** often publishes workout plans, nutrition guides, and fitness tips.\n- **Women's Health** covers a variety of workout routines with an emphasis on women-specific fitness goals.\n- **Shape Magazine** frequently releases articles about trending workouts and fitness challenges.\n- **Fitness Blender**, known for its video content, may publish written guides to complement their visual resources.\n- **Bodybuilding.com** often features detailed workout plans and muscle-building techniques.\n\n### 3. **Analyze for Content Gaps:**\n   Identify areas where these websites might need more content or unique perspectives:\n\n- **Eco-friendly Workout Routines:** With growing interest in sustainability, there's a gap in workouts that require minimal equipment or outdoor settings.\n  \n- **Mindfulness and Fitness Integration:** Articles exploring the integration of mental wellness practices with physical exercise could be beneficial.\n\n- **Specialized Workouts for Remote Workers:** Many people work from home; content focused on alleviating the negative health impacts of sedentary office life is increasingly relevant.\n\n- **Workout Routines Tailored to Specific Health Conditions:** Content focusing on safe workout routines for individuals managing conditions like diabetes or arthritis could fill a niche gap.\n\n### 4. **Good Guest Post Ideas:**\n   Develop ideas that align with these content gaps and offer value:\n\n1. **Minimalist Home Workouts:** A guide to effective workouts using common household items, perfect for eco-conscious fitness enthusiasts.\n   \n2. **Yoga \u0026 Meditation Fusion Routines:** Articles on combining yoga or meditation practices with traditional workout regimens to enhance mental health benefits.\n\n3. **The Remote Worker's Fitness Blueprint:** Strategies and exercises tailored specifically for those working from home, emphasizing posture correction and movement breaks.\n\n4. **Fitness Plans for Specific Health Conditions:** Creating safe, effective workouts designed for people with specific health conditions like arthritis or chronic pain.\n\n5. **Workout Challenges for the Eco-Conscious Individual:** Develop themed workout challenges that promote environmental awareness while encouraging physical activity.\n\n### 5. **Check Guest Post Policies:**\n   Visit each website's \"Write for Us\" or \"Guest Posting\" page to confirm their openness to guest contributions and understand any specific requirements or guidelines they have for submissions.\n\nBy targeting these high-authority websites with content ideas that fill identified gaps, you can increase the likelihood of your guest post being accepted and well-received."},"done_reason":"stop","done":true,"total_duration":46033600500,"load_duration":18138200,"prompt_eval_count":123,"prompt_eval_duration":286996400,"eval_count":669,"eval_duration":45727430200}
+2025-05-20 11:13:37,911 [INFO] DeepThinkAI: Starting guest post outreach request ffe02ce5-5205-4d65-98d5-72bc9fe91bc8 for niche: fitness workouts
+2025-05-20 11:13:37,912 [INFO] DeepThinkAI: [GuestPost] Sending prompt to Ollama: You are Deepthink AI, an expert in guest post outreach. Given a user's niche, identify 5-10 high authority websites in that niche that have published articles in the last 3 months, accept guest posts, and analyze for content gaps and good guest post ideas.
+
+I need you to identify 5-10 high authority websites in my niche (fitness workouts) that have published articles within the last 3 months. These sites should accept guest posts. Analyze their sites for content gaps and ideas for good guest posts.
+2025-05-20 11:14:31,745 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 11:14:31,751 [INFO] DeepThinkAI: [GuestPost] Raw Ollama response: {"model":"phi4:latest","created_at":"2025-05-20T17:14:31.7450722Z","message":{"role":"assistant","content":"To identify high-authority fitness workout websites that publish articles regularly, accept guest posts, and present opportunities for unique content, I'll outline a strategy to find such platforms. Although I can't browse the internet in real-time or access specific databases, I will provide a methodology you can follow along with some examples based on historical data.\n\n### Strategy to Identify Suitable Websites:\n\n1. **Use SEO Tools**: Platforms like Ahrefs, SEMrush, or Moz can help identify authoritative sites within your niche by checking domain authority and recent content.\n   \n2. **Check Recent Publications**: Filter these tools for websites that have published articles in the last three months on fitness workouts.\n\n3. **Guest Post Policies**: Visit each website's \"Write For Us\" or \"Contributor Guidelines\" page to confirm they accept guest posts.\n\n4. **Analyze Content Gaps and Trends**:\n   - Look at popular topics.\n   - Identify gaps where your expertise can add value.\n   - Consider emerging trends in fitness (e.g., home workouts, virtual training).\n\n### Example Websites:\n\n1. **Bodybuilding.com**\n   - **Content Analysis**: Extensive content on strength training, bodybuilding techniques, nutrition, and supplements.\n   - **Gaps/Trends**: Articles on incorporating mindfulness into workout routines or mental health benefits of exercise could be explored.\n\n2. **Men's Health**\n   - **Content Analysis**: Covers a wide range from workouts to lifestyle tips targeting men’s wellness.\n   - **Gaps/Trends**: Explore niche areas like fitness tech reviews, personalized workout plans based on genetic testing, etc.\n\n3. **Women's Health**\n   - **Content Analysis**: Focuses on women-centric fitness topics including cardio, strength training, and mental health.\n   - **Gaps/Trends**: Content about post-partum fitness or specific workouts for women over 50 can be explored.\n\n4. **Fitness Blender** (fitnessblender.com)\n   - **Content Analysis**: Offers workout videos and guides catering to various levels and preferences.\n   - **Gaps/Trends**: Articles on integrating fitness into daily life, or specific challenges like \"30-day home workouts\" could fill a niche.\n\n5. **T-Nation (Bodybuilding.com)**\n   - **Content Analysis**: Deep-dive articles focusing on advanced training methods and science of bodybuilding.\n   - **Gaps/Trends**: Innovative recovery techniques or cutting-edge workout technologies might be areas to explore.\n\n6. **Mind Body Green**\n   - **Content Analysis**: Emphasizes holistic health including fitness, nutrition, and mindfulness.\n   - **Gaps/Trends**: Intersectional topics like eco-friendly fitness gear or the benefits of outdoor workouts could be unique angles.\n\n7. **Shape Magazine**\n   - **Content Analysis**: Mixes celebrity workout trends with general fitness advice.\n   - **Gaps/Trends**: Developing content around lesser-known celebrities' workouts or debunking common fitness myths might attract interest.\n\n### Guest Post Ideas:\n- **New Fitness Routines**: Introduce innovative at-home or minimal-equipment routines tailored for specific demographics (e.g., parents, seniors).\n- **Fitness Technology Reviews**: Provide insights on the latest fitness gadgets and apps.\n- **Nutrition-Fitness Synergy**: Articles that bridge nutrition with workout efficiency and recovery.\n- **Mindfulness in Workouts**: How incorporating meditation or mental focus can enhance physical performance.\n\n### Next Steps:\n1. **Compile a List**: Use tools mentioned to identify specific websites based on current metrics.\n2. **Create Content Proposals**: Develop unique angles for your articles addressing the identified gaps.\n3. **Reach Out**: Contact these sites with tailored pitch emails emphasizing how your content will add value to their audience.\n\nBy following this approach, you'll be able to target high-authority fitness workout websites effectively for guest posting opportunities."},"done_reason":"stop","done":true,"total_duration":53412860100,"load_duration":21687500,"prompt_eval_count":123,"prompt_eval_duration":268450300,"eval_count":772,"eval_duration":53121691200}
