@@ -72,7 +72,7 @@ function App() {
   const [chats, setChats] = useState<Chat[]>([]);
   const [currentChatId, setCurrentChatId] = useState<string>('');
   const [model, setModel] = useState<string>('gemma:7b');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mode, setMode] = useState<'light' | 'dark'>(
@@ -154,6 +154,18 @@ function App() {
     ));
   };
 
+  // Close sidebar after sign-in on mobile
+  useEffect(() => {
+    if (user && isMobile) {
+      setIsSidebarOpen(false);
+    }
+  }, [user, isMobile]);
+
+  // Handler to open sidebar (for hamburger/menu button)
+  const handleSidebarOpen = () => setIsSidebarOpen(true);
+  // Handler to close sidebar
+  const handleSidebarClose = () => setIsSidebarOpen(false);
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -175,59 +187,77 @@ function App() {
           <Router>
             <MenuColorWrapper>
               {(isChat) => (
-                <Box sx={{ position: 'fixed', top: 0, right: 0, zIndex: 1000, p: 2, display: 'flex', gap: 2 }}>
-                  {isMobile ? (
-                    <>
-                      <IconButton
-                        color="primary"
-                        onClick={handleToolsClick}
-                        aria-controls={anchorEl ? 'mobile-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={anchorEl ? 'true' : undefined}
-                        sx={{ minWidth: 40, color: isChat ? '#fff' : undefined }}
-                      >
-                        <MenuIcon />
-                      </IconButton>
-                      <Menu
-                        id="mobile-menu"
-                        anchorEl={anchorEl}
-                        open={Boolean(anchorEl)}
-                        onClose={handleToolsClose}
-                        MenuListProps={{ 'aria-labelledby': 'mobile-menu-button' }}
-                        PaperProps={{ sx: { bgcolor: mode === 'dark' ? '#232936' : '#fff' } }}
-                      >
-                        <MenuItem component={Link} to="/" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>DeepThink AI</MenuItem>
-                        <MenuItem component={Link} to="/monetization-planner" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Monetization Planner</MenuItem>
-                        <MenuItem component={Link} to="/guestpost-outreach" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Guest Post Outreach Ideas</MenuItem>
-                        <MenuItem component={Link} to="/search-intent-tool" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Search Intent Tool</MenuItem>
-                        <MenuItem component={Link} to="/image-generator" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink AI Image Generator</MenuItem>
-                        <MenuItem component={Link} to="/blog" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Blog</MenuItem>
-                        <MenuItem component={Link} to="/content-outline-creator" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Content Creator Machine</MenuItem>
-                        <MenuItem component={Link} to="/affiliate-article-ideas" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Affiliate Article Idea Generator</MenuItem>
-                        <MenuItem component={Link} to="/youtube-content-planner" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>YouTube Content Planner</MenuItem>
-                        <MenuItem component={Link} to="/video-generator" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Video Generator</MenuItem>
-                        <MenuItem component={Link} to="/website-authority-checker" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Website Authority Checker</MenuItem>
-                      </Menu>
-                    </>
-                  ) : (
-                    <>
-                      <Button color="primary" variant="outlined" component={Link} to="/chat" sx={{ color: '#ff6600', borderColor: '#ff6600', background: '#fff', fontWeight: 700, boxShadow: 2, '&:hover': { background: 'rgba(255,102,0,0.08)', borderColor: '#ff6600' } }}>{'DeepThink AI'}</Button>
-                      <Button color="primary" variant="outlined" component={Link} to="/blog" sx={{ color: '#ff6600', borderColor: '#ff6600', background: '#fff', fontWeight: 700, boxShadow: 2, '&:hover': { background: 'rgba(255,102,0,0.08)', borderColor: '#ff6600' } }}>{'Blog'}</Button>
-                      <Button color="primary" variant="outlined" onClick={handleToolsClick} aria-controls={anchorEl ? 'tools-menu' : undefined} aria-haspopup="true" aria-expanded={anchorEl ? 'true' : undefined} sx={{ color: '#ff6600', borderColor: '#ff6600', background: '#fff', fontWeight: 700, boxShadow: 2, '&:hover': { background: 'rgba(255,102,0,0.08)', borderColor: '#ff6600' } }}>Tools</Button>
-                      <Menu id="tools-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleToolsClose} MenuListProps={{ 'aria-labelledby': 'tools-button' }}>
-                        <MenuItem component={Link} to="/monetization-planner" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Monetization Planner</MenuItem>
-                        <MenuItem component={Link} to="/guestpost-outreach" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Guest Post Outreach Ideas</MenuItem>
-                        <MenuItem component={Link} to="/search-intent-tool" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Search Intent Tool</MenuItem>
-                        <MenuItem component={Link} to="/image-generator" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink AI Image Generator</MenuItem>
-                        <MenuItem component={Link} to="/content-outline-creator" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Content Creator Machine</MenuItem>
-                        <MenuItem component={Link} to="/affiliate-article-ideas" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Affiliate Article Idea Generator</MenuItem>
-                        <MenuItem component={Link} to="/youtube-content-planner" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>YouTube Content Planner</MenuItem>
-                        <MenuItem component={Link} to="/video-generator" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Video Generator</MenuItem>
-                        <MenuItem component={Link} to="/website-authority-checker" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Website Authority Checker</MenuItem>
-                      </Menu>
-                    </>
+                <>
+                  {/* Hamburger/Menu Button for Mobile */}
+                  {isMobile && !isSidebarOpen && (
+                    <IconButton
+                      color="primary"
+                      onClick={handleSidebarOpen}
+                      aria-label="Open sidebar"
+                      sx={{
+                        position: 'fixed',
+                        top: 12,
+                        left: 12,
+                        zIndex: 2000,
+                        bgcolor: 'background.paper',
+                        boxShadow: 3,
+                        borderRadius: 2,
+                        width: 44,
+                        height: 44,
+                        display: { xs: 'flex', sm: 'none' },
+                      }}
+                    >
+                      <MenuIcon />
+                    </IconButton>
                   )}
-                </Box>
+                  {/* Sidebar */}
+                  <Sidebar
+                    chats={chats}
+                    currentChatId={currentChatId}
+                    onSelectChat={setCurrentChatId}
+                    onNewChat={handleNewChat}
+                    open={isSidebarOpen}
+                    onClose={handleSidebarClose}
+                    onDeleteChat={handleDeleteChat}
+                  />
+                  {/* Mobile Tools Menu (top right) */}
+                  <Box sx={{ position: 'fixed', top: 0, right: 0, zIndex: 1000, p: 2, display: 'flex', gap: 2 }}>
+                    {isMobile && (
+                      <>
+                        <IconButton
+                          color="primary"
+                          onClick={handleToolsClick}
+                          aria-controls={anchorEl ? 'mobile-menu' : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={anchorEl ? 'true' : undefined}
+                          sx={{ minWidth: 40, color: isChat ? '#fff' : undefined }}
+                        >
+                          <MenuIcon />
+                        </IconButton>
+                        <Menu
+                          id="mobile-menu"
+                          anchorEl={anchorEl}
+                          open={Boolean(anchorEl)}
+                          onClose={handleToolsClose}
+                          MenuListProps={{ 'aria-labelledby': 'mobile-menu-button' }}
+                          PaperProps={{ sx: { bgcolor: mode === 'dark' ? '#232936' : '#fff' } }}
+                        >
+                          <MenuItem component={Link} to="/" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>DeepThink AI</MenuItem>
+                          <MenuItem component={Link} to="/monetization-planner" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Monetization Planner</MenuItem>
+                          <MenuItem component={Link} to="/guestpost-outreach" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Guest Post Outreach Ideas</MenuItem>
+                          <MenuItem component={Link} to="/search-intent-tool" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Search Intent Tool</MenuItem>
+                          <MenuItem component={Link} to="/image-generator" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink AI Image Generator</MenuItem>
+                          <MenuItem component={Link} to="/blog" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Blog</MenuItem>
+                          <MenuItem component={Link} to="/content-outline-creator" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Deepthink Content Creator Machine</MenuItem>
+                          <MenuItem component={Link} to="/affiliate-article-ideas" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Affiliate Article Idea Generator</MenuItem>
+                          <MenuItem component={Link} to="/youtube-content-planner" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>YouTube Content Planner</MenuItem>
+                          <MenuItem component={Link} to="/video-generator" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Video Generator</MenuItem>
+                          <MenuItem component={Link} to="/website-authority-checker" onClick={handleToolsClose} sx={{ color: (isChat || mode === 'dark') ? '#fff' : '#222' }}>Website Authority Checker</MenuItem>
+                        </Menu>
+                      </>
+                    )}
+                  </Box>
+                </>
               )}
             </MenuColorWrapper>
             {/* Add top padding to main content to prevent overlap with menu */}
