@@ -2858,11 +2858,25 @@ async def test_ollama():
         # Test basic connectivity
         async with httpx.AsyncClient(timeout=30.0) as client:
             # Test /api/tags endpoint
-            tags_response = await client.get("http://ollama:11434/api/tags")
-            if tags_response.status_code != 200:
+            try:
+                tags_response = await client.get("http://ollama:11434/api/tags")
+                if tags_response.status_code != 200:
+                    return JSONResponse(
+                        status_code=500,
+                        content={
+                            "error": f"Failed to get tags: {tags_response.text}",
+                            "status_code": tags_response.status_code,
+                            "headers": dict(tags_response.headers)
+                        }
+                    )
+            except httpx.ConnectError as e:
                 return JSONResponse(
                     status_code=500,
-                    content={"error": f"Failed to get tags: {tags_response.text}"}
+                    content={
+                        "error": "Failed to connect to Ollama service",
+                        "details": str(e),
+                        "url": "http://ollama:11434/api/tags"
+                    }
                 )
             
             # Test a simple chat request with each model
@@ -2889,19 +2903,23 @@ async def test_ollama():
                     else:
                         results[model] = {
                             "status": "error",
-                            "error": f"Status code: {chat_response.status_code}, Response: {chat_response.text}"
+                            "error": f"Status code: {chat_response.status_code}",
+                            "response": chat_response.text,
+                            "headers": dict(chat_response.headers)
                         }
                 except Exception as e:
                     results[model] = {
                         "status": "error",
-                        "error": str(e)
+                        "error": str(e),
+                        "type": type(e).__name__
                     }
             
             return JSONResponse(
                 status_code=200,
                 content={
                     "service_status": "running",
-                    "models": results
+                    "models": results,
+                    "ollama_url": "http://ollama:11434"
                 }
             )
             
@@ -2910,6 +2928,7 @@ async def test_ollama():
             status_code=500,
             content={
                 "error": f"Ollama test failed: {str(e)}",
+                "type": type(e).__name__,
                 "service_status": "error"
             }
         )
