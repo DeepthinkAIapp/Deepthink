@@ -95,7 +95,7 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
             }}
           >
             <img 
-              src="/images/blog/logo.png" 
+              src={process.env.PUBLIC_URL ? process.env.PUBLIC_URL + '/images/blog/logo.png' : '/images/blog/logo.png'}
               alt="Logo" 
               style={{ 
                 height: '100%', 
