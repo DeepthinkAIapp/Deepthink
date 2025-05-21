@@ -1,6 +1,71 @@
-# Deepthink AI Platform
+# DeepThink AI
 
-A modern, full-stack AI chat and tools platform with a FastAPI backend and React + Material UI frontend. Features real-time streaming chat, robust privacy/branding, and advanced tools like the AI Monetization Planner.
+[![Deployed on Vercel](https://vercel.com/button)](https://deepthinkai.app)
+
+## Overview
+DeepThink AI is a full-stack AI-powered platform for SEO, content, and digital growth. The backend is deployed on [Render](https://render.com/) and the frontend is deployed on [Vercel](https://vercel.com/) at [https://deepthinkai.app](https://deepthinkai.app).
+
+---
+
+## Production Deployment
+
+### Backend (API)
+- **Platform:** [Render](https://render.com/)
+- **URL:** https://deepthinkapp.onrender.com
+- **Environment Variables:** Set in the Render dashboard (not in `.env` for production)
+  - `OLLAMA_API_URL` (cloud or internal URL)
+  - `SD_WEBUI_URL` (cloud or internal URL)
+  - `SECRET_KEY`, `MAX_CONNECTIONS`, etc. as needed
+- **Note:** Backend does **not** need to be run locally for production use.
+
+### Frontend (Web App)
+- **Platform:** [Vercel](https://vercel.com/)
+- **URL:** https://deepthinkai.app
+- **API Connection:** All API calls are routed to the Render backend via the deployed domain.
+- **Configuration:**
+  - `frontend/src/config.ts` uses `https://deepthinkapp.onrender.com` as the API base URL.
+  - `vercel.json` rewrites `/api/*` to the Render backend.
+
+---
+
+## Local Development
+
+### Backend
+- You can still run the backend locally for development:
+  1. Clone the repo
+  2. Set up a `.env` file with your local or test environment variables
+  3. Run: `uvicorn main:app --reload --host 0.0.0.0 --port 8000`
+- For production, **do not** run the backend locally. Use the Render deployment.
+
+### Frontend
+- You can run the frontend locally with Vite:
+  1. `cd frontend`
+  2. `npm install`
+  3. `npm run dev`
+- For local API testing, update `frontend/src/config.ts` to use your local backend, or use the deployed Render backend for production-like testing.
+
+---
+
+## Environment Variables
+- **Production:** Set in Render and Vercel dashboards.
+- **Local:** Use a `.env` file for backend, and `.env.local` for frontend if needed.
+
+---
+
+## Connecting Frontend and Backend
+- All production API calls from the frontend at `deepthinkai.app` are routed to the backend at `https://deepthinkapp.onrender.com`.
+- CORS and allowed origins are configured to allow requests from `https://deepthinkai.app`.
+
+---
+
+## Troubleshooting
+- If you see `Failed to fetch` errors, ensure your frontend is using the correct API URL and your backend is running on Render.
+- If logos or images do not appear, ensure they are in the correct `public` directory and referenced with the correct path.
+
+---
+
+## Contact & Support
+For questions or support, open an issue or contact the maintainer.
 
 ---
 
@@ -28,40 +93,6 @@ A modern, full-stack AI chat and tools platform with a FastAPI backend and React
 
 ---
 
-## Quick Start
-
-1. **Start Ollama** (for local LLMs):
-   ```bash
-   ollama serve
-   ollama run mistral  # or your preferred model
-   ```
-
-2. **Backend:**
-   ```bash
-   cd backend
-   # Recommended for most setups:
-   uvicorn main:app --reload --host 0.0.0.0 --port 8000
-   # (Alternatively, python main.py)
-   ```
-   - Make sure you are in the `backend` directory when running this command.
-   - If you see errors about missing directories (e.g., `data/generated_images`), create them:
-   ```bash
-   mkdir data/generated_images
-   mkdir data/generated_videos
-   ```
-   - The backend supports video generation endpoints and can be integrated with Deforum/Stable Diffusion workflows.
-
-3. **Frontend:**
-   ```bash
-   cd frontend
-   npm install
-   npm run dev
-   ```
-
-4. **Open** [http://localhost:5173](http://localhost:5173) in your browser.
-
----
-
 ## Features
 
 - **Real-time AI chat** with streaming responses (SSE)
@@ -72,23 +103,6 @@ A modern, full-stack AI chat and tools platform with a FastAPI backend and React
 - **Prometheus monitoring** and detailed logging
 - **Database persistence** (SQLite, optionally PostgreSQL)
 - **Modern, responsive UI** with Material UI
-
----
-
-## Environment Variables
-
-### Backend (.env)
-```
-SECRET_KEY=your-secret-key
-OLLAMA_API_URL=http://localhost:11434/api/chat
-ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
-# (add your ngrok/production domains as needed)
-```
-
-### Frontend (.env)
-```
-VITE_API_URL=http://localhost:8000
-```
 
 ---
 
@@ -192,20 +206,6 @@ POST /api/chat
 - Backend: PEP 8, pytest
 - Frontend: ESLint, Prettier, `npm test`
 - All dependencies listed in `backend/requirements.txt` and `frontend/package.json`
-
----
-
-## Troubleshooting
-- **Ollama not running:** Start with `ollama serve` and run/pull a model (see docs)
-- **CORS errors:** Update `ALLOWED_ORIGINS` and restart backend
-- **Database issues:** Delete/recreate `chat.db` if schema changes
-- **Port conflicts:** Change ports in config if needed
-- **Missing directory errors:** If you see errors like `Directory 'data/generated_images' does not exist`, create the required folders in the backend directory:
-  ```bash
-  mkdir data/generated_images
-  mkdir data/generated_videos
-  ```
-- **Video generation/Deforum integration:** See the VideoGeneratorPage and backend `/api/generate-video` endpoint for details on integrating Deforum or other video AI tools.
 
 ---
 
