@@ -744,7 +744,7 @@ async def stop_chat(request_id: str):
 @app.get("/", include_in_schema=True)
 @app.head("/", include_in_schema=True)
 async def root():
-    return {"message": "Welcome to DeepThinkAI API"}
+    return {"message": "Welcome to DeepThinkAI API", "status": "online", "version": "1.0.0"}
 
 # NLP Enhancement Functions
 def preprocess_text(text: str) -> str:
