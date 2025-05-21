@@ -89,7 +89,8 @@ For questions or support, open an issue or contact the maintainer.
 ├── docs/                   # Additional documentation (Ollama, API, etc.)
 ├── README.md               # This file
 └── ...
-```
+```-
+
 
 ---
 
