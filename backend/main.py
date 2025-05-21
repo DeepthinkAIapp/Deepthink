@@ -192,7 +192,8 @@ ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "https://www.deepthinkai.app",
     "https://deepthinkai.app",
-    "https://deepthinkai.vercel.app"  # Add Vercel preview deployments
+    "https://deepthinkai.vercel.app",
+    "https://deepthinkapp.onrender.com"  # Add Render domain
 ]
 
 app.state.cors_origins = ALLOWED_ORIGINS
