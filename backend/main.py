@@ -131,19 +131,28 @@ class RequestContextFilter(logging.Filter):
         record.request_id = 'startup'
         return True
 
-# Download required NLTK data
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
+# Lazy-load spaCy model
+def get_nlp():
+    global _nlp
+    try:
+        return _nlp
+    except NameError:
+        pass
+    try:
+        _nlp = spacy.load('en_core_web_sm')
+    except OSError:
+        spacy.cli.download('en_core_web_sm')
+        _nlp = spacy.load('en_core_web_sm')
+    return _nlp
 
-# Load spaCy model
-try:
-    nlp = spacy.load('en_core_web_sm')
-except OSError:
-    # If model not found, download it
-    spacy.cli.download('en_core_web_sm')
-    nlp = spacy.load('en_core_web_sm')
+# Lazy-load NLTK data
+def ensure_nltk_data():
+    import nltk
+    for pkg in ['punkt', 'stopwords', 'wordnet', 'averaged_perceptron_tagger']:
+        try:
+            nltk.data.find(f'tokenizers/{pkg}')
+        except LookupError:
+            nltk.download(pkg)
 
 # Load environment variables
 load_dotenv()
@@ -155,6 +164,8 @@ if not SECRET_KEY:
 
 # API Configuration
 OLLAMA_API_URL = os.getenv("OLLAMA_API_URL", "http://127.0.0.1:11434/api/chat")
+OLLAMA_TIMEOUT = float(os.getenv("OLLAMA_TIMEOUT", "30.0"))
+OLLAMA_MAX_RETRIES = int(os.getenv("OLLAMA_MAX_RETRIES", "3"))
 
 # Stable Diffusion WebUI URL
 SD_WEBUI_URL = "http://127.0.0.1:7860"
@@ -747,6 +758,7 @@ def preprocess_text(text: str) -> str:
 
 def extract_entities(text: str) -> List[Dict]:
     """Extract named entities using spaCy."""
+    nlp = get_nlp()
     doc = nlp(text)
     entities = []
     for ent in doc.ents:
@@ -2771,6 +2783,34 @@ async def affiliate_article_ideas_by_domain(request: Request):
     except Exception as e:
         logger.error(f"Request {request_id}: Error in affiliate article ideas by domain: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
+
+@backoff.on_exception(
+    backoff.expo,
+    (httpx.RequestError, httpx.TimeoutException),
+    max_tries=OLLAMA_MAX_RETRIES,
+    max_time=OLLAMA_TIMEOUT
+)
+async def call_ollama(messages: List[Message], model: str = "mistral:latest") -> str:
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            OLLAMA_API_URL,
+            json={
+                "model": model,
+                "messages": [{"role": msg.role, "content": msg.content} for msg in messages]
+            },
+            timeout=OLLAMA_TIMEOUT
+        )
+        response.raise_for_status()
+        return response.json()["message"]["content"]
+
+@app.get("/api/test-ollama")
+async def test_ollama():
+    try:
+        response = await call_ollama([Message(role="user", content="Hello, are you working?")])
+        return {"status": "success", "message": "Ollama server is running and responding", "response": response}
+    except Exception as e:
+        logger.error(f"Ollama connection error: {str(e)}")
+        return {"status": "error", "message": f"Failed to connect to Ollama server: {str(e)}"}
 
 if __name__ == "__main__":
     import uvicorn
