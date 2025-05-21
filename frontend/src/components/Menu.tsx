@@ -13,9 +13,6 @@ const Menu = () => (
             <Link to="/search-intent-tool" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Search Intent Tool</Link>
         </MenuItem>
         <MenuItem>
-            <Link to="/image-generator" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Image Generator</Link>
-        </MenuItem>
-        <MenuItem>
             <Link to="/content-outline-creator" style={{ color: '#ff6600', fontWeight: 600, textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.textDecoration = 'underline'} onMouseOut={e => e.currentTarget.style.textDecoration = 'none'}>Content Creator Machine</Link>
         </MenuItem>
         <MenuItem>

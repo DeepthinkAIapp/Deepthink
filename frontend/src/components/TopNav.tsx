@@ -12,11 +12,9 @@ const toolLinks = [
   { label: 'Monetization Planner', to: '/monetization-planner' },
   { label: 'Guest Post Outreach', to: '/guestpost-outreach' },
   { label: 'Search Intent Tool', to: '/search-intent-tool' },
-  { label: 'AI Image Generator', to: '/image-generator' },
   { label: 'Content Creator Machine', to: '/content-outline-creator' },
   { label: 'Affiliate Article Ideas', to: '/affiliate-article-ideas' },
   { label: 'YouTube Content Planner', to: '/youtube-content-planner' },
-  { label: 'Video Generator', to: '/video-generator' },
   { label: 'Website Authority Checker', to: '/website-authority-checker' },
 ];
 

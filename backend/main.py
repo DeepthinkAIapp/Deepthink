@@ -2907,7 +2907,7 @@ async def test_ollama():
                             "response": chat_response.text,
                             "headers": dict(chat_response.headers)
                         }
-                except Exception as e:
+    except Exception as e:
                     results[model] = {
                         "status": "error",
                         "error": str(e),
