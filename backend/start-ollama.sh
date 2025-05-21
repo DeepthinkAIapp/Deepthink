@@ -16,7 +16,7 @@ OLLAMA_PID=$!
 # Wait for the server to start
 log "Waiting for Ollama server to start..."
 for i in {1..30}; do
-    if curl -s http://localhost:11434/api/tags > /dev/null; then
+    if curl -s http://0.0.0.0:11434/api/tags > /dev/null; then
         log "Ollama server is running!"
         break
     fi
@@ -30,7 +30,7 @@ done
 
 # Pull required models
 log "Pulling required models..."
-for model in "mistral:latest" "bakllava:latest"; do
+for model in "mistral:latest" "bakllava:latest" "gemma:7b"; do
     log "Pulling $model..."
     if ! ollama pull $model; then
         log "Failed to pull $model"
@@ -44,6 +44,11 @@ log "All models pulled successfully"
 # Keep the container running and monitor the Ollama process
 log "Monitoring Ollama process..."
 while kill -0 $OLLAMA_PID 2>/dev/null; do
+    # Check if the server is still responding
+    if ! curl -s http://0.0.0.0:11434/api/tags > /dev/null; then
+        log "Ollama server is not responding"
+        exit 1
+    fi
     sleep 1
 done
 
