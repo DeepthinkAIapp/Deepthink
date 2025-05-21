@@ -2853,12 +2853,66 @@ async def call_ollama(messages: List[Message], model: str = "mistral:latest") ->
 
 @app.get("/api/test-ollama")
 async def test_ollama():
+    """Test endpoint to verify Ollama service and models"""
     try:
-        response = await call_ollama([Message(role="user", content="Hello, are you working?")])
-        return {"status": "success", "message": "Ollama server is running and responding", "response": response}
+        # Test basic connectivity
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            # Test /api/tags endpoint
+            tags_response = await client.get("http://ollama:11434/api/tags")
+            if tags_response.status_code != 200:
+                return JSONResponse(
+                    status_code=500,
+                    content={"error": f"Failed to get tags: {tags_response.text}"}
+                )
+            
+            # Test a simple chat request with each model
+            models = ["mistral:latest", "bakllava:latest", "gemma:7b"]
+            results = {}
+            
+            for model in models:
+                try:
+                    chat_response = await client.post(
+                        "http://ollama:11434/api/chat",
+                        json={
+                            "model": model,
+                            "messages": [{"role": "user", "content": "Hello, are you working?"}],
+                            "stream": False
+                        },
+                        timeout=30.0
+                    )
+                    
+                    if chat_response.status_code == 200:
+                        results[model] = {
+                            "status": "success",
+                            "response": chat_response.json()
+                        }
+                    else:
+                        results[model] = {
+                            "status": "error",
+                            "error": f"Status code: {chat_response.status_code}, Response: {chat_response.text}"
+                        }
+                except Exception as e:
+                    results[model] = {
+                        "status": "error",
+                        "error": str(e)
+                    }
+            
+            return JSONResponse(
+                status_code=200,
+                content={
+                    "service_status": "running",
+                    "models": results
+                }
+            )
+            
     except Exception as e:
-        logger.error(f"Ollama connection error: {str(e)}")
-        return {"status": "error", "message": f"Failed to connect to Ollama server: {str(e)}"}
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": f"Ollama test failed: {str(e)}",
+                "service_status": "error"
+            }
+        )
 
 # Add this after the imports at the top
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
