@@ -3,6 +3,7 @@
 # Enable debug logging
 export OLLAMA_DEBUG=1
 export OLLAMA_HOST=0.0.0.0
+export OLLAMA_ORIGINS=*
 
 # Function to log messages
 log() {
@@ -22,8 +23,20 @@ check_binding() {
     return 1
 }
 
+# Function to verify network interfaces
+check_network() {
+    log "Checking network interfaces..."
+    ip addr show
+    log "Checking network connectivity..."
+    ping -c 1 ollama || true
+    ping -c 1 llama-backend || true
+}
+
+# Check network configuration
+check_network
+
 # Start Ollama server in the background
-log "Starting Ollama server..."
+log "Starting Ollama server with host: $OLLAMA_HOST, port: $OLLAMA_PORT"
 ollama serve &
 OLLAMA_PID=$!
 

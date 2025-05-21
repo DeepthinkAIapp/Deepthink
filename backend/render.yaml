@@ -42,6 +42,17 @@ services:
         value: 0.0.0.0
       - key: OLLAMA_PORT
         value: 11434
+      - key: OLLAMA_DEBUG
+        value: "1"
+      - key: OLLAMA_ORIGINS
+        value: "*"
+      - key: OLLAMA_MODELS
+        value: "mistral:latest,bakllava:latest,gemma:7b"
     healthCheckPath: /api/tags
     healthCheckTimeout: 300
-    autoDeploy: true 
+    autoDeploy: true
+    numInstances: 1
+    plan: free
+    scaling:
+      minInstances: 1
+      maxInstances: 1 
