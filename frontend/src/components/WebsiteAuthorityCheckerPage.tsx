@@ -19,18 +19,18 @@ export default function WebsiteAuthorityCheckerPage() {
     setError(null);
     setMetrics([]);
     try {
-      const res = await fetch(getApiUrl('/api/authority-checker'), {
+      const res = await fetch(getApiUrl('/api/backlink/forms'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ domain }),
       });
       const data = await res.json();
-      if (data.html) {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = data.html;
-        const spans = Array.from(tempDiv.querySelectorAll('span'));
-        const numbers = spans.map(span => span.textContent?.trim() || '').filter(Boolean);
-        setMetrics(numbers.slice(0, 3));
+      if (data.error) {
+        setError(data.error);
+      } else if (data.forms) {
+        // Process the forms data
+        const formCount = data.forms.length;
+        setMetrics([formCount.toString(), '0', '0']); // Update metrics with form count
       } else {
         setError('No results found');
       }

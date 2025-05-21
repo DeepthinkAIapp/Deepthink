@@ -17,7 +17,7 @@ export const API_CONFIG = {
   HEALTH: '/health',
   AUTHORITY_CHECKER: '/api/authority-checker',
   // Stable Diffusion endpoints
-  SD_BASE_URL: 'http://127.0.0.1:7861',
+  SD_BASE_URL: 'http://127.0.0.1:7860',
   SD_TXT2IMG: '/sdapi/v1/txt2img',
   SD_IMG2IMG: '/sdapi/v1/img2img',
   SD_DEFORUM: '/deforum_api',
