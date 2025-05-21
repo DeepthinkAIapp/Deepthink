@@ -979,6 +979,7 @@ def is_name_question(text: str) -> bool:
 
 # Enhanced health check endpoint with detailed metrics
 @app.get("/health")
+@app.head("/health")
 async def health_check():
     health_status = {
         "status": "healthy",
@@ -996,7 +997,7 @@ async def health_check():
     # Check model service health
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
-            response = await client.get("http://127.0.0.1:11434/api/tags")
+            response = await client.get(OLLAMA_API_URL.replace("/api/chat", "/api/tags"))
             health_status["model_service"] = "healthy" if response.status_code == 200 else "unhealthy"
     except Exception as e:
         health_status["model_service"] = "unhealthy"
