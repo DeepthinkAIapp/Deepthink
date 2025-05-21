@@ -1,0 +1,7 @@
+FROM ollama/ollama:latest
+
+# Expose the Ollama API port
+EXPOSE 11434
+
+# Start Ollama
+CMD ["serve"] 
