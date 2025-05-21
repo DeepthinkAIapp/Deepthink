@@ -705,7 +705,7 @@ async def chat(request: Request, chat_request: EnhancedChatRequest, background_t
                     await check_ollama_health()
                 except Exception as e:
                     logger.error(f"Ollama server health check failed after retries: {str(e)}")
-                    yield f"data: {{\"error\": \"Ollama server is not available. Please ensure it is running at {OLLAMA_API_URL}\"}}\n\n"
+                    yield f"data: {{\"error\": \"Ollama server is not available. Please ensure it is running at http://ollama:11434/api/chat\"}}\n\n"
                     return
 
                 # Create a client with longer timeout and retry logic
@@ -751,7 +751,7 @@ async def chat(request: Request, chat_request: EnhancedChatRequest, background_t
                                         yield f"data: {line}\n\n"
                     except httpx.ConnectError as e:
                         logger.error(f"Failed to connect to Ollama server: {str(e)}")
-                        yield f"data: {{\"error\": \"Failed to connect to Ollama server. Please ensure it is running at {OLLAMA_API_URL}\"}}\n\n"
+                        yield f"data: {{\"error\": \"Failed to connect to Ollama server. Please ensure it is running at http://ollama:11434/api/chat\"}}\n\n"
                     except httpx.ReadTimeout as e:
                         logger.error(f"Read timeout from Ollama server: {str(e)}")
                         yield f"data: {{\"error\": \"Request timed out while reading from Ollama server\"}}\n\n"
@@ -2997,7 +2997,7 @@ async def chat(request: Request, chat_request: EnhancedChatRequest, background_t
                     await check_ollama_health()
                 except Exception as e:
                     logger.error(f"Ollama server health check failed after retries: {str(e)}")
-                    yield f"data: {{\"error\": \"Ollama server is not available. Please ensure it is running at {OLLAMA_API_URL}\"}}\n\n"
+                    yield f"data: {{\"error\": \"Ollama server is not available. Please ensure it is running at http://ollama:11434/api/chat\"}}\n\n"
                     return
 
                 # Create a client with longer timeout and retry logic
@@ -3043,7 +3043,7 @@ async def chat(request: Request, chat_request: EnhancedChatRequest, background_t
                                         yield f"data: {line}\n\n"
                     except httpx.ConnectError as e:
                         logger.error(f"Failed to connect to Ollama server: {str(e)}")
-                        yield f"data: {{\"error\": \"Failed to connect to Ollama server. Please ensure it is running at {OLLAMA_API_URL}\"}}\n\n"
+                        yield f"data: {{\"error\": \"Failed to connect to Ollama server. Please ensure it is running at http://ollama:11434/api/chat\"}}\n\n"
                     except httpx.ReadTimeout as e:
                         logger.error(f"Read timeout from Ollama server: {str(e)}")
                         yield f"data: {{\"error\": \"Request timed out while reading from Ollama server\"}}\n\n"

@@ -3,6 +3,7 @@ FROM ollama/ollama:latest
 # Set environment variables
 ENV OLLAMA_HOST=0.0.0.0
 ENV OLLAMA_PORT=11434
+ENV OLLAMA_DEBUG=1
 
 # Expose the Ollama port
 EXPOSE 11434
@@ -10,5 +11,13 @@ EXPOSE 11434
 # Create a directory for Ollama data
 RUN mkdir -p /root/.ollama
 
-# Start Ollama server
-CMD ["serve"] 
+# Create a startup script
+COPY start-ollama.sh /start-ollama.sh
+RUN chmod +x /start-ollama.sh
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:11434/api/tags || exit 1
+
+# Start Ollama server with the startup script
+CMD ["/start-ollama.sh"] 
