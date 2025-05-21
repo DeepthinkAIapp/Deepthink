@@ -741,7 +741,8 @@ async def stop_chat(request_id: str):
         return {"status": "stopped"}
     return {"status": "not_found"}
 
-@app.get("/")
+@app.get("/", include_in_schema=True)
+@app.head("/", include_in_schema=True)
 async def root():
     return {"message": "Welcome to DeepThinkAI API"}
 
