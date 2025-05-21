@@ -56,7 +56,8 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
 
   const drawer = (
     <Box sx={{ 
-      width: DRAWER_WIDTH, 
+      width: { xs: '100vw', sm: DRAWER_WIDTH }, 
+      maxWidth: '100vw',
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -66,23 +67,23 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
       background: 'linear-gradient(to bottom, #ff6600 0%, #ffffff 100%)',
     }}>
       <Box sx={{ 
-        p: 2, 
+        p: { xs: 1, sm: 2 }, 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'space-between',
         borderBottom: '2px solid',
         borderColor: '#ff6600',
-        minHeight: 80,
+        minHeight: { xs: 60, sm: 80 },
         background: 'linear-gradient(135deg, rgba(255,102,0,0.15) 0%, rgba(255,255,255,0.9) 100%)',
         backdropFilter: 'blur(8px)',
         boxShadow: '0 4px 12px rgba(255,102,0,0.1)'
       }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.5 } }}>
           <Box
             sx={{
               position: 'relative',
-              width: 44,
-              height: 44,
+              width: { xs: 36, sm: 44 },
+              height: { xs: 36, sm: 44 },
               borderRadius: 2,
               overflow: 'hidden',
               boxShadow: '0 2px 8px rgba(255,102,0,0.2)',
@@ -107,21 +108,29 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
             <Typography 
               sx={{ 
                 fontWeight: 800, 
-                fontSize: 20, 
+                fontSize: { xs: 16, sm: 20 }, 
                 letterSpacing: 1,
                 color: '#ff6600',
                 textShadow: '0 1px 2px rgba(255,102,0,0.1)',
-                lineHeight: 1.2
+                lineHeight: 1.2,
+                maxWidth: { xs: 120, sm: 'none' },
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
               }}
             >
               DEEPTHINK AI
             </Typography>
             <Typography 
               sx={{ 
-                fontSize: 12, 
+                fontSize: { xs: 10, sm: 12 }, 
                 color: 'text.secondary',
                 letterSpacing: 0.5,
-                fontWeight: 500
+                fontWeight: 500,
+                maxWidth: { xs: 120, sm: 'none' },
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
               }}
             >
               AI-Powered Tools
@@ -145,13 +154,13 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
       <Box>
         <button onClick={onNewChat} style={{ 
           width: '100%', 
-          padding: '10px 0', 
+          padding: isMobile ? '8px 0' : '10px 0', 
           background: '#ff6600', 
           color: '#fff', 
           border: 'none', 
           borderRadius: 6, 
           fontWeight: 600, 
-          fontSize: 16, 
+          fontSize: isMobile ? 14 : 16, 
           cursor: 'pointer',
           boxShadow: '0 2px 8px rgba(255, 102, 0, 0.3)'
         }}>
@@ -173,9 +182,14 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
             }
           },
           color: '#fff',
+          px: { xs: 1, sm: 2 },
         },
         '& .MuiListItemText-root': {
           color: '#fff',
+          maxWidth: { xs: 120, sm: 'none' },
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
         },
       }}>
         <ListItem disablePadding>
@@ -356,8 +370,9 @@ function Sidebar({ chats, currentChatId, onSelectChat, onNewChat, open, onClose,
             keepMounted: true, // Better open performance on mobile
           }}
           sx={{
-            '& .MuiDrawer-paper': { 
+            '& .MuiDrawer-paper': {
               width: DRAWER_WIDTH,
+              maxWidth: '100vw',
               boxSizing: 'border-box',
             },
           }}

@@ -4,7 +4,7 @@
 // API Configuration
 export const API_CONFIG = {
   // Use consistent API URL for both development and production
-  BASE_URL: 'http://localhost:8000',
+  BASE_URL: 'https://deepthinkapp.onrender.com',
   // API endpoints
   CHAT: '/api/chat',
   GENERATE: '/api/generate',
