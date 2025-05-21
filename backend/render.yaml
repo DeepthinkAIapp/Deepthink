@@ -47,9 +47,9 @@ services:
       - key: OLLAMA_ORIGINS
         value: "*"
       - key: OLLAMA_MODELS
-        value: "mistral:latest,bakllava:latest,gemma:7b"
+        value: "llama3.1:latest,llama3.2-vision:latest,phi4:latest,mistral:latest,gemma:7b,gemma3:latest,gemma3:12b,llava:latest,bakllava:latest,codellama:latest,llama2-uncensored:latest,deepseek-r1:latest"
     healthCheckPath: /api/tags
-    healthCheckTimeout: 300
+    healthCheckTimeout: 1800
     autoDeploy: true
     numInstances: 1
     plan: free

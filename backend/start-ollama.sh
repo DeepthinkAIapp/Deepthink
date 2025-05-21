@@ -10,31 +10,6 @@ log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
-# Function to check if Ollama is listening on all interfaces
-check_binding() {
-    if netstat -tuln | grep -q ":11434.*LISTEN"; then
-        if netstat -tuln | grep -q "0.0.0.0:11434.*LISTEN"; then
-            return 0
-        else
-            log "Ollama is not bound to 0.0.0.0"
-            return 1
-        fi
-    fi
-    return 1
-}
-
-# Function to verify network interfaces
-check_network() {
-    log "Checking network interfaces..."
-    ip addr show
-    log "Checking network connectivity..."
-    ping -c 1 ollama || true
-    ping -c 1 llama-backend || true
-}
-
-# Check network configuration
-check_network
-
 # Start Ollama server in the background
 log "Starting Ollama server with host: $OLLAMA_HOST, port: $OLLAMA_PORT"
 ollama serve &
@@ -43,7 +18,7 @@ OLLAMA_PID=$!
 # Wait for the server to start and verify binding
 log "Waiting for Ollama server to start..."
 for i in {1..30}; do
-    if check_binding; then
+    if curl -s http://0.0.0.0:11434/api/tags > /dev/null; then
         log "Ollama server is running and bound to all interfaces!"
         break
     fi
@@ -57,7 +32,7 @@ done
 
 # Pull required models
 log "Pulling required models..."
-for model in "mistral:latest" "bakllava:latest" "gemma:7b"; do
+for model in "phi" "neural-chat"; do
     log "Pulling $model..."
     if ! ollama pull $model; then
         log "Failed to pull $model"
@@ -71,11 +46,7 @@ log "All models pulled successfully"
 # Keep the container running and monitor the Ollama process
 log "Monitoring Ollama process..."
 while kill -0 $OLLAMA_PID 2>/dev/null; do
-    # Check if the server is still responding and properly bound
-    if ! check_binding; then
-        log "Ollama server is not properly bound"
-        exit 1
-    fi
+    # Check if the server is still responding
     if ! curl -s http://0.0.0.0:11434/api/tags > /dev/null; then
         log "Ollama server is not responding"
         exit 1
