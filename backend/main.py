@@ -70,6 +70,7 @@ from selenium.webdriver.edge.service import Service
 import random
 from ahrefs_scraper import router as ahrefs_router
 from minigpt4_integration import process_image_for_minigpt4, stream_minigpt4_response, call_minigpt4_gradio
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 # Create FastAPI app instance
 app = FastAPI(title="DeepThinkAI API", version="1.0.0")
@@ -699,30 +700,67 @@ async def chat(request: Request, chat_request: EnhancedChatRequest, background_t
         # Handle other models with existing logic
         async def event_stream():
             try:
-                async with httpx.AsyncClient(timeout=60.0) as client:
-                    async with client.stream(
-                        "POST",
-                        OLLAMA_API_URL,
-                        json={
-                            "model": chat_request.model,
-                            "messages": [{"role": m.role, "content": m.content} for m in chat_request.messages],
-                            "stream": True
-                        }
-                    ) as response:
-                        async for line in response.aiter_lines():
-                            if line.strip():
-                                try:
-                                    data = json.loads(line)
-                                    if 'message' in data and 'content' in data['message']:
-                                        data['message']['content'] = mask_model_names(data['message']['content'])
-                                        yield f"data: {json.dumps(data)}\n\n"
-                                    else:
+                # Check Ollama health with retry logic
+                try:
+                    await check_ollama_health()
+                except Exception as e:
+                    logger.error(f"Ollama server health check failed after retries: {str(e)}")
+                    yield f"data: {{\"error\": \"Ollama server is not available. Please ensure it is running at {OLLAMA_API_URL}\"}}\n\n"
+                    return
+
+                # Create a client with longer timeout and retry logic
+                async with httpx.AsyncClient(
+                    timeout=60.0,
+                    limits=httpx.Limits(max_keepalive_connections=5, max_connections=10)
+                ) as client:
+                    logger.info(f"Making request to Ollama API at {OLLAMA_API_URL}")
+                    
+                    # Prepare the request
+                    request_data = {
+                        "model": chat_request.model,
+                        "messages": [{"role": m.role, "content": m.content} for m in chat_request.messages],
+                        "stream": True
+                    }
+                    
+                    # Make the request with retry logic
+                    try:
+                        async with client.stream(
+                            "POST",
+                            OLLAMA_API_URL,
+                            json=request_data
+                        ) as response:
+                            if response.status_code != 200:
+                                error_text = await response.text()
+                                logger.error(f"Ollama API error: {response.status_code} - {error_text}")
+                                raise HTTPException(
+                                    status_code=response.status_code,
+                                    detail=f"Ollama API error: {error_text}"
+                                )
+
+                            async for line in response.aiter_lines():
+                                if line.strip():
+                                    try:
+                                        data = json.loads(line)
+                                        if 'message' in data and 'content' in data['message']:
+                                            data['message']['content'] = mask_model_names(data['message']['content'])
+                                            yield f"data: {json.dumps(data)}\n\n"
+                                        else:
+                                            yield f"data: {line}\n\n"
+                                    except Exception as e:
+                                        logger.error(f"Error processing Ollama response line: {str(e)}")
                                         yield f"data: {line}\n\n"
-                                except Exception:
-                                    yield f"data: {line}\n\n"
-            except Exception as e:
-                logger.error(f"Error in event_stream for /api/chat: {str(e)}", exc_info=True)
-                yield f"data: {{\"error\": \"{str(e)}\"}}\n\n"
+                    except httpx.ConnectError as e:
+                        logger.error(f"Failed to connect to Ollama server: {str(e)}")
+                        yield f"data: {{\"error\": \"Failed to connect to Ollama server. Please ensure it is running at {OLLAMA_API_URL}\"}}\n\n"
+                    except httpx.ReadTimeout as e:
+                        logger.error(f"Read timeout from Ollama server: {str(e)}")
+                        yield f"data: {{\"error\": \"Request timed out while reading from Ollama server\"}}\n\n"
+                    except httpx.WriteTimeout as e:
+                        logger.error(f"Write timeout to Ollama server: {str(e)}")
+                        yield f"data: {{\"error\": \"Request timed out while writing to Ollama server\"}}\n\n"
+                    except Exception as e:
+                        logger.error(f"Error in event_stream for /api/chat: {str(e)}", exc_info=True)
+                        yield f"data: {{\"error\": \"{str(e)}\"}}\n\n"
             finally:
                 ACTIVE_REQUESTS.dec()
         
@@ -2423,8 +2461,15 @@ async def upload_image(image: UploadFile = File(...)):
 @app.post("/api/backlink/forms")
 async def detect_backlink_forms(payload: Dict[str, Any] = Body(...)):
     directory_url = payload.get("directory_url")
-    if not directory_url:
-        return {"error": "Missing directory_url"}
+    domain = payload.get("domain")
+    
+    if not directory_url and not domain:
+        return {"error": "Missing directory_url or domain"}
+        
+    # If domain is provided, use it as the directory_url
+    if domain and not directory_url:
+        directory_url = f"https://{domain}"
+        
     forms = scraper.find_submission_forms(directory_url, max_pages=3)
     return {"forms": forms}
 
@@ -2812,6 +2857,211 @@ async def test_ollama():
     except Exception as e:
         logger.error(f"Ollama connection error: {str(e)}")
         return {"status": "error", "message": f"Failed to connect to Ollama server: {str(e)}"}
+
+# Add this after the imports at the top
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+
+# Add this function after the imports and before the FastAPI app instance
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=4, max=10),
+    retry=retry_if_exception_type((httpx.ConnectError, httpx.ReadTimeout, httpx.WriteTimeout))
+)
+async def check_ollama_health():
+    """Check if Ollama server is healthy with retry logic"""
+    async with httpx.AsyncClient(timeout=5.0) as client:
+        try:
+            # First try the tags endpoint
+            response = await client.get(OLLAMA_API_URL.replace("/api/chat", "/api/tags"))
+            response.raise_for_status()
+            return True
+        except Exception as e:
+            logger.error(f"Ollama health check failed: {str(e)}")
+            # If tags endpoint fails, try a simple chat request
+            try:
+                response = await client.post(
+                    OLLAMA_API_URL,
+                    json={
+                        "model": "mistral:latest",
+                        "messages": [{"role": "user", "content": "test"}],
+                        "stream": False
+                    }
+                )
+                response.raise_for_status()
+                return True
+            except Exception as e2:
+                logger.error(f"Ollama chat test failed: {str(e2)}")
+                raise
+
+# Update the chat endpoint's event_stream function
+@app.post("/api/chat")
+@limiter.limit(f"{RATE_LIMIT_REQUESTS}/{RATE_LIMIT_PERIOD}seconds")
+async def chat(request: Request, chat_request: EnhancedChatRequest, background_tasks: BackgroundTasks):
+    request_id = getattr(request.state, "request_id", str(uuid.uuid4()))
+    ACTIVE_REQUESTS.inc()
+    logger.info(f"Starting chat request {request_id} with model: {chat_request.model}")
+    
+    try:
+        # Always inject system prompt if custom instructions are present
+        custom_instructions = getattr(chat_request, 'customInstructions', None) or getattr(chat_request, 'custom_instructions', None)
+        if custom_instructions and (custom_instructions.get('about') or custom_instructions.get('style')):
+            system_content = ' '.join(filter(None, [custom_instructions.get('about', ''), custom_instructions.get('style', '')])).strip()
+            if system_content:
+                # Remove any existing system message to avoid duplicates
+                chat_request.messages = [m for m in chat_request.messages if m.role != 'system']
+                chat_request.messages.insert(0, type(chat_request.messages[0])(role='system', content=system_content))
+
+        # Intercept creator and name questions for all models
+        last_user_message = next((msg.content for msg in reversed(chat_request.messages) if msg.role == 'user'), None)
+        if last_user_message:
+            if is_creator_question(last_user_message):
+                async def event_stream():
+                    yield f"data: {{\"message\": {{\"content\": \"{CREATOR_RESPONSE}\"}}, \"done\": true}}\n\n"
+                    yield "data: [DONE]\n\n"
+                return StreamingResponse(
+                    event_stream(),
+                    media_type="text/event-stream",
+                    headers={
+                        "X-Request-ID": request_id,
+                        "Cache-Control": "no-cache",
+                        "Connection": "keep-alive",
+                    }
+                )
+            if is_name_question(last_user_message):
+                async def event_stream():
+                    yield f"data: {{\"message\": {{\"content\": \"{NAME_RESPONSE}\"}}, \"done\": true}}\n\n"
+                    yield "data: [DONE]\n\n"
+                return StreamingResponse(
+                    event_stream(),
+                    media_type="text/event-stream",
+                    headers={
+                        "X-Request-ID": request_id,
+                        "Cache-Control": "no-cache",
+                        "Connection": "keep-alive",
+                    }
+                )
+
+        # Select model if auto
+        if chat_request.model == 'auto':
+            chat_request.model = select_best_model(chat_request.messages, chat_request.image)
+            logger.info(f"Auto-selected model: {chat_request.model}")
+        
+        # Process image if present
+        image_data = None
+        if chat_request.image:
+            try:
+                image_data = await process_image_for_minigpt4(chat_request.image)
+            except Exception as e:
+                logger.error(f"Error processing image: {str(e)}")
+                raise HTTPException(status_code=400, detail="Invalid image format")
+        
+        # Handle MiniGPT-4 requests
+        if chat_request.model == 'minigpt4:latest':
+            async def event_stream():
+                try:
+                    # Get the last user message
+                    last_message = next((msg.content for msg in reversed(chat_request.messages) 
+                                      if msg.role == 'user'), None)
+                    if not last_message:
+                        raise HTTPException(status_code=400, detail="No user message found")
+                    
+                    # Stream MiniGPT-4 response
+                    async for chunk in stream_minigpt4_response(last_message, image_data):
+                        if chunk.get('error'):
+                            raise HTTPException(status_code=500, detail=chunk['error'])
+                        
+                        yield f"data: {json.dumps(chunk)}\n\n"
+                    
+                    yield "data: [DONE]\n\n"
+                
+                except Exception as e:
+                    logger.error(f"Error in MiniGPT-4 stream: {str(e)}")
+                    yield f"data: {json.dumps({'error': str(e)})}\n\n"
+            
+            return StreamingResponse(
+                event_stream(),
+                media_type="text/event-stream",
+                headers={
+                    "X-Request-ID": request_id,
+                    "Cache-Control": "no-cache",
+                    "Connection": "keep-alive",
+                }
+            )
+        
+        # Handle other models with existing logic
+        async def event_stream():
+            try:
+                # Check Ollama health with retry logic
+                try:
+                    await check_ollama_health()
+                except Exception as e:
+                    logger.error(f"Ollama server health check failed after retries: {str(e)}")
+                    yield f"data: {{\"error\": \"Ollama server is not available. Please ensure it is running at {OLLAMA_API_URL}\"}}\n\n"
+                    return
+
+                # Create a client with longer timeout and retry logic
+                async with httpx.AsyncClient(
+                    timeout=60.0,
+                    limits=httpx.Limits(max_keepalive_connections=5, max_connections=10)
+                ) as client:
+                    logger.info(f"Making request to Ollama API at {OLLAMA_API_URL}")
+                    
+                    # Prepare the request
+                    request_data = {
+                        "model": chat_request.model,
+                        "messages": [{"role": m.role, "content": m.content} for m in chat_request.messages],
+                        "stream": True
+                    }
+                    
+                    # Make the request with retry logic
+                    try:
+                        async with client.stream(
+                            "POST",
+                            OLLAMA_API_URL,
+                            json=request_data
+                        ) as response:
+                            if response.status_code != 200:
+                                error_text = await response.text()
+                                logger.error(f"Ollama API error: {response.status_code} - {error_text}")
+                                raise HTTPException(
+                                    status_code=response.status_code,
+                                    detail=f"Ollama API error: {error_text}"
+                                )
+
+                            async for line in response.aiter_lines():
+                                if line.strip():
+                                    try:
+                                        data = json.loads(line)
+                                        if 'message' in data and 'content' in data['message']:
+                                            data['message']['content'] = mask_model_names(data['message']['content'])
+                                            yield f"data: {json.dumps(data)}\n\n"
+                                        else:
+                                            yield f"data: {line}\n\n"
+                                    except Exception as e:
+                                        logger.error(f"Error processing Ollama response line: {str(e)}")
+                                        yield f"data: {line}\n\n"
+                    except httpx.ConnectError as e:
+                        logger.error(f"Failed to connect to Ollama server: {str(e)}")
+                        yield f"data: {{\"error\": \"Failed to connect to Ollama server. Please ensure it is running at {OLLAMA_API_URL}\"}}\n\n"
+                    except httpx.ReadTimeout as e:
+                        logger.error(f"Read timeout from Ollama server: {str(e)}")
+                        yield f"data: {{\"error\": \"Request timed out while reading from Ollama server\"}}\n\n"
+                    except httpx.WriteTimeout as e:
+                        logger.error(f"Write timeout to Ollama server: {str(e)}")
+                        yield f"data: {{\"error\": \"Request timed out while writing to Ollama server\"}}\n\n"
+                    except Exception as e:
+                        logger.error(f"Error in event_stream for /api/chat: {str(e)}", exc_info=True)
+                        yield f"data: {{\"error\": \"{str(e)}\"}}\n\n"
+            finally:
+                ACTIVE_REQUESTS.dec()
+        
+        return StreamingResponse(event_stream(), media_type="text/event-stream")
+    
+    except Exception as e:
+        ACTIVE_REQUESTS.dec()
+        ERROR_COUNT.labels(type=type(e).__name__, endpoint='/api/chat').inc()
+        logger.error(f"Exception in /api/chat: {str(e)}", exc_info=True)
+        raise
 
 if __name__ == "__main__":
     import uvicorn

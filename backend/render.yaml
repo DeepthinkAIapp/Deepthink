@@ -11,6 +11,27 @@ services:
         value: 8000
       - key: OLLAMA_API_URL
         value: http://ollama:11434/api/chat
+      - key: SECRET_KEY
+        sync: false
+      - key: OLLAMA_TIMEOUT
+        value: "30.0"
+      - key: OLLAMA_MAX_RETRIES
+        value: "3"
+      - key: MAX_CONNECTIONS
+        value: "10"
+      - key: DB_TIMEOUT
+        value: "30.0"
+      - key: RATE_LIMIT_REQUESTS
+        value: "10"
+      - key: RATE_LIMIT_PERIOD
+        value: "60"
+      - key: MAX_REQUEST_SIZE
+        value: "104857600"
+      - key: MINIGPT4_URL
+        value: "http://localhost:7860"
+    serviceDiscovery:
+      - name: ollama
+        type: web
 
   - type: web
     name: ollama
@@ -20,4 +41,7 @@ services:
       - key: OLLAMA_HOST
         value: 0.0.0.0
       - key: OLLAMA_PORT
-        value: 11434 
+        value: 11434
+    healthCheckPath: /api/tags
+    healthCheckTimeout: 300
+    autoDeploy: true 
